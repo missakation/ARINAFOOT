@@ -1,0 +1,55 @@
+<style>
+    .headercolor{
+        background-color: rgb(62,83,100);
+        color: white
+    }
+    .whitecheck{
+        background-color: transparent;
+        color: white;
+        border: none
+    }
+    	.headercolor {
+			background-color: rgb(62, 83, 100);
+			color: white;
+			border-bottom: 2px solid rgb(62, 83, 100);
+			border-top: 3px;
+		}
+</style>
+
+<ion-view view-title="Settings">
+
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+    <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+    </ion-nav-buttons>
+
+    <ion-nav-bar class="headercolor">
+        <ion-nav-back-button>
+
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content style="background-color:rgb(46,62,75)">
+
+
+<ion-list>
+
+    <ion-checkbox ng-model="filter.notification" class="whitecheck" ng-change="saveNotificationData(filter.notification)">Notification</ion-checkbox>
+    <ion-checkbox ng-model="filter.reminder_3hours" class="whitecheck" ng-change="saveReminderData(filter.reminder_3hours)">Reminder 3 hours before game</ion-checkbox>
+    <ion-checkbox ng-model="filter.email" class="whitecheck">Email Verified</ion-checkbox>
+    <ion-checkbox ng-model="filter.facebookVerified" class="whitecheck">Facebook Verified</ion-checkbox>
+    <ion-checkbox ng-model="filter.smsVerified" class="whitecheck">SMS Verified</ion-checkbox>
+    
+
+        <button class="button button-balanced button-full" ng-click="gosmsverifypage()">
+             Verify Mobile
+        </button>
+<label class="item item-input" style="background-color:rgb(46,62,75">
+        <span class="input-label" style="color:white">Telephone</span>
+        <input type="tel">
+        </label>
+
+        </ion-list>
+
+        </ion-content>
+        </ion-view>

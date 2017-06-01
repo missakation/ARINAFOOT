@@ -1,0 +1,246 @@
+<style>
+    .col-50 {
+        border: thick;
+        border-color: black;
+    }
+
+    .ion-item {
+        background-color: rgb(30,30,30);
+    }
+
+    .div {
+        background-color: rgb(30,30,30);
+    }
+
+    .h3.whitetext,
+    h2.whitetext,
+    h1.whitetext,
+    h4.whitetext,
+    h5.whitetext,
+    h6.whitetext,
+    p.whitetext {
+        color: white;
+    }
+
+    .h3.greytext,
+    h2.greytext,
+    h1.greytext,
+    h4.greytext,
+    h5.greytext,
+    h6.greytext,
+    p.greytext {
+        color: lightgray;
+    }
+
+    .button {
+        color: black;
+    }
+    .headercolor {
+		background-color: rgb(62, 83, 100);
+		color: white;
+		border-bottom: 2px solid rgb(62, 83, 100);
+		border-top: 1px;
+	}
+        html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+       body {
+            background-color: lightgrey;
+        }
+
+        h4.titles {
+            background-color:lightgray;
+            text-align: center;
+            height: 25px;
+        }
+</style>
+
+
+<ion-view view-title="Stadium Details">
+	
+	<ion-nav-back-button side="left">
+		<button menu-toggle="left"></button>
+	</ion-nav-back-button>
+
+	<ion-nav-bar class="headercolor">
+		<ion-nav-back-button>
+
+		</ion-nav-back-button>
+	</ion-nav-bar>
+
+<ion-content style="background-color:rgb(45,62,75)">
+<ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()">
+</ion-refresher>
+<div class="card" style="background-color:rgb(62,83,100)">
+<ion-slide-box on-slide-changed="slideHasChanged($index)">
+    <ion-slide ng-repeat="item in stadiums.photos">
+        <img src="http://www.beechwoodinn.ws/wp-content/uploads/2015/01/Special-Offers.jpg" style="height:150px;width: 100%">
+</ion-slide>
+<ion-slide>
+    <img src="http://www.beechwoodinn.ws/wp-content/uploads/2015/01/Special-Offers.jpg" style="height:150px;width: 100%">
+</ion-slide>
+</ion-slide-box>
+
+
+<div class="row " style="padding-top:0px;padding-bottom:0px;margin-bottom:0px">
+    <div class="col col-75" style="padding-left:0px;padding-top: 0px;font-weight:bold;padding-bottom:0px;color:white"> 404Hoops{{stadiums.stadiumname}} - Big Field 404{{stadiums.description}} - Beirut 
+</div>
+
+<div class="col" align="right" style="padding-top:0px;padding-bottom:0px;font-size:12px;color:#5f7485"> PRICE
+</div>
+
+</div>
+
+<div class="row" style="padding-bottom:0px">
+    <div class="col col-66"  style="padding-left:0px;padding-top: 4px" align="left">
+        <rating style="font-size:18px;color:orange" readonly="readOnly" ng-model=stadiums.rating align="left">
+        </rating>
+
+</div>
+
+<div class="col" align="right"  style="padding-top: 4px;color:white">
+<b>
+	
+		404.000{{stadiums.price}} L.L.
+		</b>
+</div>
+</div>
+
+<div class="row " style="padding:10px 0 5px 0;margin-top:0px">
+    <div class="col col-25" align="center" style="border-right:1px solid #5f7485;padding:0px;font-size:12px;color:#5f7485"> DISTANCE
+</div>
+
+<div class="col col-33" style="border-right:1px solid #5f7485;padding:0px;font-size:12px;color:#5f7485" align="center"> TYPE
+</div>
+
+<div class="col col-16" style="border-right:1px solid #5f7485;padding:0px;font-size:12px;color:#5f7485" align="center"> SIZE
+</div>
+<div class="col col-25" style="padding:0px;font-size:12px;color:#5f7485" align="center"> CANCEL
+</div>
+
+</div>
+
+
+<div class="row" style="padding:0 0 10px 0 " >
+    <div class="col col-25" align="center" style="border-right:1px solid #5f7485;padding:0px;color:white">
+<b>
+		
+		<i class="ion-location" style="padding-right:3px;font-size:18px;color:#5f7485"></i>	2.1km
+			</b>
+</div>
+
+<div class="col col-33" align="center" style="border-right:1px solid #5f7485;padding:0px;color:white">
+<b>
+			Grass{{stadiums.typefloor}} &#8226; 404{{stadiums.typefloor}}
+			</b>
+</div>
+
+<div class="col col-16" align="center" style="border-right:1px solid #5f7485;padding:0px;color:white">
+<b>
+			5vs5
+			</b>
+</div>
+
+<div class="col col-25" align="center" style="padding:0px;color:white">
+<b>
+			24 Hrs
+			</b>
+</div>
+
+
+</div>
+</div>
+
+<div class="card" style="background-color:rgb(62,83,100)">
+
+<div align="center">
+    <h5 class="whitetext" style="padding-bottom:0px;margin-bottom:0px" align="middle"><b>AVAILABLE TOMORROW</b></h5>
+    <div class="row" ng-show="!challenges.isadmin">
+        <div class="col">
+            <button class="button button-block button-balanced button-small" style="border-radius:50px;color:#2ab021;background-color: white">
+<b> 10:00 - 12:00 </b>
+</button>
+</div>
+<div class="col">
+    <button class="button button-block button-balanced button-small" style="border-radius:50px;color:#2ab021;background-color: white">
+<b> 10:00 - 12:00 </b>
+</button>
+</div>
+<div class="col">
+    <button class="button button-block button-balanced button-small" style="border-radius:50px;color:#2ab021;background-color: white">
+<b> 10:00 - 12:00 </b>
+</button>
+</div>
+</div>
+</div>
+
+</div>
+
+
+
+<div class="card" style="background-color:rgb(62,83,100)">
+
+<div align="center">
+    <h5 class="whitetext" align="middle"><b>SPECIAL FEATURES</b></h5>
+</div>
+
+</div>
+
+
+
+<div class="card" style="background-color:rgb(62,83,100)">
+
+<div align="center">
+    <h5 class="whitetext" align="middle"><b>DETAILS</b></h5>
+    <p class="whitetext">
+        {{stadiums.details}}
+    </p>
+    <i class="icon ion-android-more-horizontal" style="color: white">
+</i>
+</div>
+
+</div>
+
+<div class="card" style="background-color:rgb(62,83,100)">
+
+<div align="center">
+    <h5 class="whitetext" align="middle"><b>DIRECTIONS</b></h5>
+    <p class="whitetext">
+        {{stadiums.direction}}
+    </p>
+    <i class="icon ion-android-more-horizontal" style="color: white">
+</i>
+</div>
+
+</div>
+
+<div class="card" style="background-color:rgb(62,83,100)">
+
+<div align="center">
+    <h5 class="whitetext" align="middle"><b>CANCELLATION POLICY</b></h5>
+    <p class="whitetext">
+        {{stadiums.cancelationpolicy}}
+    </p>
+</div>
+
+</div>
+
+<div class="card" style="background-color:rgb(62,83,100)">
+
+<div align="center" id="map">
+    <h5 class="whitetext" align="middle"><b>MAP</b></h5>
+    <iframe src="//www.google.com/maps/embed/v1/place?q=Harrods,Brompton%20Rd,%20UK
+      &zoom=17
+      &key=AIzaSyBLRPrDZuaGR0u5X4V1t17CMMnHVHbCDMQ" style="width:100%;height:200px">
+</iframe>
+</div>
+
+</div>
+
+</ion-content>
+</ion-view>
