@@ -270,7 +270,7 @@ angular.module('football.controllers')
 
                                         if (childSnapshot.child(teamOf).val()) {
 
-                                            var range = 1110 - childSnapshot.child("rating").val();
+                                            var range = 1500 - childSnapshot.child("rating").val();
 
                                             var difficulty = "";
                                             var difficultytext = "";
@@ -306,9 +306,9 @@ angular.module('football.controllers')
                                                 "teamname": childSnapshot.child("teamname").val(),
                                                 'teamphoto': childSnapshot.child("teamphoto").val(),
                                                 //'datecreated': childSnapshot.child("datecreated").val(),
-                                                "favstadium": "",
-                                                "favstadiumphoto": childSnapshot.child("favstadiumphoto").val(),
-                                                "favstadium": childSnapshot.child("favstadium").val(),
+                                                //"favstadium": "",
+                                                //"favstadiumphoto": childSnapshot.child("favstadiumphoto").val(),
+                                                //"favstadium": childSnapshot.child("favstadium").val(),
                                                 "homejersey": childSnapshot.child("homejersey").val(),
                                                 "awayjersey": childSnapshot.child("awayjersey").val(),
                                                 "badge": childSnapshot.child("badge").val(),
@@ -380,7 +380,7 @@ angular.module('football.controllers')
                                     team1name: teams[i].teamname, //
                                     team1logo: teams[i].badge, //
                                     team1rank: teams[i].rank, //
-                                    team1jersey: teams[i].awayjersey, //
+                                    team1jersey: teams[i].awayjersey == myteam.homejersey ? teams[i].homejersey : teams[i].awayjersey, //
 
                                     team2key: myteam.key,
                                     team2name: myteam.teamname,
@@ -420,7 +420,7 @@ angular.module('football.controllers')
                                     team2logo: teams[i].badge,
                                     team2rank: teams[i].rank,
                                     team2adminid: teams[i].teamadmin,
-                                    team2jersey: teams[i].awayjersey,
+                                    team2jersey: teams[i].awayjersey == myteam.homejersey ? teams[i].homejersey : teams[i].awayjersey,
 
                                     team1key: myteam.key,
                                     team1name: myteam.teamname, //
@@ -435,7 +435,9 @@ angular.module('football.controllers')
 
                                     adminphoto: myprofile.photo,
                                     admintelephon: myprofile.telephone,
-                                    adminname: myprofile.firstname + " " + myprofile.lastname
+                                    adminname: myprofile.firstname + " " + myprofile.lastname,
+
+                                    winner: ""
 
                                 }
 

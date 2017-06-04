@@ -215,13 +215,13 @@ angular.module('football.controllers', [])
             UpdateProfile: function (profile, withdetails) {
                 try {
 
-                    
-                        var ageset = profile.age.getFullYear() == 1900 ? false : true;
 
-                        var year = profile.age.getFullYear();
-                        var month = profile.age.getMonth();
-                        var day = profile.age.getDate();
-                    
+                    var ageset = profile.age.getFullYear() == 1900 ? false : true;
+
+                    var year = profile.age.getFullYear();
+                    var month = profile.age.getMonth();
+                    var day = profile.age.getDate();
+
 
 
                     var user = firebase.auth().currentUser;
@@ -511,6 +511,38 @@ angular.module('football.controllers', [])
                                     title: challenges.child("admin").val() == id ? "you challenged " + challenges.child("team2name").val() : challenges.child("team2name").val() + " challenged you"
 
                                 }
+
+                                switch (challengedata.team1rank) {
+                                    case 1:
+                                        challengedata.team1rankdescription = challengedata.team1rank + 'st';
+                                        break;
+                                    case 2:
+                                        challengedata.team1rankdescription = challengedata.team1rank + 'nd';
+                                        break;
+                                    case 3:
+                                        challengedata.team1rankdescription = challengedata.team1rank + 'rd';
+                                        break;
+
+                                    default:
+                                        challengedata.team1rankdescription = challengedata.team1rank + 'th';
+                                        break;
+                                }
+
+                                switch (challengedata.team2rank) {
+                                    case 1:
+                                        challengedata.team2rankdescription = challengedata.team2rank + 'st';
+                                        break;
+                                    case 2:
+                                        challengedata.team2rankdescription = challengedata.team2rank + 'nd';
+                                        break;
+                                    case 3:
+                                        challengedata.team2rankdescription = challengedata.team2rank + 'rd';
+                                        break;
+
+                                    default:
+                                        challengedata.team2rankdescription = challengedata.team2rank + 'th';
+                                        break;
+                                }
                                 totchallenges.push(challengedata);
 
                             })
@@ -709,7 +741,7 @@ angular.module('football.controllers', [])
                                     key: req.key,
                                     firstname: req.child("firstname").val(),
                                     lastname: req.child("lastname").val(),
-                                    photo: req.child("requestorphoto").val() == "" ? "img/PlayerProfile.png" : req.child("requestorphoto").val(),
+                                    photo: (req.child("requestorphoto").val() == "" || !req.child("requestorphoto").exists()) ? "img/PlayerProfile.png" : req.child("requestorphoto").val(),
                                     telephone: req.child("telephone").val(),
                                     status: req.child("requeststatus").val(),
                                     color: color,
@@ -2195,7 +2227,7 @@ angular.module('football.controllers', [])
                 available: false,
                 skilllevel: "Newbie",
                 isplayer: true,
-                age:new Date()
+                age: new Date()
 
             }
 

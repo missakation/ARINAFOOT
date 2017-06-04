@@ -1030,6 +1030,44 @@ angular.module('football.controllers')
 
                             })
                         }
+                        else if (amiadmin && counter > 1) {
+                            template = 'Are you sure you want to leave the team?';
+
+                            var confirmPopup = $ionicPopup.confirm({
+                                title: 'Leave Team',
+                                template: template
+                            });
+
+                            confirmPopup.then(function (res) {
+                                var updates = {};
+                                for (var i = 0; i < result.players.length; i++) {
+                                    if (result.players[i].isadmin && result.players[i].key != id) {
+
+                                        updates['team/' + result.key + '/teamadmin'] = result.players[i].key;
+                                        updates['teamsinfo/' + result.key + '/teamadmin'] = result.players[i].key;
+                                    }
+
+                                };
+
+                                firebase.database().ref().update(updates).then(function () {
+                                    TeamStores.LeaveTeam(result)
+                                        .then(function (value) {
+                                            var alertPopup = $ionicPopup.alert({
+                                                title: 'Success',
+                                                template: 'You Left the Team'
+                                            }).then(function () {
+                                                $ionicHistory.nextViewOptions({
+                                                    disableBack: true
+                                                });
+                                                $state.go("app.teammanagement");
+                                            });
+
+                                        }, function (error) {
+                                            alert(error.message);
+                                        })
+                                });
+                            })
+                        }
                         else {
 
                             template = 'Are you sure you want to leave the team?';
@@ -1085,14 +1123,14 @@ angular.module('football.controllers')
     })
 
     .controller('TeamHistoryController', function ($scope, $ionicHistory, $ionicLoading, $ionicPopup, $stateParams, $state) {
-       
-       
+
+
         $scope.teammatches = $state.params.teammatches;
         console.log($scope.teammatches);
 
-   
 
- })
+
+    })
 
     .controller('TeamEditController', function ($scope, $ionicHistory, $ionicPopover, $ionicLoading, $timeout, $ionicPopup, $stateParams, $state, TeamStores) {
 

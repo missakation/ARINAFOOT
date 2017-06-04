@@ -7,7 +7,7 @@ angular.module('football.controllers')
 
         $scope.notloaded = true;
         $scope.limit = 10;
-        $scope.limitfinished = true;
+        $scope.limitfinished = false;
         $scope.rankedteams = [];
 
         $scope.goteamprofile = function (id) {
@@ -24,7 +24,7 @@ angular.module('football.controllers')
 
             LeaderBoardStore.GetLeaderboard(limit, function (leagues) {
 
-
+                console.log(leagues);
                 $scope.notloaded = false;
                 $scope.rankedteams = leagues.reverse();
 
@@ -53,10 +53,9 @@ angular.module('football.controllers')
 
         $scope.loadMore = function () {
 
-            if (!$scope.limitfinished) {
                 $scope.limit += 10;
                 $scope.refreshpage($scope.limit);
-            }
+            
 
         }
 

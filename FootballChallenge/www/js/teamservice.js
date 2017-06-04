@@ -50,17 +50,17 @@
                                 };
                                 switch (Items.rank) {
                                     case 1:
-                                        Items.rankdescription = Items.rank + ' st';
+                                        Items.rankdescription = Items.rank + 'st';
                                         break;
                                     case 2:
-                                        Items.rankdescription = Items.rank + ' nd';
+                                        Items.rankdescription = Items.rank + 'nd';
                                         break;
                                     case 3:
-                                        Items.rankdescription = Items.rank + ' rd';
+                                        Items.rankdescription = Items.rank + 'rd';
                                         break;
 
                                     default:
-                                        Items.rankdescription = Items.rank + ' th';
+                                        Items.rankdescription = Items.rank + 'th';
                                         break;
                                 }
                                 MyTeams.push(Items);
@@ -179,7 +179,7 @@
                         rank: 0,
                         numberofgames: 0,
                         wins: 0,
-                        winstreak:0,
+                        winstreak: 0,
 
                         teamoffive: newteam.five,
                         teamofsix: newteam.six,
@@ -309,7 +309,7 @@
                 try {
 
 
-                    firebase.database().ref('/teams/' + key).on('value',function (snapshot) {
+                    firebase.database().ref('/teams/' + key).on('value', function (snapshot) {
                         TeamProfile = {};
                         var upcomingmatches = [];
                         if (snapshot.exists()) {
@@ -429,7 +429,6 @@
 
                                 })
                             }
-                            console.log(upcomingmatches);
                             var Items = {
                                 "key": snapshot.key,
                                 "teamname": snapshot.child("teamname").val(),
@@ -471,8 +470,8 @@
 
                                 //STATS
                                 "numberofmatches": numberofmatches,
-                                "wins":1,
-                                "winstreak":1,
+                                "wins": 1,
+                                "winstreak": 1,
 
 
                                 "teamoffive": snapshot.child("teamoffive").val(),
@@ -490,17 +489,17 @@
                             };
                             switch (Items.rank) {
                                 case 1:
-                                    Items.rankdescription = Items.rank + ' st';
+                                    Items.rankdescription = Items.rank + 'st';
                                     break;
                                 case 2:
-                                    Items.rankdescription = Items.rank + ' nd';
+                                    Items.rankdescription = Items.rank + 'nd';
                                     break;
                                 case 3:
-                                    Items.rankdescription = Items.rank + ' rd';
+                                    Items.rankdescription = Items.rank + 'rd';
                                     break;
 
                                 default:
-                                    Items.rankdescription = Items.rank + ' th';
+                                    Items.rankdescription = Items.rank + 'th';
                                     break;
                             }
 
@@ -553,17 +552,17 @@
                             };
                             switch (Items.rank) {
                                 case 1:
-                                    Items.rankdescription = Items.rank + ' st';
+                                    Items.rankdescription = Items.rank + 'st';
                                     break;
                                 case 2:
-                                    Items.rankdescription = Items.rank + ' nd';
+                                    Items.rankdescription = Items.rank + 'nd';
                                     break;
                                 case 3:
-                                    Items.rankdescription = Items.rank + ' rd';
+                                    Items.rankdescription = Items.rank + 'rd';
                                     break;
 
                                 default:
-                                    Items.rankdescription = Items.rank + ' th';
+                                    Items.rankdescription = Items.rank + 'th';
                                     break;
                             }
                             TeamProfileInfo = Items;
@@ -637,6 +636,8 @@
                     for (var i = 0; i < members.length; i++) {
                         updates['/players/' + members[i].key + '/teams/' + team.key] = null;
                     }
+                    updates['/teamnames/' + team.teamname ] = null;
+
 
 
                     // updates['/players/' + id + '/teams/' + newPostKey] = contact;

@@ -211,20 +211,44 @@ angular.module('football.controllers')
                 $scope.teaminvitationoperation = true;
                 switch (x) {
                     case 1:
-                        HomeStore.AcceptTeamInvitation(invitation, $scope.profile).then(function () {
 
-                            var alertPopup = $ionicPopup.alert({
-                                title: 'New Team',
-                                template: 'You now belong to team ' + invitation.teamname
-                            }).then(function () {
-                                $state.go("app.teammanagement");
-                            }, function (error) {
-                                alert(error.message);
-                                LoginStore.PostError(error);
-                            })
+                        firebase.database().ref('/teaminfo/' + invitation.key).once('value').then(function (snapshot) {
+                            if (snapshot.exists()) {
+                                HomeStore.AcceptTeamInvitation(invitation, $scope.profile).then(function () {
+                                    var alertPopup = $ionicPopup.alert({
+                                        title: 'New Team',
+                                        template: 'You now belong to team ' + invitation.teamname
+                                    }).then(function () {
+                                        $state.go("app.teammanagement");
+                                    }, function (error) {
+                                        alert(error.message);
+                                        LoginStore.PostError(error);
+                                    })
 
 
-                        });
+                                });
+                            }
+                            else {
+                                var alertPopup = $ionicPopup.alert({
+                                   template: 'Sorry, the team does not exist anymore.'
+                                }).then(function () {
+                                    HomeStore.DeleteInvitation(invitation).then(function () {
+                                        $scope.profile.teaminvitations = $scope.profile.teaminvitations.filter(function (el) {
+                                            return el.key !== invitation.key;
+                                        });
+                                    }, function (error) {
+                                        alert(error.message);
+                                        LoginStore.PostError(error);
+                                    })
+                                }, function (error) {
+
+                                })
+                            }
+                        })
+
+
+
+
                         break;
                     case 2:
                         HomeStore.DeleteInvitation(invitation).then(function () {
@@ -397,7 +421,7 @@ angular.module('football.controllers')
                         TeamStores.GetTeamInfoByKey($scope.profile.teamdisplayedkey, function (favteam) {
                             if (favteam !== null || favteam !== undefined) {
 
-                                
+
 
                                 $scope.teamdisplayed.name = favteam.teamname;
                                 $scope.teamdisplayed.picture = favteam.badge;
