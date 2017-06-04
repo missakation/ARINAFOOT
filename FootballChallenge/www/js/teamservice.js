@@ -179,6 +179,7 @@
                         rank: 0,
                         numberofgames: 0,
                         wins: 0,
+                        winstreak:0,
 
                         teamoffive: newteam.five,
                         teamofsix: newteam.six,
@@ -428,7 +429,7 @@
 
                                 })
                             }
-
+                            console.log(upcomingmatches);
                             var Items = {
                                 "key": snapshot.key,
                                 "teamname": snapshot.child("teamname").val(),
@@ -453,8 +454,6 @@
                                 "startsundayend": snapshot.child("startsundayend").val(),
                                 "rating": snapshot.child("rating").val(),
                                 "rank": snapshot.child("rank").val(),
-                                "numberofgames": 0,
-                                "wins": 0,
                                 "amiadmin": amiadmin,
                                 "players": players,
                                 "captain": admins,
@@ -469,7 +468,12 @@
                                 "favstadium": snapshot.child("favstadium").val(),
                                 "favstadiumphoto": "",
                                 "favstadiumname": "",
-                                "numChildren": numberofmatches,
+
+                                //STATS
+                                "numberofmatches": numberofmatches,
+                                "wins":1,
+                                "winstreak":1,
+
 
                                 "teamoffive": snapshot.child("teamoffive").val(),
                                 "teamofsix": snapshot.child("teamofsix").val(),

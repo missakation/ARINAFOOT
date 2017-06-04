@@ -100,7 +100,7 @@ angular.module('football.controllers')
                 team: false,
                 teamsize: false,
                 teamsizemax: false,
-                favsize:false
+                favsize: false
             }
 
         $scope.managecolors =
@@ -235,8 +235,7 @@ angular.module('football.controllers')
                             $scope.disabledbutton = false;
                             error = true;
                         }
-                        if(team.favstadium == "")
-                        {
+                        if (team.favstadium == "") {
                             $scope.validate.favsize = true;
                             $scope.disabledbutton = false;
                             error = true;
@@ -281,7 +280,7 @@ angular.module('football.controllers')
 
                         });
                     }
-                    
+
 
                 });
             }
@@ -852,12 +851,21 @@ angular.module('football.controllers')
             }
         }
 
+        $scope.GoMatchHistory = function () {
+
+            $state.go('app.teamhistory',
+
+                {
+                    teammatches: $scope.currentprofile.upcomingmatches
+                });
+        }
+
         $scope.playeroperations = function (opercode, player) {
             var message = "";
             var noerror = true;
 
             firebase.database().ref('/playersinfo/' + player.key).once('value').then(function (snapshot) {
-                
+
                 if (snapshot.exists()) {
                     switch (opercode) {
                         case 1:
@@ -1075,6 +1083,16 @@ angular.module('football.controllers')
         }
 
     })
+
+    .controller('TeamHistoryController', function ($scope, $ionicHistory, $ionicLoading, $ionicPopup, $stateParams, $state) {
+       
+       
+        $scope.teammatches = $state.params.teammatches;
+        console.log($scope.teammatches);
+
+   
+
+ })
 
     .controller('TeamEditController', function ($scope, $ionicHistory, $ionicPopover, $ionicLoading, $timeout, $ionicPopup, $stateParams, $state, TeamStores) {
 

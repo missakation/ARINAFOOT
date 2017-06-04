@@ -98,7 +98,7 @@ angular.module('football.controllers')
                                         //"datetime": hour + " : " + minute,
                                         "datetime": search.date,
                                         "price": stadiumsnapshot.child("price").val(),
-                                        "photo": mainstadiumSnapshot.child("photo").val(),
+                                        "photo": stadiumsnapshot.child("photo").val(),
                                         "type": stadiumsnapshot.child("type").val(),
                                         "typefloor": stadiumsnapshot.child("typefloor").val(),
                                         "distance": "5",

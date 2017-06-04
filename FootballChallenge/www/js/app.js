@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('football', ['ionic', 'ionicImgCache', 'football.controllers', 'ionic.cloud', "ion-datetime-picker", "ionicLazyLoad", "ion-floating-menu", 'ngCordova', 'ionic.rating', 'rzModule'])
+angular.module('football', ['ionic', /*'ionicImgCache'*/, 'football.controllers', 'ionic.cloud', "ion-datetime-picker", "ionicLazyLoad", "ion-floating-menu", 'ngCordova', 'ionic.rating', 'rzModule'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -28,7 +28,7 @@ angular.module('football', ['ionic', 'ionicImgCache', 'football.controllers', 'i
 
     })
 
-    .config(function ($stateProvider, $urlRouterProvider, $ionicCloudProvider, ionicImgCacheProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $ionicCloudProvider, /*ionicImgCacheProvider*/) {
         $ionicCloudProvider.init({
             "core": {
                 "app_id": "de07ef7c"
@@ -47,13 +47,15 @@ angular.module('football', ['ionic', 'ionicImgCache', 'football.controllers', 'i
             }
         })
 
-        ionicImgCacheProvider.debug(true);
+        /*  ionicImgCacheProvider.debug(true);
+  
+          // Set storage size quota to 100 MB. 
+          ionicImgCacheProvider.quota(100);
+  
+          // Set foleder for cached files. 
+          ionicImgCacheProvider.folder('ARINACACHE');*/
 
-        // Set storage size quota to 100 MB. 
-        ionicImgCacheProvider.quota(100);
 
-        // Set foleder for cached files. 
-        ionicImgCacheProvider.folder('ARINACACHE');
         $stateProvider
 
             .state('firstpage', {
@@ -397,6 +399,20 @@ angular.module('football', ['ionic', 'ionicImgCache', 'football.controllers', 'i
                     'menuContent': {
                         templateUrl: 'templates/settingssms.html',
                         controller: 'SettingsSmsController'
+
+                    }
+                }
+            })
+
+            .state('app.teamhistory', {
+                url: '/teamhistory',
+                params: {
+                    teammatches: null
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/teamhistory.html',
+                        controller: 'TeamHistoryController'
 
                     }
                 }

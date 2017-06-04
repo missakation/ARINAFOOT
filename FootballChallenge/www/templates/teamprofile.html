@@ -241,7 +241,7 @@
 		<div class="row row-top" style="background-color:rgb(46,62,75);padding-top: 0px;margin-bottom:-25px;margin-top:-20px">
 
 			<div class="col" align="center">
-				<button class="button  button-balanced button-full" style="min-height:35px;border-radius:45px" ng-click="Challengeteam()">
+				<button class="button  button-balanced button-full" style="min-height:35px;border-radius:45px" ng-click="GoMatchHistory()">
 					<h5 class="whitetext">
 						Match History
 					</h5>
@@ -533,7 +533,7 @@
 
 					<div class="col">
 
-						<h3 class="whitetext" align="right">1</h3>
+						<h3 class="whitetext" align="right">{{currentprofile.numberofmatches}}</h3>
 					</div>
 
 				</div>
@@ -546,7 +546,7 @@
 
 					<div class="col">
 
-						<h3 class="whitetext" align="right">1</h3>
+						<h3 class="whitetext" align="right">{{currentprofile.wins}}</h3>
 					</div>
 
 				</div>
@@ -559,7 +559,7 @@
 
 					<div class="col">
 
-						<h3 class="whitetext" align="right">1</h3>
+						<h3 class="whitetext" align="right">{{currentprofile.winstreak}}</h3>
 					</div>
 
 				</div>
