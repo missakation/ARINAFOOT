@@ -3,7 +3,7 @@ angular.module('football.controllers')
 
 
 
-    .controller('ChallengeController', function ($scope, TeamStores, ChallengeStore, $state, $ionicPopup, $ionicLoading, $ionicPopover, pickerView) {
+    .controller('ChallengeController', function ($scope, TeamStores, ChallengeStore, $state, $ionicPopup, $ionicLoading, $ionicPopover, pickerView, $ionicFilterBar) {
 
 
         var numofplayersArr = [];
@@ -36,6 +36,10 @@ angular.module('football.controllers')
             var selectedDate = new Date();
             if (selectedDay == "Tomorrow") {
                 selectedDate.setDate(selectedDate.getDate() + 1);
+                return weekday[selectedDate.getDay()] + monthChar[selectedDate.getMonth()] + " " + selectedDate.getDate();
+            }
+            if (selectedDay == "Today") {
+                selectedDate.setDate(selectedDate.getDate());
                 return weekday[selectedDate.getDay()] + monthChar[selectedDate.getMonth()] + " " + selectedDate.getDate();
             }
             for (var i = 0; i < 6; i++) {
@@ -178,6 +182,7 @@ angular.module('football.controllers')
                         })
 
                     }
+                    $scope.filteredTeams = $scope.allteamsnotme;
 
                 })
 
@@ -247,11 +252,12 @@ angular.module('football.controllers')
                     });
                 }
                 else {
-
+                    
                     $state.go('app.challengeteamstadium',
 
                         {
                             date: $scope.search.date,
+                            visualText: $scope.search.text,
                             teams: $scope.selectedteams,
                             myteam: $scope.myteam
                         });
@@ -263,19 +269,68 @@ angular.module('football.controllers')
         }
 
 
+        //Filter bar stuff
+        var filterBarInstance;
 
+        //function getItems () {
+        //    var items = [];
+        //    for (var x = 1; x < 2000; x++) {
+        //        items.push({text: 'This is item number ' + x + ' which is an ' + (x % 2 === 0 ? 'EVEN' : 'ODD') + ' number.'});
+        //    }
+        //    $scope.items = items;
+        //}
+
+        //getItems();
+
+
+        $scope.filteredTeams = $scope.allteamsnotme;
+        //$scope.$digest();
+        $scope.showFilterBar = function () {
+            filterBarInstance = $ionicFilterBar.show({
+                items: $scope.allteamsnotme,
+                update: function (filteredItems, filterText) {
+                    if (filterText != "" && filterText != null) {
+                        console.log("filterText is: " + filterText)
+                        $scope.filteredTeams = filteredItems;
+                    }
+                    else {
+                        console.log("filterText non empty is: " + filterText)
+                        $scope.filteredTeams = $scope.allteamsnotme;
+                    }
+                },
+                filterProperties: "teamname"
+            });
+        };
+
+
+
+
+        $scope.refreshItems = function () {
+            if (filterBarInstance) {
+                filterBarInstance();
+                filterBarInstance = null;
+            }
+
+            $timeout(function () {
+                getItems();
+                $scope.$broadcast('scroll.refreshComplete');
+            }, 1000);
+        };
+
+        //------------filter bar stuff ----/
 
 
 
     })
 
-    .controller('challengestadiumcontroller', function ($http, $scope, $ionicHistory, LoginStore, ChallengeStore, HomeStore, ReservationFact, $state, $stateParams, $ionicPopup, $ionicLoading, $ionicPopover) {
-
+    .controller('challengestadiumcontroller', function ($http, $scope, $ionicHistory, LoginStore, ChallengeStore, HomeStore, ReservationFact, $state, $stateParams, $ionicPopup, $ionicLoading, $ionicPopover, $ionicFilterBar) {
+        
         $scope.selectedstadiums = [];
         $scope.challengestatus = false;
         $scope.selecteddate =
             {
-                date: $state.params.date
+                date: $state.params.date,
+                text: $state.params.visualText
             };
 
         $scope.myteam = $state.params.myteam;
@@ -312,7 +367,7 @@ angular.module('football.controllers')
             });
 
 
-
+            $scope.filteredStadiums = $scope.allfreestadiums;
         })
         $scope.updateselectedteams = function (stadiums) {
 
@@ -434,6 +489,55 @@ angular.module('football.controllers')
             }
 
         }
+        //Filter bar stuff
+        var filterBarInstance;
+
+        //function getItems () {
+        //    var items = [];
+        //    for (var x = 1; x < 2000; x++) {
+        //        items.push({text: 'This is item number ' + x + ' which is an ' + (x % 2 === 0 ? 'EVEN' : 'ODD') + ' number.'});
+        //    }
+        //    $scope.items = items;
+        //}
+
+        //getItems();
+
+
+        $scope.filteredStadiums = $scope.allfreestadiums;
+        //$scope.$digest();
+        $scope.showFilterBar = function () {
+            filterBarInstance = $ionicFilterBar.show({
+                items: $scope.allfreestadiums,
+                update: function (filteredItems, filterText) {
+                    if (filterText != "" && filterText != null) {
+                        console.log("filterText is: " + filterText)
+                        $scope.filteredStadiums = filteredItems;
+                    }
+                    else {
+                        console.log("filterText non empty is: " + filterText)
+                        $scope.filteredStadiums = $scope.allfreestadiums;
+                    }
+                },
+                filterProperties: "stadiumname"
+            });
+        };
+
+
+
+
+        $scope.refreshItems = function () {
+            if (filterBarInstance) {
+                filterBarInstance();
+                filterBarInstance = null;
+            }
+
+            $timeout(function () {
+                getItems();
+                $scope.$broadcast('scroll.refreshComplete');
+            }, 1000);
+        };
+
+        //------------filter bar stuff ----/
 
     })
 

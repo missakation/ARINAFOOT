@@ -1,11 +1,15 @@
 ﻿
 angular.module('football.controllers')
-    .controller('stadiumcontroller', function ($scope, $http, $ionicPopover, $interval, $ionicHistory, ReservationFact, $ionicPopup, $ionicLoading, $timeout, $state, $cordovaDatePicker, pickerView, SMSService) {
+    .controller('stadiumcontroller', function ($scope, $http, $ionicPopover, $interval, $ionicHistory, ReservationFact, $ionicPopup, $ionicLoading, $timeout, $state, $cordovaDatePicker, pickerView, SMSService, $ionicFilterBar) {
 
         function getDateFromDayName(selectedDay) {
             var selectedDate = new Date();
             if (selectedDay == "Tomorrow") {
                 selectedDate.setDate(selectedDate.getDate() + 1);
+                return weekday[selectedDate.getDay()] + monthChar[selectedDate.getMonth()] + " " + selectedDate.getDate();
+            }
+            if (selectedDay == "Today") {
+                selectedDate.setDate(selectedDate.getDate());
                 return weekday[selectedDate.getDay()] + monthChar[selectedDate.getMonth()] + " " + selectedDate.getDate();
             }
             for (var i = 0; i < 6; i++) {
@@ -383,8 +387,10 @@ angular.module('football.controllers')
                         $scope.allfreestadiums[i].points = totlPoints;
                         // LOGIC FOR POINTS ENDS
                     }
-                }
+                    }
 
+                    $scope.filteredStadiums = $scope.allfreestadiums;
+                    $scope.$digest();
 
               });
 
@@ -416,6 +422,7 @@ angular.module('football.controllers')
                 'Speed: ' + position.coords.speed + '\n' +
                 'Timestamp: ' + position.timestamp + '\n');*/
 
+
                 $scope.latitude = position.coords.latitude;
                 $scope.longitude = position.coords.longitude;
 
@@ -426,6 +433,7 @@ angular.module('football.controllers')
                     method: 'GET',
                     url: 'https://us-central1-project-6346119287623064588.cloudfunctions.net/date'
                 }).then(function successCallback(response) {
+
 
 
                     $scope.checkfree();
@@ -439,7 +447,9 @@ angular.module('football.controllers')
                 });
 
 
+
             }, function (error) {
+
 
                 $scope.checkfree();
             });
@@ -482,6 +492,7 @@ angular.module('football.controllers')
                         SMSService.verifyUserMobile($scope, $scope.reserve, [search, stadiums])
                     } else {
                         try {
+
 
 
                             var confirmPopup = $ionicPopup.confirm({
@@ -537,6 +548,8 @@ angular.module('football.controllers')
 
 
 
+
+
                                     }
 
                                 });
@@ -551,6 +564,7 @@ angular.module('football.controllers')
             };
 
 
+
             $scope.updatefilter = function () {
                 $scope.closePopover();
                 $ionicLoading.show({
@@ -562,6 +576,7 @@ angular.module('football.controllers')
                 });
 
                 $scope.allfreestadiums = [];
+
 
                 for (var i = 0; i < $scope.globalstadiums.length; i++) {
                     if ($scope.globalstadiums[i].type && $scope.globalstadiums[i].typefloor) {
@@ -596,6 +611,56 @@ angular.module('football.controllers')
                     $scope.nointernet = true;
                 }
             });
+
+			//Filter bar stuff
+        var filterBarInstance;
+
+        //function getItems () {
+        //    var items = [];
+        //    for (var x = 1; x < 2000; x++) {
+        //        items.push({text: 'This is item number ' + x + ' which is an ' + (x % 2 === 0 ? 'EVEN' : 'ODD') + ' number.'});
+        //    }
+        //    $scope.items = items;
+        //}
+
+        //getItems();
+
+
+        $scope.filteredStadiums = $scope.allfreestadiums;
+        //$scope.$digest();
+        $scope.showFilterBar = function () {
+            filterBarInstance = $ionicFilterBar.show({
+                items: $scope.allfreestadiums,
+                update: function (filteredItems, filterText) {
+                    if (filterText != "" && filterText != null) {
+                        console.log("filterText is: " + filterText)
+                        $scope.filteredStadiums = filteredItems;
+                    }
+                    else {
+                        console.log("filterText non empty is: " + filterText)
+                        $scope.filteredStadiums = $scope.allfreestadiums;
+                    }
+                },
+                filterProperties: "stadiumname"
+            });
+        };
+
+
+
+
+        $scope.refreshItems = function () {
+            if (filterBarInstance) {
+                filterBarInstance();
+                filterBarInstance = null;
+            }
+
+            $timeout(function () {
+                getItems();
+                $scope.$broadcast('scroll.refreshComplete');
+            }, 1000);
+        };
+
+        //------------filter bar stuff ----/
 
 
         })

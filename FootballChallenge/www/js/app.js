@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('football', ['ionic', 'ionicImgCache', 'football.controllers', 'ionic.cloud', "ion-datetime-picker", "ionicLazyLoad", "ion-floating-menu", 'ngCordova', 'ionic.rating', 'rzModule'])
+angular.module('football', ['ionic', 'ionicImgCache', 'football.controllers', 'ionic.cloud', "ion-datetime-picker", "ionicLazyLoad", "ion-floating-menu", 'ngCordova', 'ionic.rating', 'jett.ionic.filter.bar', 'rzModule'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -19,6 +19,12 @@ angular.module('football', ['ionic', 'ionicImgCache', 'football.controllers', 'i
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+			
+			$ionicPlatform.onHardwareBackButton(function() {
+                event.preventDefault();
+                event.stopPropagation();
+                alert("going back now y'all");
+            });
         });
 
         //  // This hooks all auth events to check everything as soon as the app starts
@@ -28,8 +34,10 @@ angular.module('football', ['ionic', 'ionicImgCache', 'football.controllers', 'i
 
     })
 
-    .config(function ($stateProvider, $urlRouterProvider, $ionicCloudProvider, ionicImgCacheProvider) {
-        $ionicCloudProvider.init({
+    .config(function ($stateProvider, $urlRouterProvider, $ionicCloudProvider, ionicImgCacheProvider, $ionicFilterBarConfigProvider) {
+        $ionicFilterBarConfigProvider.theme('royal')
+        ;
+		$ionicCloudProvider.init({
             "core": {
                 "app_id": "de07ef7c"
             },
@@ -422,6 +430,7 @@ angular.module('football', ['ionic', 'ionicImgCache', 'football.controllers', 'i
                 url: '/challengeteamstadium',
                 params: {
                     date: null,
+                    visualText: null,
                     teams: null,
                     myteam: null
                 },
