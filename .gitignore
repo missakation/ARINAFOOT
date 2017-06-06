@@ -240,3 +240,10 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+
+#plugins
+plugins/
+merges/
+hooks/
+platforms/
