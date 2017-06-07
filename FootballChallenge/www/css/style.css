@@ -234,3 +234,8 @@
 		background-color: transparent;
 		margin-top: -6px;
 	}
+
+    .bar .bar-royal
+    {
+        background-color: white !important;
+    }

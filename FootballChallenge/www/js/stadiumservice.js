@@ -16,7 +16,7 @@ angular.module('football.controllers')
                 //var q = $q.defer();
                 try {
 
-                    alert(JSON.stringify(search.date));
+                    //alert(JSON.stringify(search.date));
                     //alert("here");
                     Availables = [];
                     var year = search.date.getFullYear();
@@ -138,7 +138,7 @@ angular.module('football.controllers')
                             });
 
                         });
-                        console.log(Availables);
+                        //console.log(Availables);
                         callback(Availables);
                     }, function (error) {
                         alert(error.message);

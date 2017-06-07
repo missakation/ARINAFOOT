@@ -19,6 +19,12 @@ angular.module('football', ['ionic', /*'ionicImgCache'*/, 'football.controllers'
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+			
+			$ionicPlatform.onHardwareBackButton(function() {
+                event.preventDefault();
+                event.stopPropagation();
+                alert("going back now y'all");
+            });
         });
 
         //  // This hooks all auth events to check everything as soon as the app starts
@@ -28,8 +34,10 @@ angular.module('football', ['ionic', /*'ionicImgCache'*/, 'football.controllers'
 
     })
 
-    .config(function ($stateProvider, $urlRouterProvider, $ionicCloudProvider, /*ionicImgCacheProvider*/) {
-        $ionicCloudProvider.init({
+    .config(function ($stateProvider, $urlRouterProvider, $ionicCloudProvider, ionicImgCacheProvider,/* $ionicFilterBarConfigProvider*/) {
+        $ionicFilterBarConfigProvider.theme('royal')
+        ;
+		$ionicCloudProvider.init({
             "core": {
                 "app_id": "de07ef7c"
             },
@@ -438,6 +446,7 @@ angular.module('football', ['ionic', /*'ionicImgCache'*/, 'football.controllers'
                 url: '/challengeteamstadium',
                 params: {
                     date: null,
+                    visualText: null,
                     teams: null,
                     myteam: null
                 },
