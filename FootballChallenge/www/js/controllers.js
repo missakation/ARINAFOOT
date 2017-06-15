@@ -378,7 +378,7 @@ angular.module('football.controllers', [])
                                         "telephone": childSnapshot.child("telephone").val(),
                                         "winstreak": childSnapshot.child("winstreak").val(),
                                         "photo": childSnapshot.child("photoURL").val() == "" ? "img/PlayerProfile.png" : childSnapshot.child("photoURL").val(),
-
+                                        "devicetoken": childSnapshot.child("devicetoken").val(),
                                         "age": num
 
                                     };
@@ -842,13 +842,41 @@ angular.module('football.controllers', [])
 
             GetProfileInfoByKey: function (key, callback) {
                 TempItems = [];
-                var user = firebase.auth().currentUser;
-                //alert("test");
-                var id = user.uid;
-
                 try {
 
-                    firebase.database().ref('/players/' + id).once('value', function (snapshot) {
+                    firebase.database().ref('/playersinfo/' + key).once('value', function (snapshot) {
+                        var age = new Date();
+
+                        age.setDate(snapshot.child("ageday").val());
+                        age.setFullYear(snapshot.child("ageyear").val());
+                        age.setMonth(snapshot.child("agemonth").val());
+
+
+                        var ageDifMs = Date.now() - age.getTime();
+                        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+                        var num = Math.abs(ageDate.getUTCFullYear() - 1970);
+
+
+                        var skilldescription = "newbie";
+                        switch (snapshot.child("skilllevel").val()) {
+                            case 0:
+                                skilldescription = "newbie";
+                                break;
+                            case 1:
+                                skilldescription = "not bad";
+                                break;
+
+                            case 2:
+                                skilldescription = "solid";
+                                break;
+                            case 3:
+                                skilldescription = "Pro";
+                                break;
+
+                            default:
+                                break;
+                        }
+
                         profile["key"] = snapshot.key;
                         profile["displayname"] = snapshot.child("displayname").val();
                         profile["firstname"] = snapshot.child("firstname").val();
@@ -864,6 +892,47 @@ angular.module('football.controllers', [])
                         profile["winstreak"] = snapshot.child("winstreak").val();
                         profile["teamdisplayed"] = "none";
                         profile["teamdisplayedkey"] = snapshot.child("teamdisplayedkey").val();
+
+
+                        profile["startmonday"] = snapshot.child("startmonday").val();
+                        profile["startmondayend"] = snapshot.child("startmondayend").val();
+                        profile["starttuesday"] = snapshot.child("starttuesday").val();
+                        profile["starttuesdayend"] = snapshot.child("starttuesdayend").val();
+                        profile["startwednesday"] = snapshot.child("startwednesday").val();
+                        profile["startwednesdayend"] = snapshot.child("startwednesdayend").val();
+                        profile["startthursday"] = snapshot.child("startthursday").val();
+                        profile["startthursdayend"] = snapshot.child("startthursdayend").val();
+                        profile["startfriday"] = snapshot.child("startfriday").val();
+                        profile["startfridayend"] = snapshot.child("startfridayend").val();
+                        profile["startsaturday"] = snapshot.child("startsaturday").val();
+                        profile["startsaturdayend"] = snapshot.child("startsaturdayend").val();
+                        profile["startsunday"] = snapshot.child("startsunday").val();
+                        profile["startsundayend"] = snapshot.child("startsundayend").val();
+
+
+                        //Age
+                        profile["ageyear"] = snapshot.child("ageyear").val();
+                        profile["agemonth"] = snapshot.child("agemonth").val();
+                        profile["ageday"] = snapshot.child("ageday").val();
+                        profile["ageset"] = snapshot.child("ageset").val();
+                        profile["age"] = age;
+                        profile["agenum"] = num;
+                        profile["identity"] = snapshot.child("identity").val();
+                        profile["available"] = snapshot.child("available").val();
+                        profile["availablepng"] = snapshot.child("available").val() ? "available" : "busy";
+                        profile["isplayer"] = snapshot.child("isplayer").val();
+
+                        profile["teamdisplayedkey"] = snapshot.child("teamdisplayedkey").val();
+                        //"teamdisplayed": snapshot.child("teamdisplayed").val(),
+                        profile["skilllevel"] = snapshot.child("skilllevel").val();
+                        profile["skilldescription"] = skilldescription;
+                        profile["favstadiumname"] = snapshot.child("favstadiumname").val();
+
+                        //"distancetoplay": snapshot.child("identity").val(),
+                        //"teamtoshow":snapshot.child("identity").val()
+
+
+
                         callback(profile);
                     }, function (error) {
                         alert(error.message);
@@ -1310,10 +1379,9 @@ angular.module('football.controllers', [])
                 var user = firebase.auth().currentUser;
                 var id = user.uid;
 
-                firebase.database().ref('/teampoints').orderByChild("rank").limitToFirst(4).once('value').then(function (snapshot) {
+                firebase.database().ref('/teampoints').orderByChild("rating").limitToFirst(4).once('value').then(function (snapshot) {
                     RankedTeams = [];
                     snapshot.forEach(function (childSnapshot) {
-
 
                         var Items = {
                             "key": childSnapshot.key,
@@ -1660,7 +1728,7 @@ angular.module('football.controllers', [])
                         "profile": notificationprofile,
                         "notification": {
                             "message": message,
-                            "title": "AMENA GHOYEM"
+                            "title": "ARINA"
                         },
                         "pluginConfig": {
                             "ios": {

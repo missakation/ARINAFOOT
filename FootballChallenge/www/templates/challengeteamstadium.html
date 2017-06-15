@@ -9,26 +9,26 @@
 		color: white;
 		height: 8px
 	}
-		.popup {
-		border-radius:50px;
-		font-size:15px;
+
+	.popup {
+		border-radius: 50px;
+		font-size: 15px;
 	}
 
-.popup-buttons .button:first-child 
-	{
-     	border-radius:50px;
-		margin:05px;
-		padding:0px;
-		background-color:rgb(153,167,180);
-		color:white;
+	.popup-buttons .button:first-child {
+		border-radius: 50px;
+		margin: 05px;
+		padding: 0px;
+		background-color: rgb(153, 167, 180);
+		color: white;
 	}
-	.popup-buttons .button:last-child 
-	{
-     	border-radius:50px;
-		margin:05px;
-		padding:0px;
-		background-color:#2ab041;
-		color:white;
+
+	.popup-buttons .button:last-child {
+		border-radius: 50px;
+		margin: 05px;
+		padding: 0px;
+		background-color: #2ab041;
+		color: white;
 	}
 
 	.popup-body {
@@ -36,31 +36,32 @@
 		margin: -5px;
 		background-color: rgb(62, 83, 100);
 		color: white;
-		text-align:center;	
-		border-radius:15px 15px 0 0 ;
+		text-align: center;
+		border-radius: 15px 15px 0 0;
 	}
-    .popup-buttons {
+
+	.popup-buttons {
 		padding: 10px 5px 5px 5px;
 		margin: -5px;
 		background-color: rgb(62, 83, 100);
-		text-align:center;	
-		border-radius:0 0 15px 15px ;
+		text-align: center;
+		border-radius: 0 0 15px 15px;
 	}
-	
-	
-    .popup-head {	
-	    display: none;  
-        	}
-	
+
+
+	.popup-head {
+		display: none;
+	}
+
 	.headercolor {
 		background-color: rgb(62, 83, 100);
 		color: white
 	}
 </style>
 <ion-view view-title="Challenge a Team">
-    <ion-nav-buttons side="secondary">
-        <button class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()"></button>
-    </ion-nav-buttons>
+	<ion-nav-buttons side="secondary">
+		<button class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()"></button>
+	</ion-nav-buttons>
 
 	<ion-nav-buttons side="primary">
 		<button class="button button-icon ion-android-funnel" ng-click="popover.show($event)"></button>
@@ -121,7 +122,7 @@
           <input type="datetime-local" ng-model="search.date" style="color:white">
       </label>-->
 
-				<div class="card" ng-repeat="stadiums in filteredStadiums | orderBy:choice.sort:reverse" style="background-color:rgb(62,83,100);margin:10px 5px 10px 5px">
+		<div class="card" ng-repeat="stadiums in filteredStadiums | orderBy:choice.sort:reverse" style="background-color:rgb(62,83,100);margin:10px 5px 10px 5px">
 			<!--  <a class="item item-thumbnail-left" ng-href="#/app/reservestadiumdetails/{{stadiums.stadiumkey}}"> -->
 
 			<div align="center" style="padding-bottom:0px">
@@ -139,7 +140,8 @@
 
 			<div class="row">
 				<div class="col col-66" align="left">
-					<rating style="color:rgb(255,152,18);margin-top:-8px;padding-top:0px" readonly="readOnly" ng-model=stadiums.rating max="rating.max" align="left">
+					<rating style="color:rgb(255,152,18);margin-top:-8px;padding-top:0px" readonly="readOnly" ng-model=stadiums.rating max="rating.max"
+					 align="left">
 
 					</rating>
 
@@ -156,10 +158,12 @@
 				<div class="col" style="font-weight:100;color:#5f7485;font-size:12px;padding-bottom:0px;padding-top:0px" align="left"> 2.1km
 				</div>
 
-				<div class="col" style="font-weight:100;color:#5f7485;border-right:1px #5f7485 solid;border-left:1px #5f7485 solid;padding-top:0px;font-size:12px;padding-bottom:0px" align="center"> TYPE
+				<div class="col" style="font-weight:100;color:#5f7485;border-right:1px #5f7485 solid;border-left:1px #5f7485 solid;padding-top:0px;font-size:12px;padding-bottom:0px"
+				 align="center"> TYPE
 				</div>
 
-				<div class="col" style="font-weight:100;color:#5f7485;font-size:12px;padding-bottom:0px;padding-top:0px" align="center"> STADIUM SIZE
+				<div class="col" style="font-weight:100;color:#5f7485;font-size:12px;padding-bottom:0px;padding-top:0px" align="center">
+				STADIUM SIZE
 				</div>
 
 			</div>
@@ -201,9 +205,10 @@
 
 
 	</ion-content>
-<div class="bar bar-footer " style="background-color:#2d3e4b">
+	<div class="bar bar-footer " style="background-color:#2d3e4b">
 
-<button class="button button-small " style="width:100%; background-color:#28b041; color:white; border-radius:20px" ng-disabled="challengestatus" ng-click="sendchallenge()"> Send Challenge
+		<button class="button button-small " style="width:100%; background-color:#28b041; color:white; border-radius:20px" ng-disabled="challengestatus"
+		 ng-click="sendchallenge()"> Send Challenge
 </button>
-</div>
+	</div>
 </ion-view>

@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('football', ['ionic', /*'ionicImgCache'*/, 'football.controllers', 'ionic.cloud', "ion-datetime-picker", "ionicLazyLoad", "ion-floating-menu", 'ngCordova', 'ionic.rating', 'rzModule'])
+angular.module('football', ['ionic', /*'ionicImgCache'*/ 'football.controllers', 'ionic.cloud', 'jett.ionic.filter.bar', "ion-datetime-picker", "ionicLazyLoad", "ion-floating-menu", 'ngCordova', 'ionic.rating', 'rzModule'])
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -19,8 +19,8 @@ angular.module('football', ['ionic', /*'ionicImgCache'*/, 'football.controllers'
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
-			
-			$ionicPlatform.onHardwareBackButton(function() {
+
+            $ionicPlatform.onHardwareBackButton(function () {
                 event.preventDefault();
                 event.stopPropagation();
                 alert("going back now y'all");
@@ -34,10 +34,32 @@ angular.module('football', ['ionic', /*'ionicImgCache'*/, 'football.controllers'
 
     })
 
-    .config(function ($stateProvider, $urlRouterProvider, $ionicCloudProvider, ionicImgCacheProvider,/* $ionicFilterBarConfigProvider*/) {
-        $ionicFilterBarConfigProvider.theme('royal')
-        ;
-		$ionicCloudProvider.init({
+    .directive('inputRestrictor', [function () {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function (scope, element, attr, ngModelCtrl) {
+                var pattern = /[^A-Za-z ]*/g;
+                function fromUser(text) {
+                    if (!text)
+                        return text;
+
+                    var transformedInput = text.replace(pattern, '');
+                    if (transformedInput !== text) {
+                        ngModelCtrl.$setViewValue(transformedInput);
+                        ngModelCtrl.$render();
+                    }
+                    return transformedInput;
+                }
+                ngModelCtrl.$parsers.push(fromUser);
+            }
+        };
+    }])
+
+    .config(function ($stateProvider, $urlRouterProvider, $ionicCloudProvider /*ionicImgCacheProvider*/, $ionicFilterBarConfigProvider) {
+
+        $ionicFilterBarConfigProvider.theme('royal');
+        $ionicCloudProvider.init({
             "core": {
                 "app_id": "de07ef7c"
             },

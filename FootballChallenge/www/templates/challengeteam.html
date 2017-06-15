@@ -362,7 +362,6 @@
 	}
 	/** from date time picker style css files **/
 
-
 	.picker-view .picker-content {
 		-moz-column-count: 3;
 		-webkit-column-count: 3;
@@ -375,11 +374,11 @@
 	/** end **/
 </style>
 <ion-view view-title="Choose Opponent">
-    <ion-nav-buttons side="secondary">
-        <button class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()"></button>
-    </ion-nav-buttons>
 
 
+	<ion-nav-buttons side="secondary">
+		<button class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()"></button>
+	</ion-nav-buttons>
 	<ion-nav-back-button>
 	</ion-nav-back-button>
 	<ion-nav-buttons side="left">
@@ -495,7 +494,7 @@
 
 
 				<div class="col" style="padding:0px" align="center">
-					<img src="https://leafii.com/images/defaultProfilePic.png" style="border-radius:50px;width:80px;height:80px;">
+					<img src="{{team.captainphoto}}" style="border-radius:50px;width:80px;height:80px;">
 					<h6 style="margin-bottom:0px;color:#5f7485">TEAM CAPTAIN</h6>
 				</div>
 

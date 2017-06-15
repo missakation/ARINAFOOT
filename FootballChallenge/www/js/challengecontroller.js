@@ -151,12 +151,15 @@ angular.module('football.controllers')
 
                 var date = new Date();
                 ChallengeStore.GetAllTeamsNotMe($scope.myteam, $scope.search, function (leagues) {
+                    console.log("TEAMS");
+                    console.log(leagues);
                     $ionicLoading.hide();
                     $scope.allteamsnotme = leagues;
+                    $scope.filteredTeams = $scope.allteamsnotme;
+                    console.log($scope.allteamsnotme);
 
 
-
-                    if (leagues.length == 0) {
+                    if ($scope.allteamsnotme.length == 0) {
                         var alertPopup = $ionicPopup.alert({
                             title: 'Error',
                             template: 'No Team Found'
@@ -164,25 +167,15 @@ angular.module('football.controllers')
                     }
                     else {
                         $scope.allteamsnotme.forEach(function (element) {
+                            if (element.teamadmin != null || element.teamadmin != "") {
+                                firebase.database().ref('/playersinfo/' + element.teamadmin).on('value', function (snapshot) {
+                                    element.captainname = snapshot.val().firstname + " " + snapshot.val().lastname;
+                                    element.captainphoto = snapshot.val().photoURL == "" ? 'img/PlayerProfile.png' : snapshot.val().photoURL;
+                                })
+                            }
 
-                            firebase.database().ref('/teaminfo/' + element.key).once('value').then(function (snapshot) {
-                                if (snapshot.exists()) {
-                                    element.members = snapshot.child("players").numChildren() - 1;
-                                    element.rank = snapshot.child("rank").val();
-                                    element.rating = snapshot.child("rating").val()
-                                }
-                                else {
-                                    element.members = "Not Found";
-                                    element.rank = "Not Found";
-                                    element.rating = "Not Found";
-                                }
-
-                            })
-
-                        })
-
+                        }, this);
                     }
-                    $scope.filteredTeams = $scope.allteamsnotme;
 
                 })
 
@@ -252,7 +245,7 @@ angular.module('football.controllers')
                     });
                 }
                 else {
-                    
+
                     $state.go('app.challengeteamstadium',
 
                         {
@@ -323,8 +316,13 @@ angular.module('football.controllers')
 
     })
 
+
+
+
+
+
     .controller('challengestadiumcontroller', function ($http, $scope, $ionicHistory, LoginStore, ChallengeStore, HomeStore, ReservationFact, $state, $stateParams, $ionicPopup, $ionicLoading, $ionicPopover, $ionicFilterBar) {
-        
+
         $scope.selectedstadiums = [];
         $scope.challengestatus = false;
         $scope.selecteddate =
@@ -365,9 +363,10 @@ angular.module('football.controllers')
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
-
-
             $scope.filteredStadiums = $scope.allfreestadiums;
+
+
+
         })
         $scope.updateselectedteams = function (stadiums) {
 
@@ -429,15 +428,9 @@ angular.module('football.controllers')
                                     ChallengeStore.ChallengeTeams($state.params.date, $state.params.teams, $scope.selectedstadiums, $scope.myteam, $scope.profile)
                                         .then(function (value) {
                                             $state.params.teams.forEach(function (element) {
-                                                console.log("here");
-                                                console.log(element);
                                                 firebase.database().ref('/players/' + element.teamadmin).once('value').then(function (snapshot) {
-                                                    console.log("AAAAAAAAAA");
                                                     $ionicLoading.hide();
-                                                    console.log(snapshot.val());
                                                     if (snapshot.val().devicetoken) {
-                                                        console.log(snapshot.val().devicetoken);
-                                                        alert("sending notification");
                                                         LoginStore.SendNotification($scope.myteam.teamname + ' challenges you to play a game at ' + $state.params.date + ' vs your team ' + element.teamname, snapshot.val().devicetoken);
                                                     } else {
                                                     }
@@ -486,7 +479,7 @@ angular.module('football.controllers')
             }
             catch (error) {
                 alert(error.message);
-            }
+                        }
 
         }
         //Filter bar stuff
@@ -538,7 +531,6 @@ angular.module('football.controllers')
         };
 
         //------------filter bar stuff ----/
-
     })
 
     .controller('ChooseYourTeamController', function ($scope, $ionicPopup, $ionicLoading, $state, $stateParams, ChallengeStore, $timeout) {

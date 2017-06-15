@@ -326,8 +326,6 @@ angular.module('football.controllers')
 
                 $ionicLoading.hide();
                 $scope.globalstadiums = leagues;
-                $scope.allfreestadiums = leagues;
-
 
 
                 if (leagues.length == 0) {
@@ -352,8 +350,8 @@ angular.module('football.controllers')
                             var lat1 = $scope.latitude;
                             var lon1 = $scope.longitude;
 
-                            var lat2 = $scope.allfreestadiums[i].latitude;
-                            var lon2 = $scope.allfreestadiums[i].longitude;
+                            var lat2 = $scope.globalstadiums[i].latitude;
+                            var lon2 = $scope.globalstadiums[i].longitude;
 
 
                             var R = 6371; // km 
@@ -369,250 +367,245 @@ angular.module('football.controllers')
                                 Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
                                 Math.sin(dLon / 2) * Math.sin(dLon / 2);
                             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-                        var d = R * c; // Distance in km
+                            var d = R * c; // Distance in km
 
-                        $scope.allfreestadiums[i].distance = d;
-                        // LOGIC FOR POINTS START
-                        var distancePoint = $scope.allfreestadiums[i].distance * 1.5;
-                        var ratingPoint = (5 - (parseInt($scope.allfreestadiums[i].rating))) * 3;
-                        var diff = Math.abs(new Date($scope.allfreestadiums[i].datetime) - new Date());
-                        var minutes = Math.floor((diff/1000)/60);
-                        var timePoint = (minutes/30) * 5;
-                        var favouritePoint = 0;
-                        var favstadiumname = profileInfoSnapshot.child("favstadiumname").val();
-                        if(favstadiumname === $scope.allfreestadiums[i].stadiumname) {
-                          favouritePoint = -10;
+                            $scope.globalstadiums[i].distance = d;
+                            // LOGIC FOR POINTS START
+                            var distancePoint = $scope.globalstadiums[i].distance * 1.5;
+                            var ratingPoint = (5 - (parseInt($scope.globalstadiums[i].rating))) * 3;
+                            var diff = Math.abs(new Date($scope.globalstadiums[i].datetime) - new Date());
+                            var minutes = Math.floor((diff / 1000) / 60);
+                            var timePoint = (minutes / 30) * 5;
+                            var favouritePoint = 0;
+                            var favstadiumname = profileInfoSnapshot.child("favstadiumname").val();
+                            if (favstadiumname === $scope.globalstadiums[i].stadiumname) {
+                                favouritePoint = -10;
+                            }
+                            var totlPoints = Math.floor(distancePoint + ratingPoint + timePoint + favouritePoint);
+                            $scope.globalstadiums[i].points = -totlPoints;
+
                         }
-                        var totlPoints = Math.floor(distancePoint + ratingPoint + timePoint + favouritePoint);
-                        $scope.allfreestadiums[i].points = totlPoints;
+                        $scope.allfreestadiums = $scope.globalstadiums;
+                        console.log($scope.globalstadiums);
                         // LOGIC FOR POINTS ENDS
                     }
+                    else {
+                        $scope.allfreestadiums = $scope.globalstadiums;
+                        $scope.filteredStadiums = $scope.allfreestadiums;
                     }
 
-                    $scope.filteredStadiums = $scope.allfreestadiums;
-                    $scope.$digest();
 
-              });
+                });
 
                 $scope.popupopen = false;
             })
         }
 
         if (typeof (Number.prototype.toRad) === "undefined") {
-                Number.prototype.toRad = function () {
-                    return this * Math.PI / 180;
-                }
+            Number.prototype.toRad = function () {
+                return this * Math.PI / 180;
             }
-            navigator.geolocation.getCurrentPosition(function (position) {
-                //here
-                $ionicLoading.show({
-                    content: 'Loading',
-                    animation: 'fade-in',
-                    showBackdrop: true,
-                    maxWidth: 200,
-                    showDelay: 0
-                });
-                //here
-                /*  alert('Latitude: ' + position.coords.latitude + '\n' +
-                'Longitude: ' + position.coords.longitude + '\n' +
-                'Altitude: ' + position.coords.altitude + '\n' +
-                'Accuracy: ' + position.coords.accuracy + '\n' +
-                'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
-                'Heading: ' + position.coords.heading + '\n' +
-                'Speed: ' + position.coords.speed + '\n' +
-                'Timestamp: ' + position.timestamp + '\n');*/
+        }
+        navigator.geolocation.getCurrentPosition(function (position) {
+            //here
+            $ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+            //here
+            /*  alert('Latitude: ' + position.coords.latitude + '\n' +
+            'Longitude: ' + position.coords.longitude + '\n' +
+            'Altitude: ' + position.coords.altitude + '\n' +
+            'Accuracy: ' + position.coords.accuracy + '\n' +
+            'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
+            'Heading: ' + position.coords.heading + '\n' +
+            'Speed: ' + position.coords.speed + '\n' +
+            'Timestamp: ' + position.timestamp + '\n');*/
 
+            $scope.latitude = position.coords.latitude;
+            $scope.longitude = position.coords.longitude;
 
-                $scope.latitude = position.coords.latitude;
-                $scope.longitude = position.coords.longitude;
+            $scope.gotlocation = true;
 
-                $scope.gotlocation = true;
-
-                // Simple GET request example:
-                $http({
-                    method: 'GET',
-                    url: 'https://us-central1-project-6346119287623064588.cloudfunctions.net/date'
-                }).then(function successCallback(response) {
-
-
-
-                    $scope.checkfree();
-
-                    //alert(JSON.stringify(response.data));
-
-                }, function errorCallback(response) {
-                    // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                    alert(JSON.stringify(response));
-                });
-
-
-
-            }, function (error) {
+            // Simple GET request example:
+            $http({
+                method: 'GET',
+                url: 'https://us-central1-project-6346119287623064588.cloudfunctions.net/date'
+            }).then(function successCallback(response) {
 
 
                 $scope.checkfree();
+
+                //alert(JSON.stringify(response.data));
+
+            }, function errorCallback(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+                alert(JSON.stringify(response));
             });
 
-            try {
-                //  $scope.checkfree();
-            }
-            catch (error) {
-                alert(error.message);
-            }
 
-            setInterval(function () {
-                if ($state.current.name == 'app.reservestadium') {
-                    if (!$scope.popupopen) {
-                        var alertPopup = $ionicPopup.alert({
-                            title: 'Refresh',
-                            template: 'Please Refresh Page'
-                        });
+        }, function (error) {
 
-                        $scope.popupopen = true;
-                        alertPopup.then(function (res) {
-                            $scope.checkfree();
-                        });
-                    }
+            $scope.checkfree();
+        });
+
+        try {
+            //  $scope.checkfree();
+        }
+        catch (error) {
+            alert(error.message);
+        }
+
+        setInterval(function () {
+            if ($state.current.name == 'app.reservestadium') {
+                if (!$scope.popupopen) {
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Refresh',
+                        template: 'Please Refresh Page'
+                    });
+
+                    $scope.popupopen = true;
+                    alertPopup.then(function (res) {
+                        $scope.checkfree();
+                    });
                 }
-            }, 360000)
+            }
+        }, 360000)
 
-            $scope.reserve = function (search, stadiums) {
-                var userId = firebase.auth().currentUser.uid;
-                $ionicLoading.show({
-                    content: 'Loading',
-                    animation: 'fade-in',
-                    showBackdrop: true,
-                    maxWidth: 200,
-                    showDelay: 0
-                });
-                firebase.database().ref('/players/' + userId).once('value').then(function (snapshot) {
-                    $ionicLoading.hide();
-                    if (!snapshot.val().isMobileVerified) {
-                        SMSService.verifyUserMobile($scope, $scope.reserve, [search, stadiums])
-                    } else {
-                        try {
-
-
-
-                            var confirmPopup = $ionicPopup.confirm({
-                                cssClass: 'custom-class',
-                                title: 'Reserve Stadium',
-                                template: 'Are you sure you want to reserve the stadium on ' + search.date.toLocaleString() + '</br>'
-                            });
-
-                            if (!$scope.nointernet) {
-
-
-                                confirmPopup.then(function (res) {
-                                    if (res) {
-
-                                        ReservationFact.RegisterFreeStadiums($scope.search, "", stadiums)
-                                            .then(function (value) {
-                                                $scope.search.date.setDate($scope.search.date.getDate() + 1);
-                                                $scope.search.date.setHours(21);
-                                                $scope.search.date.setMinutes(0);
-                                                $scope.search.date.setMilliseconds(0);
-                                                $scope.search.date.setSeconds(0);
-                                                //alert($scope.search.date);
-                                                $scope.search = {
-                                                    date: new Date(),
-                                                };
-
-                                                var alertPopup = $ionicPopup.alert({
-                                                    title: 'Success',
-                                                    template: 'Successfully Reserved'
-                                                }).then(function (res) {
-
-                                                    $ionicHistory.nextViewOptions({
-                                                        disableBack: true
-                                                    });
-                                                    $state.go("app.bookings");
-                                                });
-
-
-                                            }, function (error) {
-                                                var alertPopup = $ionicPopup.alert({
-                                                    title: 'Error',
-                                                    template: 'Stadium Not Available. Please Try Again'
-                                                });
-
-                                                alertPopup.then(function (res) {
-                                                    // Custom functionality....
-                                                });
-                                                //$scope.allfreestadiums.
-
-                                            })
-
-                                    } else {
-
-
-
-
-
-                                    }
-
-                                });
-                            }
-
-                        }
-                        catch (error) {
-                            alert(error.message);
-                        }
-                    }
-                });
-            };
-
-
-
-            $scope.updatefilter = function () {
-                $scope.closePopover();
-                $ionicLoading.show({
-                    content: 'Applying Filter',
-                    animation: 'fade-in',
-                    showBackdrop: true,
-                    maxWidth: 200,
-                    showDelay: 0
-                });
-
-                $scope.allfreestadiums = [];
-
-
-                for (var i = 0; i < $scope.globalstadiums.length; i++) {
-                    if ($scope.globalstadiums[i].type && $scope.globalstadiums[i].typefloor) {
-                        if (($scope.managecolors.anydoor.selected
-                            || $scope.globalstadiums[i].type.toLowerCase() == "indoor" && $scope.managecolors.indoor.selected
-                            || $scope.globalstadiums[i].type.toLowerCase() == "outdoor" && $scope.managecolors.outdoor.selected)
-                            && ($scope.managecolors.anyground.selected
-                                || ($scope.globalstadiums[i].typefloor.toLowerCase() == "grass" && $scope.managecolors.grass.selected)
-                                || $scope.globalstadiums[i].typefloor.toLowerCase() == "clay" && $scope.managecolors.ground.selected)
-                            && ($scope.globalstadiums[i].price <= $scope.managecolors.priceto && $scope.globalstadiums[i].price >= $scope.managecolors.pricefrom)
-                            && ($scope.globalstadiums[i].distance <= $scope.managecolors.distanceto && $scope.globalstadiums[i].price >= $scope.managecolors.distancefrom)) {
-                            $scope.allfreestadiums.push($scope.globalstadiums[i]);
-                        }
-                    }
-                }
-                //$scope.$apply();
+        $scope.reserve = function (search, stadiums) {
+            var userId = firebase.auth().currentUser.uid;
+            $ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+            firebase.database().ref('/players/' + userId).once('value').then(function (snapshot) {
                 $ionicLoading.hide();
+                if (!snapshot.val().isMobileVerified) {
+                    SMSService.verifyUserMobile($scope, $scope.reserve, [search, stadiums])
+                } else {
+                    try {
 
-            }
 
-            $scope.cancelfilter = function () {
-                $scope.closePopover();
-            }
+                        var confirmPopup = $ionicPopup.confirm({
+                            cssClass: 'custom-class',
+                            title: 'Reserve Stadium',
+                            template: 'Are you sure you want to reserve the stadium on ' + search.date.toLocaleString() + '</br>'
+                        });
 
-            var connectedRef = firebase.database().ref(".info/connected");
-            connectedRef.on("value", function (snap) {
-                if (snap.val() === true) {
-                    $scope.nointernet = false;
-                }
-                else {
-                    $ionicLoading.hide();
-                    $scope.nointernet = true;
+                        if (!$scope.nointernet) {
+
+
+                            confirmPopup.then(function (res) {
+                                if (res) {
+
+                                    ReservationFact.RegisterFreeStadiums($scope.search, "", stadiums)
+                                        .then(function (value) {
+                                            $scope.search.date.setDate($scope.search.date.getDate() + 1);
+                                            $scope.search.date.setHours(21);
+                                            $scope.search.date.setMinutes(0);
+                                            $scope.search.date.setMilliseconds(0);
+                                            $scope.search.date.setSeconds(0);
+                                            //alert($scope.search.date);
+                                            $scope.search = {
+                                                date: new Date(),
+                                            };
+
+                                            var alertPopup = $ionicPopup.alert({
+                                                title: 'Success',
+                                                template: 'Successfully Reserved'
+                                            }).then(function (res) {
+
+                                                $ionicHistory.nextViewOptions({
+                                                    disableBack: true
+                                                });
+                                                $state.go("app.bookings");
+                                            });
+
+
+                                        }, function (error) {
+                                            var alertPopup = $ionicPopup.alert({
+                                                title: 'Error',
+                                                template: 'Stadium Not Available. Please Try Again'
+                                            });
+
+                                            alertPopup.then(function (res) {
+                                                // Custom functionality....
+                                            });
+                                            //$scope.allfreestadiums.
+
+                                        })
+
+                                } else {
+
+
+
+                                }
+
+                            });
+                        }
+
+                    }
+                    catch (error) {
+                        alert(error.message);
+                    }
                 }
             });
+        };
 
-			//Filter bar stuff
+
+        $scope.updatefilter = function () {
+            $scope.closePopover();
+            $ionicLoading.show({
+                content: 'Applying Filter',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
+
+            $scope.allfreestadiums = [];
+
+            for (var i = 0; i < $scope.globalstadiums.length; i++) {
+                if ($scope.globalstadiums[i].type && $scope.globalstadiums[i].typefloor) {
+                    if (($scope.managecolors.anydoor.selected
+                        || $scope.globalstadiums[i].type.toLowerCase() == "indoor" && $scope.managecolors.indoor.selected
+                        || $scope.globalstadiums[i].type.toLowerCase() == "outdoor" && $scope.managecolors.outdoor.selected)
+                        && ($scope.managecolors.anyground.selected
+                            || ($scope.globalstadiums[i].typefloor.toLowerCase() == "grass" && $scope.managecolors.grass.selected)
+                            || $scope.globalstadiums[i].typefloor.toLowerCase() == "clay" && $scope.managecolors.ground.selected)
+                        && ($scope.globalstadiums[i].price <= $scope.managecolors.priceto && $scope.globalstadiums[i].price >= $scope.managecolors.pricefrom)
+                        && ($scope.globalstadiums[i].distance <= $scope.managecolors.distanceto && $scope.globalstadiums[i].price >= $scope.managecolors.distancefrom)) {
+                        $scope.allfreestadiums.push($scope.globalstadiums[i]);
+                    }
+                }
+            }
+            //$scope.$apply();
+            $ionicLoading.hide();
+
+        }
+
+        $scope.cancelfilter = function () {
+            $scope.closePopover();
+        }
+
+        var connectedRef = firebase.database().ref(".info/connected");
+        connectedRef.on("value", function (snap) {
+            if (snap.val() === true) {
+                $scope.nointernet = false;
+            }
+            else {
+                $ionicLoading.hide();
+                $scope.nointernet = true;
+            }
+        });
+        			//Filter bar stuff
         var filterBarInstance;
 
         //function getItems () {
@@ -663,7 +656,7 @@ angular.module('football.controllers')
         //------------filter bar stuff ----/
 
 
-        })
+    })
 
     .controller('stadiumdetailscontroller', function ($scope, $stateParams, $ionicPopover, ReservationFact, $ionicPopup, $ionicLoading, $timeout, $state, $cordovaDatePicker) {
 

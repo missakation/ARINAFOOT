@@ -122,6 +122,7 @@ angular.module('football.controllers')
                                         var Items = {
                                             "key": childSnapshot.key,
                                             "displayname": childSnapshot.child("displayname").val(),
+                                            "devicetoken": childSnapshot.child("devicetoken").val(),
                                             "enableinvitations": childSnapshot.child("enableinvitations").val(),
                                             "favouritesport": childSnapshot.child("favouritesport").val(),
                                             "firstname": childSnapshot.child("firstname").val(),
@@ -146,7 +147,8 @@ angular.module('football.controllers')
                                             "comments": childSnapshot.child("comments").val(),
                                             "photo": childSnapshot.child("photoURL").val() == "" ? "img/PlayerProfile.png" : childSnapshot.child("photoURL").val(),
 
-                                            "teamdisplayedkey":childSnapshot.child("teamdisplayedkey").val()
+                                            "teamdisplayedkey":childSnapshot.child("teamdisplayedkey").val(),
+                                            "teambadge":""
 
 
                                         };

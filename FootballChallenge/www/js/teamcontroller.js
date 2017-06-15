@@ -736,6 +736,21 @@ angular.module('football.controllers')
 
                     $scope.currentprofile = myprofile;
 
+                    $scope.currentprofile.players.forEach(function (element) {
+                        console.log(element);
+                        firebase.database().ref('/playersinfo/' + element.key).on('value', function (snapshot) {
+                            if (snapshot.exists()) {
+                                console.log(snapshot.val());
+
+                                element.photo = snapshot.child("photoURL").val() == "" ? 'img/PlayerProfile.png' : snapshot.child("photoURL").val();
+                            }
+                        })
+
+
+
+                    }, this);
+
+
                     var teamsizestring = "";
 
                     teamsizestring = $scope.currentprofile.teamoffive ? teamsizestring + "5v5 ." : teamsizestring;
@@ -1419,7 +1434,7 @@ angular.module('football.controllers')
 
     })
 
-    .controller('InvitePlayersController', function ($scope, $http, ProfileStore1, $ionicPopup, $ionicHistory, HomeStore, $ionicLoading, $state, $stateParams, SearchStore, TeamStores, $timeout) {
+    .controller('InvitePlayersController', function ($scope, $http,LoginStore, ProfileStore1, $ionicPopup, $ionicHistory, HomeStore, $ionicLoading, $state, $stateParams, SearchStore, TeamStores, $timeout) {
 
         $scope.notloaded = true;
 
@@ -1452,38 +1467,12 @@ angular.module('football.controllers')
 
         $scope.InvitePlayerToTeam = function (player) {
             TeamStores.InvitePlayerToTeam($scope.myteam, player, $scope.profile).then(function () {
-
                 player.status = "Invitation Sent";
+                console.log(player);
+                if (player.devicetoken != undefined && player.devicetoken != "") {
+                    LoginStore.SendNotification("Would you like to join "+$scope.myteam.teamname, player.devicetoken+'?');
 
-
-                if ($scope.profile.devicetoken != undefined && $scope.profile.devicetoken != "") {
-                    var token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiIwMjMzM2FhYy1jNjBjLTQyNTItYjI1ZS05MmY0ZGQ5OGRhNmYifQ.QCuKlXbH3CczgW-bScCoPVVhPcdf_peZadTRIZFL4j0'
-
-                    var req = {
-                        method: 'POST',
-                        url: 'https://api.ionic.io',
-                        headers: {
-                            'Authorization': 'Bearer ' + token,
-                            'Content-Type': 'application/json'
-                        },
-                        data: {
-                            "tokens": $scope.profile.devicetoken,
-                            "profile": "ARINAPROFILE",
-                            "notification": {
-                                "message": $scope.myteam + " invites you to join his team!"
-                            }
-                        }
-                    }
-
-                    $http(req).then(function () {
-                        alert("notification sent");
-                    }, function (error) {
-                        alert(error.message);
-                    });
                 }
-
-
-
                 $scope.$digest();
 
             }, function (error) {
@@ -1615,6 +1604,20 @@ angular.module('football.controllers')
                 if (myprofile !== null && myprofile !== undefined) {
 
                     $scope.currentprofile = myprofile;
+
+                    $scope.currentprofile.players.forEach(function (element) {
+                        console.log(element);
+                        firebase.database().ref('/playersinfo/' + element.key).on('value', function (snapshot) {
+                            if (snapshot.exists()) {
+                                console.log(snapshot.val());
+
+                                element.photo = snapshot.child("photoURL").val() == "" ? 'img/PlayerProfile.png' : snapshot.child("photoURL").val();
+                            }
+                        })
+
+
+
+                    }, this);
 
                     var teamsizestring = "";
 

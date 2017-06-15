@@ -40,7 +40,7 @@
                 });
             },
             GetAllLeaderboard: function (callback) {
-                firebase.database().ref('/teampoints').orderByChild("rating").once('value').then(function (snapshot) {
+                firebase.database().ref('/teampoints').orderByChild("rank").once('value').then(function (snapshot) {
                     var AllRankedTeams = [];
                     var playerkeys = [];
                     snapshot.forEach(function (childSnapshot) {

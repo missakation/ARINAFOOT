@@ -8,6 +8,12 @@ angular.module('football.controllers')
         $scope.first = true;
         $scope.currentteam = "";
 
+
+        $scope.rating = {};
+        $scope.rating.rate = 3;
+        $scope.rating.max = 5;
+
+        
         $scope.myplayers = [];
 
         $scope.gameid = $state.params.gameid;
@@ -25,8 +31,10 @@ angular.module('football.controllers')
 
 
             ChallengeStore.GetChallengeByKey($scope.myid, $scope.gameid, function (challengedetails) {
-                
-                if ( challengedetails.hasOwnProperty("key")) {
+
+                console.log(challengedetails);
+
+                if (challengedetails.hasOwnProperty("key")) {
                     $scope.challenge = challengedetails;
 
                     //alert(JSON.stringify($scope.challenge)); 
@@ -55,8 +63,6 @@ angular.module('football.controllers')
                         TeamStores.GetTeamByKey($scope.currentteam, function (myteam) {
 
                             $scope.myteam = myteam;
-                            console.log(myteam);
-
                             $scope.myplayers = $scope.myteam.players;
 
                             if ($scope.isadmin) {
@@ -97,10 +103,65 @@ angular.module('football.controllers')
 
                             $scope.$apply();
                             //  alert("test2");
-                            console.log($scope.isadmin);
                         })
                     }
                     $scope.notloaded = false;
+
+                    var oppositecaptain = $scope.first ? $scope.challenge.team2adminid : $scope.challenge.team1adminid;
+                    firebase.database().ref('/playersinfo/' + oppositecaptain).on('value', function (snapshot) {
+                        if (snapshot.exists()) {
+                            $scope.challenge.adminname = snapshot.val().firstname + " " + snapshot.val().lastname;
+                            $scope.challenge.adminphoto = snapshot.val().photoURL == "" ? 'img/PlayerProfile.png' : snapshot.val().photoURL;
+                            $scope.challenge.admintelephon = snapshot.val().telephone
+                        }
+                    })
+
+                    firebase.database().ref('/teampoints/' + $scope.challenge.team1key).on('value', function (snapshot) {
+                        if (snapshot.exists()) {
+
+                            $scope.challenge.team1rank = snapshot.val().rating;
+
+                            switch ($scope.challenge.team1rank) {
+                                case 1:
+                                    $scope.challenge.team1rankdescription = $scope.challenge.team1rank + 'st';
+                                    break;
+                                case 2:
+                                    $scope.challenge.team1rankkdescription = $scope.challenge.team1rank + 'nd';
+                                    break;
+                                case 3:
+                                    $scope.challenge.team1rankdescription = $scope.challenge.team1rank + 'rd';
+                                    break;
+
+                                default:
+                                    $scope.challenge.team1rankdescription = $scope.challenge.team1rank + 'th';
+                                    break;
+                            }
+                        }
+                    })
+
+                    firebase.database().ref('/teampoints/' + $scope.challenge.team2key).on('value', function (snapshot) {
+                        if (snapshot.exists()) {
+
+                            $scope.challenge.team2rank = snapshot.val().rating;
+
+                            switch ($scope.challenge.team2rank) {
+                                case 1:
+                                    $scope.challenge.team2rankdescription = $scope.challenge.team2rank + 'st';
+                                    break;
+                                case 2:
+                                    $scope.challenge.team2rankdescription = $scope.challenge.team2rank + 'nd';
+                                    break;
+                                case 3:
+                                    $scope.challenge.team2rankdescription = $scope.challenge.team2rank + 'rd';
+                                    break;
+
+                                default:
+                                    $scope.challenge.team2rankdescription = $scope.challenge.team2rank + 'th';
+                                    break;
+                            }
+                        }
+                    })
+
                     $scope.$apply();
 
                 }

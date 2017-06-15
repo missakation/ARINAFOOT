@@ -24,6 +24,7 @@ angular.module('football.controllers')
                         }).then(function (t) {
                             var updates = {};
                             updates['/players/' + user.uid + '/devicetoken'] = t.token;
+                            updates['/playersinfo/' + user.uid + '/devicetoken'] = t.token;
                             firebase.database().ref().update(updates).then(function () {
 
                             });
@@ -147,6 +148,15 @@ angular.module('football.controllers')
                     if (res) {
                         //decline the challenge
                         HomeStore.DeleteChallenge(challenge).then(function () {
+
+
+                            firebase.database().ref('/playersinfo/' + challenge.team2adminid).on('value', function (snapshot) {
+                                if (snapshot.exists()) {
+                                    var devicetoken = snapshot.val().devicetoken;
+                                    LoginStore.SendNotification(challenge.team1name + ' declined your challenge', devicetoken);
+                                }
+                            })
+
 
                             var alertPopup = $ionicPopup.alert({
                                 title: 'Success',
@@ -394,71 +404,31 @@ angular.module('football.controllers')
         }
 
 
-
-        // since I can connect from multiple devices or browser tabs, we store each connection instance separately
-        // any time that connectionsRef's value is null (i.e. has no children) I am offline
-        var myConnectionsRef = firebase.database().ref('lastonlines/rudKv3IU2oaQ10Xe9E4aQ5zXIzz2/connections');
-
-        // stores the timestamp of my last disconnect (the last time I was seen online)
-        var lastOnlineRef = firebase.database().ref('lastonlines/rudKv3IU2oaQ10Xe9E4aQ5zXIzz2/connections/last');
-
-        var connectedRef = firebase.database().ref('.info/connected');
-
-        connectedRef.on('value', function (snap) {
-            if (snap.val() === true) {
-                // We're connected (or reconnected)! Do anything here that should happen only if online (or on reconnect)
-
-                // add this device to my connections list
-                // this value could contain info about the device or a timestamp too
-                var con = myConnectionsRef.push(true);
-
-                // when I disconnect, remove this device
-                con.onDisconnect().remove();
-
-                // when I disconnect, update the last time I was seen online
-                lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
-            }
-        });
-
-
-
-
-
-
-
         $scope.doRefresh = function (currentdate) {
 
             try {
                 $scope.profile = {};
 
-                HomeStore.GetProfileInfo(currentdate, function (leagues) {
-
-                    console.log(leagues);
+                HomeStore.GetProfileInfo(currentdate, function (myprofile) {
 
                     var todaydate = new Date();
                     var oldchallenges = [];
                     var newchallenges = [];
-                    $scope.profile = leagues;
-
-
+                    $scope.profile = myprofile;
                     console.log($scope.profile);
+
                     if ($scope.profile.photo.trim() == "") {
                         $scope.profile.photo = "img/PlayerProfile.png"
                     }
 
                     if ($scope.profile.teamdisplayedkey !== "none" && $scope.profile.teamdisplayedkey != "") {
-                        console.log($scope.profile.teamdisplayedkey);
                         TeamStores.GetTeamInfoByKey($scope.profile.teamdisplayedkey, function (favteam) {
                             if (favteam !== null || favteam !== undefined) {
-
-
 
                                 $scope.teamdisplayed.name = favteam.teamname;
                                 $scope.teamdisplayed.picture = favteam.badge;
                                 $scope.teamdisplayed.rank = favteam.rank;
                                 $scope.teamdisplayed.key = favteam.key;
-
-                                console.log($scope.teamdisplayed);
 
                             }
                             else {
@@ -481,13 +451,13 @@ angular.module('football.controllers')
                     }
                     //$scope.profile.upcominteamgmatches.push($scope.profile.upcomingmatches);
 
-                    if (leagues.challenges.length > 0) {
-                        for (var i = 0; i < leagues.challenges.length; i++) {
-                            if (Math.abs(todaydate - leagues.challenges[i].date) / 36e5 > 24) {
-                                oldchallenges.push(leagues.challenges[i]);
+                    if ($scope.profile.challenges.length > 0) {
+                        for (var i = 0; i < $scope.profile.challenges.length; i++) {
+                            if (($scope.profile.challenges[i].date - todaydate) / 36e5 < 12 || ($scope.profile.challenges[i].date > todaydate)) {
+                                oldchallenges.push($scope.profile.challenges[i]);
                             }
                             else {
-                                newchallenges.push(leagues.challenges[i]);
+                                newchallenges.push($scope.profile.challenges[i]);
                             }
                         }
                     }
@@ -624,19 +594,6 @@ angular.module('football.controllers')
         }
 
 
-
-        var connectedRef = firebase.database().ref(".info/connected");
-        connectedRef.on("value", function (snap) {
-            if (snap.val() === true) {
-                $scope.nointernet = false;
-            }
-            else {
-                $ionicLoading.hide();
-                $scope.nointernet = true;
-            }
-        });
-
-
     })
 
 
@@ -670,7 +627,7 @@ angular.module('football.controllers')
                         if (snapshot.exists()) {
 
                             ReservationFact.CheckIfFree(stadium, $scope.search.date, function (result) {
-
+                                console.log($scope.challenge);
                                 if (!result) {
 
                                     HomeStore.RegisterTeamMatch($scope.search, "", stadium, $scope.challenge)
@@ -683,6 +640,15 @@ angular.module('football.controllers')
                                             $ionicHistory.nextViewOptions({
                                                 disableBack: true
                                             });
+
+                                            firebase.database().ref('/playersinfo/' + $scope.challenge.team2adminid).on('value', function (snapshot) {
+                                                console.log(snapshot.val());
+                                                if (snapshot.exists()) {
+                                                    var devicetoken = snapshot.val().devicetoken;
+
+                                                    LoginStore.SendNotification("It's game time! " + $scope.challenge.team1name + ' accepted your challenge', devicetoken);
+                                                }
+                                            })
                                             $state.go("app.gamedetails",
                                                 {
                                                     gameid: $scope.challenge.key

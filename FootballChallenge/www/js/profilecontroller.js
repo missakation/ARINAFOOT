@@ -180,7 +180,7 @@ angular.module('football.controllers')
 
 
     })
-    .controller('ProfileEditController', function ($cordovaImagePicker, $scope,SMSService, $ionicHistory, ProfileStore1, $ionicLoading, $timeout, $ionicPopup, $stateParams, $state, TeamStores, FirebaseStorageService) {
+    .controller('ProfileEditController', function ($cordovaImagePicker, $scope, SMSService, $ionicHistory, ProfileStore1, $ionicLoading, $timeout, $ionicPopup, $stateParams, $state, TeamStores, FirebaseStorageService) {
 
         $scope.currentprofile = $state.params.myprofile;
 
@@ -634,14 +634,15 @@ angular.module('football.controllers')
 
     })
 
-    .controller('ProfileViewController', function ($scope, HomeStore, ProfileStore, $ionicPopup, TeamStores, $state, $stateParams, $ionicLoading, $timeout) {
+    .controller('ProfileViewController', function ($scope, HomeStore, ProfileStore,$ionicHistory, $ionicPopup, TeamStores, $state, $stateParams, $ionicLoading, $timeout) {
 
-
-        $stateParams.key
 
         $scope.$on("$ionicView.beforeEnter", function (event, data) {
 
             if ($stateParams.key == firebase.auth().currentUser.uid) {
+                $ionicHistory.nextViewOptions({
+                    disableBack: true
+                });
                 $state.go("app.selfprofile");
             }
 
@@ -679,14 +680,20 @@ angular.module('football.controllers')
             //works
             $timeout(function () {
                 HomeStore.GetProfileInfoByKey($stateParams.key, function (myprofile) {
-                    if (myprofile.teamdisplayedkey !== "none") {
-                        TeamStores.GetTeamInfoByKey(myprofile.teamdisplayedkey, function (favteam) {
-                            if (favteam !== null || favteam !== undefined) {
-
+                    $scope.currentprofile = myprofile;
+                    console.log($scope.currentprofile);
+                    if ($scope.currentprofile.photo.trim() == "") {
+                        $scope.currentprofile.photo = "img/PlayerProfile.png"
+                    }
+                    if ($scope.currentprofile.teamdisplayedkey !== "none") {
+                        firebase.database().ref('/teampoints/' + $scope.currentprofile.teamdisplayedkey).once('value').then(function (favteam) {
+                            if (favteam.exists()) {
                                 $scope.teamdisplayed.name = favteam.teamname;
                                 $scope.teamdisplayed.picture = favteam.badge;
                                 $scope.teamdisplayed.rank = favteam.rank;
                                 $scope.teamdisplayed.key = favteam.key;
+                                $scope.teamexists = true;
+                                $scope.$apply;
 
                             }
                             else {
@@ -694,10 +701,10 @@ angular.module('football.controllers')
                                 $scope.teamdisplayed.picture = "defaultteam";
                                 $scope.teamdisplayed.rank = "";
                                 $scope.teamdisplayed.key = "";
+                                $scope.teamexists = false;
+                                $scope.$apply;
+
                             }
-
-
-
 
                         })
                     }
@@ -710,10 +717,7 @@ angular.module('football.controllers')
 
                     $scope.notloaded = true;
                     $ionicLoading.hide();
-                    $scope.currentprofile = myprofile;
-                    if ($scope.currentprofile.photo.trim() == "") {
-                        $scope.currentprofile.photo = "img/PlayerProfile.png"
-                    }
+
                     $scope.$apply();
                     $scope.$broadcast('scroll.refreshComplete');
 
