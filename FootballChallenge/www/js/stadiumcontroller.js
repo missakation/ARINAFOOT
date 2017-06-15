@@ -67,31 +67,6 @@ angular.module('football.controllers')
         $scope.latitude = 0;
         $scope.longitude = 0;
 
-
-
-        /*        var user = firebase.auth().currentUser;
-    
-                if (user != null) {
-                    user.providerData.forEach(function (profile) 
-                    {
-                        
-                        if(user.emailVerified)
-                        {
-                             $scope.verified = false;
-                        }
-                        else
-                        {
-                            $scope.verified = true;
-                        }
-                    });
-                }
-                else
-                {
-                    $scope.verified = true;
-                }
-    */
-
-
         $scope.filter = {
             indoor: true,
             outdoor: true,
@@ -320,7 +295,14 @@ angular.module('football.controllers')
 
         $scope.checkfree = function () {
 
-
+          //here
+            $ionicLoading.show({
+                content: 'Loading',
+                animation: 'fade-in',
+                showBackdrop: true,
+                maxWidth: 200,
+                showDelay: 0
+            });
             //works
             ReservationFact.FindFreeStadiums($scope.search, function (leagues) {
 
@@ -335,12 +317,6 @@ angular.module('football.controllers')
                     });
                 }
 
-                /*     for (var i = 0; i < $scope.allfreestadiums.length; i++) {
-                         for (var i = 0; i < $scope.allfreestadiums[i].freetimes.length; i++) {
-     
-     
-                         }
-                     }*/
                 firebase.database().ref('/playersinfo/' + firebase.auth().currentUser.uid).once('value', function (profileInfoSnapshot) {
 
                     if ($scope.gotlocation) {
@@ -386,12 +362,15 @@ angular.module('football.controllers')
 
                         }
                         $scope.allfreestadiums = $scope.globalstadiums;
+                        $scope.filteredStadiums = $scope.allfreestadiums;
+                        $scope.$apply();
                         console.log($scope.globalstadiums);
                         // LOGIC FOR POINTS ENDS
                     }
                     else {
                         $scope.allfreestadiums = $scope.globalstadiums;
                         $scope.filteredStadiums = $scope.allfreestadiums;
+                        $scope.$apply();
                     }
 
 
@@ -406,24 +385,9 @@ angular.module('football.controllers')
                 return this * Math.PI / 180;
             }
         }
+
+
         navigator.geolocation.getCurrentPosition(function (position) {
-            //here
-            $ionicLoading.show({
-                content: 'Loading',
-                animation: 'fade-in',
-                showBackdrop: true,
-                maxWidth: 200,
-                showDelay: 0
-            });
-            //here
-            /*  alert('Latitude: ' + position.coords.latitude + '\n' +
-            'Longitude: ' + position.coords.longitude + '\n' +
-            'Altitude: ' + position.coords.altitude + '\n' +
-            'Accuracy: ' + position.coords.accuracy + '\n' +
-            'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
-            'Heading: ' + position.coords.heading + '\n' +
-            'Speed: ' + position.coords.speed + '\n' +
-            'Timestamp: ' + position.timestamp + '\n');*/
 
             $scope.latitude = position.coords.latitude;
             $scope.longitude = position.coords.longitude;
@@ -605,7 +569,7 @@ angular.module('football.controllers')
                 $scope.nointernet = true;
             }
         });
-        			//Filter bar stuff
+        //Filter bar stuff
         var filterBarInstance;
 
         //function getItems () {

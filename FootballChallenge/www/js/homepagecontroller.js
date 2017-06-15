@@ -430,6 +430,22 @@ angular.module('football.controllers')
                                 $scope.teamdisplayed.rank = favteam.rank;
                                 $scope.teamdisplayed.key = favteam.key;
 
+                                switch ($scope.teamdisplayed.rank) {
+                                    case 1:
+                                        $scope.teamdisplayed.rank = $scope.teamdisplayed.rank + 'st';
+                                        break;
+                                    case 2:
+                                        $scope.teamdisplayed.rank = $scope.teamdisplayed.rank + 'nd';
+                                        break;
+                                    case 3:
+                                        $scope.teamdisplayed.rank = $scope.teamdisplayed.rank + 'rd';
+                                        break;
+
+                                    default:
+                                        $scope.teamdisplayed.rank = $scope.teamdisplayed.rank + 'th';
+                                        break;
+                                }
+
                             }
                             else {
                                 $scope.teamdisplayed.name = "";
