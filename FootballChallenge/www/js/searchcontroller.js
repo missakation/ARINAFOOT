@@ -1,7 +1,7 @@
 ﻿
 angular.module('football.controllers')
 
-    .controller('SearchController', function ($scope, SearchStore, ReservationFact, $ionicPopup, $ionicPopover, $timeout, $ionicLoading, pickerView, SMSService) {
+    .controller('SearchController', function ($scope, SearchStore, ReservationFact, LoginStore, $ionicPopup, $ionicPopover, $timeout, $ionicLoading, pickerView, SMSService) {
         /** picker view stuff **/
         function getDateFromDayName(selectedDay) {
             var selectedDate = new Date();
@@ -36,25 +36,11 @@ angular.module('football.controllers')
         });
         //getting current location
         navigator.geolocation.getCurrentPosition(function (position) {
-            //here
-
-            //here
-            /*  alert('Latitude: ' + position.coords.latitude + '\n' +
-            'Longitude: ' + position.coords.longitude + '\n' +
-            'Altitude: ' + position.coords.altitude + '\n' +
-            'Accuracy: ' + position.coords.accuracy + '\n' +
-            'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
-            'Heading: ' + position.coords.heading + '\n' +
-            'Speed: ' + position.coords.speed + '\n' +
-            'Timestamp: ' + position.timestamp + '\n');*/
-
             $scope.latitude = position.coords.latitude;
             $scope.longitude = position.coords.longitude;
 
             $scope.gotlocation = true;
         }, function (error) {
-            alert("Hello");
-            //$scope.checkfree();
         });
 
         SearchStore.GetMyProfileInfo(function (profile) {
@@ -120,7 +106,7 @@ angular.module('football.controllers')
 
 
 
-            //preparing stadiums list
+            /*//preparing stadiums list
             stadiums.push("Near me");
             if ($scope.myprofile.favstadium)
                 stadiums.push($scope.myprofile.favstadium);
@@ -128,10 +114,12 @@ angular.module('football.controllers')
                 //console.log(leagues[i].name);
                 if (leagues[i].name != $scope.myprofile.favstadium)
                     stadiums.push(leagues[i].name);
-            }
+            }*/
 
 
         });
+
+
         $ionicLoading.hide();
 
 
@@ -255,7 +243,7 @@ angular.module('football.controllers')
 
                 var counter = 0;
                 var count = leagues.length;
-
+                $scope.allfreeplayers = leagues;
 
                 $scope.sliderskill = {
                     value: 3,
@@ -270,53 +258,67 @@ angular.module('football.controllers')
                     }
                 };
 
-                if (count > 0) {
+                if ($scope.allfreeplayers.length > 0) {
 
-                    leagues.forEach(function (element) {
+                    $scope.allfreeplayers.forEach(function (element) {
 
-                        firebase.database().ref('/teaminfo/' + element.teamdisplayedkey).on('value', function (snapshot) {
-                            if (snapshot.exists()) {
+                        if (element.teamdisplayedkey != 'none' || element.teamdisplayedkey != '') {
+                            firebase.database().ref('/teampoints/' + element.teamdisplayedkey).on('value', function (snapshot) {
+                                if (snapshot.exists()) {
 
-                                element.teambadge = snapshot.child("badge").val();
-                                element.teamname = snapshot.child("teamname").val();
-                                element.rank = snapshot.child("rank").val();
+                                    element.teambadge = snapshot.child("badge").val();
+                                    element.teamname = snapshot.child("teamname").val();
+                                    element.rank = snapshot.child("rank").val();
+                                    element.teamexists = true;
+                                    switch (element.rank) {
+                                        case 1:
+                                            element.rankdescription = element.rank + 'st';
+                                            break;
+                                        case 2:
+                                            element.rankdescription = element.rank + 'nd';
+                                            break;
+                                        case 3:
+                                            element.rankdescription = element.rank + 'rd';
+                                            break;
 
-                                switch (element.rank) {
-                                    case 1:
-                                        element.rankdescription = element.rank + ' st';
-                                        break;
-                                    case 2:
-                                        element.rankdescription = element.rank + ' nd';
-                                        break;
-                                    case 3:
-                                        element.rankdescription = element.rank + ' rd';
-                                        break;
+                                        default:
+                                            element.rankdescription = element.rank + 'th';
+                                            break;
+                                    }
+                                    $scope.$apply();
 
-                                    default:
-                                        element.rankdescription = element.rank + ' th';
-                                        break;
                                 }
 
-                            }
-                            else {
-                                element.members = "";
-                                element.rank = "";
-                                element.rating = "";
-                            }
+                                else {
+                                    element.members = "";
+                                    element.rank = "";
+                                    element.rating = "";
+                                    element.teambadge = "defaultteam";
+                                    element.teamexists = false;
+                                    $scope.$apply();
+                                }
 
 
-                        })
-                        counter++;
-                        if (counter == count) {
-                            $scope.allfreeplayers = leagues;
-                            console.log($scope.allfreeplayers);
+                            })
+                            counter++;
+                        }
+                        else {
+                            element.members = "";
+                            element.rank = "";
+                            element.rating = "";
+                            element.teambadge = "defaultteam";
+                            element.teamexists = false;
                             $scope.$apply();
                         }
 
+
+
                     }, this);
+
                 }
 
 
+                console.log($scope.allfreeplayers);
                 $ionicLoading.hide();
 
 
@@ -366,11 +368,15 @@ angular.module('football.controllers')
                             SMSService.verifyUserMobile($scope, $scope.requestnumber, [player])
                         } else {
                             SearchStore.RequestNumber($scope.myprofile, player).then(function (value) {
-                                console.log(4)
                                 player.status = 1;
                                 player.statusdesc = "Number Requested";
                                 player.color = "white";
                                 player.backcolor = "#2ab042";
+
+                                console.log($scope.myprofile);
+                                console.log(player);
+                                LoginStore.SendNotification("Hello, I am " + $scope.myprofile.firstname + " " + $scope.myprofile.lastname + " . Can I invite you to a match?", player.devicetoken);
+
                                 $scope.$apply();
 
                             }, function (error) {

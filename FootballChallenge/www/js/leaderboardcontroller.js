@@ -26,7 +26,7 @@ angular.module('football.controllers')
 
                 console.log(leagues);
                 $scope.notloaded = false;
-                $scope.rankedteams = leagues.reverse();
+                $scope.rankedteams = leagues;
 
                 
                /* LeaderBoardStore.UpdateRatings($scope.rankedteams).then(function(result)

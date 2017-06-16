@@ -80,7 +80,7 @@
 							{{challenge.team1name}}
 						</h5>
 						<h6 style="color:darkturquoise">
-							Rank {{challenge.team1rank}}
+							{{challenge.team1rankdescription}}
 						</h6>
 						<img src="img/Jerseys/{{challenge.team1jersey}}.png" style="width:40px;height:40px ">
 					</div>
@@ -109,7 +109,7 @@
 							{{challenge.team2name}}
 						</h5>
 						<h6 style="color:darkturquoise">
-							Rank {{challenge.team2rank}}
+							{{challenge.team2rankdescription}}
 						</h6>
 						<img src="img/Jerseys/{{challenge.team2jersey}}.png" style="width:40px;height:40px ">
 					</div>
@@ -157,7 +157,7 @@
 		
 
 		<div class="row ">
-			<div class="col col-66" style="padding-top:0px;color:white; font-weight:bold;font-size:12px"> {{stadiums.stadiumname}} / {{stadiums.description}}
+			<div class="col col-66" align="left" style="padding-top:0px;color:white; font-weight:bold;font-size:12px"> {{challenge.stadiums.stadiumname}} / {{challenge.stadiums.description}}
 			</div>
 
 			<div class="col" align="right" style="padding-top:0px;font-size:11px;color:#5f7485"> PRICE
@@ -167,7 +167,7 @@
 
 		<div class="row">
 			<div class="col col-66" align="left">
-				<rating style="color:rgb(255,152,18);margin-top:-8px;padding-top:0px" readonly="readOnly" ng-model=stadiums.rating max="rating.max"
+				<rating style="color:rgb(255,152,18);margin-top:-8px;padding-top:0px" readonly="readOnly" ng-model="challenge.stadiums.rating" max="rating.max"
 				 align="left">
 
 				</rating>
@@ -177,7 +177,7 @@
 			<div class="col" align="right" style="padding:3px 0 0 0;color:white;margin-top:-8px;font-size:15px">
 				<b>
 	
-		{{stadiums.price}} LL
+		{{challenge.stadiums.price}} LL
 		</b>
 			</div>
 		</div>
@@ -204,7 +204,7 @@
 							{{challenge.team1name}}
 						</h5>
 						<h6 style="color:darkturquoise;margin-top:-5px">
-							Rank {{challenge.team1rank}}
+							{{challenge.team1rankdescription}}
 						</h6>
 						<img src="img/Jerseys/{{challenge.team1jersey}}.png" style="width:40px;height:40px ">
 					</div>

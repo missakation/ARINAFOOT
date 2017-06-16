@@ -389,16 +389,6 @@
 	.popup-title {
 		color: white;
 	}
-
-	.picker-view .picker-content {
-		-moz-column-count: 2;
-		-webkit-column-count: 2;
-		column-count: 2;
-		position: relative;
-		background-color: rgb(42, 62, 82);
-		height: 60%;
-		top: 15px;
-	}
 </style>
 
 <ion-view view-title="Player Finder">
@@ -513,7 +503,7 @@
 
 			<div class="row" style="margin-top:5px;padding:6px 0 0 0">
 				<div class="col col-50" style="border-right:1px solid #5f7485;	padding:0px" align="center">
-					<img src="{{item.photo}}" style="padding:0px;border-radius:50px;width:80px;height:80px;" ui-sref="app.profileview({key: player.uid})">
+					<img src="{{item.photo}}" style="padding:0px;border-radius:50px;width:80px;height:80px;" ui-sref="app.profileview({key: item.key})">
 
 					<h5 class="whitetext" style="margin-bottom:0px;margin-top:5px;text-transform: capitalize;padding:0px;font-weight:bold"> {{item.firstname}} {{item.lastname}} </h5>
 
@@ -536,7 +526,7 @@
 					</h5>
 				</div>
 
-				<div class="col col-50" style="margin-top:5px;padding:0px" align="center">
+				<div ng-show="team.teamexists" class="col col-50" style="margin-top:5px;padding:0px" align="center">
 					<h6 style="color:darkturquoise"> Rank {{item.rank}} </h6>
 				</div>
 			</div>

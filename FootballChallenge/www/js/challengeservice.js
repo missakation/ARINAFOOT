@@ -80,6 +80,22 @@ angular.module('football.controllers')
                                     "rating": childSnapshot.child("rating").val(),
                                 };
 
+                                switch (Items.rank) {
+                                    case 1:
+                                        Items.rankdescription = Items.rank + 'st';
+                                        break;
+                                    case 2:
+                                        Items.rankdescription = Items.rank + 'nd';
+                                        break;
+                                    case 3:
+                                        Items.rankdescription = Items.rank + 'rd';
+                                        break;
+
+                                    default:
+                                        Items.rankdescription = Items.rank + 'th';
+                                        break;
+                                }
+
                                 AllMyAdminTeams.push(Items)
                             }
 
@@ -268,67 +284,66 @@ angular.module('football.controllers')
                                     // if (childSnapshot.child(startat).val() <= hour) {
                                     if (childSnapshot.child("available").val()) {
 
-                                        if (childSnapshot.child(teamOf).val()) {
+                                        //  if (childSnapshot.child(teamOf).val()) {
 
-                                            var range = 1500 - childSnapshot.child("rating").val();
+                                        var range = 1500 - childSnapshot.child("rating").val();
 
-                                            var difficulty = "";
-                                            var difficultytext = "";
-                                            switch (true) {
-                                                case range <= 100 && range >= -100:
-                                                    difficulty = "Medium.png";
-                                                    difficultytext = "Medium";
-                                                    break;
-                                                case range < -100 && range > -200:
-                                                    difficulty = "Hard.png";
-                                                    difficultytext = "Hard";
-                                                    break;
-                                                case range <= -200:
-                                                    difficulty = "Extreme.png";
-                                                    difficultytext = "Extreme";
-                                                    break;
-                                                case range > 100 && range <= 200:
-                                                    difficulty = "Easy.png";
-                                                    difficultytext = "Easy";
-                                                    break;
-                                                case range > 200:
-                                                    difficulty = "VeryEasy.png";
-                                                    difficultytext = "Very Easy";
-                                                    break;
-                                                default:
-                                                    break;
-                                            }
-
-                                            //alert(childSnapshot.key);
-                                            var Items = {
-
-                                                "key": childSnapshot.key,
-                                                "teamname": childSnapshot.child("teamname").val(),
-                                                'teamphoto': childSnapshot.child("teamphoto").val(),
-                                                //'datecreated': childSnapshot.child("datecreated").val(),
-                                                //"favstadium": "",
-                                                //"favstadiumphoto": childSnapshot.child("favstadiumphoto").val(),
-                                                //"favstadium": childSnapshot.child("favstadium").val(),
-                                                "homejersey": childSnapshot.child("homejersey").val(),
-                                                "awayjersey": childSnapshot.child("awayjersey").val(),
-                                                "badge": childSnapshot.child("badge").val(),
-                                                "rank": childSnapshot.child("rank").val(),
-                                                "rating": childSnapshot.child("rating").val(),
-                                                "numberofgames": childSnapshot.child("numberofgames").val(),
-                                                "wins": childSnapshot.child("wins").val(),
-                                                "selected": "select",
-                                                "color": "#28b041",
-                                                "backcolor": "white",
-                                                "teamadmin": childSnapshot.child("teamadmin").val(),
-                                                "difficulty": difficulty,
-                                                "difficultytext": difficultytext,
-                                                "comments": childSnapshot.child("comments").val(),
-                                                "members": 0,
-                                                "captainname": childSnapshot.child('captain/' + childSnapshot.child('teamadmin').val() + '/name').val()
-                                            };
-                                            AllITems.push(Items);
+                                        var difficulty = "";
+                                        var difficultytext = "";
+                                        switch (true) {
+                                            case range <= 100 && range >= -100:
+                                                difficulty = "Medium.png";
+                                                difficultytext = "Medium";
+                                                break;
+                                            case range < -100 && range > -200:
+                                                difficulty = "Hard.png";
+                                                difficultytext = "Hard";
+                                                break;
+                                            case range <= -200:
+                                                difficulty = "Extreme.png";
+                                                difficultytext = "Extreme";
+                                                break;
+                                            case range > 100 && range <= 200:
+                                                difficulty = "Easy.png";
+                                                difficultytext = "Easy";
+                                                break;
+                                            case range > 200:
+                                                difficulty = "VeryEasy.png";
+                                                difficultytext = "Very Easy";
+                                                break;
+                                            default:
+                                                break;
                                         }
+
+                                        //alert(childSnapshot.key);
+                                        var Items = {
+
+                                            "key": childSnapshot.key,
+                                            "teamname": childSnapshot.child("teamname").val(),
+                                            'teamphoto': childSnapshot.child("teamphoto").val(),
+                                            //'datecreated': childSnapshot.child("datecreated").val(),
+                                            //"favstadium": "",
+                                            //"favstadiumphoto": childSnapshot.child("favstadiumphoto").val(),
+                                            //"favstadium": childSnapshot.child("favstadium").val(),
+                                            "homejersey": childSnapshot.child("homejersey").val(),
+                                            "awayjersey": childSnapshot.child("awayjersey").val(),
+                                            "badge": childSnapshot.child("badge").val(),
+                                            "rank": childSnapshot.child("rank").val(),
+                                            "rating": childSnapshot.child("rating").val(),
+                                            "numberofgames": childSnapshot.child("numberofgames").val(),
+                                            "wins": childSnapshot.child("wins").val(),
+                                            "selected": "select",
+                                            "color": "#28b041",
+                                            "backcolor": "white",
+                                            "teamadmin": childSnapshot.child("teamadmin").val(),
+                                            "difficulty": difficulty,
+                                            "difficultytext": difficultytext,
+                                            "comments": childSnapshot.child("comments").val(),
+                                            "members": snapshot.child("players").numChildren() - 1,
+                                        };
+                                        AllITems.push(Items);
                                     }
+                                    //   }
                                     //   }
                                 }
                             });
