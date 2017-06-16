@@ -522,7 +522,7 @@ angular.module('football.controllers')
             console.log(JSON.stringify(window.Camera))
 
             var options = {
-                quality: 70,
+                quality: 30,
                 destinationType: Camera.DestinationType.DATA_URL,
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                 encodingType: Camera.EncodingType.PNG,
@@ -561,7 +561,7 @@ angular.module('football.controllers')
 
             navigator.camera.getPicture(function (imageURI) {
                 $scope.currentprofile.photo = "data:image/png;base64," + imageURI;
-
+                $scope.currentprofile.photo
                 FirebaseStorageService.saveUserProfilePicture($scope.currentprofile.photo, firebase.auth().currentUser.uid).then(function (imageUrl) {
                     $scope.currentprofile.photo = imageUrl;
                     $scope.$apply();
@@ -569,7 +569,7 @@ angular.module('football.controllers')
                     $scope.currentprofile.photo = "img/PlayerProfile.png";
                     $scope.$apply();
                     alert("Unable to save image to storage.")
-                })
+                }, options)
 
                 $scope.$apply();
 

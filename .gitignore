@@ -247,3 +247,4 @@ plugins/
 merges/
 hooks/
 platforms/
+bower_components/

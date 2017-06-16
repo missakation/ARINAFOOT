@@ -1,0 +1,39 @@
+{
+  "name": "ng-image-compress",
+  "homepage": "https://github.com/sammychl/ng-image-compress.git",
+  "authors": [
+    "sammychl@hotmail.com"
+  ],
+  "description": "compress image files on client side using angularjs",
+  "main": "ng-image-compress.js",
+  "keywords": [
+    "angularjs",
+    "angular",
+    "image",
+    "compress",
+    "jpeg",
+    "png",
+    "client-side",
+    "compression",
+    "JIC",
+    "canvas"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "f7cdedce6f",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "f7cdedce6fbcf00c4e44a24326b85c89eca97445"
+  },
+  "_source": "https://github.com/sammychl/ng-image-compress.git",
+  "_target": "*",
+  "_originalSource": "ng-image-compress",
+  "_direct": true
+}
