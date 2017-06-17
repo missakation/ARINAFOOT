@@ -66,7 +66,6 @@ angular.module('football.controllers')
 
                                             if ((Math.abs( (temphour*60+tempminute) - (hour*60+minute) < 90)))
                                              {          
-                                                 alert("not available");                                      
                                                 available = false;
                                             }
 
@@ -422,7 +421,7 @@ angular.module('football.controllers')
                 try {
                     //firebase.database().ref('/stadiums/ministadiums').on('value',function (snapshot) {  
 
-                    firebase.database().ref('/stadiumsinfo').once('value', function (snapshot) {
+                    firebase.database().ref('/stadiums').once('value', function (snapshot) {
                         AllStadiums = [];
                         snapshot.forEach(function (minisnapshot) {
 

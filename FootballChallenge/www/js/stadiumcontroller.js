@@ -326,6 +326,9 @@ angular.module('football.controllers')
                             var lat1 = $scope.latitude;
                             var lon1 = $scope.longitude;
 
+                            console.log(lat1);
+                            console.log(lon1);
+
                             var lat2 = $scope.globalstadiums[i].latitude;
                             var lon2 = $scope.globalstadiums[i].longitude;
 
@@ -372,7 +375,6 @@ angular.module('football.controllers')
                         $scope.filteredStadiums = $scope.allfreestadiums;
                         $scope.$apply();
                     }
-
 
                 });
 
