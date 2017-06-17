@@ -1,4 +1,4 @@
-<ion-view view-title="My Profile">
+<ion-view view-title="Edit Profile">
 	<style>
 		.item-select:after {
 			margin-top: 0px;
@@ -422,13 +422,13 @@
 			</h5>
 
 			<div align="center" class="list" style="width:95%">
-				<label class="item item-input" style="border:1px solid #96a6b3;padding:2px 20px 20px 10px; border-radius:5px;">
-                <textarea maxlength="200" type="text" placeholder="Write something cool about yourself!" ng-model="currentprofile.comments" style="color:#2ab041;background-color:transparent;padding-left:2px">
+				<label class="item item-input" style="border:1px solid #96a6b3;padding:2px 20px 20px 20px; border-radius:5px;">
+                <textarea rows="4" cols="100" maxlength="111" type="text" placeholder="Write something cool about yourself!" ng-model="currentprofile.comments" style="color:#2ab041;background-color:transparent;padding-left:2px">
                 	 </textarea>
+				</label>
 					 	</div>
 						 </div>
 
-</label>
 				<label class="item item-input item-select" style="border-bottom:1px solid #5f7485;padding-bottom:15px;margin-top:15px;padding-top:16px;border-top:1px solid #5f7485;color:rgb(153,167,180);font-size:14px;background-color:transparent;padding-left:10px">
 					TEAM DISPLAYED
 	<select class"madzone" ng-model="currentprofile.teamdisplayed" style="background-color:transparent;border-color:transparent;color:#2ab041" >
@@ -442,11 +442,14 @@
 				<div align="left" style="padding-bottom:10px;margin-top:15px;padding-left: 10px;padding-right:10px">
 					<h5 style="color:rgb(153,167,180);margin-bottom:0px">POSITION
 					</h5>
+
 					<div class="button-bar" align="center" style="width:99%;margin:0 0 0 0px">
-						<button class="button button-small" style="background-color: {{isplayercolors.goalkeeper.backcolor}}; color: {{isplayercolors.goalkeeper.color}};font-size:14px; margin-top:15px;margin-right:5px;font-weight:bold;border-radius:50px"
+						<button class="button" style="padding: 2px 4px 1px; min-width: 28px;  min-height: 30px; font-size: 12px;
+  line-height: 26px;background-color: {{isplayercolors.goalkeeper.backcolor}}; color: {{isplayercolors.goalkeeper.color}};font-size:14px; margin-top:15px;margin-right:5px;font-weight:bold;border-radius:50px"
 						 ng-click="switchcolors(1)">
 					Goalkeeper</button>
-						<button class="button button-small" style="background-color: {{isplayercolors.player.backcolor}}; color: {{isplayercolors.player.color}}; margin-top:15px; margin-left:5px;font-size:14px;font-weight:bold;border-radius:50px"
+						<button class="button" style=" padding: 2px 4px 1px;  min-width: 28px;  min-height: 30px;  font-size: 12px;
+  line-height: 26px; }background-color: {{isplayercolors.player.backcolor}}; color: {{isplayercolors.player.color}}; margin-top:15px; margin-left:5px;font-size:14px;font-weight:bold;border-radius:50px"
 						 ng-click="switchcolors(0)">
 					Player </button>
 					</div>

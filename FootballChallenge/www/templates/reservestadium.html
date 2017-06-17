@@ -12,6 +12,7 @@
 		margin-top: 0px;
 		color: #2ab041;
 	}
+
 	input:focus,
 	input:valid {
 		box-shadow: none;
@@ -28,6 +29,7 @@
 		transform: translateY(-30px);
 		visibility: visible !important;
 	}
+
 	.rzslider {
 		position: relative;
 		display: inline-block;
@@ -190,7 +192,7 @@
 		transform: translate(-50%, 0);
 	}
 
-	.picker-view .picker-content {	
+	.picker-view .picker-content {
 		-moz-column-count: 3;
 		-webkit-column-count: 3;
 		column-count: 3;
@@ -431,9 +433,9 @@
 
 
 <ion-view view-title="Reserve a Stadium">
-    <ion-nav-buttons side="secondary">
-        <button class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()"></button>
-    </ion-nav-buttons>
+	<ion-nav-buttons side="secondary">
+		<button class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()"></button>
+	</ion-nav-buttons>
 	<ion-nav-buttons side="right">
 		<button class="button button-icon ion-android-options" align="right" style="color:white" ng-click="popover.show($event)"></button>
 
@@ -453,7 +455,7 @@
 
 
 
-	<ion-content  style="background-color:rgb(46,62,85)">
+	<ion-content style="background-color:rgb(46,62,85)">
 
 
 		<script id="templates/my-popover.html" type="text/ng-template">
@@ -592,6 +594,12 @@
 			<!--</label>-->
 		</div>
 
+		<div align="left">
+			<h5 class="whitetext" style="font-size:12px;text-indent:20px; color:#5f7485">
+				Reservation are made for 90 mins
+			</h5>
+		</div>
+
 		<div class="card" ng-repeat="stadiums in allfreestadiums | orderBy :'-points'" style="background-color:rgb(62,83,100);margin:3px 5px 10px 5px">
 			<!--  <a class="item item-thumbnail-left" ng-href="#/app/reservestadiumdetails/{{stadiums.stadiumkey}}"> -->
 
@@ -626,11 +634,11 @@
 			</div>
 			<div class="row" style="padding-left:0px" align="center">
 
-				<div align="center" style="width:12%;color:#5f7485;padding:0px;padding-top:0px" align="left">
+				<div align="center" style="width:20%;color:#5f7485;padding:0px;padding-top:0px" align="left">
 					<i class="icon ion-location" style="color: #5f7485;font-size:20px">
 </i>
 				</div>
-				<div align="left" style="width:28%;color:#5f7485;font-size:12px;padding:0px;padding-top:0px" align="left">
+				<div align="left" style="width:20%;color:#5f7485;font-size:12px;padding:0px;padding-top:0px" align="left">
 					{{stadiums.distance | number:2}}KM
 				</div>
 
@@ -648,7 +656,7 @@
 
 
 			<div class="row" style="padding-left:0px;padding-bottom:12px">
-			
+
 				<div align="center" style="width:40%;font-weight:bold;color:white;padding:0px">
 					Anthelias 404
 				</div>

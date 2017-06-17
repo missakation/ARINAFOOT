@@ -634,7 +634,7 @@ angular.module('football.controllers')
 
     })
 
-    .controller('ProfileViewController', function ($scope, HomeStore, ProfileStore,$ionicHistory, $ionicPopup, TeamStores, $state, $stateParams, $ionicLoading, $timeout) {
+    .controller('ProfileViewController', function ($scope, HomeStore, ProfileStore, $ionicHistory, $ionicPopup, TeamStores, $state, $stateParams, $ionicLoading, $timeout) {
 
 
         $scope.$on("$ionicView.beforeEnter", function (event, data) {

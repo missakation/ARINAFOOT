@@ -56,8 +56,6 @@ angular.module('football.controllers')
                 if (allStadiums.length > 0) {
                     $scope.stadiums = allStadiums;
                     //alert("Stadiums: " + $scope.stadiums.length);
-                    for (stdCounter = 0; stdCounter < allStadiums.length; stdCounter++)
-                        console.log(allStadiums[stdCounter].stadiumid);
                 }
                 //alert("hellO");
                 //$scope.$apply();

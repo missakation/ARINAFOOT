@@ -62,7 +62,8 @@
 	</ion-nav-back-button>
 
 	<ion-nav-buttons side="right">
- <button class="button icon ion-checkmark" style="color:#2ab041;background-color:rgb(62,83,100)" ng-show="currentprofile.amiadmin" ng-click="UpdateTeam(currentprofile)"></button>
+		<button class="button icon ion-checkmark" style="color:#2ab041;background-color:rgb(62,83,100)" ng-show="currentprofile.amiadmin"
+		 ng-click="UpdateTeam(currentprofile)"></button>
 
 	</ion-nav-buttons>
 
@@ -100,51 +101,54 @@
 		</h5>
 		<div class="list" style="width:100%; padding-left:10px;padding-right:10px;padding-bottom:15px;border-bottom:1px solid #5f7485">
 			<label class="item item-input" style="padding:2px 20px 20px 10px;background-color:transparent; color:#ffffff; border-radius:5px; border-color:#97a7b4">
-                <textarea ng-maxlength="300" type="text" placeholder="Write something cool about your team!" ng-model="currentprofile.comments" style="color:#2ab041;background-color:transparent;padding-left:2px">
+                <textarea rows="4" cols="100" maxlength="105"  type="text" placeholder="Write something cool about your team!" ng-model="currentprofile.comments" style="color:#2ab041;background-color:transparent;padding-left:2px">
                 	 </textarea>
-					 	</div>
+			</label>
+		</div>
 
-			<div class="row" style="padding-bottom:0px;margin-top:-20px" ng-click="gochoosestadium(currentprofile)">
-				<div class="col col-66" ng-click="gochoosestadium(currentprofile)" align="left" style="padding-bottom:0px;color: white" >
-					<h5 align=left style="padding-bottom:0px;color:#5f7485">
-						 FAVORITE STADIUM
-					</h5>
-				<div>					
-						</div>
-				
-			</div>
-			
-				<h5 class="col col-33" ng-click="gochoosestadium(currentprofile)" align="center" style="border-radius:15px;border:1px solid #97a7b4;padding-top:5px;color:#2ab041">
-					{{currentprofile.favstadiumname| uppercase }}
+		<div class="row" style="padding-bottom:0px;margin-top:-20px" ng-click="gochoosestadium(currentprofile)">
+			<div class="col col-66" ng-click="gochoosestadium(currentprofile)" align="left" style="padding-bottom:0px;color: white">
+				<h5 align="left" style="padding-bottom:0px;color:#5f7485">
+					FAVORITE STADIUM
 				</h5>
-				
-				
-			</div>
-			<h6 align="left" style="padding-top:0px;padding-bottom:10px;border-bottom:1px solid #5f7485;padding-left:10px;color:#5f7485"> 	<i class = "ion-ios-information-outline" style="font-size:15px;color:#2ab041"></i> Info: We will use your favorite stadium as your current location</h6>
+				<div>
+				</div>
 
-<div class="row row-center" style="border-bottom:1px solid #5f7485;padding:5px 0px" align="left">
-					<div class="col" style="padding:0 0 0 10px">
-						<div class="row whitetext" style="font-size:15px;padding:0px;color:#5f7485;font-size:14px">
-<div class="col" style="padding:0px">
-							TEAM STATUS : 
-							</div> 
-							<div ng-show="!currentprofile.available" class="col" style="margin-left:-12%;font-weight:bold;color:#c8141e;padding:0px">
-								BUSY
-							</div>
-							<div ng-show="currentprofile.available" class="col" style="margin-left:-12%;font-weight:bold;color:#28b041;padding:0px">
-								AVAILABLE
-							</div>
-						<div class="col col-20" style="padding:0px;margin-top:-5px">
+			</div>
+
+			<h5 class="col col-33" ng-click="gochoosestadium(currentprofile)" align="center" style="border-radius:15px;border:1px solid #97a7b4;padding-top:5px;color:#2ab041">
+				{{currentprofile.favstadiumname| uppercase }}
+			</h5>
+
+
+		</div>
+		<h6 align="left" style="padding-top:0px;padding-bottom:10px;border-bottom:1px solid #5f7485;padding-left:10px;color:#5f7485">
+		<i class="ion-ios-information-outline" style="font-size:15px;color:#2ab041"></i> Info: We will use your favorite stadium
+			as your current location</h6>
+
+		<div class="row row-center" style="border-bottom:1px solid #5f7485;padding:5px 0px" align="left">
+			<div class="col" style="padding:0 0 0 10px">
+				<div class="row whitetext" style="font-size:15px;padding:0px;color:#5f7485;font-size:14px">
+					<div class="col" style="padding:0px">
+						TEAM STATUS :
+					</div>
+					<div ng-show="!currentprofile.available" class="col" style="margin-left:-12%;font-weight:bold;color:#c8141e;padding:0px">
+						BUSY
+					</div>
+					<div ng-show="currentprofile.available" class="col" style="margin-left:-12%;font-weight:bold;color:#28b041;padding:0px">
+						AVAILABLE
+					</div>
+					<div class="col col-20" style="padding:0px;margin-top:-5px">
 						<label class="toggle">
 							<input type="checkbox" ng-model="currentprofile.available" >
 							<div class="track">
 								<div class="handle"></div>
 							</div>
 						</label>
-		</div>
-		</div>
-		<h6 ng-show="!currentprofile.available" style="color:#c8141e;margin-top:-3px"> <i class="ion-ios-information-outline" style="font-size:15px;color:#2ab041"></i> Your Team Cannot Be Challenged</h6>
-		</div>
+					</div>
+				</div>
+				<h6 ng-show="!currentprofile.available" style="color:#c8141e;margin-top:-3px"> <i class="ion-ios-information-outline" style="font-size:15px;color:#2ab041"></i> Your Team Cannot Be Challenged</h6>
+			</div>
 		</div>
 
 		<div ng-show="currentprofile.available">

@@ -146,8 +146,6 @@
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
     </ion-nav-buttons>
 
-
-
     <ion-nav-bar class="headercolor">
         <ion-nav-back-button>
 
@@ -210,7 +208,33 @@
         </div>
 
 
-        <div class="card" style="margin-top:10px;background-color:rgb(62,83,100);margin-bottom:0px">
+        <div style="background-color:rgb(45,62,75)">
+            <div class="row" style="padding:0 5px;background-color:rgb(45,62,75)">
+                <div class="col">
+
+                    <button class="button button-block button-balanced button-small" style="margin-top:5px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
+                        type="submit" ng-click="homepagedirect(2)"> Find Players
+</button>
+
+                </div>
+
+                <div class="col">
+                    <button class="button button-block button-balanced button-small" style="margin-top:5px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
+                        type="submit" ng-click="homepagedirect(1)"> Book Stadiums
+</button>
+
+                </div>
+
+                <div class="col">
+
+                    <button class="button button-block button-balanced button-small" style="margin-top:5px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
+                        type="submit" ng-click="homepagedirect(3)"> Challenge Teams
+</button>
+
+                </div>
+            </div>
+        </div>
+   <div class="card" style="margin-top:-5px;background-color:rgb(62,83,100);margin-bottom:0px">
 
             <div align="center">
 
@@ -239,9 +263,9 @@
 
                 <div class="col" align="center">
                     <img ion-img-cache  src="img/Badges/{{rankedteams[2].badge}}.png" style="width:50px;height:50px " ng-click="goteamprofile(rankedteams[2].key)">
-                    <h5 class="whitetext" style="margin-bottom:-5px;text-transform:capitalize">
+                    <h6 class="whitetext" style="margin-bottom:-5px;text-transform:capitalize">
                         {{rankedteams[2].teamname}}
-                    </h5>
+                    </h6>
                     <h6 style="color: DarkTurquoise;margin-bottom:3px"> <b>3rd</b>
                     </h6>
                 </div>
@@ -253,38 +277,15 @@
                 </h6>
             </div>
         </div>
-
-        <div style="background-color:rgb(45,62,75)">
-            <div class="row" style="padding:0 5px;background-color:rgb(45,62,75)">
-                <div class="col">
-
-                    <button class="button button-block button-balanced button-small" style="margin-top:5px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
-                        type="submit" ng-click="homepagedirect(2)"> Find Players
-</button>
-
-                </div>
-
-                <div class="col">
-                    <button class="button button-block button-balanced button-small" style="margin-top:5px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
-                        type="submit" ng-click="homepagedirect(1)"> Book Stadiums
-</button>
-
-                </div>
-
-                <div class="col">
-
-                    <button class="button button-block button-balanced button-small" style="margin-top:5px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
-                        type="submit" ng-click="homepagedirect(3)"> Challenge Teams
-</button>
-
-                </div>
-            </div>
-        </div>
+   </div>
+   </div>
+   </div>
+   </div>
+   </div>
 
 
 
-
-        <div class="card" style="background-color:rgb(62,83,100);margin-top:-5px" ng-show="showupcomingmatches || showupcomingsinglematches">
+        <div class="card" style="background-color:rgb(62,83,100);margin-top:10px" ng-show="showupcomingmatches || showupcomingsinglematches">
             <div style="background-color:rgb(62,83,100)">
                 <div align="center">
                     <h4 class="whitetext" align="middle"><b>UPCOMING MATCHES</b></h4>
