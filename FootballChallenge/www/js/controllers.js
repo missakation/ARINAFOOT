@@ -478,6 +478,15 @@ angular.module('football.controllers', [])
                                 challengedate.setHours(challenges.child("hour").val());
                                 challengedate.setDate(challenges.child("day").val());
 
+                                var dateofchallenge = new Date();
+                                dateofchallenge.setMinutes(challenges.child("dateofchallengeminute").val());
+                                dateofchallenge.setFullYear(challenges.child("dateofchallengeyear").val());
+                                dateofchallenge.setMonth(challenges.child("dateofchallengemonth").val());
+                                dateofchallenge.setHours(challenges.child("dateofchallengehour").val());
+                                dateofchallenge.setDate(challenges.child("dateofchallengeday").val());
+
+                                
+
                                 var challengedata = {
                                     key: challenges.key,
                                     accepted: challenges.child("accepted").val(),
@@ -504,7 +513,7 @@ angular.module('football.controllers', [])
                                     date: challengedate,
                                     isadmin: isadmin,
 
-
+                                    dateofchallenge: dateofchallenge,
                                     adminphoto: challenges.child("adminphoto").val() == "" ? "img/PlayerProfile.png" : challenges.child("adminphoto").val(),
                                     admintelephon: challenges.child("admintelephon").val(),
                                     adminname: challenges.child("adminname").val(),
@@ -992,14 +1001,14 @@ angular.module('football.controllers', [])
 
                     // Write the new post's data simultaneously in the posts list and the user's post list.
                     var updates = {};
-                    updates['/players/' + challenge.team1adminid + '/upcomingteammatches/' + challenge.key] = null;
-                    updates['/players/' + challenge.team2adminid + '/upcomingteammatches/' + challenge.key] = null;
+                    updates['/players/' + challenge.team1adminid + '/upcominteamgmatches/' + challenge.key] = null;
+                    updates['/players/' + challenge.team2adminid + '/upcominteamgmatches/' + challenge.key] = null;
 
                     for (var i = 0; i < challenge.team1players; i++) {
-                        updates['/players/' + challenge.team1players[i].key + '/upcomingteammatches/' + challenge.key] = null;
+                        updates['/players/' + challenge.team1players[i].key + '/upcominteamgmatches/' + challenge.key] = null;
                     }
                     for (var i = 0; i < challenge.team2players; i++) {
-                        updates['/players/' + challenge.team2players[i].key + '/upcomingteammatches/' + challenge.key] = null;
+                        updates['/players/' + challenge.team2players[i].key + '/upcominteamgmatches/' + challenge.key] = null;
                     }
 
                     //should be already nulls;
@@ -1011,6 +1020,7 @@ angular.module('football.controllers', [])
                     updates['/teams/' + challenge.team2key + '/upcominteamgmatches/' + challenge.key] = null;
 
                     updates['/stadiums/' + challenge.stadiums.stadiumkey + '/ministadiums/' + challenge.stadiums.ministadiumkey + '/schedules/' + challenge.stadiums.year + '/' + challenge.stadiums.month + '/' + challenge.stadiums.day + '/' + challenge.key] = null;
+                    updates['/stadiums/' + challenge.stadiums.stadiumkey + '/ministadiumshistory/' + challenge.stadiums.ministadiumkey + '/schedules/' + challenge.stadiums.year + '/' + challenge.stadiums.month + '/' + challenge.stadiums.day + '/' + challenge.key] = null;
 
 
                     updates['/challenges/' + challenge.key] = null;

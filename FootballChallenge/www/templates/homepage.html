@@ -18,15 +18,18 @@
     .div {
         background-color: rgb(30, 30, 30);
     }
-	.x-navbar-fixed-top-active .x-navbar-wrap {
-  margin-bottom: 0;
-}
-.bar-header {
-    border: 0px !important;
-    border-bottom-color: transparent !important;
-    background-image: none !important;
-    border-bottom: none !important;
-}
+
+    .x-navbar-fixed-top-active .x-navbar-wrap {
+        margin-bottom: 0;
+    }
+
+    .bar-header {
+        border: 0px !important;
+        border-bottom-color: transparent !important;
+        background-image: none !important;
+        border-bottom: none !important;
+    }
+
     .h3.whitetext,
     h2.whitetext,
     h1.whitetext,
@@ -193,7 +196,8 @@
 
                 <div class="col" align="center" style="border-left-style: solid;border-width: thin;border-color: #5f7485;">
 
-                    <img ion-img-cache  image-lazy-src="img/Badges/{{teamdisplayed.picture}}.png" style="height:60px ; width:60px" height="50" ng-click="gototeam(teamdisplayed.key)">
+                    <img ion-img-cache image-lazy-src="img/Badges/{{teamdisplayed.picture}}.png" style="height:60px ; width:60px" height="50"
+                        ng-click="gototeam(teamdisplayed.key)">
                     <div align="center">
                         <h5 class="whitetext" style="text-transform:capitalize">{{teamdisplayed.name}}</h5>
                         <p style="margin-top:-5px;color:darkturquoise" ng-hide="teamdisplayed.key==''">{{teamdisplayed.rank}}</p>
@@ -234,7 +238,7 @@
                 </div>
             </div>
         </div>
-   <div class="card" style="margin-top:-5px;background-color:rgb(62,83,100);margin-bottom:0px">
+        <div class="card" style="margin-top:-5px;background-color:rgb(62,83,100);margin-bottom:0px">
 
             <div align="center">
 
@@ -243,7 +247,8 @@
             <div class="row" style="background-color:rgb(62,83,100)">
 
                 <div class="col" align="center">
-                    <img ion-img-cache  src="img/Badges/{{rankedteams[0].badge}}.png" style="text-transform:capitalize;width:50px;height:50px " ng-click="goteamprofile(rankedteams[0].key)">
+                    <img ion-img-cache src="img/Badges/{{rankedteams[0].badge}}.png" style="text-transform:capitalize;width:50px;height:50px "
+                        ng-click="goteamprofile(rankedteams[0].key)">
                     <h6 class="whitetext" style="margin-bottom:-5px;text-transform:capitalize">
                         {{rankedteams[0].teamname}}
                     </h6>
@@ -252,7 +257,7 @@
                 </div>
 
                 <div class="col" align="center">
-                    <img ion-img-cache  src="img/Badges/{{rankedteams[1].badge}}.png" style="width:50px;height:50px " ng-click="goteamprofile(rankedteams[1].key)">
+                    <img ion-img-cache src="img/Badges/{{rankedteams[1].badge}}.png" style="width:50px;height:50px " ng-click="goteamprofile(rankedteams[1].key)">
                     <h6 class="whitetext" style="margin-bottom:-5px;text-transform:capitalize">
                         {{rankedteams[1].teamname}}
                     </h6>
@@ -262,7 +267,7 @@
 
 
                 <div class="col" align="center">
-                    <img ion-img-cache  src="img/Badges/{{rankedteams[2].badge}}.png" style="width:50px;height:50px " ng-click="goteamprofile(rankedteams[2].key)">
+                    <img ion-img-cache src="img/Badges/{{rankedteams[2].badge}}.png" style="width:50px;height:50px " ng-click="goteamprofile(rankedteams[2].key)">
                     <h6 class="whitetext" style="margin-bottom:-5px;text-transform:capitalize">
                         {{rankedteams[2].teamname}}
                     </h6>
@@ -277,11 +282,11 @@
                 </h6>
             </div>
         </div>
-   </div>
-   </div>
-   </div>
-   </div>
-   </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
 
 
 
@@ -319,11 +324,11 @@
             <div align="center">
                 <h4 class="whitetext" align="middle"><b>Team Invitation</b>
                 </h4>
-            
+
             </div>
             <div class="row row-center" align="left" style="background-color:rgb(62,83,100)">
                 <div class="col col-25">
-                    <img ion-img-cache  src="img/Badges/{{upmatches.badge}}.png" style="height:50px ; width:50px" />
+                    <img ion-img-cache src="img/Badges/{{upmatches.badge}}.png" style="height:50px ; width:50px" />
                 </div>
                 <div class="col col-center" align="left">
                     <h4 class="whitetext" style="text-transform:capitalize">
@@ -338,7 +343,7 @@
 
 
                 <div class="col col-25">
-                    <img ion-img-cache  src="{{upmatches.adminphoto}}" style="border-radius:50% ; height:50px ; width:50px" />
+                    <img ion-img-cache src="{{upmatches.adminphoto}}" style="border-radius:50% ; height:50px ; width:50px" />
 
                 </div>
                 <div class="col">
@@ -373,11 +378,13 @@
             <div align="center">
                 <h5 style="color:white;font-size:15px;font-weight:bold"> {{challenges.date |date:'EEEE, MMM d y @ HH:mm'}} - 5v5
                 </h5>
+                <h5 style="color:white;font-size:15px;font-weight:bold"> {{challenges.ticker}}
+                </h5>
             </div>
             <div class="row" style="padding-bottom:0px">
                 <div class="col" style="padding:0px">
                     <div align="center">
-                        <img ion-img-cache  src="img/Badges/{{challenges.team1logo}}.png" style="width:60px;height:60px ">
+                        <img ion-img-cache src="img/Badges/{{challenges.team1logo}}.png" style="width:60px;height:60px ">
                     </div>
                     <div align="center">
                         <h5 class="whitetext" style="font-weight:bold;text-transform: capitalize">
@@ -386,7 +393,7 @@
                         <h6 style="color:darkturquoise">
                             {{challenges.team1rankdescription}}
                         </h6>
-                        <img ion-img-cache  src="img/Jerseys/{{challenges.team1jersey}}.png" style="width:40px;height:40px ">
+                        <img ion-img-cache src="img/Jerseys/{{challenges.team1jersey}}.png" style="width:40px;height:40px ">
                     </div>
                 </div>
                 <div class="col" style="padding:0px">
@@ -407,7 +414,7 @@
                 </div>
                 <div class="col" style="padding:0px">
                     <div align="center">
-                        <img ion-img-cache  src="img/Badges/{{challenges.team2logo}}.png" style="width:60px;height:60px ">
+                        <img ion-img-cache src="img/Badges/{{challenges.team2logo}}.png" style="width:60px;height:60px ">
                     </div>
                     <div align="center">
                         <h5 class="whitetext" style="font-weight:bold;text-transform: capitalize">
@@ -416,7 +423,7 @@
                         <h6 style="color:darkturquoise">
                             {{challenges.team2rankdescription}}
                         </h6>
-                        <img ion-img-cache  src="img/Jerseys/{{challenges.team2jersey}}.png" style="width:40px;height:40px ">
+                        <img ion-img-cache src="img/Jerseys/{{challenges.team2jersey}}.png" style="width:40px;height:40px ">
                     </div>
                 </div>
 
@@ -431,7 +438,7 @@
                 <div style="width:20%;padding:0px">
 
 
-                    <img ion-img-cache  src="{{challenges.adminphoto}}" style="margin-left:5px;border-radius:50% ; height:65px ; width:65px" />
+                    <img ion-img-cache src="{{challenges.adminphoto}}" style="margin-left:5px;border-radius:50% ; height:65px ; width:65px" />
 
                 </div>
 
@@ -494,7 +501,7 @@
             <div class="row ">
                 <div class="col">
                     <div align="center">
-                        <img ion-img-cache  src="img/Badges/{{challenges.team1logo}}.png" style="width:60px;height:60px ">
+                        <img ion-img-cache src="img/Badges/{{challenges.team1logo}}.png" style="width:60px;height:60px ">
                     </div>
                     <div align="center">
                         <h5 class="whitetext">
@@ -503,7 +510,7 @@
                         <h6 style="color:darkturquoise">
                             {{challenges.team1rank}}
                         </h6>
-                        <img ion-img-cache  src="img/Jerseys/{{challenges.team1jersey}}.png" style="width:40px;height:40px ">
+                        <img ion-img-cache src="img/Jerseys/{{challenges.team1jersey}}.png" style="width:40px;height:40px ">
                     </div>
                 </div>
                 <div class="col">
@@ -524,7 +531,7 @@
                 </div>
                 <div class="col">
                     <div align="center">
-                        <img ion-img-cache  src="img/Badges/{{challenges.team2logo}}.png" style="width:60px;height:60px ">
+                        <img ion-img-cache src="img/Badges/{{challenges.team2logo}}.png" style="width:60px;height:60px ">
                     </div>
                     <div align="center">
                         <h5 class="whitetext">
@@ -533,7 +540,7 @@
                         <h6 style="color:darkturquoise">
                             Rank:{{challenges.team2rank}}
                         </h6>
-                        <img ion-img-cache  src="img/Jerseys/{{challenges.team2jersey}}.png" style="width:40px;height:40px ">
+                        <img ion-img-cache src="img/Jerseys/{{challenges.team2jersey}}.png" style="width:40px;height:40px ">
                     </div>
                 </div>
 
@@ -565,7 +572,7 @@
             <div class="row ">
 
                 <div class="col col-25">
-                    <img ion-img-cache  src="{{requests.photo}}" style="width:70px;height:70px;border-radius:50px">
+                    <img ion-img-cache src="{{requests.photo}}" style="width:70px;height:70px;border-radius:50px">
                 </div>
 
                 <div class="col" style="padding-left:15px">
@@ -604,7 +611,7 @@
             <div class="row" ng-repeat="requests in profile.previousnumbers" style="border-bottom:1px solid #5f7485;padding:10px 0 0 5px">
 
                 <div style="padding:0px;width:22%">
-                    <img ion-img-cache  src="{{requests.photo}}" style="width:60px;height:60px;border-radius:50px">
+                    <img ion-img-cache src="{{requests.photo}}" style="width:60px;height:60px;border-radius:50px">
                 </div>
 
                 <div style="text-transform:capitalize;width:45%;margin-top:22px;">
@@ -807,13 +814,13 @@
 
                 <div class="row">
                     <div class="col">
-                        <img ion-img-cache  src="img/whats.png" style="height:60px ; width:60px" height="50" />
+                        <img ion-img-cache src="img/whats.png" style="height:60px ; width:60px" height="50" />
                     </div>
                     <div class="col">
-                        <img ion-img-cache  src="img/fb.png" style="height:60px ; width:60px" height="50" ng-click="InviteFacebook()" />
+                        <img ion-img-cache src="img/fb.png" style="height:60px ; width:60px" height="50" ng-click="InviteFacebook()" />
                     </div>
                     <div class="col">
-                        <img ion-img-cache  src="img/sms.png" style="height:60px ; width:60px" height="50" />
+                        <img ion-img-cache src="img/sms.png" style="height:60px ; width:60px" height="50" />
                     </div>
 
                 </div>

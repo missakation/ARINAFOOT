@@ -367,6 +367,15 @@ angular.module('football.controllers')
                 var hour = date.getHours();
                 var minute = date.getMinutes();
 
+                var dateofchallenge = new Date();
+
+                var dateofchallengeyear = dateofchallenge.getFullYear();
+                var dateofchallengemonth = dateofchallenge.getMonth();
+                var dateofchallengeday = dateofchallenge.getDate();
+
+                var dateofchallengehour = dateofchallenge.getHours();
+                var dateofchallengeminute = dateofchallenge.getMinutes();
+
                 try {
                     for (var i = 0; i < teams.length; i++) {
 
@@ -409,7 +418,13 @@ angular.module('football.controllers')
                                     accepted: false,
                                     adminphoto: myprofile.photo,
                                     admintelephon: myprofile.telephone,
-                                    adminname: myprofile.firstname + " " + myprofile.lastname
+                                    adminname: myprofile.firstname + " " + myprofile.lastname,
+
+                                    dateofchallengeyear: dateofchallengeyear,
+                                    dateofchallengemonth: dateofchallengemonth,
+                                    dateofchallengeday: dateofchallengeday,
+                                    dateofchallengehour: dateofchallengehour,
+                                    dateofchallengeminute: dateofchallengeminute
 
 
                                 }
@@ -452,7 +467,13 @@ angular.module('football.controllers')
                                     admintelephon: myprofile.telephone,
                                     adminname: myprofile.firstname + " " + myprofile.lastname,
 
-                                    winner: ""
+                                    winner: "",
+
+                                    dateofchallengeyear: dateofchallengeyear,
+                                    dateofchallengemonth: dateofchallengemonth,
+                                    dateofchallengeday: dateofchallengeday,
+                                    dateofchallengehour: dateofchallengehour,
+                                    dateofchallengeminute: dateofchallengeminute
 
                                 }
 

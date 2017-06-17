@@ -1,8 +1,8 @@
-﻿
+
 angular.module('football.controllers')
 
 
-    .controller('HomeController', function ($scope, $ionicPush, $http, HomeStore, LoginStore, TeamStores, $state, $timeout, $ionicPopup, $ionicLoading, $cordovaSocialSharing) {
+    .controller('HomeController', function ($scope, $interval, $ionicPush, $http, HomeStore, LoginStore, TeamStores, $state, $timeout, $ionicPopup, $ionicLoading, $cordovaSocialSharing) {
 
         $scope.nointernet = false;
         $scope.$on("$ionicView.afterEnter", function (event, data) {
@@ -85,24 +85,6 @@ angular.module('football.controllers')
         try {
 
             $scope.profile = {};
-
-            /* $timeout(function () {
-                 //Get My Profile
-                 // Simple GET request example:
-                 $http({
-                     method: 'GET',
-                     url: 'https://us-central1-project-6346119287623064588.cloudfunctions.net/date'
-                 }).then(function successCallback(response) {
- 
-                     $scope.currentdate = new Date(response.data);
-                     $scope.doRefresh($scope.currentdate);
- 
-                 }, function errorCallback(response) {
-                     // called asynchronously if an error occurs
-                     // or server returns response with an error status.
-                     alert(JSON.stringify(response));
-                 });
-             }, 2000); */
 
 
         } catch (error) {
@@ -404,6 +386,43 @@ angular.module('football.controllers')
         }
 
 
+
+        $scope.secondsToHms = function (d) {
+            d = Number(d);
+
+            var h = Math.floor(d / 3600);
+            var m = Math.floor(d % 3600 / 60);
+            var s = Math.floor(d % 3600 % 60);
+
+            return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
+        }
+
+        $scope.UpdateTime = function () {
+            alert("loaded");
+            if ($scope.notloaded == false) {
+
+                $scope.profile.challenges.forEach(function (element) {
+                    element.tickersec -= 1;
+                    alert((24*60)-element.tickersec);
+                    element.ticker = $scope.secondsToHms(element.tickersec);
+
+                }, this);
+            }
+
+        }
+
+        $interval(function () {
+            if ($scope.notloaded == false) {
+
+                $scope.profile.challenges.forEach(function (element) {
+                    element.tickersec -= 1;
+                    element.ticker = $scope.secondsToHms(element.tickersec);
+
+                }, this);
+            }
+        }, 1000);
+
+
         $scope.doRefresh = function (currentdate) {
 
             try {
@@ -415,6 +434,15 @@ angular.module('football.controllers')
                     var oldchallenges = [];
                     var newchallenges = [];
                     $scope.profile = myprofile;
+
+                    var test = new Date(null);
+
+                    $scope.profile.challenges.forEach(function (element) {
+                        element.tickersec = (($scope.currentdate - element.dateofchallenge) / 1000);
+
+                    }, this);
+
+
                     console.log($scope.profile);
 
                     if ($scope.profile.photo.trim() == "") {

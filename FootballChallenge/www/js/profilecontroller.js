@@ -53,6 +53,8 @@ angular.module('football.controllers')
                                 $scope.teamdisplayed.rank = favteam.rank;
                                 $scope.teamdisplayed.key = favteam.key;
 
+                                $scope.currentprofile.teamdisplayed = favteam.teamname;
+
                             }
                             else {
                                 $scope.teamdisplayed.name = "";
@@ -532,33 +534,6 @@ angular.module('football.controllers')
                 saveToPhotoAlbum: false
             };
 
-
-            /*var getFileBlob = function (url, cb) {
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", url);
-                xhr.responseType = "blob";
-                xhr.addEventListener('load', function() {
-                    cb(xhr.response);
-                });
-                xhr.send();
-            };
- 
-            var blobToFile = function (blob, name) {
-                    blob.lastModifiedDate = new Date();
-                    blob.name = name;
-                    return blob;
-            };
- 
-            var getFileObject = function(filePathOrUrl, cb) {
-                getFileBlob(filePathOrUrl, function (blob) {
-                    cb(blobToFile(blob, 'test.jpg'));
-                });
-            };
- 
-            getFileObject('img/test.jpg', function (fileObject) {
-                console.log(fileObject);
-            })*/
-
             navigator.camera.getPicture(function (imageURI) {
                 $scope.currentprofile.photo = "data:image/png;base64," + imageURI;
                 $scope.currentprofile.photo
@@ -572,59 +547,6 @@ angular.module('football.controllers')
                 }, options)
 
                 $scope.$apply();
-
-                // $scope.$apply();
-                // //console.log('Image URI: ' + results[0]);
-                //
-                // // File or Blob named mountains.jpg
-                // var file = results[0];
-                //
-                // // Create the file metadata
-                // var metadata = {
-                //     contentType: 'image/jpeg'
-                // };
-                //
-                // var user = firebase.auth().currentUser;
-                // var id = user.uid;
-                //
-                // $scope.uploading = true;
-                //
-                // // Upload file and metadata to the object 'images/mountains.jpg'
-                // var uploadTask = storageRef.child('playerimages/' + '/' + id + '/' + file.name).put(file, metadata);
-                //
-                // // Listen for state changes, errors, and completion of the upload.
-                // uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-                //     function (snapshot) {
-                //         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-                //         $scope.progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                //         //console.log('Upload is ' + progress + '% done');
-                //         switch (snapshot.state) {
-                //             case firebase.storage.TaskState.PAUSED: // or 'paused'
-                //                 console.log('Upload is paused');
-                //                 break;
-                //             case firebase.storage.TaskState.RUNNING: // or 'running'
-                //                 console.log('Upload is running');
-                //                 break;
-                //         }
-                //     }, function (error) {
-                //         switch (error.code) {
-                //             case 'storage/unauthorized':
-                //                 // User doesn't have permission to access the object
-                //                 break;
-                //
-                //             case 'storage/canceled':
-                //                 // User canceled the upload
-                //                 break;
-                //
-                //             case 'storage/unknown':
-                //                 // Unknown error occurred, inspect error.serverResponse
-                //                 break;
-                //         }
-                //         $scope.$apply();
-                //     }, function () {
-                //         // Upload completed successfully, now we can get the download URL
-                //         var downloadURL = uploadTask.snapshot.downloadURL;
-                //     });
 
             }, function (error) {
                 console.log(error);
