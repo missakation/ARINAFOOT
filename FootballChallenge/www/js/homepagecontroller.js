@@ -438,7 +438,7 @@ angular.module('football.controllers')
                     var test = new Date(null);
 
                     $scope.profile.challenges.forEach(function (element) {
-                        element.tickersec = (($scope.currentdate - element.dateofchallenge) / 1000);
+                        element.tickersec = 24*60*60-(($scope.currentdate - element.dateofchallenge) / 1000);
 
                     }, this);
 
