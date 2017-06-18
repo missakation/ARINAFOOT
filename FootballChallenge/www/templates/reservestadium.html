@@ -429,12 +429,22 @@
 		transform: translateY(-30px);
 		visibility: visible !important;
 	}
+	.bar.bar-royal {
+		background-color:rgb(46,62,85);
+		border:rgb(46,62,85);
+	}
+		.filter-bar .filter-bar-wrapper .item-input-inset .icon.placeholder-icon:before {
+		font-size:26px;
+		}
+		.bar .button.button-icon, .bar button.button-icon {
+			color:white;
+		}
 </style>
 
 
 <ion-view view-title="Reserve a Stadium">
 	<ion-nav-buttons side="secondary">
-		<button class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()"></button>
+		<button placeholder="Players, teams, stadiums" class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()"></button>
 	</ion-nav-buttons>
 	<ion-nav-buttons side="right">
 		<button class="button button-icon ion-android-options" align="right" style="color:white" ng-click="popover.show($event)"></button>

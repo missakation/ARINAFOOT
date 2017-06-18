@@ -10,6 +10,7 @@
         border: thick;
         border-color: black;
     }
+    
 
     .ion-item {
         background-color: rgb(30, 30, 30);
@@ -177,14 +178,14 @@
             <ion-spinner name="bubbles" style="color:white" ng-show="notloaded" icon="lines"></ion-spinner>
         </div>
         <div class="card" style="margin:10px 10px 5px;background-color:rgb(62,83,100)">
-            <div class="row" style="padding:5px 0 ">
+            <div class="row" style="padding:5px 0 0 0">
 
 
-                <div class="col" align="center" style="padding:5px 0;border-radius: 10px;">
+                <div class="col" align="center" style="padding:5px 0 0 0">
 
-                    <div align="center">
+                    <div align="center" style="border-right:1px solid #5f7485">
                         <a href="#/app/selfprofile">
-                            <img ion-img-cache  image-lazy-src="{{profile.photo}}" style="border-radius:50% ; height:60px ; width:60px" height="50" />
+                            <img ion-img-cache  image-lazy-src="{{profile.photo}}" style="border-radius:50%;border:none ; height:60px ; width:60px" height="50" />
                         </a>
                         <h5 class="whitetext" style="font-weight:bold;text-transform:capitalize">Hello {{profile.firstname}} !</h5>
 
@@ -194,13 +195,13 @@
 
                 </div>
 
-                <div class="col" align="center" style="border-left-style: solid;border-width: thin;border-color: #5f7485;">
+                <div class="col" align="center" style="padding-bottom:0px">
 
                     <img ion-img-cache image-lazy-src="img/Badges/{{teamdisplayed.picture}}.png" style="height:60px ; width:60px" height="50"
                         ng-click="gototeam(teamdisplayed.key)">
                     <div align="center">
                         <h5 class="whitetext" style="text-transform:capitalize">{{teamdisplayed.name}}</h5>
-                        <p style="margin-top:-5px;color:darkturquoise" ng-hide="teamdisplayed.key==''">{{teamdisplayed.rank}}</p>
+                        <p style="margin-top:-8px;color:darkturquoise" ng-hide="teamdisplayed.key==''">{{teamdisplayed.rank}}</p>
                     </div>
 
 
@@ -307,7 +308,7 @@
 
                     <div class="col">
 
-                        <button ng-show="upmatches.isadmin" class="button button-balanced" style="padding:2px 4px 1px;min-width:28px;font-size:12px;width:60px;font:12px;background-color:#28b041;color:white"
+                        <button ng-show="upmatches.isadmin" class="button button-balanced" style="padding:2px 4px 1px;min-width:28px;font-size:12px;width:60px;border-radius:50px;font:12px;background-color:#28b041;color:white"
                             ng-click="gogamedetails(upmatches)"> Manage
 </button>
 
@@ -320,7 +321,7 @@
             </div>
         </div>
 
-        <div class="card" ng-repeat="upmatches in profile.teaminvitations | orderBy: 'date':false" style="margin-top:0px;background-color:rgb(62,83,100)">
+        <div class="card" ng-repeat="upmatches in profile.teaminvitations | orderBy: 'date':false" style="margin-top:-10px;background-color:rgb(62,83,100)">
             <div align="center">
                 <h4 class="whitetext" align="middle"><b>Team Invitation</b>
                 </h4>
@@ -371,7 +372,7 @@
             </div>
 
         </div>
-        <div class="card" style="margin-top:-5px;background-color:rgb(62,83,100)" ng-repeat="challenges in profile.challenges | orderBy: 'date':false">
+        <div class="card" style="margin-top:-10px;background-color:rgb(62,83,100)" ng-repeat="challenges in profile.challenges | orderBy: 'date':false">
             <div align="center">
                 <h4 class="whitetext" style="text-transform:uppercase;color:#2ab041" align="middle"><b> {{challenges.title}}</b></h4>
             </div>
