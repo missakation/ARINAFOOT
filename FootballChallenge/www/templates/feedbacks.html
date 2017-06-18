@@ -26,21 +26,18 @@
 
 	<ion-content style="background-color:rgb(46,62,75)">
  
-        <div align="center" style="padding-top:13px;font-size:15px;color:white"> REPORT BUGS </div>
+        <div align="center" style="background-color:tranparent;padding-bottom:5px;padding-top:13px;font-size:15px;color:white"> Write Your Feedback </div>
         <div class="list" >
 
-            <label class="item item-input"  style="margin:10px">
-                <textarea rows="5" placeholder="Bug Report"></textarea>
-            </label>
-
-   <div align="center" style="padding-top:5px;font-size:15px;color:white"> SUGGEST IMPROVEMENTS </div>
-
-            <label class="item item-input" style="margin:10px" >
-                <textarea rows="5" placeholder="What do you want to see in the app?"></textarea>
-            </label>
+			<div class="list" style="width:100%; padding-left:10px;padding-right:10px;padding-bottom:15px">
+			<label class="item item-input" style="padding:2px 20px 20px 10px;background-color:transparent; color:#ffffff; border-radius:5px; border-color:#97a7b4">
+                <textarea rows="8" cols="100" maxlength="220"  type="text" placeholder="Found A Bug ? You Have A Suggestion ?                   Please Let Us Know <3 " ng-model="currentprofile.comments" style="font-style:italic;color:#2ab041;background-color:transparent;padding-left:2px">
+                	 </textarea>
+			</label>
+		</div>
 
 
-	<div style="background-color:rgb(46,62,75);padding:10px">
+	<div style="background-color:rgb(46,62,75);margin-top:-40px;padding:20px">
 		
 				<button class="button button-balanced button-full" style="min-height:35px;border-radius:45px">
 					<h5 class="whitetext">
@@ -52,7 +49,5 @@
 			</div>
 		</div>
 
-
-  
     </ion-content>
 </ion-view>
