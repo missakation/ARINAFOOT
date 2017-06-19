@@ -1,4 +1,10 @@
 <style>
+    .slider-pager .slider-pager-page {
+        color:white;
+    }
+    .slider-pager {
+        bottom:25px;
+    }
     .player-image {
         display: block;
         width: 75px;
@@ -291,7 +297,7 @@
 
 
 
-        <div class="card" style="background-color:rgb(62,83,100);margin-top:10px" ng-show="showupcomingmatches || showupcomingsinglematches">
+        <div class="card" style="background-color:rgb(62,83,100);margin-bottom:10px;margin-top:10px" ng-show="showupcomingmatches || showupcomingsinglematches">
             <div style="background-color:rgb(62,83,100)">
                 <div align="center">
                     <h4 class="whitetext" align="middle"><b>UPCOMING MATCHES</b></h4>
@@ -372,29 +378,37 @@
             </div>
 
         </div>
-        <div class="card" style="margin-top:-10px;background-color:rgb(62,83,100)" ng-repeat="challenges in profile.challenges | orderBy: 'date':false">
-            <div align="center">
-                <h4 class="whitetext" style="text-transform:uppercase;color:#2ab041" align="middle"><b> {{challenges.title}}</b></h4>
+
+
+        <ion-slide-box  ng-if="profile.challenges">
+            <ion-slide ng-repeat="challenges in profile.challenges | orderBy: 'date':false">
+        <div class="card" style="margin-top:-10px;background-color:rgb(62,83,100)">
+             <div class="row" style="margin-top:10px;padding:0px">
+            <div align="center" style="font-size:17px;width:78%;margin-left:14%;text-transform:capitalize;color:#2ab041">
+               <b> {{challenges.title}}</b>
             </div>
-            <div align="center">
-                <h5 style="color:white;font-size:15px;font-weight:bold"> {{challenges.date |date:'EEEE, MMM d y @ HH:mm'}} - 5v5
+            <div align="right"  style="width:20%">
+                  <h5 style="margin:0px;padding:0px;border-radius:50px 0 0;color:white;font-size:12px;font-weight:bold;background-color:#ef473a;color:white"> {{challenges.ticker}}
                 </h5>
-                <h5 style="color:white;font-size:15px;font-weight:bold;color:#ef473a"> Challenge Expires in {{challenges.ticker}}
-                </h5>
-            </div>
+                 </div>
+                  </div>
+                <div align="center" style="margin-top:5px;color:white;font-size:14px;font-weight:bold"> {{challenges.date |date:'EEEE, MMM d y @ HH:mm'}} - 5v5
+                </div>
+             
+           
             <div class="row" style="padding-bottom:0px">
                 <div class="col" style="padding:0px">
                     <div align="center">
                         <img ion-img-cache src="img/Badges/{{challenges.team1logo}}.png" style="width:60px;height:60px ">
                     </div>
                     <div align="center">
-                        <h5 class="whitetext" style="font-weight:bold;text-transform: capitalize">
+                        <h5 class="whitetext" style="margin-bottom:5px;font-weight:bold;text-transform: capitalize">
                             {{challenges.team1name}}
                         </h5>
-                        <h6 style="color:darkturquoise">
+                        <h6 style="margin-top:5px;color:darkturquoise">
                             {{challenges.team1rankdescription}}
                         </h6>
-                        <img ion-img-cache src="img/Jerseys/{{challenges.team1jersey}}.png" style="width:40px;height:40px ">
+                        
                     </div>
                 </div>
                 <div class="col" style="padding:0px">
@@ -406,7 +420,7 @@
                         </h3>
                         <hr style="height:20px; visibility:hidden;" />
 
-                        <h6 style="color:#5f7485" align="center"> DIFFICULTY </h6>
+                        <h6 style="margin-top:-20px;color:#5f7485" align="center"> DIFFICULTY </h6>
                         <h5 align="center" class="whitetext" style="margin-top:-5px;font-weight:bold">
                             HARD
                         </h5>
@@ -418,13 +432,13 @@
                         <img ion-img-cache src="img/Badges/{{challenges.team2logo}}.png" style="width:60px;height:60px ">
                     </div>
                     <div align="center">
-                        <h5 class="whitetext" style="font-weight:bold;text-transform: capitalize">
+                        <h5 class="whitetext" style="margin-bottom:5px;font-weight:bold;text-transform: capitalize">
                             {{challenges.team2name}}
                         </h5>
-                        <h6 style="color:darkturquoise">
+                        <h6 style="margin-top:5px;color:darkturquoise">
                             {{challenges.team2rankdescription}}
                         </h6>
-                        <img ion-img-cache src="img/Jerseys/{{challenges.team2jersey}}.png" style="width:40px;height:40px ">
+                      
                     </div>
                 </div>
 
@@ -488,8 +502,9 @@
                 </div>
             </div>
         </div>
-
-
+ 
+            </ion-slide>
+ </ion-slide-box>
 
         <div class="card" style="background-color:rgb(62,83,100)" ng-repeat="challenges in profile.gameinvitation | orderBy: 'date':false">
             <div align="center">
@@ -511,7 +526,7 @@
                         <h6 style="color:darkturquoise">
                             {{challenges.team1rank}}
                         </h6>
-                        <img ion-img-cache src="img/Jerseys/{{challenges.team1jersey}}.png" style="width:40px;height:40px ">
+                    
                     </div>
                 </div>
                 <div class="col">
@@ -541,7 +556,7 @@
                         <h6 style="color:darkturquoise">
                             Rank:{{challenges.team2rank}}
                         </h6>
-                        <img ion-img-cache src="img/Jerseys/{{challenges.team2jersey}}.png" style="width:40px;height:40px ">
+                      
                     </div>
                 </div>
 

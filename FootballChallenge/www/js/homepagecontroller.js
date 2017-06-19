@@ -4,6 +4,12 @@ angular.module('football.controllers')
 
     .controller('HomeController', function ($scope, $interval, $ionicPush, $http, HomeStore, LoginStore, TeamStores, $state, $timeout, $ionicPopup, $ionicLoading, $cordovaSocialSharing) {
 
+
+$timeout( function() {
+$ionicSlideBoxDelegate.update();
+}, 50);
+
+
         $scope.nointernet = false;
         $scope.$on("$ionicView.afterEnter", function (event, data) {
             // handle event
