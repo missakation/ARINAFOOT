@@ -326,8 +326,9 @@
                 </div>
             </div>
         </div>
-
-        <div class="card" ng-repeat="upmatches in profile.teaminvitations | orderBy: 'date':false" style="margin-top:-10px;background-color:rgb(62,83,100)">
+ <ion-slide-box  ng-if="profile.profile.teaminvitations">
+            <ion-slide ng-repeat="upmatches in profile.teaminvitations | orderBy: 'date':false" >
+        <div class="card" style="margin-top:-10px;background-color:rgb(62,83,100)">
             <div align="center">
                 <h4 class="whitetext" align="middle"><b>Team Invitation</b>
                 </h4>
@@ -379,6 +380,9 @@
 
         </div>
 
+
+            </ion-slide>
+ </ion-slide-box>
 
         <ion-slide-box  ng-if="profile.challenges">
             <ion-slide ng-repeat="challenges in profile.challenges | orderBy: 'date':false">
