@@ -170,7 +170,8 @@ angular.module('football', ['ionic', /*'ionicImgCache'*/ 'football.controllers',
                 url: '/feedbacks',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/feedbacks.html'
+                        templateUrl: 'templates/feedbacks.html',
+                        controller:"FeedBackController"
                     }
                 }
             })

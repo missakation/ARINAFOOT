@@ -485,7 +485,7 @@ angular.module('football.controllers', [])
                                 dateofchallenge.setHours(challenges.child("dateofchallengehour").val());
                                 dateofchallenge.setDate(challenges.child("dateofchallengeday").val());
 
-                                
+
 
                                 var challengedata = {
                                     key: challenges.key,
@@ -841,6 +841,7 @@ angular.module('football.controllers', [])
 
                         callback(myprofile);
                     }, function (error) {
+                        alert("test");
                         alert(error.message);
                     });
                 } catch (error) {
@@ -1776,6 +1777,10 @@ angular.module('football.controllers', [])
 
     .controller('LoginController', function ($scope, $ionicModal, $ionicHistory, $ionicPopup, $timeout, $state, LoginStore, FirebaseStorageService) {
 
+
+
+
+
         $scope.loginData = {};
         $scope.myprofile = {};
 
@@ -2233,7 +2238,7 @@ angular.module('football.controllers', [])
 
     })
 
-    .controller('FeedBackController', ['$scope', function ($scope) {
+    .controller('FeedBackController', function ($scope, $state, $stateParams, $ionicPopup, $ionicLoading) {
 
         $scope.submit = function () {
             //$scope.list.push(this.text);
@@ -2242,7 +2247,7 @@ angular.module('football.controllers', [])
             $scope.text = 'tee';
 
         };
-    }])
+    })
 
     .controller('LoginPassController', function ($scope, $state, $ionicPopup) {
 
