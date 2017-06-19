@@ -2,12 +2,12 @@
 angular.module('football.controllers')
 
 
-    .controller('HomeController', function ($scope, $interval, $ionicPush, $http,$ionicSlideBoxDelegate, HomeStore, LoginStore, TeamStores, $state, $timeout, $ionicPopup, $ionicLoading, $cordovaSocialSharing) {
+    .controller('HomeController', function ($scope, $interval, $ionicPush, $http, $ionicSlideBoxDelegate, HomeStore, LoginStore, TeamStores, $state, $timeout, $ionicPopup, $ionicLoading, $cordovaSocialSharing) {
 
 
-$timeout( function() {
+        $timeout(function () {
 
-}, 50);
+        }, 50);
 
 
         $scope.nointernet = false;
@@ -403,26 +403,22 @@ $timeout( function() {
             return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
         }
 
-        $scope.UpdateTime = function () {
-            alert("loaded");
-            if ($scope.notloaded == false) {
-
-                $scope.profile.challenges.forEach(function (element) {
-                    element.tickersec -= 1;
-                    alert((24*60)-element.tickersec);
-                    element.ticker = $scope.secondsToHms(element.tickersec);
-
-                }, this);
-            }
-
-        }
-
         $interval(function () {
             if ($scope.notloaded == false) {
 
                 $scope.profile.challenges.forEach(function (element) {
                     element.tickersec -= 1;
-                    element.ticker = $scope.secondsToHms(element.tickersec);
+
+
+                    if (element.tickersec < 1) {
+                        HomeStore.DeleteChallenge(element).then(function () {
+                        }, function (error) {
+                            LoginStore.PostError(error);
+                        })
+                    }
+                    else {
+                        element.ticker = $scope.secondsToHms(element.tickersec);
+                    }
 
                 }, this);
             }
@@ -444,7 +440,7 @@ $timeout( function() {
                     var test = new Date(null);
 
                     $scope.profile.challenges.forEach(function (element) {
-                        element.tickersec = 24*60*60-(($scope.currentdate - element.dateofchallenge) / 1000);
+                        element.tickersec = 1.3 * 60 * 60 - (($scope.currentdate - element.dateofchallenge) / 1000);
 
                     }, this);
 
