@@ -2,11 +2,11 @@
 angular.module('football.controllers')
 
 
-    .controller('HomeController', function ($scope, $interval, $ionicPush, $http, HomeStore, LoginStore, TeamStores, $state, $timeout, $ionicPopup, $ionicLoading, $cordovaSocialSharing) {
+    .controller('HomeController', function ($scope, $interval, $ionicPush, $http,$ionicSlideBoxDelegate, HomeStore, LoginStore, TeamStores, $state, $timeout, $ionicPopup, $ionicLoading, $cordovaSocialSharing) {
 
 
 $timeout( function() {
-$ionicSlideBoxDelegate.update();
+
 }, 50);
 
 
@@ -275,10 +275,10 @@ $ionicSlideBoxDelegate.update();
 
         }
 
-        $scope.$on('cloud:push:notification', function (event, data) {
+        /*$scope.$on('cloud:push:notification', function (event, data) {
             var msg = data.message;
             //alert(msg.title + ': ' + msg.text);
-        });
+        });*/
 
 
         $scope.acceptrequest = function (request, x) {
@@ -519,7 +519,6 @@ $ionicSlideBoxDelegate.update();
 
                         $scope.challenges = newchallenges;
                         $scope.notloaded = false;
-                        $scope.$apply();
 
                         $scope.showpendingchallenge = $scope.profile.challenges.length == 0 ? false : true;
                         $scope.showupcomingmatches = $scope.profile.upcominteamgmatches.length == 0 ? false : true;
@@ -533,7 +532,7 @@ $ionicSlideBoxDelegate.update();
                             $scope.rankedteams = leagues;
                         })
                         //JSON.stringify()
-
+                        $ionicSlideBoxDelegate.update();
                         $scope.$apply();
                     }, function (error) {
                         alert(error.message);
