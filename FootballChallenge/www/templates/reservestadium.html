@@ -429,16 +429,20 @@
 		transform: translateY(-30px);
 		visibility: visible !important;
 	}
+
 	.bar.bar-royal {
-		background-color:rgb(46,62,85);
-		border:rgb(46,62,85);
+		background-color: rgb(46, 62, 85);
+		border: rgb(46, 62, 85);
 	}
-		.filter-bar .filter-bar-wrapper .item-input-inset .icon.placeholder-icon:before {
-		font-size:26px;
-		}
-		.bar .button.button-icon, .bar button.button-icon {
-			color:white;
-		}
+
+	.filter-bar .filter-bar-wrapper .item-input-inset .icon.placeholder-icon:before {
+		font-size: 26px;
+	}
+
+	.bar .button.button-icon,
+	.bar button.button-icon {
+		color: white;
+	}
 </style>
 
 
@@ -642,27 +646,29 @@
 		</b>
 				</div>
 			</div>
-			<div class="row" style="padding-left:0px" align="center">
 
-				
-				<div align="right" style="padding-right:20px;width:40%;color:#5f7485;font-size:12px">
-				<i class="ion-location" style="padding-right:3px;font-size:18px;color:#5f7485"></i>	{{stadiums.distance | number:2}}KM
+
+			<div class="row" style="margin-top:5px;font-size:12px;padding-left:0px;padding-bottom:12px">
+				<div align="right" style="font-weight:bold;color:#5f7485;width:20%">
+					<i class="ion-location" style="margin-right:10px;font-size:22px;color:#5f7485"></i>
+					</div>
+				<div align="left" style="font-weight:bold;color:#5f7485;width:20%">
+					{{stadiums.distance | number:2}}KM
 				</div>
 
-				<div style="width:33%;color:#5f7485;border-right:1px #5f7485 solid;border-left:1px #5f7485 solid;padding:0px;font-size:12px;padding-bottom:0px"
-				 align="center"> TYPE
-
+				<div align="center" style="color:#5f7485;text-transform:capitalize;width:33%;padding:0px;border-right:1px #5f7485 solid;border-left:1px #5f7485 solid">
+					TYPE
 				</div>
 
-				<div style="width:27%;color:#5f7485;font-size:12px;padding:0px" align="center">
+				<div align="center" style="color:#5f7485;width:27%;padding:0px">
 					STADIUM SIZE
-
 				</div>
 
 			</div>
 
 
-			<div class="row" style="padding-left:0px;padding-bottom:12px">
+
+			<div class="row" style="margin-top:-12px;padding-left:0px;padding-bottom:12px">
 
 				<div align="center" style="width:40%;font-weight:bold;color:white">
 					Anthelias 404

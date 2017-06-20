@@ -1,19 +1,29 @@
 <style>
-    .headercolor{
-        background-color: rgb(62,83,100);
+    .headercolor {
+        background-color: rgb(62, 83, 100);
         color: white
     }
-    .whitecheck{
+
+    .whitecheck {
         background-color: transparent;
         color: white;
         border: none
     }
-    	.headercolor {
-			background-color: rgb(62, 83, 100);
-			color: white;
-			border-bottom: 2px solid rgb(62, 83, 100);
-			border-top: 3px;
-		}
+
+    .headercolor {
+        background-color: rgb(62, 83, 100);
+        color: white;
+        border-bottom: 2px solid rgb(62, 83, 100);
+        border-top: 3px;
+    }
+
+    .toggle .track {
+        background-color: #C00000;
+    }
+
+    .toggle .handle {
+        background-color: white;
+    }
 </style>
 
 <ion-view view-title="Settings">
@@ -32,24 +42,24 @@
     <ion-content style="background-color:rgb(46,62,75)">
 
 
-<ion-list>
+        <ion-list>
 
-    <ion-checkbox ng-model="filter.notification" class="whitecheck" ng-change="saveNotificationData(filter.notification)">Notification</ion-checkbox>
-    <ion-checkbox ng-model="filter.reminder_3hours" class="whitecheck" ng-change="saveReminderData(filter.reminder_3hours)">Reminder 3 hours before game</ion-checkbox>
-    <ion-checkbox ng-model="filter.email" class="whitecheck">Email Verified</ion-checkbox>
-    <ion-checkbox ng-model="filter.facebookVerified" class="whitecheck">Facebook Verified</ion-checkbox>
-    <ion-checkbox ng-model="filter.smsVerified" class="whitecheck">SMS Verified</ion-checkbox>
-    
+            <ion-toggle ng-model="filter.notification" class="whitecheck" ng-change="saveNotificationData(filter.notification)"> Allow Notification</ion-toggle>
+            <ion-toggle ng-model="filter.reminder_3hours" class="whitecheck" ng-change="saveReminderData(filter.reminder_3hours)">Reminder 3 hours before game</ion-toggle>
+            <ion-toggle ng-model="filter.smsVerified" class="whitecheck">Phone Number Verified</ion-toggle>
+            <ion-toggle ng-model="filter.email" class="whitecheck">Email Verified</ion-toggle>
+            <ion-toggle ng-model="filter.facebookVerified" class="whitecheck">Facebook Verified</ion-toggle>
+          
 
-        <button class="button button-balanced button-full" ng-click="gosmsverifypage()">
-             Verify Mobile
-        </button>
-<label class="item item-input" style="background-color:rgb(46,62,75">
-        <span class="input-label" style="color:white">Telephone</span>
+
+            <label class="item item-input" style="background-color:rgb(46,62,75)">
+        <span class="input-label" style="width:80%;color:white">Telephone</span> 
         <input type="tel">
         </label>
-
+            <button class="button button-balanced button-full" ng-click="gosmsverifypage()">
+             Verify Mobile
+        </button>
         </ion-list>
 
-        </ion-content>
-        </ion-view>
+    </ion-content>
+</ion-view>

@@ -1,10 +1,12 @@
-<style>  
-      .slider-pager .slider-pager-page {
-        color:white;
+<style>
+    .slider-pager .slider-pager-page {
+        color: white;
     }
+
     .slider-pager {
-        bottom:25px;
+        bottom: 25px;
     }
+
     .player-image {
         display: block;
         width: 75px;
@@ -13,11 +15,11 @@
     }
 
     .col-50 {
-        border: thick;  
+        border: thick;
         border-color: black;
     }
-   
-   
+
+
     .ion-item {
         background-color: rgb(30, 30, 30);
     }
@@ -245,7 +247,7 @@
                 </div>
             </div>
         </div>
-        <div class="card" style="margin-top:-5px;background-color:rgb(62,83,100);margin-bottom:0px">
+        <div class="card" style="margin-top:-5px;background-color:rgb(62,83,100);margin-bottom:10px">
 
             <div align="center">
 
@@ -314,11 +316,11 @@
 
                     <div class="col">
 
-                        <button ng-show="upmatches.isadmin" class="button button-balanced" style="padding:2px 4px 1px;min-width:28px;font-size:12px;width:60px;border-radius:50px;font:12px;background-color:#28b041;color:white"
+                        <button ng-show="upmatches.isadmin" class="button button-balanced button-small" style="padding:2px 4px 1px;min-width:28px;font-size:12px;width:60px;border-radius:50px;background-color:#28b041;color:white"
                             ng-click="gogamedetails(upmatches)"> Manage
 </button>
 
-                        <button ng-show="!(upmatches.isadmin)" class="button button-small" style="padding:2px 4px 1px;min-width:28px;font-size:12px;border-radius:50px;width:60px;font:12px;background-color:#28b041;color:white"
+                        <button ng-show="!(upmatches.isadmin)" class="button button-small" style="padding:2px 4px 1px;min-width:28px;font-size:12px;border-radius:50px;width:60px;background-color:#28b041;color:white"
                             ng-click="gogamedetails(upmatches)"> View
 </button>
                     </div>
@@ -327,315 +329,319 @@
             </div>
         </div>
 
- <ion-slide-box  ng-if="profile.profile.teaminvitations">
-            <ion-slide ng-repeat="upmatches in profile.teaminvitations | orderBy: 'date':false" >
-        <div class="card" style="margin-top:-10px;background-color:rgb(62,83,100)">
-            <div align="center">
-                <h4 class="whitetext" align="middle"><b>Team Invitation</b>
-                </h4>
+        <ion-slide-box ng-if="profile.profile.teaminvitations">
+            <ion-slide ng-repeat="upmatches in profile.teaminvitations | orderBy: 'date':false">
+                <div class="card" style="margin-top:-10px;background-color:rgb(62,83,100)">
+                    <div align="center">
+                        <h4 class="whitetext" align="middle"><b>Team Invitation</b>
+                        </h4>
 
-            </div>
-            <div class="row row-center" align="left" style="background-color:rgb(62,83,100)">
-                <div class="col col-25">
-                    <img ion-img-cache src="img/Badges/{{upmatches.badge}}.png" style="height:50px ; width:50px" />
-                </div>
-                <div class="col col-center" align="left">
-                    <h4 class="whitetext" style="text-transform:capitalize">
-                        {{upmatches.teamname}}
-                    </h4>
-                </div>
-            </div>
+                    </div>
+                    <div class="row row-center" align="left" style="background-color:rgb(62,83,100)">
+                        <div class="col col-25">
+                            <img ion-img-cache src="img/Badges/{{upmatches.badge}}.png" style="height:50px ; width:50px" />
+                        </div>
+                        <div class="col col-center" align="left">
+                            <h4 class="whitetext" style="text-transform:capitalize">
+                                {{upmatches.teamname}}
+                            </h4>
+                        </div>
+                    </div>
 
-            <div class="row row-center" style="margin-top:-20px;background-color:rgb(62,83,100)">
-
-
+                    <div class="row row-center" style="margin-top:-20px;background-color:rgb(62,83,100)">
 
 
-                <div class="col col-25">
-                    <img ion-img-cache src="{{upmatches.adminphoto}}" style="border-radius:50% ; height:50px ; width:50px" />
 
-                </div>
-                <div class="col">
-                    <h5 class="whitetext">
-                        Hello I am {{upmatches.adminfirstname}} {{upmatches.adminlastname}}<br> Would you like to join my
-                        team {{upmatches.teamname}}?
-                    </h5>
 
-                </div>
-            </div>
+                        <div class="col col-25">
+                            <img ion-img-cache src="{{upmatches.adminphoto}}" style="border-radius:50% ; height:50px ; width:50px" />
 
-            <div class="row row-top" style="margin-top:-20px;padding-bottom:0px;background-color:rgb(62,83,100)">
-                <div class="col">
+                        </div>
+                        <div class="col">
+                            <h5 class="whitetext">
+                                Hello I am {{upmatches.adminfirstname}} {{upmatches.adminlastname}}<br> Would you like to
+                                join my team {{upmatches.teamname}}?
+                            </h5>
 
-                    <button class="button button-block button-full button-assertive " style="line-height:30px;min-height:30px;padding:2px 4px 1px;min-width:28px;font-size:12px;border-radius:50px;color:white"
-                        ng-click="acceptteaminvitation(upmatches,2)"> DECLINE
+                        </div>
+                    </div>
+
+                    <div class="row row-top" style="margin-top:-20px;padding-bottom:0px;background-color:rgb(62,83,100)">
+                        <div class="col">
+
+                            <button class="button button-block button-full button-assertive " style="line-height:30px;min-height:30px;padding:2px 4px 1px;min-width:28px;font-size:12px;border-radius:50px;color:white"
+                                ng-click="acceptteaminvitation(upmatches,2)"> DECLINE
 </button>
-                </div>
-                <div class="col">
-                    <button class="button button-block button-full button-balanced " style="line-height:30px;min-height:30px;padding:2px 4px 1px;min-width:28px;font-size:12px;border-radius:50px;color:white;font-weight:bold"
-                        ng-click="acceptteaminvitation(upmatches,1)"> ACCEPT
+                        </div>
+                        <div class="col">
+                            <button class="button button-block button-full button-balanced " style="line-height:30px;min-height:30px;padding:2px 4px 1px;min-width:28px;font-size:12px;border-radius:50px;color:white;font-weight:bold"
+                                ng-click="acceptteaminvitation(upmatches,1)"> ACCEPT
 </button>
+                        </div>
+
+                    </div>
+
                 </div>
 
-            </div>
 
-        </div>
+            </ion-slide>
+        </ion-slide-box>
 
-
-            </ion-slide >
- </ion-slide-box>
-
-        <ion-slide-box  ng-if="profile.challenges" >
+        <ion-slide-box ng-if="profile.challenges">
             <ion-slide ng-repeat="challenges in profile.challenges | orderBy: 'date':false">
-        <div class="card" style="margin-top:10px;background-color:rgb(62,83,100)">
-             <div class="row" style="padding:0px">
-            <div align="center" style="font-size:17px;width:78%;margin-left:14%;text-transform:capitalize;color:#2ab041">
-               <b> {{challenges.title}}</b>
-            </div>
-            <div align="right"  style="width:20%">
-                  <h5 style="margin:0px;padding:0px;border-radius:0 0 0 50px;color:white;font-size:12px;font-weight:bold;background-color:#ef473a;color:white"> {{challenges.ticker}}
-                </h5>
-                 </div>
-                  </div>
+                <div class="card" style="margin-top:0px;background-color:rgb(62,83,100)">
+
+                        <h5 style="width:20%;margin:0px;padding:0px;border-radius:0 0px 50px;color:white;font-size:12px;font-weight:bold;background-color:#ef473a;color:white">
+                        {{challenges.ticker}}
+                        </h5>
+                   
+                  
+
+                    <div align="center" style="margin-top:-5px;font-size:17px;width:100%;text-transform:capitalize;color:#2ab041">
+                        <b> {{challenges.title}}</b>
+                    </div>
+
+                
                 <div align="center" style="margin-top:5px;color:white;font-size:14px;font-weight:bold"> {{challenges.date |date:'EEEE, MMM d y @ HH:mm'}} - 5v5
                 </div>
-             
-           
-            <div class="row" style="padding-bottom:0px">
-                <div class="col" style="padding:0px">
-                    <div align="center">
-                        <img ion-img-cache src="img/Badges/{{challenges.team1logo}}.png" style="width:60px;height:60px ">
+
+
+                <div class="row" style="padding-bottom:0px">
+                    <div class="col" style="padding:0px">
+                        <div align="center">
+                            <img ion-img-cache src="img/Badges/{{challenges.team1logo}}.png" style="width:60px;height:60px ">
+                        </div>
+                        <div align="center">
+                            <h5 class="whitetext" style="margin-bottom:5px;font-weight:bold;text-transform: capitalize">
+                                {{challenges.team1name}}
+                            </h5>
+                            <h6 style="margin-top:5px;color:darkturquoise">
+                                {{challenges.team1rankdescription}}
+                            </h6>
+
+                        </div>
                     </div>
-                    <div align="center">
-                        <h5 class="whitetext" style="margin-bottom:5px;font-weight:bold;text-transform: capitalize">
-                            {{challenges.team1name}}
+                    <div class="col" style="padding:0px">
+                        <div align="center">
+                            <hr style="height:0px; visibility:hidden;" />
+
+                            <h3 class="whitetext" style="font-weight:bold;color:white">
+                                VS
+                            </h3>
+                            <hr style="height:20px; visibility:hidden;" />
+
+                            <h6 style="margin-top:-20px;color:#5f7485" align="center"> DIFFICULTY </h6>
+                            <h5 align="center" class="whitetext" style="margin-top:-5px;font-weight:bold">
+                                HARD
+                            </h5>
+
+                        </div>
+                    </div>
+                    <div class="col" style="padding:0px">
+                        <div align="center">
+                            <img ion-img-cache src="img/Badges/{{challenges.team2logo}}.png" style="width:60px;height:60px ">
+                        </div>
+                        <div align="center">
+                            <h5 class="whitetext" style="margin-bottom:5px;font-weight:bold;text-transform: capitalize">
+                                {{challenges.team2name}}
+                            </h5>
+                            <h6 style="margin-top:5px;color:darkturquoise">
+                                {{challenges.team2rankdescription}}
+                            </h6>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <h5 class="whitetext" align="center" style="text-transform:capitalize;margin:5px 0 0 0;font-size:15px;font-weight:bold">
+                    Captain {{challenges.adminname}}
+                </h5>
+                <div class="row" style="padding:0px;background-color:rgb(62, 83, 100)">
+
+                    <div style="width:20%;padding:0px">
+
+
+                        <img ion-img-cache src="{{challenges.adminphoto}}" style="margin-left:5px;border-radius:50% ; height:65px ; width:65px" />
+
+                    </div>
+
+                    <div align="center" style="width:50%;padding:0px 5px">
+
+
+
+                        <h6 style="color:#5f7485"> CONTACT </h6>
+                        <h5 class="whitetext" style="font-weight:bold">
+                            (+961) {{challenges.admintelephon}}
                         </h5>
-                        <h6 style="margin-top:5px;color:darkturquoise">
-                            {{challenges.team1rankdescription}}
-                        </h6>
-                        
                     </div>
-                </div>
-                <div class="col" style="padding:0px">
-                    <div align="center">
-                        <hr style="height:0px; visibility:hidden;" />
+                    <div class="col" style="padding:0px">
 
-                        <h3 class="whitetext" style="font-weight:bold;color:white">
-                            VS
-                        </h3>
-                        <hr style="height:20px; visibility:hidden;" />
-
-                        <h6 style="margin-top:-20px;color:#5f7485" align="center"> DIFFICULTY </h6>
-                        <h5 align="center" class="whitetext" style="margin-top:-5px;font-weight:bold">
-                            HARD
+                        <h6 style="color:#5f7485;border-left:1px solid #5f7485" align="center"> LAST SEEN </h6>
+                        <h5 align="center" class="whitetext" style="padding-top:10px;margin-top:-10px;font-weight:bold;border-left:1px solid #5f7485">
+                            404 Hrs
                         </h5>
-
-                    </div>
-                </div>
-                <div class="col" style="padding:0px">
-                    <div align="center">
-                        <img ion-img-cache src="img/Badges/{{challenges.team2logo}}.png" style="width:60px;height:60px ">
-                    </div>
-                    <div align="center">
-                        <h5 class="whitetext" style="margin-bottom:5px;font-weight:bold;text-transform: capitalize">
-                            {{challenges.team2name}}
-                        </h5>
-                        <h6 style="margin-top:5px;color:darkturquoise">
-                            {{challenges.team2rankdescription}}
-                        </h6>
-                      
                     </div>
                 </div>
 
-            </div>
-
-
-            <h5 class="whitetext" align="center" style="text-transform:capitalize;margin:5px 0 0 0;font-size:15px;font-weight:bold">
-                Captain {{challenges.adminname}}
-            </h5>
-            <div class="row" style="padding:0px;background-color:rgb(62, 83, 100)">
-
-                <div style="width:20%;padding:0px">
-
-
-                    <img ion-img-cache src="{{challenges.adminphoto}}" style="margin-left:5px;border-radius:50% ; height:65px ; width:65px" />
-
-                </div>
-
-                <div align="center" style="width:50%;padding:0px 5px">
-
-
-
-                    <h6 style="color:#5f7485"> CONTACT </h6>
-                    <h5 class="whitetext" style="font-weight:bold">
-                        (+961) {{challenges.admintelephon}}
-                    </h5>
-                </div>
-                <div class="col" style="padding:0px">
-
-                    <h6 style="color:#5f7485;border-left:1px solid #5f7485" align="center"> LAST SEEN </h6>
-                    <h5 align="center" class="whitetext" style="padding-top:10px;margin-top:-10px;font-weight:bold;border-left:1px solid #5f7485">
-                        404 Hrs
-                    </h5>
-                </div>
-            </div>
-
-            <div class="row" ng-show="!challenges.isadmin">
-                <div class="col">
-                    <button class="button button-block button-assertive button-small" style="border-radius:50px;color:white" ng-click="declineinvitation(challenges)"> DECLINE
+                <div class="row" ng-show="!challenges.isadmin">
+                    <div class="col">
+                        <button class="button button-block button-assertive button-small" style="border-radius:50px;color:white" ng-click="declineinvitation(challenges)"> DECLINE
 </button>
-                </div>
+                    </div>
 
-                <div class="col">
-                    <button class="button button-block button-balanced button-small" style="font-weight:bold;border-radius:50px;color:white"
-                        ng-click="acceptinvitation(challenges)"> PICK STADIUM
+                    <div class="col">
+                        <button class="button button-block button-balanced button-small" style="font-weight:bold;border-radius:50px;color:white"
+                            ng-click="acceptinvitation(challenges)"> PICK STADIUM
 </button>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row" ng-show="challenges.isadmin">
-                <div class="col">
-                    <button class="button button-block button-balanced button-small" style="border-radius:50px;background-color:white;color: #2ab041"
-                        ng-click="cancelinvitation(challenges)"> CANCEL
+                <div class="row" ng-show="challenges.isadmin">
+                    <div class="col">
+                        <button class="button button-block button-balanced button-small" style="border-radius:50px;background-color:white;color: #2ab041"
+                            ng-click="cancelinvitation(challenges)"> CANCEL
 </button>
-                </div>
+                    </div>
 
 
-                <div class="col">
-                    <button class="button button-block button-energized button-small" style="border-radius:50px;width:bold;color:white"> PENDING
+                    <div class="col">
+                        <button class="button button-block button-energized button-small" style="border-radius:50px;width:bold;color:white"> PENDING
 </button>
+                    </div>
+
                 </div>
-               
-            </div>
-                        
-        </div>
-                             
- 
+
+                </div>
+
+
             </ion-slide>
- </ion-slide-box>
+        </ion-slide-box>
 
 
 
-  <ion-slide-box  ng-if="profile.gameinvitation">
+        <ion-slide-box ng-if="profile.gameinvitation">
             <ion-slide ng-repeat="challenges in profile.gameinvitation | orderBy: 'date':false">
-        <div class="card" style="background-color:rgb(62,83,100)">
-            <div align="center">
-                <h4 class="whitetext" align="middle"><b>Pending Attendance</b></h4>
-            </div>
-            <div align="center">
-                <h5 class="whitetext" style="color:white"> {{challenges.date |date:'MMM d, y h:mm a'}}
-                </h5>
-            </div>
-            <div class="row ">
-                <div class="col">
+                <div class="card" style="background-color:rgb(62,83,100)">
                     <div align="center">
-                        <img ion-img-cache src="img/Badges/{{challenges.team1logo}}.png" style="width:60px;height:60px ">
+                        <h4 class="whitetext" align="middle"><b>Pending Attendance</b></h4>
                     </div>
                     <div align="center">
-                        <h5 class="whitetext">
-                            {{challenges.team1name}}
+                        <h5 class="whitetext" style="color:white"> {{challenges.date |date:'MMM d, y h:mm a'}}
                         </h5>
-                        <h6 style="color:darkturquoise">
-                            {{challenges.team1rank}}
-                        </h6>
-                    
                     </div>
-                </div>
-                <div class="col">
-                    <div align="center">
-                        <h4 class="whitetext">
-                            VS
-                        </h4>
-                        <h6 class="greytext">
-                            Stadium
-                        </h6>
-                        <h6 class="whitetext">
-                            {{challenges.stadium.description}}
-                        </h6>
+                    <div class="row ">
+                        <div class="col">
+                            <div align="center">
+                                <img ion-img-cache src="img/Badges/{{challenges.team1logo}}.png" style="width:60px;height:60px ">
+                            </div>
+                            <div align="center">
+                                <h5 class="whitetext">
+                                    {{challenges.team1name}}
+                                </h5>
+                                <h6 style="color:darkturquoise">
+                                    {{challenges.team1rank}}
+                                </h6>
+
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div align="center">
+                                <h4 class="whitetext">
+                                    VS
+                                </h4>
+                                <h6 class="greytext">
+                                    Stadium
+                                </h6>
+                                <h6 class="whitetext">
+                                    {{challenges.stadium.description}}
+                                </h6>
+
+                            </div>
+
+
+                        </div>
+                        <div class="col">
+                            <div align="center">
+                                <img ion-img-cache src="img/Badges/{{challenges.team2logo}}.png" style="width:60px;height:60px ">
+                            </div>
+                            <div align="center">
+                                <h5 class="whitetext">
+                                    {{challenges.team2name}}
+                                </h5>
+                                <h6 style="color:darkturquoise">
+                                    Rank:{{challenges.team2rank}}
+                                </h6>
+
+                            </div>
+                        </div>
 
                     </div>
-
-
-                </div>
-                <div class="col">
-                    <div align="center">
-                        <img ion-img-cache src="img/Badges/{{challenges.team2logo}}.png" style="width:60px;height:60px ">
-                    </div>
-                    <div align="center">
-                        <h5 class="whitetext">
-                            {{challenges.team2name}}
-                        </h5>
-                        <h6 style="color:darkturquoise">
-                            Rank:{{challenges.team2rank}}
-                        </h6>
-                      
-                    </div>
-                </div>
-
-            </div>
-            <div class="row">
-                <div class="col">
-                    <button class="button button-block button-assertive button-small" style="color:white;border-radius:50px" ng-click="acceptgameinvitation(2,challenges)"> DECLINE
+                    <div class="row">
+                        <div class="col">
+                            <button class="button button-block button-assertive button-small" style="color:white;border-radius:50px" ng-click="acceptgameinvitation(2,challenges)"> DECLINE
 </button>
-                </div>
+                        </div>
 
-                <div class="col">
-                    <button class="button button-block button-balanced button-small" style="font-weight:bold;border-radius:50px;width:bold;color:white"
-                        ng-click="acceptgameinvitation(1,challenges)"> ACCEPT
+                        <div class="col">
+                            <button class="button button-block button-balanced button-small" style="font-weight:bold;border-radius:50px;width:bold;color:white"
+                                ng-click="acceptgameinvitation(1,challenges)"> ACCEPT
 </button>
-                </div>
-            </div>
+                        </div>
+                    </div>
 
-        </div>
+                </div>
 
             </ion-slide>
- </ion-slide-box>
+        </ion-slide-box>
 
 
-        <ion-slide-box  ng-if="profile.requestednumbers">
+        <ion-slide-box ng-if="profile.requestednumbers">
             <ion-slide ng-repeat="requests in profile.requestednumbers | orderBy: 'date':false">
-        <div class="card" style="background-color:rgb(62,83,100)">
-            <div align="center">
-                <h4 class="whitetext" align="middle"><b>PENDING REQUESTS</b></h4>
-            </div>
-            <div align="center">
-                <h5 class="whitetext" style="color:white"> {{Requests.date |date:'MMM d, y h:mm a'}}
-                </h5>
-            </div>
-            <div class="row ">
+                <div class="card" style="background-color:rgb(62,83,100)">
+                    <div align="center">
+                        <h4 class="whitetext" align="middle"><b>PENDING REQUESTS</b></h4>
+                    </div>
+                    <div align="center">
+                        <h5 class="whitetext" style="color:white"> {{Requests.date |date:'MMM d, y h:mm a'}}
+                        </h5>
+                    </div>
+                    <div class="row ">
 
-                <div class="col col-25">
-                    <img ion-img-cache src="{{requests.photo}}" style="width:70px;height:70px;border-radius:50px">
-                </div>
+                        <div class="col col-25">
+                            <img ion-img-cache src="{{requests.photo}}" style="width:70px;height:70px;border-radius:50px">
+                        </div>
 
-                <div class="col" style="padding-left:15px">
-                    <h5 class="whitetext" style="color:white"> Hey, My name is {{requests.firstname}} {{requests.lastname}}. I would to Request your mobile number
-                    </h5>
-                </div>
+                        <div class="col" style="padding-left:15px">
+                            <h5 class="whitetext" style="color:white"> Hey, My name is {{requests.firstname}} {{requests.lastname}}. I would to Request your mobile
+                                number
+                            </h5>
+                        </div>
 
-            </div>
+                    </div>
 
 
-            <div class="row row-top">
-                <div class="col">
+                    <div class="row row-top">
+                        <div class="col">
 
-                    <button class="button button-block button-full button-assertive button-small" style="border-radius:50px;color:white" ng-click="acceptrequest(requests,2)"> DECLINE
+                            <button class="button button-block button-full button-assertive button-small" style="border-radius:50px;color:white" ng-click="acceptrequest(requests,2)"> DECLINE
 </button>
-                </div>
-                <div class="col">
-                    <button class="button button-block button-full button-balanced button-small" style="border-radius:50px;color:white;font-weight:bold"
-                        ng-click="acceptrequest(requests,1)"> ACCEPT
+                        </div>
+                        <div class="col">
+                            <button class="button button-block button-full button-balanced button-small" style="border-radius:50px;color:white;font-weight:bold"
+                                ng-click="acceptrequest(requests,1)"> ACCEPT
 </button>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
 
-        </div>
-
-      </ion-slide>
- </ion-slide-box>
+            </ion-slide>
+        </ion-slide-box>
 
 
-  
+
         <div class="card" style="margin:-10px 10px 10px 10px;background-color:rgb(62,83,100)">
             <div align="center">
                 <h4 class="whitetext" align="middle"><b>PREVIOUS REQUESTS</b></h4>
