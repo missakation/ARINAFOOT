@@ -121,12 +121,11 @@
 
           <input type="datetime-local" ng-model="search.date" style="color:white">
       </label>-->
-
-		<div class="card" ng-repeat="stadiums in filteredStadiums | orderBy:choice.sort:reverse" style="background-color:rgb(62,83,100);margin:10px 5px 10px 5px">
+<div class="card" ng-repeat="stadiums in allfreestadiums | orderBy :'-points'" style="background-color:rgb(62,83,100);margin:3px 5px 10px 5px">
 			<!--  <a class="item item-thumbnail-left" ng-href="#/app/reservestadiumdetails/{{stadiums.stadiumkey}}"> -->
 
 			<div align="center" style="padding-bottom:0px">
-				<img src="{{stadiums.photo}}" style="width:100%;height:140px;" ui-sref="app.reservestadiumdetails({stadiumid: stadiums.stadiumkey})">
+				<img ion-img-cache src="{{stadiums.photo}}" style="width:100%;height:140px;" ui-sref="app.reservestadiumdetails({stadiumid: stadiums.stadiumkey})">
 			</div>
 
 			<div class="row ">
@@ -147,40 +146,48 @@
 
 				</div>
 
-				<div class="col" align="right" style="color:white;margin-top:-8px;font-size:15px">
+				<div class="col" align="right" style="padding:3px 0 0 0;color:white;margin-top:-8px;font-size:15px">
 					<b>
 	
 		{{stadiums.price}} LL
 		</b>
 				</div>
 			</div>
-			<div class="row ">
-				<div class="col" style="font-weight:100;color:#5f7485;font-size:12px;padding-bottom:0px;padding-top:0px" align="left"> 2.1km
+
+
+			<div class="row" style="margin-top:5px;font-size:12px;padding-left:0px;padding-bottom:12px">
+				<div align="right" style="font-weight:bold;color:#5f7485;width:20%">
+					<i class="ion-location" style="margin-right:10px;font-size:22px;color:#5f7485"></i>
+					</div>
+				<div align="left" style="font-weight:bold;color:#5f7485;width:20%">
+					{{stadiums.distance | number:2}}KM
 				</div>
 
-				<div class="col" style="font-weight:100;color:#5f7485;border-right:1px #5f7485 solid;border-left:1px #5f7485 solid;padding-top:0px;font-size:12px;padding-bottom:0px"
-				 align="center"> TYPE
+				<div align="center" style="color:#5f7485;text-transform:capitalize;width:33%;padding:0px;border-right:1px #5f7485 solid;border-left:1px #5f7485 solid">
+					TYPE
 				</div>
 
-				<div class="col" style="font-weight:100;color:#5f7485;font-size:12px;padding-bottom:0px;padding-top:0px" align="center">
-				STADIUM SIZE
+				<div align="center" style="color:#5f7485;width:27%;padding:0px">
+					STADIUM SIZE
 				</div>
 
 			</div>
 
 
-			<div class="row ">
-				<div class="col" align="left" style="font-weight:bold;color:white;padding-top:0px">
-					Anthelias
+
+			<div class="row" style="margin-top:-12px;padding-left:0px;padding-bottom:12px">
+
+				<div align="center" style="width:40%;font-weight:bold;color:white">
+					Anthelias 404
 				</div>
 
-				<div class="col" align="center" style="color:white;padding-top:0px;border-right:1px #5f7485 solid;border-left:1px #5f7485 solid">
+				<div align="center" style="text-transform:capitalize;width:33%;color:white;padding:0px;border-right:1px #5f7485 solid;border-left:1px #5f7485 solid">
 					<b>
 			{{stadiums.type}}  &#8226 {{stadiums.typefloor}}
 			</b>
 				</div>
 
-				<div class="col" align="center" style="color:white;padding-top:0px">
+				<div align="center" style="width:27%;color:white;padding:0px">
 					<b>
 			Max {{stadiums.players}} v {{stadiums.players}}
 			</b>
@@ -206,9 +213,9 @@
 
 	</ion-content>
 	<div class="bar bar-footer " style="background-color:#2d3e4b">
-
-		<button class="button button-small " style="width:100%; background-color:#28b041; color:white; border-radius:20px" ng-disabled="challengestatus"
-		 ng-click="sendchallenge()"> Send Challenge
+	<button class="button button-balanced button-bull" style="min-height:35px;line-height:35px;width:100%; color:white; border-radius:20px"
+			 ng-click="sendchallenge()"> Send Challenge
 </button>
+	
 	</div>
 </ion-view>

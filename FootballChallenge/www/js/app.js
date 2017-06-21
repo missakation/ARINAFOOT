@@ -58,7 +58,10 @@ angular.module('football', ['ionic', /*'ionicImgCache'*/ 'football.controllers',
 
     .config(function ($stateProvider, $urlRouterProvider, $ionicCloudProvider /*ionicImgCacheProvider*/, $ionicFilterBarConfigProvider) {
 
+        
         $ionicFilterBarConfigProvider.theme('royal');
+        
+        
         $ionicCloudProvider.init({
             "core": {
                 "app_id": "de07ef7c"
