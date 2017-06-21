@@ -1,39 +1,17 @@
 <style>
-    button {
-  display: inline-block;
-  margin: 0 10px 0 0;
-  padding: 15px 45px;
-  font-size: 48px;
-  font-family: "Bitter",serif;
-  line-height: 1.8;
-  appearance: none;
-  box-shadow: none;
-  border-radius: 0;
-}
+  
+    button:focus {
+        
+        outline: none
+    }
 
-button:focus {
-  outline: none
+    section.gradient button {
+       background-image: linear-gradient(bottom, #6496c8, #346392);
+     box-shadow: 0 5px 5px rgba(0,0,0,0.19), 0 5px 3px rgba(0,0,0,0.23);
+       
+    }
 
-}
-section.gradient button {
-  color: #fff;
-  text-shadow: -2px 2px #346392;
-  background-color: #ff9664;
-  background-image: linear-gradient(top, #6496c8, #346392);
-  box-shadow: inset 0 0 0 1px #27496d;
-  border: none;
-  border-radius: 15px;
-}
 
-section.gradient button:hover,
-section.gradient button.hover {
-  box-shadow: inset 0 0 0 1px #27496d,0 5px 15px #193047;
-}
-
-section.gradient button:active,
-section.gradient button.active {
-  box-shadow: inset 0 0 0 1px #27496d,inset 0 5px 30px #193047;
-}
     .slider-pager .slider-pager-page {
         color: white;
     }
@@ -257,32 +235,32 @@ section.gradient button.active {
 
 
         <div style="background-color:rgb(45,62,75)">
-             <section class="gradient">
-            <div class="row" style="padding:0 5px;background-color:rgb(45,62,75)">
-                <div class="col">
-                   
-                    <button  class="button button-block button-balanced button-small gradient " style="letter-spacing:1.1px;margin-top:0px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
-                        type="submit" ng-click="homepagedirect(2)">   Find Players
+            <section class="gradient">
+                <div class="row" style="padding:0 5px;background-color:rgb(45,62,75)">
+                    <div class="col">
+
+                        <button class="button button-block button-balanced button-small" style="letter-spacing:1.1px;margin-top:0px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
+                            type="submit" ng-click="homepagedirect(2)">   Find Players
 </button>
 
 
-                </div>
+                    </div>
 
-                <div class="col">
-                    <button class="button button-block button-balanced button-small" style="letter-spacing:1.1px;margin-top:0px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
-                        type="submit" ng-click="homepagedirect(1)"> Reserve Stadium
+                    <div class="col">
+                        <button class="button button-block button-balanced button-small" style="letter-spacing:1.1px;margin-top:0px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
+                            type="submit" ng-click="homepagedirect(1)"> Reserve Stadium
 </button>
 
-                </div>
+                    </div>
 
-                <div class="col">
+                    <div class="col">
 
-                    <button class="button button-block button-balanced button-small" style="letter-spacing:1.1px;margin-top:0px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
-                        type="submit" ng-click="homepagedirect(3)"> Challenge Teams
+                        <button class="button button-block button-balanced button-small" style="letter-spacing:1.1px;margin-top:0px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
+                            type="submit" ng-click="homepagedirect(3)"> Challenge Teams
 </button>
 
+                    </div>
                 </div>
-            </div>
         </div>
         </section>
         <div class="card" style="margin-top:-5px;background-color:rgb(62,83,100);margin-bottom:10px">
@@ -429,127 +407,127 @@ section.gradient button.active {
             <ion-slide ng-repeat="challenges in profile.challenges | orderBy: 'date':false">
                 <div class="card" style="margin-top:0px;background-color:rgb(62,83,100)">
 
-                        <h5 style="width:20%;margin:0px;padding:0px;border-radius:0 0px 50px;color:white;font-size:12px;font-weight:bold;background-color:#ef473a;color:white">
+                    <h5 style="width:20%;margin:0px;padding:0px;border-radius:0 0px 50px;color:white;font-size:12px;font-weight:bold;background-color:#ef473a;color:white">
                         {{challenges.ticker}}
-                        </h5>
-                   
-                  
+                    </h5>
+
+
 
                     <div align="center" style="margin-top:-5px;font-size:17px;width:100%;text-transform:capitalize;color:#2ab041">
                         <b> {{challenges.title}}</b>
                     </div>
 
-                
-                <div align="center" style="margin-top:5px;color:white;font-size:14px;font-weight:bold"> {{challenges.date |date:'EEEE, MMM d y @ HH:mm'}} - 5v5
-                </div>
+
+                    <div align="center" style="margin-top:5px;color:white;font-size:14px;font-weight:bold"> {{challenges.date |date:'EEEE, MMM d y @ HH:mm'}} - 5v5
+                    </div>
 
 
-                <div class="row" style="padding-bottom:0px">
-                    <div class="col" style="padding:0px">
-                        <div align="center">
-                            <img ion-img-cache src="img/Badges/{{challenges.team1logo}}.png" style="width:60px;height:60px ">
+                    <div class="row" style="padding-bottom:0px">
+                        <div class="col" style="padding:0px">
+                            <div align="center">
+                                <img ion-img-cache src="img/Badges/{{challenges.team1logo}}.png" style="width:60px;height:60px ">
+                            </div>
+                            <div align="center">
+                                <h5 class="whitetext" style="margin-bottom:5px;font-weight:bold;text-transform: capitalize">
+                                    {{challenges.team1name}}
+                                </h5>
+                                <h6 style="margin-top:5px;color:darkturquoise">
+                                    {{challenges.team1rankdescription}}
+                                </h6>
+
+                            </div>
                         </div>
-                        <div align="center">
-                            <h5 class="whitetext" style="margin-bottom:5px;font-weight:bold;text-transform: capitalize">
-                                {{challenges.team1name}}
+                        <div class="col" style="padding:0px">
+                            <div align="center">
+                                <hr style="height:0px; visibility:hidden;" />
+
+                                <h3 class="whitetext" style="font-weight:bold;color:white">
+                                    VS
+                                </h3>
+                                <hr style="height:20px; visibility:hidden;" />
+
+                                <h6 style="margin-top:-20px;color:#5f7485" align="center"> DIFFICULTY </h6>
+                                <h5 align="center" class="whitetext" style="margin-top:-5px;font-weight:bold">
+                                    HARD
+                                </h5>
+
+                            </div>
+                        </div>
+                        <div class="col" style="padding:0px">
+                            <div align="center">
+                                <img ion-img-cache src="img/Badges/{{challenges.team2logo}}.png" style="width:60px;height:60px ">
+                            </div>
+                            <div align="center">
+                                <h5 class="whitetext" style="margin-bottom:5px;font-weight:bold;text-transform: capitalize">
+                                    {{challenges.team2name}}
+                                </h5>
+                                <h6 style="margin-top:5px;color:darkturquoise">
+                                    {{challenges.team2rankdescription}}
+                                </h6>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <h5 class="whitetext" align="center" style="text-transform:capitalize;margin:5px 0 0 0;font-size:15px;font-weight:bold">
+                        Captain {{challenges.adminname}}
+                    </h5>
+                    <div class="row" style="padding:0px;background-color:rgb(62, 83, 100)">
+
+                        <div style="width:20%;padding:0px">
+
+
+                            <img ion-img-cache src="{{challenges.adminphoto}}" style="margin-left:5px;border-radius:50% ; height:65px ; width:65px" />
+
+                        </div>
+
+                        <div align="center" style="width:50%;padding:0px 5px">
+
+
+
+                            <h6 style="color:#5f7485"> CONTACT </h6>
+                            <h5 class="whitetext" style="font-weight:bold">
+                                (+961) {{challenges.admintelephon}}
                             </h5>
-                            <h6 style="margin-top:5px;color:darkturquoise">
-                                {{challenges.team1rankdescription}}
-                            </h6>
-
                         </div>
-                    </div>
-                    <div class="col" style="padding:0px">
-                        <div align="center">
-                            <hr style="height:0px; visibility:hidden;" />
+                        <div class="col" style="padding:0px">
 
-                            <h3 class="whitetext" style="font-weight:bold;color:white">
-                                VS
-                            </h3>
-                            <hr style="height:20px; visibility:hidden;" />
-
-                            <h6 style="margin-top:-20px;color:#5f7485" align="center"> DIFFICULTY </h6>
-                            <h5 align="center" class="whitetext" style="margin-top:-5px;font-weight:bold">
-                                HARD
+                            <h6 style="color:#5f7485;border-left:1px solid #5f7485" align="center"> LAST SEEN </h6>
+                            <h5 align="center" class="whitetext" style="padding-top:10px;margin-top:-10px;font-weight:bold;border-left:1px solid #5f7485">
+                                404 Hrs
                             </h5>
-
-                        </div>
-                    </div>
-                    <div class="col" style="padding:0px">
-                        <div align="center">
-                            <img ion-img-cache src="img/Badges/{{challenges.team2logo}}.png" style="width:60px;height:60px ">
-                        </div>
-                        <div align="center">
-                            <h5 class="whitetext" style="margin-bottom:5px;font-weight:bold;text-transform: capitalize">
-                                {{challenges.team2name}}
-                            </h5>
-                            <h6 style="margin-top:5px;color:darkturquoise">
-                                {{challenges.team2rankdescription}}
-                            </h6>
-
                         </div>
                     </div>
 
-                </div>
-
-
-                <h5 class="whitetext" align="center" style="text-transform:capitalize;margin:5px 0 0 0;font-size:15px;font-weight:bold">
-                    Captain {{challenges.adminname}}
-                </h5>
-                <div class="row" style="padding:0px;background-color:rgb(62, 83, 100)">
-
-                    <div style="width:20%;padding:0px">
-
-
-                        <img ion-img-cache src="{{challenges.adminphoto}}" style="margin-left:5px;border-radius:50% ; height:65px ; width:65px" />
-
-                    </div>
-
-                    <div align="center" style="width:50%;padding:0px 5px">
-
-
-
-                        <h6 style="color:#5f7485"> CONTACT </h6>
-                        <h5 class="whitetext" style="font-weight:bold">
-                            (+961) {{challenges.admintelephon}}
-                        </h5>
-                    </div>
-                    <div class="col" style="padding:0px">
-
-                        <h6 style="color:#5f7485;border-left:1px solid #5f7485" align="center"> LAST SEEN </h6>
-                        <h5 align="center" class="whitetext" style="padding-top:10px;margin-top:-10px;font-weight:bold;border-left:1px solid #5f7485">
-                            404 Hrs
-                        </h5>
-                    </div>
-                </div>
-
-                <div class="row" ng-show="!challenges.isadmin">
-                    <div class="col">
-                        <button class="button button-block button-assertive button-small" style="border-radius:50px;color:white" ng-click="declineinvitation(challenges)"> DECLINE
+                    <div class="row" ng-show="!challenges.isadmin">
+                        <div class="col">
+                            <button class="button button-block button-assertive button-small" style="border-radius:50px;color:white" ng-click="declineinvitation(challenges)"> DECLINE
 </button>
-                    </div>
+                        </div>
 
-                    <div class="col">
-                        <button class="button button-block button-balanced button-small" style="font-weight:bold;border-radius:50px;color:white"
-                            ng-click="acceptinvitation(challenges)"> PICK STADIUM
+                        <div class="col">
+                            <button class="button button-block button-balanced button-small" style="font-weight:bold;border-radius:50px;color:white"
+                                ng-click="acceptinvitation(challenges)"> PICK STADIUM
 </button>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row" ng-show="challenges.isadmin">
-                    <div class="col">
-                        <button class="button button-block button-balanced button-small" style="border-radius:50px;background-color:white;color: #2ab041"
-                            ng-click="cancelinvitation(challenges)"> CANCEL
+                    <div class="row" ng-show="challenges.isadmin">
+                        <div class="col">
+                            <button class="button button-block button-balanced button-small" style="border-radius:50px;background-color:white;color: #2ab041"
+                                ng-click="cancelinvitation(challenges)"> CANCEL
 </button>
-                    </div>
+                        </div>
 
 
-                    <div class="col">
-                        <button class="button button-block button-energized button-small" style="border-radius:50px;width:bold;color:white"> PENDING
+                        <div class="col">
+                            <button class="button button-block button-energized button-small" style="border-radius:50px;width:bold;color:white"> PENDING
 </button>
-                    </div>
+                        </div>
 
-                </div>
+                    </div>
 
                 </div>
 
@@ -925,7 +903,7 @@ section.gradient button.active {
             </div>
 
         </div>
-<br>
+        <br>
 
     </ion-content>
 
