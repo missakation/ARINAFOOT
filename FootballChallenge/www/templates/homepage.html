@@ -1,4 +1,39 @@
 <style>
+    button {
+  display: inline-block;
+  margin: 0 10px 0 0;
+  padding: 15px 45px;
+  font-size: 48px;
+  font-family: "Bitter",serif;
+  line-height: 1.8;
+  appearance: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+button:focus {
+  outline: none
+
+}
+section.gradient button {
+  color: #fff;
+  text-shadow: -2px 2px #346392;
+  background-color: #ff9664;
+  background-image: linear-gradient(top, #6496c8, #346392);
+  box-shadow: inset 0 0 0 1px #27496d;
+  border: none;
+  border-radius: 15px;
+}
+
+section.gradient button:hover,
+section.gradient button.hover {
+  box-shadow: inset 0 0 0 1px #27496d,0 5px 15px #193047;
+}
+
+section.gradient button:active,
+section.gradient button.active {
+  box-shadow: inset 0 0 0 1px #27496d,inset 0 5px 30px #193047;
+}
     .slider-pager .slider-pager-page {
         color: white;
     }
@@ -222,10 +257,11 @@
 
 
         <div style="background-color:rgb(45,62,75)">
+             <section class="gradient">
             <div class="row" style="padding:0 5px;background-color:rgb(45,62,75)">
                 <div class="col">
-                    
-                    <button  class="button button-block button-balanced button-small" style="letter-spacing:1.1px;margin-top:0px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
+                   
+                    <button  class="button button-block button-balanced button-small gradient " style="letter-spacing:1.1px;margin-top:0px;height:80px;font-size:18px;background-color:rgb(40,176,65)"
                         type="submit" ng-click="homepagedirect(2)">   Find Players
 </button>
 
@@ -248,6 +284,7 @@
                 </div>
             </div>
         </div>
+        </section>
         <div class="card" style="margin-top:-5px;background-color:rgb(62,83,100);margin-bottom:10px">
 
             <div align="center">
