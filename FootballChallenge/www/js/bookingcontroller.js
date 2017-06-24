@@ -21,9 +21,6 @@ angular.module('football.controllers')
 
         $scope.notloaded = true;
 
-
-
-        $timeout(function () {
             BookingStore.GetMyUpcomingBookings(function (leagues) {
 
                 // Simple GET request example:
@@ -59,7 +56,6 @@ angular.module('football.controllers')
 
 
             });
-        }, 2000);
 
         $scope.deletebooking = function () {
 
