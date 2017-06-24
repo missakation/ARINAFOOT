@@ -422,7 +422,13 @@ angular.module('football.controllers')
 
                     confirmPopup.then(function (res) {
                         if (res) {
-
+                            $ionicLoading.show({
+                                content: 'Loading',
+                                animation: 'fade-in',
+                                showBackdrop: true,
+                                maxWidth: 200,
+                                showDelay: 0
+                            });
                             ChallengeStore.GetNumChallengeByDate($state.params.date, $scope.myteam, function (result) {
                                 if (result + $state.params.teams.length < 4) {
                                     ChallengeStore.ChallengeTeams($state.params.date, $state.params.teams, $scope.selectedstadiums, $scope.myteam, $scope.profile)
@@ -443,15 +449,18 @@ angular.module('football.controllers')
                                                     $ionicHistory.nextViewOptions({
                                                         disableBack: true
                                                     });
+                                                    $ionicLoading.hide();
                                                     $state.go("app.homepage");
                                                 });
 
                                             })
                                         }, function (error) {
+                                            $ionicLoading.hide();
                                             alert(error.message);
                                         })
                                 }
                                 else {
+                                    $ionicLoading.hide();
                                     var alertPopup = $ionicPopup.alert({
                                         title: 'Error',
                                         template: 'You have ' + (3 - result) + ' challenges left for the selected date'
@@ -460,9 +469,8 @@ angular.module('football.controllers')
                                     });
                                 }
 
-
-
                             }, function (error) {
+                                $ionicLoading.hide();
                                 alert(error.message);
                             })
 
@@ -479,7 +487,7 @@ angular.module('football.controllers')
             }
             catch (error) {
                 alert(error.message);
-                        }
+            }
 
         }
         //Filter bar stuff

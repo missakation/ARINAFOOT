@@ -1439,33 +1439,33 @@ angular.module('football.controllers')
 
     })
 
-    .controller('InvitePlayersController', function ($scope, $http,LoginStore, ProfileStore1, $ionicPopup, $ionicHistory, HomeStore, $ionicLoading, $state, $stateParams, SearchStore, TeamStores, $timeout) {
+    .controller('InvitePlayersController', function ($scope, $http, LoginStore, ProfileStore1, $ionicPopup, $ionicHistory, HomeStore, $ionicLoading, $state, $stateParams, SearchStore, TeamStores, $timeout) {
 
         $scope.notloaded = true;
 
         $scope.myteam = $state.params.myteam;
 
 
-        $timeout(function () {
-            ProfileStore1.SearchPlayers($scope.myteam, function (leagues) {
-                $scope.allplayers = leagues;
+        ProfileStore1.SearchPlayers($scope.myteam, function (leagues) {
+            $scope.allplayers = leagues;
+            console.log($scope.allplayers);
 
-                var date = new Date();
-                HomeStore.GetProfileInfo(date, function (players) {
-                    $scope.profile = players;
-                    $scope.notloaded = false;
-                    $scope.$apply();
-
-                }, function (error) {
-                    $scope.notloaded = false;
-                    $scope.$apply();
-                })
+            var date = new Date();
+            HomeStore.GetProfileInfo(date, function (players) {
+                $scope.profile = players;
+                $scope.notloaded = false;
+                $scope.$apply();
 
             }, function (error) {
                 $scope.notloaded = false;
                 $scope.$apply();
             })
-        }, 1000)
+
+        }, function (error) {
+            $scope.notloaded = false;
+            $scope.$apply();
+        })
+
 
 
 
@@ -1473,12 +1473,13 @@ angular.module('football.controllers')
         $scope.InvitePlayerToTeam = function (player) {
             TeamStores.InvitePlayerToTeam($scope.myteam, player, $scope.profile).then(function () {
                 player.status = "Invitation Sent";
-                console.log(player);
                 if (player.devicetoken != undefined && player.devicetoken != "") {
-                    LoginStore.SendNotification("Would you like to join "+$scope.myteam.teamname, player.devicetoken+'?');
+                    LoginStore.SendNotification("Would you like to join " + $scope.myteam.teamname + '?', player.devicetoken);
 
                 }
-                $scope.$digest();
+                player.color = "white";
+                player.backcolor = "#28b041";
+                $scope.$apply();
 
             }, function (error) {
                 alert(error.message)
