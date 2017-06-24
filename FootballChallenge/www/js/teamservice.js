@@ -8,7 +8,6 @@
         return {
 
             GetMyTeams: function (callback) {
-                //console.log("TEST");
                 var user = firebase.auth().currentUser;
                 var id = user.uid;
 
@@ -502,10 +501,6 @@
                                     Items.rankdescription = Items.rank + 'th';
                                     break;
                             }
-
-                            //  var sfd = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-                            //  sfd.format(new Date(snapshot.child("timestamp").val()))
-                            //  alert(sfd);
 
                             TeamProfile = Items;
 

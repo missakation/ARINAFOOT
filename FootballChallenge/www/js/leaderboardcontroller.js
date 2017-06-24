@@ -1,8 +1,6 @@
 ﻿
 angular.module('football.controllers')
 
-
-
     .controller('LeaderboardController', function ($scope, $timeout, LeaderBoardStore, $state, $ionicPopup, $ionicLoading, $ionicPopover) {
 
         $scope.notloaded = true;

@@ -11,24 +11,7 @@ angular.module('football.controllers')
         $scope.filter.reminder_3hours = data.reminder_3hours;
       });
 
-      /*  $timeout(function () {
-            BookingStore.GetMyUpcomingBookings(function (leagues) {
 
-                $ionicLoading.hide();
-                $scope.test = leagues;
-                $scope.$digest();
-
-                if (leagues.length == 0) {
-                    var alertPopup = $ionicPopup.alert({
-                        title: 'Error',
-                        template: 'You still have no bookings'
-                    });
-                }
-
-
-            });
-        }, 2000);*/
-        
         $scope.saveNotificationData = function (value) {
           var userId = firebase.auth().currentUser.uid;
           firebase.database().ref('players/' + userId + '/settings').update({

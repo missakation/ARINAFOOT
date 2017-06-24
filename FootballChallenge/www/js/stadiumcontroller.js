@@ -295,7 +295,7 @@ angular.module('football.controllers')
 
         $scope.checkfree = function () {
 
-          //here
+            //here
             $ionicLoading.show({
                 content: 'Loading',
                 animation: 'fade-in',
@@ -401,12 +401,7 @@ angular.module('football.controllers')
                 method: 'GET',
                 url: 'https://us-central1-project-6346119287623064588.cloudfunctions.net/date'
             }).then(function successCallback(response) {
-
-
                 $scope.checkfree();
-
-                //alert(JSON.stringify(response.data));
-
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
@@ -418,13 +413,6 @@ angular.module('football.controllers')
 
             $scope.checkfree();
         });
-
-        try {
-            //  $scope.checkfree();
-        }
-        catch (error) {
-            alert(error.message);
-        }
 
         setInterval(function () {
             if ($state.current.name == 'app.reservestadium') {
@@ -470,43 +458,58 @@ angular.module('football.controllers')
 
                             confirmPopup.then(function (res) {
                                 if (res) {
+                                    ReservationFact.GetNumReservationsByDate(new Date(), function (result) {
+                                        if (result < 2) {
 
-                                    ReservationFact.RegisterFreeStadiums($scope.search, "", stadiums)
-                                        .then(function (value) {
-                                            $scope.search.date.setDate($scope.search.date.getDate() + 1);
-                                            $scope.search.date.setHours(21);
-                                            $scope.search.date.setMinutes(0);
-                                            $scope.search.date.setMilliseconds(0);
-                                            $scope.search.date.setSeconds(0);
-                                            //alert($scope.search.date);
-                                            $scope.search = {
-                                                date: new Date(),
-                                            };
+                                            ReservationFact.RegisterFreeStadiums($scope.search, "", stadiums)
+                                                .then(function (value) {
+                                                    $scope.search.date.setDate($scope.search.date.getDate() + 1);
+                                                    $scope.search.date.setHours(21);
+                                                    $scope.search.date.setMinutes(0);
+                                                    $scope.search.date.setMilliseconds(0);
+                                                    $scope.search.date.setSeconds(0);
+                                                    //alert($scope.search.date);
+                                                    $scope.search = {
+                                                        date: new Date(),
+                                                    };
 
-                                            var alertPopup = $ionicPopup.alert({
-                                                title: 'Success',
-                                                template: 'Successfully Reserved'
-                                            }).then(function (res) {
+                                                    var alertPopup = $ionicPopup.alert({
+                                                        title: 'Success',
+                                                        template: 'Successfully Reserved'
+                                                    }).then(function (res) {
 
-                                                $ionicHistory.nextViewOptions({
-                                                    disableBack: true
-                                                });
-                                                $state.go("app.bookings");
-                                            });
+                                                        $ionicHistory.nextViewOptions({
+                                                            disableBack: true
+                                                        });
+                                                        $state.go("app.bookings");
+                                                    });
 
 
-                                        }, function (error) {
+                                                }, function (error) {
+                                                    var alertPopup = $ionicPopup.alert({
+                                                        title: 'Error',
+                                                        template: 'Stadium Not Available. Please Try Again'
+                                                    });
+
+                                                    alertPopup.then(function (res) {
+                                                        // Custom functionality....
+                                                    });
+                                                    //$scope.allfreestadiums.
+
+                                                })
+                                        }
+
+                                        else {
                                             var alertPopup = $ionicPopup.alert({
                                                 title: 'Error',
-                                                template: 'Stadium Not Available. Please Try Again'
-                                            });
+                                                template: 'You Cannot Reserve'
+                                            }).then(function () {
 
-                                            alertPopup.then(function (res) {
-                                                // Custom functionality....
                                             });
-                                            //$scope.allfreestadiums.
+                                        }
 
-                                        })
+                                    }, function (error) {
+                                    })
 
                                 } else {
 
@@ -519,7 +522,6 @@ angular.module('football.controllers')
 
                     }
                     catch (error) {
-                        alert(error.message);
                     }
                 }
             });

@@ -189,6 +189,7 @@ angular.module('football.controllers')
 
         $scope.next = function () {
             try {
+                //IF THE SAME TEAM NAME EXIST ERROR
                 TeamStores.GetTeamByName($scope.adduser.teamname, function (exist) {
 
                     if (!exist) {
@@ -218,10 +219,13 @@ angular.module('football.controllers')
                             photo: ""
 
                         };
-
+                        console.log($scope.adduser.favstadium);
+                        console.log($scope.allstadiums);
                         for (var i = 0; i < $scope.allstadiums.length; i++) {
                             if ($scope.adduser.favstadium == $scope.allstadiums[i].name) {
-                                team.photo = $scope.allstadiums[i].photo
+                                team.favstadium = $scope.allstadiums[i].key;
+                                team.photo = $scope.allstadiums[i].photo;
+                                break;
                             }
                         }
 
@@ -784,6 +788,7 @@ angular.module('football.controllers')
                     //////
                     if (myprofile.favstadium !== "") {
                         ReservationFact.GetStadiumsByID(myprofile.favstadium, function (favstadium) {
+                            console.log(favstadium);
                             if (favstadium !== null || favstadium !== undefined) {
 
 
@@ -1606,17 +1611,11 @@ angular.module('football.controllers')
                     $scope.currentprofile = myprofile;
 
                     $scope.currentprofile.players.forEach(function (element) {
-                        console.log(element);
                         firebase.database().ref('/playersinfo/' + element.key).on('value', function (snapshot) {
                             if (snapshot.exists()) {
-                                console.log(snapshot.val());
-
                                 element.photo = snapshot.child("photoURL").val() == "" ? 'img/PlayerProfile.png' : snapshot.child("photoURL").val();
                             }
                         })
-
-
-
                     }, this);
 
                     var teamsizestring = "";
@@ -1649,9 +1648,9 @@ angular.module('football.controllers')
                         }
                     }
 
-                    //////
                     if (myprofile.favstadium !== "") {
                         ReservationFact.GetStadiumsByID(myprofile.favstadium, function (favstadium) {
+                            console.log(favstadium);
                             if (favstadium !== null || favstadium !== undefined) {
 
                                 $scope.stadiumdisplayed.name = favstadium.stadiumname;
@@ -1666,10 +1665,6 @@ angular.module('football.controllers')
                                 $scope.stadiumdisplayed.picture = "defaultteam";
                                 $scope.stadiumdisplayed.key = "";
                             }
-
-                            //$scope.currentprofile["teamdisplayed"] = $scope.stadiumdisplayed.name == "" ? "Select a Team" : $scope.teamdisplayed.name;
-
-
 
                         })
                     }
@@ -1692,21 +1687,12 @@ angular.module('football.controllers')
                         $state.go("app.homepage");
                     });
                 }
-                //////
-
-
-
             })
 
         }
         catch (error) {
             alert(error.message);
         }
-
-
-        //$scope.value = 150;
-
-
 
         $scope.goupdate = function () {
             $state.go('app.teamprofileedit',
@@ -1721,7 +1707,6 @@ angular.module('football.controllers')
             try {
 
                 TeamStores.GetTeamByKey($stateParams.teamid, function (myprofile) {
-                    console.log(myprofile);
                     $scope.currentprofile = myprofile;
                     $scope.$apply();
                     $scope.$broadcast('scroll.refreshComplete');

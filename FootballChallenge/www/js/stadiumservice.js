@@ -42,9 +42,9 @@ angular.module('football.controllers')
                                 var endminute = stadiumsnapshot.child("endminute").val();
                                 var players = stadiumsnapshot.child("numplayers").val();
 
-                                
 
-                                
+
+
                                 //console.log(players);
                                 //console.log(search.players);
                                 if (stadiumsnapshot.child('schedules/' + year + '/' + month + '/' + day).exists()) {
@@ -59,13 +59,9 @@ angular.module('football.controllers')
                                             var temphour = minisnapshot.child("hour").val();
                                             var tempminute = minisnapshot.child("minute").val();
 
-                                          //  if (temphour < starthour || temphour > (endhour - 2) || (Math.abs(temphour - hour) < 1.5)) {
+                                            //  if (temphour < starthour || temphour > (endhour - 2) || (Math.abs(temphour - hour) < 1.5)) {
 
-                                            if(stadiumsnapshot.key=="Middle")
-                                                alert((Math.abs( (temphour*60+tempminute) - (hour*60+minute))));
-
-                                            if ((Math.abs( (temphour*60+tempminute) - (hour*60+minute) < 90)))
-                                             {          
+                                            if ((Math.abs((temphour * 60 + tempminute) - (hour * 60 + minute) < 90))) {
                                                 available = false;
                                             }
 
@@ -318,15 +314,21 @@ angular.module('football.controllers')
 
                 updates['/accounting/' + id + '/' + mainkey] = accountinfo;
 
-                console.log(updates);
+
+                var reservedate = new Date();
+
+                var reserveyear = reservedate.getFullYear();
+                var reservemonth = reservedate.getMonth();
+                var reserveday = reservedate.getDate();
+
+                updates['/players/' + id + '/reserveyears/' + reserveyear + '/' + reservemonth + '/' + reserveday + '/' + mainkey] = true;
+
 
                 return firebase.database().ref().update(updates);
 
             },
             GetStadiumsByID: function (id, callback) {
-                //var q = $q.defer();
                 try {
-                    //firebase.database().ref('/stadiums/ministadiums').on('value',function (snapshot) {  
 
                     firebase.database().ref('/stadiumsinfo/' + id).once('value', function (snapshot) {
                         StadiumInfo = {};
@@ -358,8 +360,6 @@ angular.module('football.controllers')
 
                         };
                         StadiumInfo = Data;
-
-                        console.log(StadiumInfo);
                         callback(StadiumInfo);
 
                     });
@@ -524,6 +524,32 @@ angular.module('football.controllers')
                     alert(error.message);
                 }
 
-            }
+            },
+            GetNumReservationsByDate: function (date, callback) {
+
+
+                var year = date.getFullYear();
+                var month = date.getMonth();
+                var day = date.getDate();
+
+                var hour = date.getHours();
+                var minute = date.getMinutes();
+
+                var user = firebase.auth().currentUser;
+
+                var id = user.uid;
+
+                firebase.database().ref('/players/' + id + '/reserveyears/' + year + '/' + month + '/' + day).once('value').then(function (snapshot) {
+
+                    if (snapshot.exists) {
+                        number = snapshot.numChildren();
+                    }
+                    else {
+                        number = 0;
+                    }
+
+                    callback(number);
+                });
+            },
         }
     })

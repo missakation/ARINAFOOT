@@ -165,7 +165,7 @@ angular.module('football.controllers')
                                 }
                             })
 
-
+                            $ionicSlideBoxDelegate.update();
                             var alertPopup = $ionicPopup.alert({
                                 title: 'Success',
                                 template: 'Challenge Declined'
@@ -175,6 +175,7 @@ angular.module('football.controllers')
                                 return el.key !== challenge.key;
 
                             })
+                            $ionicSlideBoxDelegate.update();
                             $scope.$apply();
                         }, function (error) {
                             alert(error.message);
@@ -201,15 +202,12 @@ angular.module('football.controllers')
                     if (res) {
                         HomeStore.DeleteChallenge(challenge).then(function () {
 
-                            var alertPopup = $ionicPopup.alert({
-                                title: 'Success',
-                                template: 'Challenge Declined'
-                            })
                             $scope.profile.challenges = $scope.profile.challenges.filter(function (el) {
                                 return el.key !== challenge.key;
 
                             })
                             $scope.$apply();
+                            $ionicSlideBoxDelegate.update();
                         }, function (error) {
                             alert(error.message);
                             LoginStore.PostError(error);
@@ -233,6 +231,7 @@ angular.module('football.controllers')
                         firebase.database().ref('/teaminfo/' + invitation.key).once('value').then(function (snapshot) {
                             if (snapshot.exists()) {
                                 HomeStore.AcceptTeamInvitation(invitation, $scope.profile).then(function () {
+                                    $ionicSlideBoxDelegate.update();
                                     var alertPopup = $ionicPopup.alert({
                                         title: 'New Team',
                                         template: 'You now belong to team ' + invitation.teamname
@@ -311,6 +310,7 @@ angular.module('football.controllers')
                                 return el.key !== request.key;
 
                             });
+                            $ionicSlideBoxDelegate.update();
                         });
                         break;
                     case 2:
@@ -320,6 +320,7 @@ angular.module('football.controllers')
                                 return el.key !== request.key;
 
                             });
+                            $ionicSlideBoxDelegate.update();
 
                         }, function (error) {
                             alert(error.message);
@@ -350,6 +351,7 @@ angular.module('football.controllers')
                             $scope.profile.gameinvitations = $scope.profile.gameinvitations.filter(function (el) {
                                 return el.key !== gameinvitation.key;
                             });
+                            $ionicSlideBoxDelegate.update();
                             $scope.$apply();
                         }, function (error) {
                             alert(error.message);
@@ -363,6 +365,7 @@ angular.module('football.controllers')
                             $scope.profile.gameinvitations = $scope.profile.gameinvitations.filter(function (el) {
                                 return el.key !== gameinvitation.key;
                             });
+                            $ionicSlideBoxDelegate.update();
                             $scope.$apply();
                         }, function (error) {
                             alert(error.message);
