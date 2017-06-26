@@ -26,16 +26,7 @@ angular.module('football.controllers')
                 $scope.notloaded = false;
                 $scope.rankedteams = leagues;
 
-                
-               /* LeaderBoardStore.UpdateRatings($scope.rankedteams).then(function(result)
-                {
-
-                },function(error)
-                {
-                    alert(error.message);
-                })*/
-                
-
+            
                 $scope.$broadcast('scroll.infiniteScrollComplete');
 
                 if ($scope.rankedteams.length < limit) {

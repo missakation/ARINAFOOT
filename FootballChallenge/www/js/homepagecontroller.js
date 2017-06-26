@@ -35,8 +35,6 @@ angular.module('football.controllers')
             // handle event
             //works
 
-            // LoginStore.SendNotification("ELECTRIC SCREWDRIVER",[]);
-
             $timeout(function () {
 
                 try {
@@ -161,7 +159,11 @@ angular.module('football.controllers')
                             firebase.database().ref('/playersinfo/' + challenge.team2adminid).on('value', function (snapshot) {
                                 if (snapshot.exists()) {
                                     var devicetoken = snapshot.val().devicetoken;
-                                    LoginStore.SendNotification(challenge.team1name + ' declined your challenge', devicetoken);
+
+                                    if (snapshot.val().settings.notification) {
+                                        LoginStore.SendNotification(challenge.team1name + ' declined your challenge', devicetoken);
+                                    }
+
                                 }
                             })
 
@@ -293,12 +295,6 @@ angular.module('football.controllers')
 
 
         }
-
-        /*$scope.$on('cloud:push:notification', function (event, data) {
-            var msg = data.message;
-            //alert(msg.title + ': ' + msg.text);
-        });*/
-
 
         $scope.acceptrequest = function (request, x) {
             try {
@@ -710,11 +706,11 @@ angular.module('football.controllers')
                                             });
 
                                             firebase.database().ref('/playersinfo/' + $scope.challenge.team2adminid).on('value', function (snapshot) {
-                                                console.log(snapshot.val());
                                                 if (snapshot.exists()) {
-                                                    var devicetoken = snapshot.val().devicetoken;
-
-                                                    LoginStore.SendNotification("It's game time! " + $scope.challenge.team1name + ' accepted your challenge', devicetoken);
+                                                    if (snapshot.val().settings.notification) {
+                                                        var devicetoken = snapshot.val().devicetoken;
+                                                        LoginStore.SendNotification("It's game time! " + $scope.challenge.team1name + ' accepted your challenge', devicetoken);
+                                                    }
                                                 }
                                             })
                                             $state.go("app.gamedetails",

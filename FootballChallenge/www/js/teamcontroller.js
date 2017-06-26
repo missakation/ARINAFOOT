@@ -1474,7 +1474,9 @@ angular.module('football.controllers')
             TeamStores.InvitePlayerToTeam($scope.myteam, player, $scope.profile).then(function () {
                 player.status = "Invitation Sent";
                 if (player.devicetoken != undefined && player.devicetoken != "") {
-                    LoginStore.SendNotification("Would you like to join " + $scope.myteam.teamname + '?', player.devicetoken);
+                    if (player.settings.notification) {
+                        LoginStore.SendNotification("Would you like to join " + $scope.myteam.teamname + '?', player.devicetoken);
+                    }
 
                 }
                 player.color = "white";
