@@ -7,8 +7,14 @@
     p.whitetext {
         color: white;
     }
-
-    
+ .slider {
+	 margin-bottom:-5px;
+ }
+    .slider-pager .slider-pager-page
+	{
+		margin-top: 15px;
+		
+	}
        /** from date time picker style css files **/
 	
 	.picker-view::-webkit-scrollbar,
@@ -240,4 +246,14 @@
 	    .bar .bar-royal
     {
         background-color: white !important;
+    }
+	.card {
+		margin:10px;
+		background-color:rgb(62,83,100);
+	}
+	 .spinner svg {
+        width: 10% !important;
+        height: 100px !important;
+        stroke: #2ab041;
+        fill: #2ab041;
     }
