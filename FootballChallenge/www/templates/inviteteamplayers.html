@@ -1,4 +1,8 @@
 <style>
+    .bar .button.button-icon, .bar button.button-icon {
+			color:white;
+		}
+
 	.h3.whitetext,
 	h2.whitetext,
 	h1.whitetext,
@@ -32,6 +36,9 @@
 	}
 </style>
 <ion-view view-title="Invite Members">
+    <ion-nav-buttons side="secondary">
+        <button class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()"></button>
+    </ion-nav-buttons>
 
 	<ion-nav-buttons side="left">
 		<button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
@@ -55,7 +62,7 @@
 		</div>
 
 
-		<div class="card" style="background-color:rgb(62,83,100)" ng-repeat="item in allplayers">
+		<div class="card" style="background-color:rgb(62,83,100)" ng-repeat="item in filteredPlayers">
 			<!--  <a class="item item-thumbnail-left" ng-href="#/app/reservestadiumdetails/{{stadiums.stadiumkey}}"> -->
 
 			<div class="row" style="padding:10px 0 0 0">
