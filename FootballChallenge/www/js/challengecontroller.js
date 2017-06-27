@@ -435,9 +435,11 @@ angular.module('football.controllers')
                                         .then(function (value) {
                                             $state.params.teams.forEach(function (element) {
                                                 firebase.database().ref('/players/' + element.teamadmin).once('value').then(function (snapshot) {
-                                                    $ionicLoading.hide();
+
                                                     if (snapshot.val().devicetoken) {
-                                                        LoginStore.SendNotification($scope.myteam.teamname + ' challenges you to play a game at ' + $state.params.date + ' vs your team ' + element.teamname, snapshot.val().devicetoken);
+                                                        if (snapshot.val().settings.notification) {
+                                                            LoginStore.SendNotification($scope.myteam.teamname + ' challenges you to play a game at ' + $state.params.date + ' vs your team ' + element.teamname, snapshot.val().devicetoken);
+                                                        }
                                                     } else {
                                                     }
                                                 })

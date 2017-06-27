@@ -379,6 +379,7 @@ angular.module('football.controllers', [])
                                         "color": color,
                                         "backcolor": backcolor,
                                         "identity": childSnapshot.child("identity").val(),
+                                        "settings":childSnapshot.child("settings").val()
 
 
                                     };
@@ -1563,8 +1564,12 @@ angular.module('football.controllers', [])
 
                                 skillevel: "newbie",
                                 isbanned: false,
-                                isMobileVerified: false
-
+                                isMobileVerified: false,
+                                settings:
+                                {
+                                    notification: true,
+                                    reminder_3hours: true,
+                                }
                             }
                         //alert(newPostKey);
                         // Write the new post's data simultaneously in the posts list and the user's post list.
@@ -1669,8 +1674,12 @@ angular.module('football.controllers', [])
                                 teamdisplayedkey: "none",
                                 skillevel: "newbie",
                                 isbanned: false,
-                                isMobileVerified: false
-
+                                isMobileVerified: false,
+                                settings:
+                                {
+                                    notification: true,
+                                    reminder_3hours: true,
+                                }
 
                             }
                         //alert(newPostKey);
@@ -2512,17 +2521,6 @@ angular.module('football.controllers', [])
 
 
     })
-
-
-    .controller('SubmitSearch', function ($scope, $ionicModal, $timeout, $state) {
-        alert("Yo"); $scope.submit = function () {
-
-
-            $state.go('availablestadiums');
-        };
-    })
-
-
 
 
     ;
