@@ -19,10 +19,16 @@
 
     .toggle .track {
         background-color: #C00000;
+        border-color: #c00000;
     }
 
     .toggle .handle {
         background-color: white;
+    }
+
+    .toggle input:checked+.track {
+        border-color: #28b041;
+        background-color: #28b041;
     }
 </style>
 
@@ -44,22 +50,91 @@
 
         <ion-list>
 
-            <ion-toggle ng-model="filter.notification" class="whitecheck" ng-change="saveNotificationData(filter.notification)"> Allow Notification</ion-toggle>
-            <ion-toggle ng-model="filter.reminder_3hours" class="whitecheck" ng-change="saveReminderData(filter.reminder_3hours)">Reminder 3 hours before game</ion-toggle>
-            <ion-toggle ng-model="filter.smsVerified" class="whitecheck">Phone Number Verified</ion-toggle>
-            <ion-toggle ng-model="filter.email" class="whitecheck">Email Verified</ion-toggle>
-            <ion-toggle ng-model="filter.facebookVerified" class="whitecheck">Facebook Verified</ion-toggle>
-          
+            <div class="row row-center">
+                <div class="col col-75" style="margin-left:10px;color:White;font-size:16px">
+                    Allow Notification
+                </div>
+                <div class="col col-25">
+                    <label class="toggle">
+							<input type="checkbox" ng-model="filter.notification"  ng-change="saveNotificationData(filter.notification)"> 
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+                </div>
+            </div>
+
+        
+                <div class="row row-center">
+                    <div class="col col-75" style="margin-left:10px;color:White;font-size:16px">
+                        Reminder 3 hours before game
+                    </div>
+                    <div class="col col-25">
+                        <label class="toggle">
+							<input type="checkbox" ng-model="filter.reminder_3hours" ng-change="saveReminderData(filter.reminder_3hours)"> 
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+                    </div>
+                </div>
+
+                <div class="row row-center">
+                    <div class="col col-75" style="margin-left:10px;color:White;font-size:16px">
+                        Phone Number Verified
+                    </div>
+                    <div class="col col-25">
+                        <label class="toggle">
+							<input type="checkbox" ng-model="filter.notification"> 
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+                    </div>
+                </div>
+
+                <div class="row row-center">
+                    <div class="col col-75" style="margin-left:10px;color:White;font-size:16px">
+                        Email Verified
+                    </div>
+                    <div class="col col-25">
+                        <label class="toggle">
+							<input type="checkbox" ng-model="filter.smsVerified"> 
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+                    </div>
+                </div>
 
 
-            <label class="item item-input" style="background-color:rgb(46,62,75)">
+                <div class="row row-center">
+                    <div class="col col-75" style="margin-left:10px;color:White;font-size:16px">
+                        Facebook Verified
+                    </div>
+                    <div class="col col-25">
+                        <label class="toggle">
+							<input type="checkbox"  ng-model="filter.facebookVerified"> 
+							<div class="track">
+								<div class="handle"></div>
+							</div>
+						</label>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <label class="item item-input" style="background-color:rgb(46,62,75)">
         <span class="input-label" style="width:80%;color:white">Telephone</span> 
         <input type="tel">
         </label>
-            <button class="button button-balanced button-full" ng-click="gosmsverifypage()">
+                <button class="button button-balanced button-full" ng-click="gosmsverifypage()">
              Verify Mobile
         </button>
-        </ion-list>
+            </ion-list>
 
     </ion-content>
 </ion-view>
