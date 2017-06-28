@@ -310,6 +310,7 @@ angular.module('football.controllers')
                 $scope.globalstadiums = leagues;
 
 
+
                 if (leagues.length == 0) {
                     var alertPopup = $ionicPopup.alert({
                         title: 'No results',

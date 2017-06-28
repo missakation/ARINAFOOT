@@ -446,7 +446,7 @@
 </style>
 
 
-<ion-view view-title="Reserve a Stadium">
+<ion-view view-title="Reserve a Stadium" cache-view="false">
 	<ion-nav-buttons side="secondary">
 		<button class="button button-icon icon ion-ios-search-strong"  placeholder="Players, teams, stadiums" ng-click="showFilterBar()"></button>
 	</ion-nav-buttons>
@@ -614,7 +614,7 @@
 			</h5>
 		</div>
 
-		<div class="card" ng-repeat="stadiums in allfreestadiums | orderBy :'-points'" style="background-color:rgb(62,83,100);margin:3px 5px 10px 5px">
+		<div class="card" ng-repeat="stadiums in filteredStadiums | orderBy :'-points'" style="background-color:rgb(62,83,100);margin:3px 5px 10px 5px">
 			<!--  <a class="item item-thumbnail-left" ng-href="#/app/reservestadiumdetails/{{stadiums.stadiumkey}}"> -->
 
 			<div align="center" style="padding-bottom:0px">

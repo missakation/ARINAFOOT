@@ -1,7 +1,7 @@
 ﻿
 angular.module('football.controllers')
 
-    .controller('SearchController', function ($scope, SearchStore, ReservationFact, LoginStore, $ionicPopup, $ionicPopover, $timeout, $ionicLoading, pickerView, SMSService) {
+    .controller('SearchController', function ($scope, SearchStore, ReservationFact, LoginStore, $ionicPopup, $ionicPopover, $timeout, $ionicLoading, pickerView, SMSService, $ionicFilterBar) {
         /** picker view stuff **/
         function getDateFromDayName(selectedDay) {
             var selectedDate = new Date();
@@ -319,6 +319,7 @@ angular.module('football.controllers')
 
 
                 console.log($scope.allfreeplayers);
+                $scope.filteredPlayers = $scope.allfreeplayers;
                 $ionicLoading.hide();
 
 
@@ -390,7 +391,55 @@ angular.module('football.controllers')
 
         }
 
+        //Filter bar stuff
+        var filterBarInstance;
 
+        //function getItems () {
+        //    var items = [];
+        //    for (var x = 1; x < 2000; x++) {
+        //        items.push({text: 'This is item number ' + x + ' which is an ' + (x % 2 === 0 ? 'EVEN' : 'ODD') + ' number.'});
+        //    }
+        //    $scope.items = items;
+        //}
+
+        //getItems();
+
+
+        $scope.filteredPlayers = $scope.allfreeplayersv;
+        //$scope.$digest();
+        $scope.showFilterBar = function () {
+            filterBarInstance = $ionicFilterBar.show({
+                items: $scope.allfreeplayers,
+                update: function (filteredItems, filterText) {
+                    if (filterText != "" && filterText != null) {
+                        console.log("filterText is: " + filterText)
+                        $scope.filteredPlayers = filteredItems;
+                    }
+                    else {
+                        console.log("filterText non empty is: " + filterText)
+                        $scope.filteredPlayers = $scope.allfreeplayers;
+                    }
+                }//,
+                //filterProperties: ['displayname', 'firstname', 'lastname']
+            });
+        };
+
+
+
+
+        $scope.refreshItems = function () {
+            if (filterBarInstance) {
+                filterBarInstance();
+                filterBarInstance = null;
+            }
+
+            $timeout(function () {
+                getItems();
+                $scope.$broadcast('scroll.refreshComplete');
+            }, 1000);
+        };
+
+        //------------filter bar stuff ----/
     })
 var weekday = new Array(7);
 weekday[0] = "Su,";

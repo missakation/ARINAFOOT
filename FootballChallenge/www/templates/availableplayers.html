@@ -399,9 +399,21 @@
 	.popup-title {
 		color: white;
 	}
+.picker-view .picker-content {
+		-moz-column-count: 2;
+		-webkit-column-count: 2;
+		column-count: 2;
+		position: relative;
+		background-color: rgb(42, 62, 82);
+		height: 60%;
+		top: 15px;
+	}
 </style>
 
-<ion-view view-title="Player Finder">
+<ion-view view-title="Player Finder" cache-view="false">
+    <ion-nav-buttons side="secondary">
+        <button class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()"></button>
+    </ion-nav-buttons>
 	<ion-nav-buttons side="right">
 		<button class="button button-icon ion-android-options" align="right" style="color:white" ng-click="popover.show($event)"></button>
 
@@ -508,7 +520,7 @@
 			<!--</label>-->
 		</div>
 
-		<div class="card" style="background-color:rgb(62,83,100)" ng-repeat="item in allfreeplayers">
+		<div class="card" style="background-color:rgb(62,83,100)" ng-repeat="item in filteredPlayers">
 			<!--  <a class="item item-thumbnail-left" ng-href="#/app/reservestadiumdetails/{{stadiums.stadiumkey}}"> -->
 
 			<div class="row" style="margin-top:5px;padding:6px 0 0 0">
