@@ -503,7 +503,7 @@ angular.module('football.controllers')
                                         else {
                                             var alertPopup = $ionicPopup.alert({
                                                 title: 'Error',
-                                                template: 'You Cannot Reserve'
+                                                template: 'You Cannot Reserve More Than 2 Times a day !'
                                             }).then(function () {
 
                                             });
