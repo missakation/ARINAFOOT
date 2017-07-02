@@ -435,7 +435,8 @@ angular.module('football.controllers')
                                     ChallengeStore.ChallengeTeams($state.params.date, $state.params.teams, $scope.selectedstadiums, $scope.myteam, $scope.profile)
                                         .then(function (value) {
                                             $state.params.teams.forEach(function (element) {
-                                                firebase.database().ref('/players/' + element.teamadmin).once('value').then(function (snapshot) {
+
+                                                firebase.database().ref('/playersinfo/' + element.teamadmin).on('value', function (snapshot) {
 
                                                     if (snapshot.val().devicetoken) {
                                                         if (snapshot.val().settings.notification) {
@@ -445,18 +446,17 @@ angular.module('football.controllers')
                                                     }
                                                 })
 
-                                                var alertPopup = $ionicPopup.alert({
-                                                    title: 'Success',
-                                                    template: 'Successfully Challenged'
-                                                }).then(function () {
-                                                    $ionicHistory.nextViewOptions({
-                                                        disableBack: true
-                                                    });
-                                                    $ionicLoading.hide();
-                                                    $state.go("app.homepage");
-                                                });
-
                                             })
+                                            $ionicLoading.hide();
+                                            var alertPopup = $ionicPopup.alert({
+                                                title: 'Success',
+                                                template: 'Successfully Challenged'
+                                            }).then(function () {
+                                                $ionicHistory.nextViewOptions({
+                                                    disableBack: true
+                                                });
+                                                $state.go("app.homepage");
+                                            });
                                         }, function (error) {
                                             $ionicLoading.hide();
                                             alert(error.message);
