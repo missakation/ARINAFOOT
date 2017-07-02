@@ -518,7 +518,7 @@
                 try {
 
 
-                    firebase.database().ref('/teaminfo/' + key).once('value').then(function (snapshot) {
+                    firebase.database().ref('/teaminfo/' + key).on('value',function (snapshot) {
                         TeamProfileInfo = {};
 
                         if (snapshot.exists()) {

@@ -151,8 +151,8 @@ angular.module('football.controllers')
 
                 var date = new Date();
                 ChallengeStore.GetAllTeamsNotMe($scope.myteam, $scope.search, function (leagues) {
-                    console.log("TEAMS");
-                    console.log(leagues);
+                    //console.log("TEAMS");
+                    //console.log(leagues);
                     $ionicLoading.hide();
                     $scope.allteamsnotme = leagues;
                     $scope.filteredTeams = $scope.allteamsnotme;
@@ -185,6 +185,7 @@ angular.module('football.controllers')
                 alert(error.message);
             }
         }
+
 
         try {
             //works

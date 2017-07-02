@@ -27,7 +27,7 @@ angular.module('football.controllers')
 
                     //firebase.database().ref('/stadiums/ministadiums').on('value',function (snapshot) {  
 
-                    firebase.database().ref('/stadiums').once('value', function (snapshot) {
+                    firebase.database().ref('/stadiums').on('value', function (snapshot) {
 
                         snapshot.forEach(function (mainstadiumSnapshot) {
 
@@ -112,6 +112,7 @@ angular.module('football.controllers')
                                         "longitude": mainstadiumSnapshot.child("cordovalongitude").val(),
                                         "iscombined": stadiumsnapshot.child("iscombined").val(),
                                         "combined": stadiumsnapshot.child("combined").val(),
+                                        "city":mainstadiumSnapshot.child("city").val()
                                         //"freedates":
                                         //{
                                         //    date : startdate
@@ -330,7 +331,7 @@ angular.module('football.controllers')
             GetStadiumsByID: function (id, callback) {
                 try {
 
-                    firebase.database().ref('/stadiumsinfo/' + id).once('value', function (snapshot) {
+                    firebase.database().ref('/stadiumsinfo/' + id).on('value', function (snapshot) {
                         StadiumInfo = {};
 
                         var Data = {

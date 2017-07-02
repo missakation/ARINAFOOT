@@ -842,8 +842,8 @@ angular.module('football.controllers', [])
 
                         callback(myprofile);
                     }, function (error) {
-                        alert("test");
-                        alert(error.message);
+                      //  alert("test");
+                      //  alert(error.message);
                     });
                 } catch (error) {
 
@@ -855,7 +855,7 @@ angular.module('football.controllers', [])
                 TempItems = [];
                 try {
 
-                    firebase.database().ref('/playersinfo/' + key).once('value', function (snapshot) {
+                    firebase.database().ref('/playersinfo/' + key).on('value', function (snapshot) {
                         var age = new Date();
 
                         age.setDate(snapshot.child("ageday").val());
@@ -1391,7 +1391,7 @@ angular.module('football.controllers', [])
                 var user = firebase.auth().currentUser;
                 var id = user.uid;
 
-                firebase.database().ref('/teampoints').orderByChild("rating").limitToFirst(4).once('value').then(function (snapshot) {
+                firebase.database().ref('/teampoints').orderByChild("rating").limitToFirst(4).on('value',function (snapshot) {
                     RankedTeams = [];
                     snapshot.forEach(function (childSnapshot) {
 
@@ -1919,13 +1919,13 @@ angular.module('football.controllers', [])
 
             if (!usere) {
 
-                $ionicLoading.show({
+           /*     $ionicLoading.show({
                     content: 'Loading',
                     animation: 'fade-in',
                     showBackdrop: true,
                     maxWidth: 200,
                     showDelay: 0
-                });
+                });*/
 
                 firebase.auth().signInWithEmailAndPassword($scope.registerusername, $scope.registerpassword).then(function (user) {
 
@@ -1969,6 +1969,8 @@ angular.module('football.controllers', [])
                         // Handle Errors here.
                         var errorCode = error.code;
                         var errorMessage = error.message;
+                        alert("Sign in Error");
+                        alert(errorCode);
                         alert(errorMessage);
                         // ...
                     });
@@ -2159,17 +2161,6 @@ angular.module('football.controllers', [])
 
     })
 
-    .controller('FeedBackController', function ($scope, $state, $stateParams, $ionicPopup, $ionicLoading) {
-
-        $scope.submit = function () {
-            //$scope.list.push(this.text);
-            //$scope.text = '';
-            alert("Yo")
-            $scope.text = 'tee';
-
-        };
-    })
-
     .controller('LoginPassController', function ($scope, $state, $ionicPopup) {
 
 
@@ -2179,7 +2170,6 @@ angular.module('football.controllers', [])
             }
 
         $scope.submit = function () {
-            alert("test");
             try {
                 var auth = firebase.auth();
                 var emailAddress = $scope.email.address;
@@ -2318,7 +2308,7 @@ angular.module('football.controllers', [])
                     maxWidth: 200,
                     showDelay: 0
                 });
-                firebase.database().ref('/players/' + userId).once('value').then(function (snapshot) {
+                firebase.database().ref('/playersinfo/' + userId).once('value').then(function (snapshot) {
                     $ionicLoading.hide();
                     if (!snapshot.val().isMobileVerified) {
                         SMSService.verifyUserMobile($scope, $scope.checkMobileNumber, [e, true])

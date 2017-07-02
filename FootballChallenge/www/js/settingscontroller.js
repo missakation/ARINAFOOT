@@ -1,7 +1,7 @@
 
 angular.module('football.controllers')
 
-  .controller('SettingsController', function ($scope, $state, $timeout, BookingStore, $ionicPopup, $ionicLoading) {
+  .controller('SettingsController', function ($scope,SMSService, $state, $timeout, BookingStore, $ionicPopup, $ionicLoading) {
     $scope.filter = {};
     var notificationRef = firebase.database().ref('/playersinfo/' + firebase.auth().currentUser.uid + '/settings');
     notificationRef.on('value', function (snapshot) {
@@ -41,7 +41,6 @@ angular.module('football.controllers')
     }
 
     $scope.gosmsverifypage = function () {
-      $state.go('app.settingssms');
     }
 
 

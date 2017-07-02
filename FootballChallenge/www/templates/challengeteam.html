@@ -497,14 +497,14 @@
 
 			<div class="row" style="padding:5px 0 0 0">
 				<div class="col" style="padding:0px;border-right:1px solid #5f7485" align="center">
-					<img src="img/Badges/{{team.badge}}.png" style="width:80px;height:80px;">
+					<img src="img/Badges/{{team.badge}}.png" ui-sref="app.teamview({teamid: team.key})"style="width:80px;height:80px;">
 					<h5 style="margin-bottom:0px;color:white;font-weight:bolder;text-transform:capitalize"> {{team.teamname}} </h5>
 
 				</div>
 
 
 				<div class="col" style="padding:0px" align="center">
-					<img src="{{team.captainphoto}}" style="border-radius:50px;width:80px;height:80px;">
+					<img src="{{team.captainphoto}}" ui-sref="app.profileview({key: team.teamadmin})" style="border-radius:50px;width:80px;height:80px;">
 					<h6 style="margin-bottom:0px;color:#5f7485">TEAM CAPTAIN</h6>
 				</div>
 

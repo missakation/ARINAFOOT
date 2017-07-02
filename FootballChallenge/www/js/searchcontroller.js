@@ -224,6 +224,19 @@ angular.module('football.controllers')
                 distanceto: 250000,
             }
 
+        $scope.sliderskill = {
+            value: 3,
+            options: {
+                showSelectionBar: true,
+                floor: 0,
+                ceil: 3,
+                showSelectionBar: true,
+                hideLimitLabels: true,
+                stepsArray: ['Newbie', 'Not Bad', 'Solid', 'Pro']
+
+            }
+        };
+
         $scope.allfreeplayers = [];
 
         $scope.checkfree = function (search) {
@@ -236,27 +249,13 @@ angular.module('football.controllers')
                 showDelay: 0
             });
 
-
-
-            //})
             SearchStore.SearchAvailablePlayers($scope.search, function (leagues) {
 
                 var counter = 0;
                 var count = leagues.length;
                 $scope.allfreeplayers = leagues;
 
-                $scope.sliderskill = {
-                    value: 3,
-                    options: {
-                        showSelectionBar: true,
-                        floor: 0,
-                        ceil: 3,
-                        showSelectionBar: true,
-                        hideLimitLabels: true,
-                        stepsArray: ['Newbie', 'Not Bad', 'Solid', 'Pro']
 
-                    }
-                };
 
                 if ($scope.allfreeplayers.length > 0) {
 
@@ -285,7 +284,6 @@ angular.module('football.controllers')
                                             element.rankdescription = element.rank + 'th';
                                             break;
                                     }
-                                    $scope.$apply();
 
                                 }
 
@@ -295,7 +293,6 @@ angular.module('football.controllers')
                                     element.rating = "";
                                     element.teambadge = "defaultteam";
                                     element.teamexists = false;
-                                    $scope.$apply();
                                 }
 
 
@@ -308,15 +305,11 @@ angular.module('football.controllers')
                             element.rating = "";
                             element.teambadge = "defaultteam";
                             element.teamexists = false;
-                            $scope.$apply();
                         }
-
-
 
                     }, this);
 
                 }
-
 
                 console.log($scope.allfreeplayers);
                 $scope.filteredPlayers = $scope.allfreeplayers;
@@ -327,28 +320,9 @@ angular.module('football.controllers')
 
         }
 
-
-        $ionicLoading.show({
-            content: 'Loading',
-            animation: 'fade-in',
-            showBackdrop: true,
-            maxWidth: 200,
-            showDelay: 0
-        });
-
-        //})
-        try {
-            $timeout(function () {
-                $scope.checkfree();
-            }, 2000)
-
-        }
-        catch (error) {
-            alert(error.message);
-        }
+        $scope.checkfree();
 
         $scope.requestnumber = function (player) {
-
 
             if (!(player == null || player == undefined || player == []) && !($scope.myprofile == null || $scope.myprofile == undefined || $scope.myprofile == [])) {
 
@@ -404,8 +378,6 @@ angular.module('football.controllers')
 
         //getItems();
 
-
-        $scope.filteredPlayers = $scope.allfreeplayersv;
         //$scope.$digest();
         $scope.showFilterBar = function () {
             filterBarInstance = $ionicFilterBar.show({
@@ -423,8 +395,6 @@ angular.module('football.controllers')
                 //filterProperties: ['displayname', 'firstname', 'lastname']
             });
         };
-
-
 
 
         $scope.refreshItems = function () {
