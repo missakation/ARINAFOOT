@@ -171,6 +171,50 @@ angular.module('football.controllers')
                                 firebase.database().ref('/playersinfo/' + element.teamadmin).on('value', function (snapshot) {
                                     element.captainname = snapshot.val().firstname + " " + snapshot.val().lastname;
                                     element.captainphoto = snapshot.val().photoURL == "" ? 'img/PlayerProfile.png' : snapshot.val().photoURL;
+
+
+                                    if (snapshot.child("lastseen").exists()) {
+                                        element.lastseen =
+                                            {
+                                                year: 0,
+                                                month: 0,
+                                                day: 0,
+                                                hour: 0,
+                                                minute: 0
+                                            };
+                                        element.lastseen.year = snapshot.val().lastseen.loginyear;
+                                        element.lastseen.month = snapshot.val().lastseen.loginmonth;
+                                        element.lastseen.day = snapshot.val().lastseen.loginday;
+                                        element.lastseen.hour = snapshot.val().lastseen.loginhour;
+                                        element.lastseen.minute = snapshot.val().lastseen.loginminute;
+
+                                        element.lastseen.date = new Date();
+                                        element.lastseen.date.setMinutes(snapshot.val().lastseen.loginminute);
+                                        element.lastseen.date.setFullYear(snapshot.val().lastseen.loginyear);
+                                        element.lastseen.date.setMonth(snapshot.val().lastseen.loginmonth);
+                                        element.lastseen.date.setHours(snapshot.val().lastseen.loginhour);
+                                        element.lastseen.date.setDate(snapshot.val().lastseen.loginday);
+
+                                        var difference = (new Date() - element.lastseen.date) / 1000 / 60;
+
+
+                                        if (difference <= 60) {
+                                            element.lastseen.text = element.lastseen.minute + " mins. ago";
+                                        }
+                                        else
+                                            if (difference <= 24 * 60) {
+                                                element.lastseen.text = element.lastseen.hour + " hrs. ago";
+                                            }
+                                            else
+                                                if (difference >= 24 * 60 && difference <= 48 * 60) {
+                                                    element.lastseen.text = "yesterday";
+                                                }
+                                                else {
+                                                    element.lastseen.text = (difference / 24) + " days ago";
+                                                }
+
+                                    }
+
                                 })
                             }
 

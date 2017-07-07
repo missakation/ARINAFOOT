@@ -64,7 +64,7 @@ angular.module('football.controllers')
 
 
 
-                firebase.database().ref('/playersinfo').orderByChild(startend).startAt(hour).on('value',function (snapshot) {
+                firebase.database().ref('/playersinfo').orderByChild(startend).startAt(hour).on('value', function (snapshot) {
                     AvailablePlayers = [];
 
                     snapshot.forEach(function (childSnapshot) {
@@ -147,11 +147,54 @@ angular.module('football.controllers')
                                             "comments": childSnapshot.child("comments").val(),
                                             "photo": childSnapshot.child("photoURL").val() == "" ? "img/PlayerProfile.png" : childSnapshot.child("photoURL").val(),
 
-                                            "teamdisplayedkey":childSnapshot.child("teamdisplayedkey").val(),
-                                            "teambadge":""
+                                            "teamdisplayedkey": childSnapshot.child("teamdisplayedkey").val(),
+                                            "teambadge": ""
 
 
                                         };
+
+                                        Items.lastseen =
+                                            {
+                                                year: 0,
+                                                month: 0,
+                                                day: 0,
+                                                hour: 0,
+                                                minute: 0
+                                            };
+
+                                        if (childSnapshot.child("lastseen").exists()) {
+                                            Items.lastseen.year = childSnapshot.val().lastseen.loginyear;
+                                            Items.lastseen.month = childSnapshot.val().lastseen.loginmonth;
+                                            Items.lastseen.day = childSnapshot.val().lastseen.loginday;
+                                            Items.lastseen.hour = childSnapshot.val().lastseen.loginhour;
+                                            Items.lastseen.minute = childSnapshot.val().lastseen.loginminute;
+
+                                            Items.lastseen.date = new Date();
+                                            Items.lastseen.date.setMinutes(childSnapshot.val().lastseen.loginminute);
+                                            Items.lastseen.date.setFullYear(childSnapshot.val().lastseen.loginyear);
+                                            Items.lastseen.date.setMonth(childSnapshot.val().lastseen.loginmonth);
+                                            Items.lastseen.date.setHours(childSnapshot.val().lastseen.loginhour);
+                                            Items.lastseen.date.setDate(childSnapshot.val().lastseen.loginday);
+
+                                            var difference = (new Date() - Items.lastseen.date) / 1000 / 60;
+
+
+                                            if (difference <= 60) {
+                                                Items.lastseen.text = Items.lastseen.minute + " mins. ago";
+                                            }
+                                            else
+                                                if (difference <= 24 * 60) {
+                                                    Items.lastseen.text = Items.lastseen.hour + " hrs. ago";
+                                                }
+                                                else
+                                                    if (difference >= 24 * 60 && difference <= 48 * 60) {
+                                                        Items.lastseen.text = "yesterday";
+                                                    }
+                                                    else {
+                                                        Items.lastseen.text = (difference / 24) + " days ago";
+                                                    }
+
+                                        }
 
                                         AvailablePlayers.push(Items)
                                     }

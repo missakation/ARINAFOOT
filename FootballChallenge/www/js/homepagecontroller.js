@@ -37,11 +37,37 @@ angular.module('football.controllers')
 
             $timeout(function () {
 
+
+
                 try {
 
                     var user = firebase.auth().currentUser;
 
                     if (!(user === null || user == '' || user === undefined)) {
+
+                        var updates = {};
+                        var CurrentDate = new Date();
+
+                        var year = CurrentDate.getFullYear();
+                        var month = CurrentDate.getMonth();
+                        var day = CurrentDate.getDate();
+
+                        var hour = CurrentDate.getHours();
+                        var minute = CurrentDate.getMinutes();
+
+                        updates['/players/' + user.uid + '/lastseen/loginyear'] = year;
+                        updates['/players/' + user.uid + '/lastseen/loginmonth'] = month;
+                        updates['/players/' + user.uid + '/lastseen/loginday'] = day;
+                        updates['/players/' + user.uid + '/lastseen/loginhour'] = hour;
+                        updates['/players/' + user.uid + '/lastseen/loginminute'] = minute;
+
+                        updates['/playersinfo/' + user.uid + '/lastseen/loginyear'] = year;
+                        updates['/playersinfo/' + user.uid + '/lastseen/loginmonth'] = month;
+                        updates['/playersinfo/' + user.uid + '/lastseen/loginday'] = day;
+                        updates['/playersinfo/' + user.uid + '/lastseen/loginhour'] = hour;
+                        updates['/playersinfo/' + user.uid + '/lastseen/loginminute'] = minute;
+
+                        firebase.database().ref().update(updates);
 
                         $ionicPush.register().then(function (t) {
                             return $ionicPush.saveToken(t);
@@ -100,9 +126,6 @@ angular.module('football.controllers')
         $scope.showupcomingsinglematches = false;
 
         $scope.teaminvitationoperation = true;
-
-
-
 
 
         $scope.notloaded = true;
@@ -234,6 +257,16 @@ angular.module('football.controllers')
                             if (snapshot.exists()) {
                                 HomeStore.AcceptTeamInvitation(invitation, $scope.profile).then(function () {
                                     $ionicSlideBoxDelegate.update();
+
+                                    firebase.database().ref('/playersinfo/' + invitation.adminkey).on('value', function (shot) {
+                                        if (shot.exists()) {
+                                            if (shot.val().settings.notification) {
+                                                var devicetoken = shot.val().devicetoken;
+                                                LoginStore.SendNotification(shot.val().firstname + " " + shot.val().lastname + " has accepted to join " + snapshot.val().teamname, devicetoken);
+                                            }
+                                        }
+                                    })
+
                                     var alertPopup = $ionicPopup.alert({
                                         title: 'New Team',
                                         template: 'You now belong to team ' + invitation.teamname
@@ -254,7 +287,9 @@ angular.module('football.controllers')
                                     HomeStore.DeleteInvitation(invitation).then(function () {
                                         $scope.profile.teaminvitations = $scope.profile.teaminvitations.filter(function (el) {
                                             return el.key !== invitation.key;
+
                                         });
+
                                     }, function (error) {
                                         alert(error.message);
                                         LoginStore.PostError(error);
@@ -276,7 +311,14 @@ angular.module('football.controllers')
                                 return el.key !== invitation.key;
 
                             });
-
+                            firebase.database().ref('/playersinfo/' + invitation.adminkey).on('value', function (shot) {
+                                if (shot.exists()) {
+                                    if (shot.val().settings.notification) {
+                                        var devicetoken = shot.val().devicetoken;
+                                        LoginStore.SendNotification(shot.val().firstname + " " + shot.val().lastname + " has declined your invitation to join " + invitation.teamname, devicetoken);
+                                    }
+                                }
+                            })
                         }, function (error) {
                             alert(error.message);
                             LoginStore.PostError(error);
@@ -298,6 +340,7 @@ angular.module('football.controllers')
 
         $scope.acceptrequest = function (request, x) {
             try {
+                var user = firebase.auth().currentUser;
                 $scope.teaminvitationoperation = true;
                 switch (x) {
                     case 1:
@@ -305,9 +348,20 @@ angular.module('football.controllers')
                             $scope.profile.requestednumbers = $scope.profile.requestednumbers.filter(function (el) {
                                 return el.key !== request.key;
 
-                            });
+                            }); 
                             $ionicSlideBoxDelegate.update();
+
+                            firebase.database().ref('/playersinfo/' + user.uid).on('value', function (shot) {
+                                if (shot.exists()) {
+                                    if (shot.val().settings.notification) {
+                                        var devicetoken = shot.val().devicetoken;
+                                        LoginStore.SendNotification(shot.val().firstname + " " + shot.val().lastname + " accepted your phone number request.", devicetoken);
+                                    }
+                                }
+                            })
+
                         });
+
                         break;
                     case 2:
                         HomeStore.DeleteMobileRequest(request).then(function () {
@@ -317,6 +371,15 @@ angular.module('football.controllers')
 
                             });
                             $ionicSlideBoxDelegate.update();
+                            
+                            firebase.database().ref('/playersinfo/' + user.uid).on('value', function (shot) {
+                                if (shot.exists()) {
+                                    if (shot.val().settings.notification) {
+                                        var devicetoken = shot.val().devicetoken;
+                                        LoginStore.SendNotification(shot.val().firstname + " " + shot.val().lastname + " declined your phone number request", devicetoken);
+                                    }
+                                }
+                            })
 
                         }, function (error) {
                             alert(error.message);
@@ -451,6 +514,8 @@ angular.module('football.controllers')
 
                 HomeStore.GetProfileInfo(currentdate, function (myprofile) {
 
+                    console.log(myprofile);
+
                     var todaydate = new Date();
                     var oldchallenges = [];
                     var newchallenges = [];
@@ -504,7 +569,10 @@ angular.module('football.controllers')
                             }
 
 
-
+                            //Get the first 4 ranked teams
+                            HomeStore.GetFirstFour(function (leagues) {
+                                $scope.rankedteams = leagues;
+                            })
 
                         })
                     }
@@ -540,12 +608,6 @@ angular.module('football.controllers')
                         $scope.showteaminvite = $scope.profile.teaminvitations.length == 0 ? false : true;
                         $scope.showupcomingsinglematches = $scope.profile.upcomingmatches.length == 0 ? false : true;
 
-
-
-                        //Get the first 4 ranked teams
-                        HomeStore.GetFirstFour(function (leagues) {
-                            $scope.rankedteams = leagues;
-                        })
                         //JSON.stringify()
                         $ionicSlideBoxDelegate.update();
                         $scope.$apply();

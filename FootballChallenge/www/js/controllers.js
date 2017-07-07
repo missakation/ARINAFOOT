@@ -1339,8 +1339,8 @@ angular.module('football.controllers', [])
 
                     if (id !== null || id == '' || id === undefined) {
 
-                        updates['/players/' + id + '/myrequests/' + request.key] = 2;
-
+                        //updates['/players/' + id + '/myrequests/' + request.key] = 2;
+                        updates['/players/' + id + '/myrequests/' + request.key] = null;
                     }
 
                     return firebase.database().ref().update(updates);
@@ -1376,7 +1376,8 @@ angular.module('football.controllers', [])
 
                     if (id !== null || id == '' || id === undefined) {
 
-                        updates['/players/' + id + '/teaminvitations/' + invitation.key + '/requeststatus'] = 2;
+                        //updates['/players/' + id + '/teaminvitations/' + invitation.key + '/requeststatus'] = null; //cz ari
+                        updates['/players/' + id + '/teaminvitations/' + invitation.key] = null; //cz ari
 
                     }
 

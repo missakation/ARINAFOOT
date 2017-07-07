@@ -13,7 +13,7 @@ angular.module('football.controllers')
         $scope.rating.rate = 3;
         $scope.rating.max = 5;
 
-        
+
         $scope.myplayers = [];
 
         $scope.gameid = $state.params.gameid;
@@ -110,9 +110,51 @@ angular.module('football.controllers')
                     var oppositecaptain = $scope.first ? $scope.challenge.team2adminid : $scope.challenge.team1adminid;
                     firebase.database().ref('/playersinfo/' + oppositecaptain).on('value', function (snapshot) {
                         if (snapshot.exists()) {
+
                             $scope.challenge.adminname = snapshot.val().firstname + " " + snapshot.val().lastname;
                             $scope.challenge.adminphoto = snapshot.val().photoURL == "" ? 'img/PlayerProfile.png' : snapshot.val().photoURL;
-                            $scope.challenge.admintelephon = snapshot.val().telephone
+                            $scope.challenge.admintelephon = snapshot.val().telephone;
+
+                            $scope.challenge.lastseen = 
+                            {
+                                year:0,
+                                month:0,
+                                day:0,
+                                hour:0,
+                                minute:0
+                            };
+                            $scope.challenge.lastseen.year = snapshot.val().lastseen.loginyear;
+                            $scope.challenge.lastseen.month = snapshot.val().lastseen.loginmonth;
+                            $scope.challenge.lastseen.day = snapshot.val().lastseen.loginday;
+                            $scope.challenge.lastseen.hour = snapshot.val().lastseen.loginhour;
+                            $scope.challenge.lastseen.minute = snapshot.val().lastseen.loginminute;
+
+                            $scope.challenge.lastseen.date = new Date();
+                            $scope.challenge.lastseen.date.setMinutes(snapshot.val().lastseen.loginminute);
+                            $scope.challenge.lastseen.date.setFullYear(snapshot.val().lastseen.loginyear);
+                            $scope.challenge.lastseen.date.setMonth(snapshot.val().lastseen.loginmonth);
+                            $scope.challenge.lastseen.date.setHours(snapshot.val().lastseen.loginhour);
+                            $scope.challenge.lastseen.date.setDate(snapshot.val().lastseen.loginday);
+
+                            var difference = (new Date() - $scope.challenge.lastseen.date) / 1000 /60;
+
+
+                            if (difference <= 60) {
+                                $scope.challenge.lastseen.text = $scope.challenge.lastseen.minute + " mins. ago";
+                            }
+                            else
+                                if (difference <= 24 * 60) {
+                                    $scope.challenge.lastseen.text = $scope.challenge.lastseen.hour + " hrs. ago";
+                                }
+                                else
+                                    if (difference >= 24 * 60 && difference <= 48 * 60) {
+                                        $scope.challenge.lastseen.text = "yesterday";
+                                    }
+                                    else {
+                                        $scope.challenge.lastseen.text = (difference/24) + " days ago";
+                                    }
+
+
                         }
                     })
 
