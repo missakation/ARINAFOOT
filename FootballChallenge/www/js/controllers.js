@@ -188,7 +188,8 @@ angular.module('football.controllers', [])
                 var f = storage.child("playerimages/" + name);
                 var task = f.putString(data, 'base64');
 
-                task.on('state_changed', function (snapshot) {
+                task.on('state_changed', function (snapshot) 
+                {
 
                 }, function (error) {
                     console.error("Unable to save image.");
@@ -1874,7 +1875,10 @@ angular.module('football.controllers', [])
 
                                 LoginStore.AddUser(newuser, $scope.registerdata).then(function (success) {
                                     var user = firebase.auth().currentUser;
-                                    FirebaseStorageService.saveUserProfilePicture($scope.userImage, user.uid);
+
+                                    if($scope.userImage!="img/PlayerProfile.png")
+                                        FirebaseStorageService.saveUserProfilePicture($scope.userImage, user.uid);
+
                                     user.sendEmailVerification().then(function () {
 
                                         var alertPopup = $ionicPopup.alert({
