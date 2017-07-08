@@ -634,75 +634,76 @@
                         </div>
 
                     </div>
-                </ion-slide>
-            </ion-slide-box>
+        </div>
+        </ion-slide>
+        </ion-slide-box>
 
 
 
-            <div class="card" ng-show="profile.previousnumbers!=0">
-                <div align="center">
-                    <h4 class="whitetext" align="middle"><b>PREVIOUS REQUESTS</b></h4>
+        <div class="card">
+            <div align="center">
+                <h4 class="whitetext" align="middle"><b>PREVIOUS REQUESTS</b></h4>
+            </div>
+
+            <div class="row" ng-repeat="requests in profile.previousnumbers" style="border-bottom:1px solid #5f7485;padding:10px 0 0 5px">
+
+                <div style="padding:0px;width:22%">
+                    <img ion-img-cache src="{{requests.photo}}" style="width:60px;height:60px;border-radius:50px">
                 </div>
 
-                <div class="row" ng-repeat="requests in profile.previousnumbers" style="border-bottom:1px solid #5f7485;padding:10px 0 0 5px">
+                <div style="text-transform:capitalize;width:45%;margin-top:22px;">
+                    {{requests.firstname}} {{requests.lastname}}
+                </div>
 
-                    <div style="padding:0px;width:22%">
-                        <img ion-img-cache src="{{requests.photo}}" style="width:60px;height:60px;border-radius:50px">
-                    </div>
-
-                    <div style="text-transform:capitalize;width:45%;margin-top:22px;">
-                        {{requests.firstname}} {{requests.lastname}}
-                    </div>
-
-                    <div class="col" style="width:30%">
-                        <button class="button button-block button-full button-balanced button-small" style="border-radius:50px;color:white;font-weight:bold;text-transform:capitalize;background-color: {{requests.color}}">
+                <div class="col" style="width:30%">
+                    <button class="button button-block button-full button-balanced button-small" style="border-radius:50px;color:white;font-weight:bold;text-transform:capitalize;background-color: {{requests.color}}">
                          {{requests.text}}
                         </button>
-                    </div>
                 </div>
             </div>
+        </div>
 
 
 
 
-            <div class="card">
+        <div class="card">
 
-                <div align="center">
+            <div align="center">
 
-                    <h4 class="whitetext" align="middle"><b>INVITE YOUR FRIENDS</b></h4>
+                <h4 class="whitetext" align="middle"><b>INVITE YOUR FRIENDS</b></h4>
 
-                    <div class="row">
-                        <div class="col">
-                            <img ion-img-cache src="img/whats.png" style="height:60px ; width:60px" height="50" />
-                        </div>
-                        <div class="col">
-                            <img ion-img-cache src="img/fb.png" style="height:60px ; width:60px" height="50" ng-click="InviteFacebook()" />
-                        </div>
-                        <div class="col">
-                            <img ion-img-cache src="img/sms.png" style="height:60px ; width:60px" height="50" />
-                        </div>
-
+                <div class="row">
+                    <div class="col">
+                        <img ion-img-cache src="img/whats.png" style="height:60px ; width:60px" height="50" />
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <h5 class="whitetext">
-                                Whatsapp
-                            </h5>
-                        </div>
-                        <div class="col">
-                            <h5 class="whitetext">
-                                Facebook
-                            </h5>
-                        </div>
-                        <div class="col">
-                            <h5 class="whitetext">
-                                SMS
-                            </h5>
-                        </div>
-
+                    <div class="col">
+                        <img ion-img-cache src="img/fb.png" style="height:60px ; width:60px" height="50" ng-click="InviteFacebook()" />
                     </div>
+                    <div class="col">
+                        <img ion-img-cache src="img/sms.png" style="height:60px ; width:60px" height="50" />
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h5 class="whitetext">
+                            Whatsapp
+                        </h5>
+                    </div>
+                    <div class="col">
+                        <h5 class="whitetext">
+                            Facebook
+                        </h5>
+                    </div>
+                    <div class="col">
+                        <h5 class="whitetext">
+                            SMS
+                        </h5>
+                    </div>
+
                 </div>
             </div>
+        </div>
         </div>
         <br>
 

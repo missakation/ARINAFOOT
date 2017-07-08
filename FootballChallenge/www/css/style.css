@@ -249,7 +249,7 @@
     }
 	.card {
 		margin:10px;
-		background-color:rgb(62,83,100);
+		background-color:rgb(62,83,100) !important;
 	}
 	 .spinner svg {
         width: 10% !important;
