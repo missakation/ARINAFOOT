@@ -1699,7 +1699,7 @@ angular.module('football.controllers', [])
                 }
 
             },
-            PostError: function (error) {
+            PostError: function (error,linenumber,filename) {
                 var user = firebase.auth().currentUser;
                 if (!(user == undefined || user != null)) {
                     var id = user.uid;
@@ -1709,7 +1709,9 @@ angular.module('football.controllers', [])
                             uid: newuser.uid,
                             errorcode: error.code,
                             errordescription: error.message,
-                            date: new Date()
+                            date: new Date(),
+                            linenumber:linenumber,
+                            filename:filename
                         };
                     var newPostKey = firebase.database().ref().child('errors').push().key;
                     var updates = {};
@@ -1780,6 +1782,36 @@ angular.module('football.controllers', [])
                 });
 
 
+            },
+            UpdateLastSeen: function()
+            {
+                var user = firebase.auth().currentUser;
+                    if (!(user === null || user == '' || user === undefined)) {
+
+                        var updates = {};
+                        var CurrentDate = new Date();
+
+                        var year = CurrentDate.getFullYear();
+                        var month = CurrentDate.getMonth();
+                        var day = CurrentDate.getDate();
+
+                        var hour = CurrentDate.getHours();
+                        var minute = CurrentDate.getMinutes();
+
+                        updates['/players/' + user.uid + '/lastseen/loginyear'] = year;
+                        updates['/players/' + user.uid + '/lastseen/loginmonth'] = month;
+                        updates['/players/' + user.uid + '/lastseen/loginday'] = day;
+                        updates['/players/' + user.uid + '/lastseen/loginhour'] = hour;
+                        updates['/players/' + user.uid + '/lastseen/loginminute'] = minute;
+
+                        updates['/playersinfo/' + user.uid + '/lastseen/loginyear'] = year;
+                        updates['/playersinfo/' + user.uid + '/lastseen/loginmonth'] = month;
+                        updates['/playersinfo/' + user.uid + '/lastseen/loginday'] = day;
+                        updates['/playersinfo/' + user.uid + '/lastseen/loginhour'] = hour;
+                        updates['/playersinfo/' + user.uid + '/lastseen/loginminute'] = minute;
+
+                        firebase.database().ref().update(updates);
+                    }
             }
 
         }

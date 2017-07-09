@@ -4,40 +4,12 @@ angular.module('football.controllers')
 
     .controller('HomeController', function ($scope, $interval, $ionicPush, $http, $ionicSlideBoxDelegate, HomeStore, LoginStore, TeamStores, $state, $timeout, $ionicPopup, $ionicLoading, $cordovaSocialSharing) {
 
-
-        // since I can connect from multiple devices or browser tabs, we store each connection instance separately
-        // any time that connectionsRef's value is null (i.e. has no children) I am offline
-        var myConnectionsRef = firebase.database().ref('users/joe/connections');
-
-        // stores the timestamp of my last disconnect (the last time I was seen online)
-        var lastOnlineRef = firebase.database().ref('users/joe/lastOnline');
-
-        var connectedRef = firebase.database().ref('.info/connected');
-        connectedRef.on('value', function (snap) {
-            if (snap.val() === true) {
-                // We're connected (or reconnected)! Do anything here that should happen only if online (or on reconnect)
-
-                // add this device to my connections list
-                // this value could contain info about the device or a timestamp too
-                var con = myConnectionsRef.push(true);
-
-                // when I disconnect, remove this device
-                con.onDisconnect().remove();
-
-                // when I disconnect, update the last time I was seen online
-                lastOnlineRef.onDisconnect().set(firebase.database.ServerValue.TIMESTAMP);
-            }
-        });
-
-
         $scope.nointernet = false;
         $scope.$on("$ionicView.afterEnter", function (event, data) {
             // handle event
             //works
-
+            alert(console.trace());
             $timeout(function () {
-
-
 
                 try {
 
@@ -45,30 +17,9 @@ angular.module('football.controllers')
 
                     if (!(user === null || user == '' || user === undefined)) {
 
-                        var updates = {};
-                        var CurrentDate = new Date();
-
-                        var year = CurrentDate.getFullYear();
-                        var month = CurrentDate.getMonth();
-                        var day = CurrentDate.getDate();
-
-                        var hour = CurrentDate.getHours();
-                        var minute = CurrentDate.getMinutes();
-
-                        updates['/players/' + user.uid + '/lastseen/loginyear'] = year;
-                        updates['/players/' + user.uid + '/lastseen/loginmonth'] = month;
-                        updates['/players/' + user.uid + '/lastseen/loginday'] = day;
-                        updates['/players/' + user.uid + '/lastseen/loginhour'] = hour;
-                        updates['/players/' + user.uid + '/lastseen/loginminute'] = minute;
-
-                        updates['/playersinfo/' + user.uid + '/lastseen/loginyear'] = year;
-                        updates['/playersinfo/' + user.uid + '/lastseen/loginmonth'] = month;
-                        updates['/playersinfo/' + user.uid + '/lastseen/loginday'] = day;
-                        updates['/playersinfo/' + user.uid + '/lastseen/loginhour'] = hour;
-                        updates['/playersinfo/' + user.uid + '/lastseen/loginminute'] = minute;
-
-                        firebase.database().ref().update(updates);
-
+                        LoginStore.UpdateLastSeen();
+                        
+                        //UPDATE TOKEN
                         $ionicPush.register().then(function (t) {
                             return $ionicPush.saveToken(t);
                         }).then(function (t) {
@@ -99,9 +50,8 @@ angular.module('football.controllers')
                                         $scope.doRefresh($scope.currentdate);
 
                                     }, function errorCallback(response) {
-                                        // called asynchronously if an error occurs
-                                        // or server returns response with an error status.
-                                        alert(JSON.stringify(response));
+                                        alert("error");
+                                        LoginStore.PostError(response,103,"homepagecontroller.js")
                                     });
 
                                 }
