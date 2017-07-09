@@ -1540,13 +1540,13 @@ angular.module('football.controllers')
         //------------filter bar stuff ----/
     })
 
-    .controller('ChooseStadiumController', function ($scope, $ionicHistory, $ionicPopover, $ionicLoading, $timeout, $stateParams, $state, TeamStores, ReservationFact) {
+    .controller('ChooseStadiumController', function ($scope, $ionicHistory, $ionicPopover, $ionicLoading, $timeout, $stateParams, $state, TeamStores, ReservationFact, $ionicFilterBar) {
 
         $scope.notloaded = true;
         ReservationFact.GetAllStadiums(function (result) {
             $scope.stadiums = result;
             $scope.notloaded = false;
-
+            $scope.filteredStadiums = $scope.stadiums
         }, function (error) {
 
         })
@@ -1558,6 +1558,56 @@ angular.module('football.controllers')
             $state.params.myteam.favstadiumname = stadium.name;
             $ionicHistory.goBack();
         }
+
+        //Filter bar stuff
+        var filterBarInstance;
+
+        //function getItems () {
+        //    var items = [];
+        //    for (var x = 1; x < 2000; x++) {
+        //        items.push({text: 'This is item number ' + x + ' which is an ' + (x % 2 === 0 ? 'EVEN' : 'ODD') + ' number.'});
+        //    }
+        //    $scope.items = items;
+        //}
+
+        //getItems();
+
+
+        $scope.filteredStadiums = $scope.stadiums;
+        //$scope.$digest();
+        $scope.showFilterBar = function () {
+            filterBarInstance = $ionicFilterBar.show({
+                items: $scope.stadiums,
+                update: function (filteredItems, filterText) {
+                    if (filterText != "" && filterText != null) {
+                        console.log("filterText is: " + filterText)
+                        $scope.filteredStadiums = filteredItems;
+                    }
+                    else {
+                        console.log("filterText empty is: " + filterText)
+                        $scope.filteredStadiums = $scope.stadiums;
+                    }
+                }//,
+                //filterProperties: ['displayname', 'firstname', 'lastname']
+            });
+        };
+
+
+
+
+        $scope.refreshItems = function () {
+            if (filterBarInstance) {
+                filterBarInstance();
+                filterBarInstance = null;
+            }
+
+            $timeout(function () {
+                getItems();
+                $scope.$broadcast('scroll.refreshComplete');
+            }, 1000);
+        };
+
+        //------------filter bar stuff ----/
     })
 
     .controller('TeamViewController', function ($scope, ReservationFact, $ionicHistory, $ionicLoading, $timeout, $ionicPopup, $stateParams, $state, TeamStores) {
