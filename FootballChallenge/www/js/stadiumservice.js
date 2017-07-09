@@ -25,6 +25,8 @@ angular.module('football.controllers')
                     var hour = search.date.getHours();
                     var minute = search.date.getMinutes();
 
+                    console.log("Hours: " + hour);
+                    console.log("Minute: " + minute);
                     //firebase.database().ref('/stadiums/ministadiums').on('value',function (snapshot) {  
 
                     firebase.database().ref('/stadiums').on('value', function (snapshot) {
@@ -33,7 +35,7 @@ angular.module('football.controllers')
 
 
                             mainstadiumSnapshot.child("ministadiums").forEach(function (stadiumsnapshot) {
-
+                                console.log(stadiumsnapshot.key);
                                 var available = true;
                                 var starthour = stadiumsnapshot.child("starthour").val();
                                 var startminute = stadiumsnapshot.child("startminute").val();
@@ -47,7 +49,7 @@ angular.module('football.controllers')
 
                                 //console.log(players);
                                 //console.log(search.players);
-                                if (stadiumsnapshot.child('schedules/' + year + '/' + month + '/' + day).exists()) {
+                                if (stadiumsnapshot.child('schedules/' + year + '/' + month + '/' + day).exists() ) {
                                     var freetimes = [];
 
                                     stadiumsnapshot.child('schedules/' + year + '/' + month + '/' + day).forEach(function (minisnapshot) {
@@ -60,8 +62,8 @@ angular.module('football.controllers')
                                             var tempminute = minisnapshot.child("minute").val();
 
                                             //  if (temphour < starthour || temphour > (endhour - 2) || (Math.abs(temphour - hour) < 1.5)) {
-
-                                            if ((Math.abs((temphour * 60 + tempminute) - (hour * 60 + minute) < 90))) {
+                                            
+                                            if ((Math.abs((temphour * 60 + tempminute) - (hour * 60 + minute)) < 90)) {
                                                 available = false;
                                             }
 
@@ -82,7 +84,7 @@ angular.module('football.controllers')
                                     startdate.setDate(day);
 
                                 }
-                                if (available == true /*&& players == search.players*/) {
+                                if (available == true  /*&& players == search.players*/) {
                                     var Data = {
                                         "admin": mainstadiumSnapshot.child("admin").val(),
                                         "stadiumkey": mainstadiumSnapshot.key,

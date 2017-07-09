@@ -56,8 +56,8 @@ angular.module('football', ['ionic', /*'ionicImgCache'*/ 'football.controllers',
         };
     }])
 
-    .config(function ($stateProvider, $urlRouterProvider, $ionicCloudProvider /*ionicImgCacheProvider*/, $ionicFilterBarConfigProvider) {
-
+    .config(function ($ionicConfigProvider, $stateProvider, $urlRouterProvider, $ionicCloudProvider /*ionicImgCacheProvider*/, $ionicFilterBarConfigProvider) {
+        $ionicConfigProvider.views.maxCache(0);
         
         $ionicFilterBarConfigProvider.theme('royal');
         
