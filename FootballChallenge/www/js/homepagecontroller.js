@@ -8,7 +8,7 @@ angular.module('football.controllers')
         $scope.$on("$ionicView.afterEnter", function (event, data) {
             // handle event
             //works
-            alert(console.trace());
+            
             $timeout(function () {
 
                 try {
@@ -66,7 +66,7 @@ angular.module('football.controllers')
                     alert(error.message);
                     LoginStore.PostError(error);
                 }
-            }, 500)
+            }, 700)
         });
 
         //Section Visibility Variables

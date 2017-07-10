@@ -420,8 +420,8 @@
                                         ministadiumkey: challenges.child("ministadiumkey").val(),
                                         photo: challenges.child("photo").val(),
                                         price: challenges.child("price").val(),
-                                        stadiumdescription: challenges.child("stadiumdescription").val()
-
+                                        stadiumdescription: challenges.child("stadiumdescription").val(),
+                                        status:challenges.child("status").val() //0 didnt begin 1 win 2 loss 3 draw
 
                                     }
                                     upcomingmatches.push(matchdata);

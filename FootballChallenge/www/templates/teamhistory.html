@@ -65,7 +65,8 @@
 								VS
 							</h3>
 
-							<h6 style="font-weight:bold;margin:15px 22px 0;padding:2px 0px;border-radius:5px;background-color:#2ab041;color:white">Win</h6>
+							<h6 ng-show="item.status==1" style="font-weight:bold;margin:15px 22px 0;padding:2px 0px;border-radius:5px;background-color:#2ab041;color:white">Win</h6>
+							<h6 ng-show="item.status==2" style="font-weight:bold;margin:15px 22px 0;padding:2px 0px;border-radius:5px;background-color:red;color:white">Loss</h6>
 
 						</div>
 					</div>

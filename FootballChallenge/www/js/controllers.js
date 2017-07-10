@@ -1093,7 +1093,8 @@ angular.module('football.controllers', [])
                         team2name: challenge.team2name,
                         team2rank: challenge.team2rank,
                         teamone: 0,
-                        teamonescore: 0
+                        teamonescore: 0,
+                        status:0
 
                     };
 
@@ -1169,7 +1170,7 @@ angular.module('football.controllers', [])
                         team2logo: challenge.team2logo,
                         team2name: challenge.team2name,
                         team2rank: challenge.team2rank,
-
+                        status:0
 
                     };
 

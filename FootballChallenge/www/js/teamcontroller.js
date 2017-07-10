@@ -719,7 +719,11 @@ angular.module('football.controllers')
 
         }
 
-
+        $scope.stats =
+            {
+                win: 0,
+                winstreak: 0
+            }
 
         //here
         $ionicLoading.show({
@@ -734,11 +738,26 @@ angular.module('football.controllers')
         try {
             TeamStores.GetTeamByKey($stateParams.teamid, function (myprofile) {
                 console.log(myprofile);
+
                 $ionicLoading.hide();
                 $scope.notloaded = true;
                 if (myprofile !== null && myprofile !== undefined) {
 
                     $scope.currentprofile = myprofile;
+                    
+                    $scope.currentprofile.upcomingmatches.forEach(function (element) {
+
+                        if (element.status != undefined && element.status != null)
+                            switch (element.status) {
+                                case 1:
+                                    $scope.stats.win++;
+                                    break;
+
+                                default:
+                                    break;
+                            }
+
+                    }, this);
 
                     $scope.currentprofile.players.forEach(function (element) {
                         console.log(element);
@@ -855,12 +874,15 @@ angular.module('football.controllers')
                 });
         }
 
+
+
         $scope.doRefresh = function () {
 
             try {
 
                 TeamStores.GetTeamByKey($stateParams.teamid, function (myprofile) {
                     $scope.currentprofile = myprofile;
+
                     $scope.$apply();
                     $scope.$broadcast('scroll.refreshComplete');
 
@@ -1139,7 +1161,7 @@ angular.module('football.controllers')
                     gameid: gameid
                 })
         }
-        
+
     })
 
     .controller('TeamHistoryController', function ($scope, $ionicHistory, $ionicLoading, $ionicPopup, $stateParams, $state) {
@@ -1450,7 +1472,7 @@ angular.module('football.controllers')
             $scope.allplayers = leagues;
             $scope.filteredPlayers = $scope.allplayers;
             console.log($scope.allplayers);
-            
+
             var date = new Date();
             HomeStore.GetProfileInfo(date, function (players) {
                 $scope.profile = players;
