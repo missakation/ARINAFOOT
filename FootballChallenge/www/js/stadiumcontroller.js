@@ -389,7 +389,15 @@ angular.module('football.controllers')
             }
         }
 
-
+        //here
+        $ionicLoading.show({
+            content: 'Loading',
+            animation: 'fade-in',
+            showBackdrop: true,
+            maxWidth: 200,
+            showDelay: 0
+        });
+        //works
         navigator.geolocation.getCurrentPosition(function (position) {
 
             $scope.latitude = position.coords.latitude;
@@ -462,7 +470,13 @@ angular.module('football.controllers')
                                     var newDate = new Date();
                                     ReservationFact.GetNumReservationsByDate(newDate, function (result) {
                                         if (result < 2) {
-
+                                            $ionicLoading.show({
+                                                content: 'Loading',
+                                                animation: 'fade-in',
+                                                showBackdrop: true,
+                                                maxWidth: 200,
+                                                showDelay: 0
+                                            });
                                             ReservationFact.RegisterFreeStadiums($scope.search, "", stadiums)
                                                 .then(function (value) {
                                                     $scope.search.date.setDate($scope.search.date.getDate() + 1);
@@ -474,7 +488,7 @@ angular.module('football.controllers')
                                                     $scope.search = {
                                                         date: new Date(),
                                                     };
-
+                                                    $ionicLoading.hide();
                                                     var alertPopup = $ionicPopup.alert({
                                                         title: 'Success',
                                                         template: 'Successfully Reserved'
@@ -488,6 +502,7 @@ angular.module('football.controllers')
 
 
                                                 }, function (error) {
+                                                    $ionicLoading.hide();
                                                     var alertPopup = $ionicPopup.alert({
                                                         title: 'Error',
                                                         template: 'Stadium Not Available. Please Try Again'
@@ -502,6 +517,7 @@ angular.module('football.controllers')
                                         }
 
                                         else {
+                                            $ionicLoading.hide();
                                             var alertPopup = $ionicPopup.alert({
                                                 title: 'Error',
                                                 template: 'You Cannot Reserve More Than 2 Times a day !'
