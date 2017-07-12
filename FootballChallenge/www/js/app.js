@@ -258,6 +258,9 @@ angular.module('football', ['ionic', /*'ionicImgCache'*/ 'football.controllers',
 
             .state('app.teamadd', {
                 url: '/teamadd',
+                params:{
+                    newuser:null
+                },
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/teamadd.html',

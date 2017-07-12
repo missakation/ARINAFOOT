@@ -88,20 +88,19 @@
 			<div class="list" align="center" style="width:95%">
 				<label class="item item-input" style="background-color:transparent; color:#ffffff; border-radius:5px; border-color:#97a7b4">
                 <input type="text" ng-model="adduser.teamname" ng-maxlength="15" placeholder="Enter Your Team Name"  style="color:#2ab041;text-transform:capitalize;text-align:center;background-color:transparent">
-				</div>
 				
 				</label>
 
 			</div>
 		</div>
-	
+
 
 		<br>
 		<h5 style="color:red;padding-left: 10px;padding-right:50px" ng-show="validate.favsize"> Please choose favorite stadium
 		</h5>
 		<div style="color:white;font-weight:bold;margin-bottom:10px" align="center"> FAVORITE STADIUM </div>
-			<h5 class="col" align="center" ng-click="gochoosestadium(currentprofile)" style="width:40%;margin-left:30%;min-height:25px;border-radius:5px;border:1px solid #97a7b4;padding-top:5px;color:#2ab041">
-			{{favstadiumname| uppercase }}
+		<h5 class="col" align="center" ng-click="gochoosestadium(adduser)" style="width:40%;margin-left:30%;min-height:25px;border-radius:5px;border:1px solid #97a7b4;padding-top:5px;color:#2ab041">
+			{{adduser.favstadiumname| uppercase }}
 		</h5>
 		<h6 align="center" style="color:#97a7b4">
 
@@ -156,7 +155,6 @@
 			<button class="button button-small" style="font-size:14px;font-weight:bold;margin:0px 7px;border-radius:50px;background-color: {{managecolors.eleven.backcolor}}; color:{{managecolors.eleven.color}}"
 			 ng-click="updateteamsize(7)">11 vs 11</button>
 		</div>
-		</div>
 		<h6 align="center" style="color:#97a7b4">
 
 
@@ -171,8 +169,8 @@
 
 				</div>
 			</div>
-
-			<button class="button button-balanced button-small" ng-disabled="disabledbutton" ng-click="next()" style="width:60%;margin-left:20%;margin-right:20%;margin-top:10px;font-weight:bold;padding:5px;border-radius:50px">
+		</h6>
+		<button class="button button-balanced button-small" ng-disabled="disabledbutton" ng-click="next(adduser)" style="width:60%;margin-left:20%;margin-right:20%;margin-top:10px;font-weight:bold;padding:5px;border-radius:50px">
                 NEXT
            </button>
 

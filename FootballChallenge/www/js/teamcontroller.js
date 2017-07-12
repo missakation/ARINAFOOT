@@ -64,7 +64,25 @@ angular.module('football.controllers')
                 if (!snapshot.val().isMobileVerified) {
                     SMSService.verifyUserMobile($scope, $scope.gotoadd, [])
                 } else {
-                    $state.go("app.teamadd");
+                    $state.go("app.teamadd", {
+                        newuser: {
+                            teamname: "",
+                            pteamsize: "5",
+                            favstadiumphoto: "",
+                            favstadiumphoto: "",
+                            favstadiumname: "",
+                            homejersey: "Blue",
+                            awayjersey: "White",
+                            badge: "01",
+                            five: false,
+                            six: false,
+                            seven: false,
+                            eight: false,
+                            nine: false,
+                            ten: false,
+                            eleven: false
+                        }
+                    });
                 }
             });
         };
@@ -84,14 +102,6 @@ angular.module('football.controllers')
     })
 
     .controller('TeamAddController', function ($scope, SearchStore, $cordovaToast, $ionicHistory, $ionicPopover, ReservationFact, $state, $ionicLoading, $ionicPopup, TeamStores) {
-
-        $ionicLoading.show({
-            template: 'Loading...',
-            animation: 'fade-in',
-            showBackdrop: true,
-            maxWidth: 200,
-            showDelay: 0
-        });
 
         $scope.teamsizecounter = 0;
 
@@ -142,38 +152,20 @@ angular.module('football.controllers')
                 }
             }
 
-        //works
-        try {
-
-            ReservationFact.GetAllStadiums(function (leagues) {
-
-                $scope.allstadiums = leagues;
-                SearchStore.GetMyProfileInfo(function (profile) {
-                    $ionicLoading.hide();
-                    $scope.myprofile = profile;
-                })
-
-
-            })
-
-        }
-        catch (error) {
-            alert(error.message);
-        }
-
-
-
         $scope.$on("$ionicView.afterEnter", function (event, data) {
             // handle event
             $scope.disabledbutton = false;
         });
 
-        $scope.adduser =
+        $scope.adduser = $state.params.newuser;
+
+        /*$scope.adduser =
             {
                 teamname: "",
                 pteamsize: "5",
-                favstadium: "",
                 favstadiumphoto: "",
+                favstadiumphoto : "",
+                favstadiumname : "",
                 homejersey: "Blue",
                 awayjersey: "White",
                 badge: "01",
@@ -184,10 +176,17 @@ angular.module('football.controllers')
                 nine: false,
                 ten: false,
                 eleven: false
-            }
+            }*/
+
+        $scope.gochoosestadium = function (adduser) {
+            $scope.adduser = adduser;
+            $state.go("app.choosestadium", {
+                myteam: adduser
+            })
+        }
 
 
-        $scope.next = function () {
+        $scope.next = function (adduser) {
             try {
                 //IF THE SAME TEAM NAME EXIST ERROR
                 TeamStores.GetTeamByName($scope.adduser.teamname, function (exist) {
@@ -219,15 +218,6 @@ angular.module('football.controllers')
                             photo: ""
 
                         };
-                        console.log($scope.adduser.favstadium);
-                        console.log($scope.allstadiums);
-                        for (var i = 0; i < $scope.allstadiums.length; i++) {
-                            if ($scope.adduser.favstadium == $scope.allstadiums[i].name) {
-                                team.favstadium = $scope.allstadiums[i].key;
-                                team.photo = $scope.allstadiums[i].photo;
-                                break;
-                            }
-                        }
 
                         if (!(team.five || team.six || team.seven || team.eight || team.nine || team.ten || team.eleven)) {
                             $scope.validate.teamsize = true;
@@ -264,6 +254,8 @@ angular.module('football.controllers')
                             $scope.validate.team = false;
                             $scope.validate.teamsizemax = false;
                             $scope.$apply;
+                            console.log(team);
+
                             $state.go("app.teamadd1", {
                                 team1: team,
                                 myprofile: $scope.myprofile
@@ -512,44 +504,48 @@ angular.module('football.controllers')
                 if (!error) {
 
                     $scope.validate.samecolor = false;
-                    TeamStores.AddNewTeam(team, $scope.myprofile)
-                        .then(function (value) {
-                            LeaderBoardStore.GetAllLeaderboard(function (leagues) {
 
-                                $scope.notloaded = false;
-                                $scope.rankedteams = leagues.reverse();
+                    SearchStore.GetMyProfileInfo(function (profile) {
+                        TeamStores.AddNewTeam(team, profile)
+                            .then(function (value) {
+                                LeaderBoardStore.GetAllLeaderboard(function (leagues) {
 
-                                LeaderBoardStore.UpdateRatings($scope.rankedteams).then(function (result) {
-                                    var alertPopup = $ionicPopup.alert({
-                                        title: 'Success',
-                                        template: 'Team Added'
-                                    }).then(function () {
-                                        $scope.adduser =
-                                            {
-                                                homejersey: "Blue",
-                                                awayjersey: "White"
-                                            }
-                                        $ionicHistory.nextViewOptions({
-                                            disableBack: true
-                                        });
-                                        $state.go("app.teammanagement");
+                                    $scope.notloaded = false;
+                                    $scope.rankedteams = leagues.reverse();
 
-                                    }, function (error) {
-                                        alert(error.message);
+                                    LeaderBoardStore.UpdateRatings($scope.rankedteams).then(function (result) {
+                                        var alertPopup = $ionicPopup.alert({
+                                            title: 'Success',
+                                            template: 'Team Added'
+                                        }).then(function () {
+                                            $scope.adduser =
+                                                {
+                                                    homejersey: "Blue",
+                                                    awayjersey: "White"
+                                                }
+                                            $ionicHistory.nextViewOptions({
+                                                disableBack: true
+                                            });
+                                            $state.go("app.teammanagement");
+
+                                        }, function (error) {
+                                            alert(error.message);
+                                        })
+
+
+
                                     })
 
+                                });
+
+                            }, function (error) {
+                                if (error.code == 'PERMISSION_DENIED') {
+                                    alert("Team Name Already Taken")
+                                }
+                            })
+                    })
 
 
-                                })
-
-
-                            });
-
-                        }, function (error) {
-                            if (error.code == 'PERMISSION_DENIED') {
-                                alert("Team Name Already Taken")
-                            }
-                        })
                 }
 
 
@@ -744,7 +740,7 @@ angular.module('football.controllers')
                 if (myprofile !== null && myprofile !== undefined) {
 
                     $scope.currentprofile = myprofile;
-                    
+
                     $scope.currentprofile.upcomingmatches.forEach(function (element) {
 
                         if (element.status != undefined && element.status != null)
@@ -1578,6 +1574,7 @@ angular.module('football.controllers')
             $state.params.myteam.favstadium = stadium.key;
             $state.params.myteam.favstadiumphoto = stadium.photo;
             $state.params.myteam.favstadiumname = stadium.name;
+            console.log($state.params.myteam);
             $ionicHistory.goBack();
         }
 

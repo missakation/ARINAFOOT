@@ -211,6 +211,7 @@ angular.module('football.controllers')
         }
 
         $scope.gochoosestadium = function (team) {
+            console.log($scope.currentprofile);
             $state.go("app.choosestadium", {
                 myteam: $scope.currentprofile
             })
@@ -479,8 +480,8 @@ angular.module('football.controllers')
         }
 
         $scope.UpdateUser = function (profile) {
-
-            console.log(profile);
+            
+            console.log($scope.currentprofile);
 
             if ($scope.currentprofile.teamdisplayed == "Select a Team" || $scope.currentprofile.teamdisplayed == "" || $scope.currentprofile.teamdisplayed == null) {
                 $scope.currentprofile.teamdisplayedkey = "none";
