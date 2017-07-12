@@ -80,12 +80,12 @@
                 </div>
 
                 <div class="row row-center">
-                    <div class="col col-75" ng-disabled="true" style="margin-left:10px;color:White;font-size:16px">
+                    <div class="col col-75"  style="margin-left:10px;color:White;font-size:16px">
                         Phone Number Verified
                     </div>
                     <div class="col col-25">
                         <label class="toggle">
-							<input type="checkbox" ng-model="filter.notification"> 
+							<input type="checkbox" ng-disabled="true" ng-model="filter.smsVerified"> 
 							<div class="track">
 								<div class="handle"></div>
 							</div>
@@ -99,41 +99,13 @@
                     </div>
                     <div class="col col-25">
                         <label class="toggle">
-							<input type="checkbox" ng-disabled="true" ng-model="filter.smsVerified"> 
+							<input type="checkbox" ng-disabled="true" ng-model="filter.emailVerified"> 
 							<div class="track">
 								<div class="handle"></div>
 							</div>
 						</label>
                     </div>
                 </div>
-
-
-                <div class="row row-center">
-                    <div class="col col-75" style="margin-left:10px;color:White;font-size:16px">
-                        Facebook Verified
-                    </div>
-                    <div class="col col-25">
-                        <label class="toggle">
-							<input type="checkbox" ng-disabled="true"  ng-model="filter.facebookVerified"> 
-							<div class="track">
-								<div class="handle"></div>
-							</div>
-						</label>
-                    </div>
-                </div>
-
-
-
-
-
-
-                <label class="item item-input" style="background-color:rgb(46,62,75)">
-        <span class="input-label" style="width:80%;color:white">Telephone</span> 
-        <input type="tel">
-        </label>
-                <button class="button button-balanced button-full" ng-click="gosmsverifypage()">
-             Verify Mobile
-        </button>
             </ion-list>
 
     </ion-content>

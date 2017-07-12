@@ -424,7 +424,7 @@ angular.module('football.controllers')
                 try {
                     //firebase.database().ref('/stadiums/ministadiums').on('value',function (snapshot) {  
 
-                    firebase.database().ref('/stadiums').once('value', function (snapshot) {
+                    firebase.database().ref('/stadiums').on('value', function (snapshot) {
                         AllStadiums = [];
                         snapshot.forEach(function (minisnapshot) {
 

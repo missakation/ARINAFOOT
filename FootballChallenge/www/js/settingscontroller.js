@@ -2,13 +2,16 @@
 angular.module('football.controllers')
 
   .controller('SettingsController', function ($scope,SMSService, $state, $timeout, BookingStore, $ionicPopup, $ionicLoading) {
-    $scope.filter = {};
+    ;
+    
+    console.log(firebase.auth().currentUser);
     var notificationRef = firebase.database().ref('/playersinfo/' + firebase.auth().currentUser.uid + '/settings');
     notificationRef.on('value', function (snapshot) {
       var data = snapshot.val();
       console.log('snapshot.val() : ' + angular.toJson(data, ' '));
       $scope.filter.notification = data.notification;
       $scope.filter.reminder_3hours = data.reminder_3hours;
+      $scope.filter.emailVerified = firebase.auth().currentUser.emailVerified;
     });
 
 
