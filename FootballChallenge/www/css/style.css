@@ -261,37 +261,37 @@
 	
 	    
     .popup {
-        border-radius: 50px;
-        font-size: 15px;
+        border-radius: 50px !important;
+        font-size: 15px !important;
     }
     
     .popup-buttons .button:first-child {
-        border-radius: 50px;
-        background-color: #2ab041;
-        margin: 5px;
-        padding: 0px;
-        width: 80%
+        border-radius: 50px !important;
+        background-color: #2ab041 !important;
+        margin: 5px !important;
+        padding: 0px !important;
+        width: 80% !important;
     }
     
     .popup-body {
-        padding: 15px;
-        margin: -5px;
-        background-color: rgb(62, 83, 100);
-        color: white;
-        text-align: center;
-        border-radius: 15px 15px 0 0;
+        padding: 15px !important;
+        margin: -5px!important;
+        background-color: rgb(62, 83, 100)!important;
+        color: white !important;
+        text-align: center!important;
+        border-radius: 15px 15px 0 0!important;
     }
     
     .popup-buttons {
-        padding: 10px 5px 5px 5px;
-        margin: -5px;
-        background-color: rgb(62, 83, 100);
-        text-align: center;
-        border-radius: 0 0 15px 15px;
+        padding: 10px 5px 5px 5px !important;
+        margin: -5px !important;
+        background-color: rgb(62, 83, 100) !important;
+        text-align: center !important;
+        border-radius: 0 0 15px 15px !important;
     }
     
     .popup-head {
-        display: none;
+        display: none !important;
     }
   
     .spinner svg {
