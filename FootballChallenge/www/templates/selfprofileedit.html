@@ -450,11 +450,11 @@
 					</h5>
 
 					<div class="button-bar" align="center" style="width:100%;margin:0 0 0 0px">
-						<button class="button" style="width:50%;padding: 2px 4px 1px; min-width: 28px;  min-height: 30px; font-size: 12px;
+						<button class="button" style="width:45%;padding: 2px 4px 1px; min-width: 28px;  min-height: 30px; font-size: 12px;
   line-height: 26px;background-color: {{isplayercolors.goalkeeper.backcolor}}; color: {{isplayercolors.goalkeeper.color}};font-size:14px; margin-top:15px;margin-right:5px;font-weight:bold;border-radius:50px"
 						 ng-click="switchcolors(1)">
 					Goalkeeper</button>
-						<button class="button" style="width:50%; padding: 2px 4px 1px;  min-width: 28px;  min-height: 30px;  font-size: 12px;
+						<button class="button" style="width:45%; padding: 2px 4px 1px;  min-width: 28px;  min-height: 30px;  font-size: 12px;
   line-height: 26px;background-color: {{isplayercolors.player.backcolor}}; color: {{isplayercolors.player.color}}; margin-top:15px; margin-left:5px;font-size:14px;font-weight:bold;border-radius:50px"
 						 ng-click="switchcolors(0)">
 					Player </button>
@@ -483,7 +483,7 @@
 
 				<div ng-show="currentprofile.available">
 					<div class="row" style="padding-bottom:5px">
-						<div class="col col-66" ng-click="gochoosestadium(currentprofile)" align="left" style="padding-bottom:0px;color: white">
+						<div ng-click="gochoosestadium(currentprofile)" align="left" style="width:64%;padding-bottom:0px;color: white">
 							<h5 align=left style="padding-bottom:0px;color:rgb(153,167,180)">
 								FAVORITE STADIUM
 							</h5>
@@ -492,7 +492,7 @@
 
 						</div>
 
-						<h5 class="col col-33" ng-click="gochoosestadium(currentprofile)" align="center" style="border-radius:15px;border:1px solid #97a7b4;padding-top:5px;color:#2ab041">
+						<h5 ng-click="gochoosestadium(currentprofile)" align="center" style="width:35%;border-radius:15px;border:1px solid #97a7b4;padding-top:5px;color:#2ab041">
 							{{currentprofile.favstadiumname| uppercase }}
 						</h5>
 					</diV>

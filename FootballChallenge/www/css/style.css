@@ -7,12 +7,14 @@
     p.whitetext {
         color: white;
     }
- .slider {
+    .slider {
 	 margin-bottom:-5px;
- }
+    }
     .slider-pager .slider-pager-page
 	{
 		margin-top: 15px;
+		color:white;
+		font-size:22px;
 		
 	}
        /** from date time picker style css files **/
@@ -243,17 +245,58 @@
 	.bar .title.title-left {
 	    text-align: center;
 	}
-	    .bar .bar-royal
+	   .bar.bar-royal
     {
-        background-color: white !important;
+        background-color: rgb(62,83,100) !important;
+		border: none !important;
     }
+	.bar .button, .bar button
+	{
+		color:white;
+	}
 	.card {
 		margin:10px;
 		background-color:rgb(62,83,100) !important;
 	}
-	 .spinner svg {
-        width: 10% !important;
-        height: 100px !important;
+	
+	    
+    .popup {
+        border-radius: 50px;
+        font-size: 15px;
+    }
+    
+    .popup-buttons .button:first-child {
+        border-radius: 50px;
+        background-color: #2ab041;
+        margin: 5px;
+        padding: 0px;
+        width: 80%
+    }
+    
+    .popup-body {
+        padding: 15px;
+        margin: -5px;
+        background-color: rgb(62, 83, 100);
+        color: white;
+        text-align: center;
+        border-radius: 15px 15px 0 0;
+    }
+    
+    .popup-buttons {
+        padding: 10px 5px 5px 5px;
+        margin: -5px;
+        background-color: rgb(62, 83, 100);
+        text-align: center;
+        border-radius: 0 0 15px 15px;
+    }
+    
+    .popup-head {
+        display: none;
+    }
+  
+    .spinner svg {
+
         stroke: #2ab041;
         fill: #2ab041;
-    }
+    
+	}
