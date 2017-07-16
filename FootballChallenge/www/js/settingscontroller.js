@@ -3,8 +3,7 @@ angular.module('football.controllers')
 
   .controller('SettingsController', function ($scope,SMSService, $state, $timeout, BookingStore, $ionicPopup, $ionicLoading) {
     ;
-    
-    console.log(firebase.auth().currentUser);
+    $scope.filter = {};
     var notificationRef = firebase.database().ref('/playersinfo/' + firebase.auth().currentUser.uid + '/settings');
     notificationRef.on('value', function (snapshot) {
       var data = snapshot.val();

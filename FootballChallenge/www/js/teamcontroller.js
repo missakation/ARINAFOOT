@@ -14,6 +14,7 @@ angular.module('football.controllers')
 
 
                 $scope.myteams = leagues;
+                console.log($scope.myteams);
 
                 if (leagues.length == 0) {
                 }
@@ -27,8 +28,26 @@ angular.module('football.controllers')
                         firebase.database().ref('/teaminfo/' + element.key).once('value').then(function (snapshot) {
                             if (snapshot.exists()) {
                                 element.members = snapshot.child("players").numChildren() - 1;
+
                                 element.rank = snapshot.child("rank").val();
                                 element.rating = snapshot.child("rating").val()
+
+                                switch (element.rank) {
+                                    case 1:
+                                        element.rankdescription = element.rank + 'st';
+                                        break;
+                                    case 2:
+                                        element.rankdescription = element.rank + 'nd';
+                                        break;
+                                    case 3:
+                                        element.rankdescription = element.rank + 'rd';
+                                        break;
+
+                                    default:
+                                        element.rankdescription = element.rank + 'th';
+                                        break;
+                                }
+
                             }
                             else {
                                 element.members = "Not Found";

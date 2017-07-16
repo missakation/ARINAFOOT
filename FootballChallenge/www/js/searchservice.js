@@ -178,23 +178,27 @@ angular.module('football.controllers')
 
                                             var difference = (new Date() - Items.lastseen.date) / 1000 / 60;
 
-
-                                            if (difference <= 60) {
-                                                Items.lastseen.text = Items.lastseen.minute + " mins. ago";
+                                            if (difference < 20) {
+                                                Items.lastseen.text = "online";
                                             }
                                             else
-                                                if (difference <= 24 * 60) {
-                                                    Items.lastseen.text = Items.lastseen.hour + " hrs. ago";
+                                                if (difference <= 60) {
+                                                    Items.lastseen.text = Math.floor(difference) + " mins. ago";
                                                 }
                                                 else
-                                                    if (difference >= 24 * 60 && difference <= 48 * 60) {
-                                                        Items.lastseen.text = "yesterday";
+                                                    if (difference <= 24 * 60) {
+                                                        Items.lastseen.text = Math.floor(difference / 60) + " hrs. ago";
                                                     }
-                                                    else {
-                                                        Items.lastseen.text = (difference / 24) + " days ago";
-                                                    }
+                                                    else
+                                                        if (difference >= 24 * 60 && difference <= 48 * 60) {
+                                                            Items.lastseen.text = "yesterday";
+                                                        }
+                                                        else {
+                                                            Items.lastseen.text = (Math.floor((difference / 60 / 24))) + " days ago";
+                                                        }
+                                            }
 
-                                        }
+                                        
 
                                         AvailablePlayers.push(Items)
                                     }

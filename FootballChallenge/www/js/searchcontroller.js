@@ -264,24 +264,25 @@ angular.module('football.controllers')
                         if (element.teamdisplayedkey != 'none' || element.teamdisplayedkey != '') {
                             firebase.database().ref('/teampoints/' + element.teamdisplayedkey).on('value', function (snapshot) {
                                 if (snapshot.exists()) {
-
+                                    element.teamkey = snapshot.key;
                                     element.teambadge = snapshot.child("badge").val();
-                                    element.teamname = snapshot.child("teamname").val();
+                                    element.teamname = snapshot.child("name").val();
                                     element.rank = snapshot.child("rank").val();
+                                    element.rating = snapshot.child("rating").val();
                                     element.teamexists = true;
-                                    switch (element.rank) {
+                                    switch (element.rating) {
                                         case 1:
-                                            element.rankdescription = element.rank + 'st';
+                                            element.rankdescription = element.rating + 'st';
                                             break;
                                         case 2:
-                                            element.rankdescription = element.rank + 'nd';
+                                            element.rankdescription = element.rating + 'nd';
                                             break;
                                         case 3:
-                                            element.rankdescription = element.rank + 'rd';
+                                            element.rankdescription = element.rating + 'rd';
                                             break;
 
                                         default:
-                                            element.rankdescription = element.rank + 'th';
+                                            element.rankdescription = element.rating + 'th';
                                             break;
                                     }
 

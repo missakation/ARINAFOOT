@@ -282,7 +282,8 @@ angular.module('football.controllers')
 
         $scope.search = {
             date: tomorrow,
-            text: "Tomorrow, 9:00PM - 5 Vs 5 "
+            text: "Tomorrow, 9:00PM - 5 Vs 5 ",
+            players:5
         };
 
 
@@ -419,7 +420,8 @@ angular.module('football.controllers')
 
 
         }, function (error) {
-
+            alert("Test");
+            alert(error.message);
             $scope.checkfree();
         });
 
@@ -485,9 +487,8 @@ angular.module('football.controllers')
                                                     $scope.search.date.setMilliseconds(0);
                                                     $scope.search.date.setSeconds(0);
                                                     //alert($scope.search.date);
-                                                    $scope.search = {
-                                                        date: new Date(),
-                                                    };
+                                                    $scope.search.date = new Date();
+                                                    
                                                     $ionicLoading.hide();
                                                     var alertPopup = $ionicPopup.alert({
                                                         title: 'Success',

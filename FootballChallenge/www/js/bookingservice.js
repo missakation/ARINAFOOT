@@ -44,6 +44,8 @@
                                 "date":gameedate,
                                 "duration":childSnapshot.child("stadiumdescription").val(),
                                 "phone":childSnapshot.child("duration").val(),
+                                "telephone":childSnapshot.child("telephone").val(),
+                                "reservationnumber":childSnapshot.child("reservationnumber").val()
 
                             };
 

@@ -538,7 +538,7 @@
 
 
 				<div class="col col-50" style="padding:0px" align="center">
-					<img style="width:80px;height:80px" src="img/Badges/{{item.teambadge}}.png">
+					<img ui-sref="app.teamview({teamid: item.teamkey})" style="width:80px;height:80px" src="img/Badges/{{item.teambadge}}.png">
 					<h5 class="whitetext" style="margin-bottom:0px;margin-top:5px;text-transform: capitalize;padding:0px;font-weight:bold"> {{item.teamname}} </h5>
 
 				</div>
@@ -553,8 +553,8 @@
 					</h5>
 				</div>
 
-				<div ng-show="team.teamexists" class="col col-50" style="margin-top:5px;padding:0px" align="center">
-					<h6 style="color:darkturquoise"> Rank {{item.rank}} </h6>
+				<div ng-show="item.teamexists" class="col col-50" style="margin-top:5px;padding:0px" align="center">
+					<h6 style="color:darkturquoise"> Rank {{item.rankdescription}} </h6>
 				</div>
 			</div>
 

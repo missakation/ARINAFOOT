@@ -47,21 +47,6 @@
                                     "rating": childSnapshot.child("rating").val(),
 
                                 };
-                                switch (Items.rank) {
-                                    case 1:
-                                        Items.rankdescription = Items.rank + 'st';
-                                        break;
-                                    case 2:
-                                        Items.rankdescription = Items.rank + 'nd';
-                                        break;
-                                    case 3:
-                                        Items.rankdescription = Items.rank + 'rd';
-                                        break;
-
-                                    default:
-                                        Items.rankdescription = Items.rank + 'th';
-                                        break;
-                                }
                                 MyTeams.push(Items);
                                 //   })
 

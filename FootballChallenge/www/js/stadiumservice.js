@@ -43,13 +43,13 @@ angular.module('football.controllers')
                                 var endhour = stadiumsnapshot.child("endhour").val();
                                 var endminute = stadiumsnapshot.child("endminute").val();
                                 var players = stadiumsnapshot.child("numplayers").val();
-
+                                var players1 = stadiumsnapshot.child("numplayers1").val();
 
 
 
                                 //console.log(players);
                                 //console.log(search.players);
-                                if (stadiumsnapshot.child('schedules/' + year + '/' + month + '/' + day).exists() ) {
+                                if (stadiumsnapshot.child('schedules/' + year + '/' + month + '/' + day).exists()) {
                                     var freetimes = [];
 
                                     stadiumsnapshot.child('schedules/' + year + '/' + month + '/' + day).forEach(function (minisnapshot) {
@@ -62,7 +62,7 @@ angular.module('football.controllers')
                                             var tempminute = minisnapshot.child("minute").val();
 
                                             //  if (temphour < starthour || temphour > (endhour - 2) || (Math.abs(temphour - hour) < 1.5)) {
-                                            
+
                                             if ((Math.abs((temphour * 60 + tempminute) - (hour * 60 + minute)) < 90)) {
                                                 available = false;
                                             }
@@ -84,7 +84,8 @@ angular.module('football.controllers')
                                     startdate.setDate(day);
 
                                 }
-                                if (available == true  /*&& players == search.players*/) {
+
+                                if (available == true && (players == search.players || players1 == search.players)) {
                                     var Data = {
                                         "admin": mainstadiumSnapshot.child("admin").val(),
                                         "stadiumkey": mainstadiumSnapshot.key,
@@ -114,17 +115,8 @@ angular.module('football.controllers')
                                         "longitude": mainstadiumSnapshot.child("cordovalongitude").val(),
                                         "iscombined": stadiumsnapshot.child("iscombined").val(),
                                         "combined": stadiumsnapshot.child("combined").val(),
-                                        "city":mainstadiumSnapshot.child("city").val()
-                                        //"freedates":
-                                        //{
-                                        //    date : startdate
-                                        //}
-                                        //"indoor": indoor,
-                                        //"outdoor": outdoor,
-                                        //"clay": clay,
-                                        //"grass":grass
-
-
+                                        "city": mainstadiumSnapshot.child("city").val(),
+                                        "telephone": mainstadiumSnapshot.child("telephone").val()
 
                                     };
 
@@ -212,7 +204,10 @@ angular.module('football.controllers')
                     startminute: minute,
                     endhour: endhour,
                     endminute: endminute,
-                    references: ""//the main info of the exact beginning time
+                    references: "",//the main info of the exact beginning time
+                    telephone: stadiums.telephone,
+                    combined: stadiums.combined,
+                    reservationnumber: stadiums.stadiumname.charAt(0) + stadiums.ministadiumkey.charAt(0) + year.toString() + month.toString() + day.toString() + hour.toString() + minute.toString()
 
 
                 };
@@ -293,9 +288,13 @@ angular.module('football.controllers')
                     teamtwo: "",
                     teamtwoscore: 0,
                     year: year,
-                    bookedadmin: false
+                    bookedadmin: false,
+                    telephone: stadiums.telephone,
+                    combined: stadiums.combined,
+                    reservationnumber: stadiums.stadiumname.charAt(0) + stadiums.ministadiumkey.charAt(0) + year.toString() + month.toString() + day.toString() + hour.toString() + minute.toString()
 
                 };
+                postDataPlayer.references = postData.references;
 
                 var keys = [];
                 if (stadiums.iscombined) {
@@ -554,5 +553,24 @@ angular.module('football.controllers')
                     callback(number);
                 });
             },
+
+            DeleteBooking: function (booking) {
+
+                var updates = {};
+
+                if (booking != null) {
+                    updates['/stadiums/' + stadiums.stadiumkey + '/ministadiums/' + subkey + '/schedules/' + year + '/' + month + '/' + day + '/' + mainkey] = postData;
+                    updates['/stadiumsinfo/' + stadiums.stadiumkey + '/ministadiums/' + subkey + '/schedules/' + year + '/' + month + '/' + day + '/' + mainkey] = postData;
+
+
+                    for (i = 0; i < booking.references.length; i++) {
+                        updates['/stadiums/' + stadiums.stadiumkey + '/ministadiums/' + subkey + '/schedules/' + year + '/' + month + '/' + day + '/' + booking.references[i].key] = postData;
+                        updates['/stadiumsinfo/' + stadiums.stadiumkey + '/ministadiums/' + subkey + '/schedules/' + year + '/' + month + '/' + day + '/' + booking.references[i].key] = postData;
+                    }
+
+
+                }
+                return firebase.database().ref().update(updates);
+            }
         }
     })
