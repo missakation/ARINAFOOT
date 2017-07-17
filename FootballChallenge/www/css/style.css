@@ -258,8 +258,7 @@
 		margin:10px;
 		background-color:rgb(62,83,100) !important;
 	}
-	
-	    
+		    
     .popup {
         border-radius: 50px !important;
         font-size: 15px !important;
@@ -272,8 +271,7 @@
 		margin: 5px;
 		padding: 0px;
     
-}
-  
+}  
     .popup-buttons .button:last-child {
 		border-radius: 50px;
 		margin: 5px;
@@ -308,3 +306,9 @@
         fill: #2ab041;
     
 	}
+	  .headercolor {
+        background-color: rgb(62, 83, 100) !important;
+        color: white !important;
+        border-bottom: 2px solid rgb(62, 83, 100) !important;
+        border-top: 1px !important;
+    }
