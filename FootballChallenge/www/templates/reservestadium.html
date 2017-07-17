@@ -448,7 +448,7 @@
 
 <ion-view view-title="Reserve a Stadium" cache-view="false">
 	<ion-nav-buttons side="secondary">
-		<button class="button button-icon icon ion-ios-search-strong"  placeholder="Players, teams, stadiums" ng-click="showFilterBar()"></button>
+		<button class="button button-icon icon ion-ios-search-strong" placeholder="Players, teams, stadiums" ng-click="showFilterBar()"></button>
 	</ion-nav-buttons>
 	<ion-nav-buttons side="right">
 		<button class="button button-icon ion-android-options" align="right" style="color:white" ng-click="popover.show($event)"></button>
@@ -651,7 +651,7 @@
 			<div class="row" style="margin-top:5px;font-size:12px;padding-left:0px;padding-bottom:12px">
 				<div align="right" style="font-weight:bold;color:#5f7485;width:18%">
 					<i class="ion-location" style="margin-right:10px;font-size:22px;color:#5f7485"></i>
-					</div>
+				</div>
 				<div align="left" style="font-weight:bold;color:#5f7485;width:18%">
 					{{stadiums.distance | number:2}}KM
 				</div>
@@ -691,31 +691,20 @@
 			<!--			<h3 class="whitetext"> Number: <b>{{stadiums.description}}</b></h3> -->
 
 
-			<div class="row" style="padding:0 0px 0 0px">
-				<div class="col" style="width:100%;padding:2px;margin-top:-10px">
-					<button style="border-radius:50px;line-height:26px;padding:6px 0 6px 0;font-size:12px;font-weight:600;background-color:rgb(42,176,65)"
-					 class="button button-block button-balanced button-small" type="submit" ng-disabled="verified" ng-click="reserve(search,stadiums)">
-                        404 not found
-                    </button>
-				</div>
-				<div class="col" style="width:100%;padding:2px;margin-top:-10px">
-					<button style="line-height:26px;border-radius:50px;padding:6px 0 6px 0;font-size:12px;font-weight:600;background-color:rgb(42,176,65)"
-					 class="button button-block button-balanced button-small" type="submit" ng-disabled="verified" ng-click="reserve(search,stadiums)">
-                       <!-- {{stadiums.datetime | date:'short'}} -->
-					   {{stadiums.datetime | date:'HH:mm'}}
-                    </button>
-				</div>
-				<div class="col" style="width:100%;padding:2px;margin-top:-10px">
-					<button style="line-height:26px;border-radius:50px;padding:6px 0 6px 0;font-size:12px;font-weight:600;background-color:rgb(42,176,65)"
-					 class="button button-block button-balanced button-small" type="submit" ng-disabled="verified" ng-click="reserve(search,stadiums)">
-                       18:00 - 19:30
-                    </button>
-				</div>
 
+
+			<div class="col" align="center" style="width:80%;padding:2px;margin-top:-10px">
+				<button style="line-height:26px;border-radius:50px;padding:6px 0 6px 0;font-size:12px;font-weight:600;background-color:rgb(42,176,65)"
+				 class="button button-block button-balanced button-small" type="submit" ng-disabled="verified" ng-click="reserve(search,stadiums)">
+                       <!-- {{stadiums.datetime | date:'short'}} -->
+					{{stadiums.datetime | date:'HH:mm'}} for 90 mins
+                    </button>
 			</div>
 
 
 		</div>
+
+
 
 
 	</ion-content>
