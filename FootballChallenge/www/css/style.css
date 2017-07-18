@@ -258,21 +258,27 @@
 		margin:10px;
 		background-color:rgb(62,83,100) !important;
 	}
-	
-	    
+		    
     .popup {
         border-radius: 50px !important;
         font-size: 15px !important;
     }
+
+    .popup-buttons .button {
+    background-color: white !important;
+	color:#2ab041 !important;
+	border-radius: 50px;
+		margin: 5px;
+		padding: 0px;
     
-    .popup-buttons .button:first-child {
-        border-radius: 50px !important;
-        background-color: #2ab041 !important;
-        margin: 5px !important;
-        padding: 0px !important;
-        width: 80% !important;
-    }
-    
+}  
+    .popup-buttons .button:last-child {
+		border-radius: 50px;
+		margin: 5px;
+		padding: 0px;
+		background-color: #2ab041 !important;
+		color: white !important;
+	}
     .popup-body {
         padding: 15px !important;
         margin: -5px!important;
@@ -300,3 +306,9 @@
         fill: #2ab041;
     
 	}
+	  .headercolor {
+        background-color: rgb(62, 83, 100) !important;
+        color: white !important;
+        border-bottom: 2px solid rgb(62, 83, 100) !important;
+        border-top: 1px !important;
+    }
