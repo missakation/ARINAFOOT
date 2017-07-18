@@ -554,23 +554,82 @@ angular.module('football.controllers')
                 });
             },
 
-            DeleteBooking: function (booking) {
+            DeleteBooking: function (reservation) {
+
+                //alert("here");
+             /*   var year = reservation.date.getFullYear();
+                var month = reservation.date.getMonth();
+                var day = reservation.date.getDate();
+
+                var hour = reservation.date.getHours();
+                var minute = reservation.date.getMinutes();
+
+
+                var key = reservation.stadiumkey;
+                var subkey = reservation.ministadiumkey;
+
 
                 var updates = {};
 
-                if (booking != null) {
-                    updates['/stadiums/' + stadiums.stadiumkey + '/ministadiums/' + subkey + '/schedules/' + year + '/' + month + '/' + day + '/' + mainkey] = postData;
-                    updates['/stadiumsinfo/' + stadiums.stadiumkey + '/ministadiums/' + subkey + '/schedules/' + year + '/' + month + '/' + day + '/' + mainkey] = postData;
+                var numslots = 90 / 30;
 
+                var mainkey = newkey;
+                var references = [];
 
-                    for (i = 0; i < booking.references.length; i++) {
-                        updates['/stadiums/' + stadiums.stadiumkey + '/ministadiums/' + subkey + '/schedules/' + year + '/' + month + '/' + day + '/' + booking.references[i].key] = postData;
-                        updates['/stadiumsinfo/' + stadiums.stadiumkey + '/ministadiums/' + subkey + '/schedules/' + year + '/' + month + '/' + day + '/' + booking.references[i].key] = postData;
+                for (i = 1; i < numslots; i++) {
+                    search.date.setMinutes(search.date.getMinutes() + 30);
+
+                    newkey = subkey + search.date.getFullYear().toString() + search.date.getMonth().toString() + search.date.getDate().toString() + search.date.getHours().toString() + search.date.getMinutes().toString();
+                    var refdata = {
+                        key: newkey
                     }
+                    references.push(refdata);
+
+                    var extrakeys = [];
+                    if (stadiums.iscombined) {
+                        for (var key in stadiums.combined) {
+                            extrakeys.push(key);
+                        }
+                        
+                        extrakeys.forEach(function (element) {
+                            updates['/stadiums/' + stadiums.stadiumkey + '/ministadiums/' + element + '/schedules/' + year + '/' + month + '/' + day + '/' + newkey] = null;
+                            updates['/stadiumshistory/' + stadiums.stadiumkey + '/ministadiums/' + element + '/schedules/' + year + '/' + month + '/' + day + '/' + newkey] = null;
+                        }, this);
+                    }
+
+                    updates['/stadiums/' + stadiums.stadiumkey + '/ministadiums/' + subkey + '/schedules/' + year + '/' + month + '/' + day + '/' + newkey] = null;
+                    updates['/stadiumshistory/' + stadiums.stadiumkey + '/ministadiums/' + subkey + '/schedules/' + year + '/' + month + '/' + day + '/' + newkey] = null;
 
 
                 }
-                return firebase.database().ref().update(updates);
+                postData.references = references;
+                postDataPlayer.references = postData.references;
+
+                var keys = [];
+                if (stadiums.iscombined) {
+                    for (var itemkey in stadiums.combined) {
+                        keys.push(itemkey);
+                    }
+
+                    keys.forEach(function (element) {
+                        updates['/stadiums/' + stadiums.stadiumkey + '/ministadiums/' + element + '/schedules/' + year + '/' + month + '/' + day + '/' + mainkey] = null;
+                        updates['/stadiumshistory/' + stadiums.stadiumkey + '/ministadiums/' + element + '/schedules/' + year + '/' + month + '/' + day + '/' + mainkey] = null;
+                    }, this);
+                }
+
+                updates['/stadiums/' + stadiums.stadiumkey + '/ministadiums/' + subkey + '/schedules/' + year + '/' + month + '/' + day + '/' + mainkey] = null;
+                updates['/stadiumshistory/' + stadiums.stadiumkey + '/ministadiums/' + subkey + '/schedules/' + year + '/' + month + '/' + day + '/' + mainkey] = null;
+
+
+                updates['/players/' + id + '/upcomingmatches/' + mainkey] = null;
+
+                updates['/accounting/' + id + '/' + mainkey] = null;
+
+
+                
+
+
+                return firebase.database().ref().update(updates);*/
             }
         }
     })

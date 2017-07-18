@@ -188,8 +188,7 @@ angular.module('football.controllers', [])
                 var f = storage.child("playerimages/" + name);
                 var task = f.putString(data, 'base64');
 
-                task.on('state_changed', function (snapshot) 
-                {
+                task.on('state_changed', function (snapshot) {
 
                 }, function (error) {
                     console.error("Unable to save image.");
@@ -380,7 +379,7 @@ angular.module('football.controllers', [])
                                         "color": color,
                                         "backcolor": backcolor,
                                         "identity": childSnapshot.child("identity").val(),
-                                        "settings":childSnapshot.child("settings").val()
+                                        "settings": childSnapshot.child("settings").val()
 
 
                                     };
@@ -843,8 +842,8 @@ angular.module('football.controllers', [])
 
                         callback(myprofile);
                     }, function (error) {
-                      //  alert("test");
-                      //  alert(error.message);
+                        //  alert("test");
+                        //  alert(error.message);
                     });
                 } catch (error) {
 
@@ -1094,7 +1093,7 @@ angular.module('football.controllers', [])
                         team2rank: challenge.team2rank,
                         teamone: 0,
                         teamonescore: 0,
-                        status:0
+                        status: 0
 
                     };
 
@@ -1170,7 +1169,7 @@ angular.module('football.controllers', [])
                         team2logo: challenge.team2logo,
                         team2name: challenge.team2name,
                         team2rank: challenge.team2rank,
-                        status:0
+                        status: 0
 
                     };
 
@@ -1394,7 +1393,7 @@ angular.module('football.controllers', [])
                 var user = firebase.auth().currentUser;
                 var id = user.uid;
 
-                firebase.database().ref('/teampoints').orderByChild("rating").limitToFirst(4).on('value',function (snapshot) {
+                firebase.database().ref('/teampoints').orderByChild("rating").limitToFirst(4).on('value', function (snapshot) {
                     RankedTeams = [];
                     snapshot.forEach(function (childSnapshot) {
 
@@ -1700,7 +1699,7 @@ angular.module('football.controllers', [])
                 }
 
             },
-            PostError: function (error,linenumber,filename) {
+            PostError: function (error, linenumber, filename) {
                 var user = firebase.auth().currentUser;
                 if (!(user == undefined || user != null)) {
                     var id = user.uid;
@@ -1711,8 +1710,8 @@ angular.module('football.controllers', [])
                             errorcode: error.code,
                             errordescription: error.message,
                             date: new Date(),
-                            linenumber:linenumber,
-                            filename:filename
+                            linenumber: linenumber,
+                            filename: filename
                         };
                     var newPostKey = firebase.database().ref().child('errors').push().key;
                     var updates = {};
@@ -1784,35 +1783,34 @@ angular.module('football.controllers', [])
 
 
             },
-            UpdateLastSeen: function()
-            {
+            UpdateLastSeen: function () {
                 var user = firebase.auth().currentUser;
-                    if (!(user === null || user == '' || user === undefined)) {
+                if (!(user === null || user == '' || user === undefined)) {
 
-                        var updates = {};
-                        var CurrentDate = new Date();
+                    var updates = {};
+                    var CurrentDate = new Date();
 
-                        var year = CurrentDate.getFullYear();
-                        var month = CurrentDate.getMonth();
-                        var day = CurrentDate.getDate();
+                    var year = CurrentDate.getFullYear();
+                    var month = CurrentDate.getMonth();
+                    var day = CurrentDate.getDate();
 
-                        var hour = CurrentDate.getHours();
-                        var minute = CurrentDate.getMinutes();
+                    var hour = CurrentDate.getHours();
+                    var minute = CurrentDate.getMinutes();
 
-                        updates['/players/' + user.uid + '/lastseen/loginyear'] = year;
-                        updates['/players/' + user.uid + '/lastseen/loginmonth'] = month;
-                        updates['/players/' + user.uid + '/lastseen/loginday'] = day;
-                        updates['/players/' + user.uid + '/lastseen/loginhour'] = hour;
-                        updates['/players/' + user.uid + '/lastseen/loginminute'] = minute;
+                    updates['/players/' + user.uid + '/lastseen/loginyear'] = year;
+                    updates['/players/' + user.uid + '/lastseen/loginmonth'] = month;
+                    updates['/players/' + user.uid + '/lastseen/loginday'] = day;
+                    updates['/players/' + user.uid + '/lastseen/loginhour'] = hour;
+                    updates['/players/' + user.uid + '/lastseen/loginminute'] = minute;
 
-                        updates['/playersinfo/' + user.uid + '/lastseen/loginyear'] = year;
-                        updates['/playersinfo/' + user.uid + '/lastseen/loginmonth'] = month;
-                        updates['/playersinfo/' + user.uid + '/lastseen/loginday'] = day;
-                        updates['/playersinfo/' + user.uid + '/lastseen/loginhour'] = hour;
-                        updates['/playersinfo/' + user.uid + '/lastseen/loginminute'] = minute;
+                    updates['/playersinfo/' + user.uid + '/lastseen/loginyear'] = year;
+                    updates['/playersinfo/' + user.uid + '/lastseen/loginmonth'] = month;
+                    updates['/playersinfo/' + user.uid + '/lastseen/loginday'] = day;
+                    updates['/playersinfo/' + user.uid + '/lastseen/loginhour'] = hour;
+                    updates['/playersinfo/' + user.uid + '/lastseen/loginminute'] = minute;
 
-                        firebase.database().ref().update(updates);
-                    }
+                    firebase.database().ref().update(updates);
+                }
             }
 
         }
@@ -1909,7 +1907,7 @@ angular.module('football.controllers', [])
                                 LoginStore.AddUser(newuser, $scope.registerdata).then(function (success) {
                                     var user = firebase.auth().currentUser;
 
-                                    if($scope.userImage!="img/PlayerProfile.png")
+                                    if ($scope.userImage != "img/PlayerProfile.png")
                                         FirebaseStorageService.saveUserProfilePicture($scope.userImage, user.uid);
 
                                     user.sendEmailVerification().then(function () {
@@ -1957,13 +1955,13 @@ angular.module('football.controllers', [])
 
             if (!usere) {
 
-           /*     $ionicLoading.show({
-                    content: 'Loading',
-                    animation: 'fade-in',
-                    showBackdrop: true,
-                    maxWidth: 200,
-                    showDelay: 0
-                });*/
+                /*     $ionicLoading.show({
+                         content: 'Loading',
+                         animation: 'fade-in',
+                         showBackdrop: true,
+                         maxWidth: 200,
+                         showDelay: 0
+                     });*/
 
                 firebase.auth().signInWithEmailAndPassword($scope.registerusername, $scope.registerpassword).then(function (user) {
 
@@ -2075,29 +2073,30 @@ angular.module('football.controllers', [])
                                         var credential = firebase.auth.FacebookAuthProvider.credential(token);
                                         firebase.auth().signInWithCredential(credential).then(function (result) {
                                             $scope.myprofile = result;
-                                            $timeout(function () {
-                                                var user = firebase.auth().currentUser;
-                                                if (user) {
+                                            var user = firebase.auth().currentUser;
+                                            if (user) {
 
-                                                    LoginStore.GetUser(function (data) {
-                                                        if (data) {
+                                                LoginStore.GetUser(function (data) {
+                                                    $ionicHistory.nextViewOptions({
+                                                        disableBack: true
+                                                    });
+                                                    if (data) {
+
+                                                        $ionicLoading.hide();
+                                                        $state.go('app.homepage');
+                                                    }
+                                                    else {
+                                                        LoginStore.AddFbUser($scope.myprofile).then(function (result) {
 
                                                             $ionicLoading.hide();
-                                                            $state.go('app.homepage');
-                                                        }
-                                                        else {
-                                                            LoginStore.AddFbUser($scope.myprofile).then(function (result) {
-
-                                                                $ionicLoading.hide();
-                                                                $state.go('app.firsttimelogin');
-                                                            }, function (error) {
-                                                                $ionicLoading.hide();
-                                                                alert(error.message);
-                                                            });
-                                                        }
-                                                    });
-                                                }
-                                            }, 1000);
+                                                            $state.go('app.firsttimelogin');
+                                                        }, function (error) {
+                                                            $ionicLoading.hide();
+                                                            alert(error.message);
+                                                        });
+                                                    }
+                                                });
+                                            }
                                         }).catch(function (error) {
                                             // Handle Errors here.
                                             alert(error.message);
