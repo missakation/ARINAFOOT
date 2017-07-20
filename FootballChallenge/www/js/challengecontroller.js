@@ -207,7 +207,7 @@ angular.module('football.controllers')
                                             }
                                             else
                                                 if (difference >= 24 * 60 && difference <= 48 * 60) {
-                                                    element.lastseen.text = "yesterday";
+                                                    element.lastseen.text = "Yesterday";
                                                 }
                                                 else {
                                                     element.lastseen.text = (difference / 24) + " days ago";

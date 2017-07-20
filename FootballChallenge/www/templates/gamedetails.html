@@ -147,7 +147,7 @@
 			<div class="col col-66" align="left" style="padding-top:0px;color:white; font-weight:bold;font-size:12px"> {{challenge.stadiums.stadiumname}} / {{challenge.stadiums.description}}
 			</div>
 
-			<div class="col" align="right" style="padding-top:0px;font-size:11px;color:#5f7485"> PRICE
+			<div class="col col-33" align="right" style="padding-top:0px;font-size:11px;color:#5f7485"> PRICE
 			</div>
 
 		</div>
@@ -161,7 +161,7 @@
 
 			</div>
 
-			<div class="col" align="right" style="padding:3px 0 0 0;color:white;margin-top:-8px;font-size:15px">
+			<div class="col col-33" align="right" style="padding:3px 0 0 0;color:white;margin-top:-8px;font-size:15px">
 				<b>
 	
 		{{challenge.stadiums.price}} LL
@@ -256,12 +256,15 @@
 					Players List
 				</h4>
 				<h6 class="graytext" ng-hide="!item.isadmin">
-					Invite at Least 5 Players
+					Invite at Least (404) Players
 				</h6>
 			</div>
 
 			<div class="row " ng-repeat="item in myplayers">
-				<div class="col col-50">
+					<div >
+						<img src="{{item.photo}}" style="margin-top:5px;border-radius:50px;border:1px solid #5f7485;width:42px;height:42px">
+					</div>
+				<div class="col col-30">
 					<h5 class="whitetext">
 						{{item.firstname}} {{item.lastname}}
 					</h5>
