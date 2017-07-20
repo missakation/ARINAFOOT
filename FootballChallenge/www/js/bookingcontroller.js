@@ -19,54 +19,53 @@ angular.module('football.controllers')
         $scope.previousbookings = [];
         $scope.selectedbookings = [];
 
-        $scope.notloaded = true;
 
-        BookingStore.GetMyUpcomingBookings(function (leagues) {
+        $scope.RefreshPage = function () {
+            $scope.notloaded = true;
+            BookingStore.GetMyUpcomingBookings(function (leagues) {
 
-            // Simple GET request example:
-            $http({
-                method: 'GET',
-                url: 'https://us-central1-project-6346119287623064588.cloudfunctions.net/date'
-            }).then(function successCallback(response) {
+                // Simple GET request example:
+                $http({
+                    method: 'GET',
+                    url: 'https://us-central1-project-6346119287623064588.cloudfunctions.net/date'
+                }).then(function successCallback(response) {
 
-                console.log(response);
+                    console.log(response);
 
-                $scope.bookings = leagues;
-                $scope.tabs.Current = true;
-                $scope.notloaded = false;
+                    $scope.bookings = leagues;
+                    $scope.tabs.Current = true;
+                    $scope.notloaded = false;
 
 
-                $scope.currentdate = new Date(response.data);
+                    $scope.currentdate = new Date(response.data);
 
-                for (var i = 0; i < $scope.bookings.length; i++) {
+                    for (var i = 0; i < $scope.bookings.length; i++) {
 
-                    if ($scope.bookings[i].date >= $scope.currentdate) {
-                        $scope.currentbookings.push($scope.bookings[i]);
+                        if ($scope.bookings[i].date >= $scope.currentdate) {
+                            $scope.currentbookings.push($scope.bookings[i]);
+                        }
+                        else {
+                            $scope.previousbookings.push($scope.bookings[i]);
+                        }
+
                     }
-                    else {
-                        $scope.previousbookings.push($scope.bookings[i]);
-                    }
 
-                }
+                    $scope.selectedbookings = $scope.currentbookings;
+                    console.log($scope.previousbookings);
+                }, function errorCallback(response) {
+                    alert(JSON.stringify(response));
+                });
 
-                $scope.selectedbookings = $scope.currentbookings;
-                console.log($scope.previousbookings);
-            }, function errorCallback(response) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-                alert(JSON.stringify(response));
+
             });
-
-
-        });
-
-        $scope.deletebooking = function () {
-
         }
+
+        $scope.RefreshPage();
+
 
         $scope.CancelBooking = function (item) {
 
-            var difference = (item.date - $scope.currentdate ) / 1000 / 60  / 60;
+            var difference = (item.date - $scope.currentdate) / 1000 / 60 / 60;
 
             firebase.database().ref('/stadiumsinfo/' + item.stadiumkey + '/ministadiums/' + item.ministadiumkey + '/cancellation').on('value', function (snapshot) {
 
@@ -78,8 +77,21 @@ angular.module('football.controllers')
 
                 }
                 else {
-                    
-                    
+
+                    BookingStore.GetBookingbyID(item, function (res) {
+                        console.log(res);
+                        if (res != null && res != []) {
+                            BookingStore.DeleteBookingByID(res).then(function () {
+                                console.log("Deleted Booking");
+                                $scope.RefreshPage();
+                            }, function (error) {
+                                console.log("ERROR ON DELETED");
+                            })
+                        }
+
+                    }, function (error) {
+                        console.log(error);
+                    })
 
                 }
 
