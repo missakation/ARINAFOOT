@@ -22,6 +22,10 @@ angular.module('football.controllers')
 
         $scope.RefreshPage = function () {
             $scope.notloaded = true;
+            $scope.currentbookings = [];
+            $scope.previousbookings = [];
+            $scope.selectedbookings = [];
+            
             BookingStore.GetMyUpcomingBookings(function (leagues) {
 
                 // Simple GET request example:
