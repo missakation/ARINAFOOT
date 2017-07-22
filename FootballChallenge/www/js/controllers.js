@@ -214,7 +214,8 @@ angular.module('football.controllers', [])
 
             UpdateProfile: function (profile, withdetails) {
                 try {
-
+                    console.log("HERE");
+                    console.log(profile);
 
                     var ageset = profile.age.getFullYear() == 1900 ? false : true;
 
@@ -250,6 +251,9 @@ angular.module('football.controllers', [])
                     updates['players/' + id + '/ageyear'] = year;
                     updates['players/' + id + '/agemonth'] = month;
                     updates['players/' + id + '/ageday'] = day;
+
+                    updates['players/' + id + '/favlatitude'] = profile.favlatitude;
+                    updates['players/' + id + '/favlongitude'] = profile.favlongitude;
 
 
                     //Age
@@ -287,6 +291,9 @@ angular.module('football.controllers', [])
                     updates['playersinfo/' + id + '/ageyear'] = year;
                     updates['playersinfo/' + id + '/agemonth'] = month;
                     updates['playersinfo/' + id + '/ageday'] = day;
+
+                    updates['playersinfo/' + id + '/ageday'] = profile.favlatitude;;
+                    updates['playersinfo/' + id + '/ageday'] = profile.favlongitude;;
 
                     if (withdetails) {
                         //Age

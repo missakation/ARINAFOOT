@@ -425,15 +425,15 @@ angular.module('football.controllers')
 
                     firebase.database().ref('/stadiums').on('value', function (snapshot) {
                         AllStadiums = [];
-                        snapshot.forEach(function (minisnapshot) {
+                        snapshot.forEach(function (mainsnapshot) {
 
                             var Data = {
-                                "key": minisnapshot.key,
-                                "name": minisnapshot.child("name").val(),
-                                "photo": minisnapshot.child("photo").val(),
-                                "area": minisnapshot.child("locationarea").val(),
-                                "latitude": minisnapshot.child("cordovalatitude").val(),
-                                "longitude": minisnapshot.child("cordovalongitude").val()
+                                "key": mainsnapshot.key,
+                                "name": mainsnapshot.child("name").val(),
+                                "photo": mainsnapshot.child("photo").val(),
+                                "area": mainsnapshot.child("locationarea").val(),
+                                "latitude": mainsnapshot.child("cordovalatitude").val(),
+                                "longitude": mainsnapshot.child("cordovalongitude").val()
 
 
                             };

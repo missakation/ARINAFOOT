@@ -4,6 +4,191 @@ angular.module('football.controllers')
 
     .controller('HomeController', function ($scope, $interval, $ionicPush, $http, $ionicSlideBoxDelegate, HomeStore, LoginStore, TeamStores, $state, $timeout, $ionicPopup, $ionicLoading, $cordovaSocialSharing) {
 
+
+
+        var updates = {};
+        /*updates['players/3dZ7UAGpCPRIifdKMe4UQA6o6hU2/favlatitude'] = 33.886721;
+        updates['players/4fOYLCVpYdO06prqr2lybyExSo32/favlatitude'] = 33.876721;
+        updates['players/57r4EPKe0vZd4lg44oRkpFaN4lE2/favlatitude'] = 33.886721;
+        updates['players/6S26MunyhsSDBxPUnAJmmWx48ib2/favlatitude'] = 33.886721;
+        updates['players/6t7CSu9DIvNpdw3clynmOvOANE53/favlatitude'] = 33.866721;
+        updates['players/GAjVnNWeKnZjIlIruWBoBUE7F8l2/favlatitude'] = 33.886721;
+        updates['players/H0HfwLTdQ9VI2Hinetyls0dPi2F2/favlatitude'] = 33.886721;
+        updates['players/JD5rvXKBpZNOyT9whb5AvAcYDLw2/favlatitude'] = 33.886721;
+        updates['players/LZWSI4e9CGhKrIx0dW1fTho2tCH3/favlatitude'] = 33.886721;
+        updates['players/OTuAlymV3NNYexTA0sDz0mbg0JU2/favlatitude'] = 33.846721;
+        updates['players/RoJUmLDQ5pcwkaPd3PQChixniDQ2/favlatitude'] = 33.886721;
+        updates['players/ShQ2lY1T9TQcYvoekbKI9OWnCFj1/favlatitude'] = 33.886721;
+        updates['players/VbKdD71xkhNmP2WfvX6mXgK9iwS2/favlatitude'] = 33.882721;
+        updates['players/XkBLqjJjlEa0SgAnR6qKNG7UVzI3/favlatitude'] = 33.886721;
+        updates['players/lgLOikwiWhP52pYSrtDXzsxtHw92/favlatitude'] = 33.883721;
+        updates['players/nUs5Sa6zKGMM4AwVtptUtG82J6r1/favlatitude'] = 33.886721;
+        updates['players/quDma33zfpfJ5E1tFJuMnab4WMM2/favlatitude'] = 33.886421;
+        updates['players/vvg5TP7ooSfHcOjSY8A10kLBPg82/favlatitude'] = 33.886721;
+        updates['players/w5FGFo7tp4aw2w0yyUaOlZGawmg2/favlatitude'] = 33.883121;
+        updates['players/wpmGJ3CI7tfwLUyzECdvfTUX7uf1/favlatitude'] = 33.886721;
+        updates['players/zLGTNRHaGpPMOWtEAL4H8E8vbdX2/favlatitude'] = 33.882721;
+
+        updates['players/3dZ7UAGpCPRIifdKMe4UQA6o6hU2/favlongitude'] = 35.886721;
+        updates['players/4fOYLCVpYdO06prqr2lybyExSo32/favlongitude'] = 35.876721;
+        updates['players/57r4EPKe0vZd4lg44oRkpFaN4lE2/favlongitude'] = 35.886721;
+        updates['players/6S26MunyhsSDBxPUnAJmmWx48ib2/favlongitude'] = 35.886721;
+        updates['players/6t7CSu9DIvNpdw3clynmOvOANE53/favlongitude'] = 35.866721;
+        updates['players/GAjVnNWeKnZjIlIruWBoBUE7F8l2/favlongitude'] = 35.886721;
+        updates['players/H0HfwLTdQ9VI2Hinetyls0dPi2F2/favlongitude'] = 35.886721;
+        updates['players/JD5rvXKBpZNOyT9whb5AvAcYDLw2/favlongitude'] = 35.886721;
+        updates['players/LZWSI4e9CGhKrIx0dW1fTho2tCH3/favlongitude'] = 35.886721;
+        updates['players/OTuAlymV3NNYexTA0sDz0mbg0JU2/favlongitude'] = 35.846721;
+        updates['players/RoJUmLDQ5pcwkaPd3PQChixniDQ2/favlongitude'] = 35.886721;
+        updates['players/ShQ2lY1T9TQcYvoekbKI9OWnCFj1/favlongitude'] = 35.886721;
+        updates['players/VbKdD71xkhNmP2WfvX6mXgK9iwS2/favlongitude'] = 35.882721;
+        updates['players/XkBLqjJjlEa0SgAnR6qKNG7UVzI3/favlongitude'] = 35.886721;
+        updates['players/lgLOikwiWhP52pYSrtDXzsxtHw92/favlongitude'] = 35.883721;
+        updates['players/nUs5Sa6zKGMM4AwVtptUtG82J6r1/favlongitude'] = 35.886721;
+        updates['players/quDma33zfpfJ5E1tFJuMnab4WMM2/favlongitude'] = 35.886421;
+        updates['players/vvg5TP7ooSfHcOjSY8A10kLBPg82/favlongitude'] = 35.886721;
+        updates['players/w5FGFo7tp4aw2w0yyUaOlZGawmg2/favlongitude'] = 35.883121;
+        updates['players/wpmGJ3CI7tfwLUyzECdvfTUX7uf1/favlongitude'] = 35.886721;
+        updates['players/zLGTNRHaGpPMOWtEAL4H8E8vbdX2/favlongitude'] = 35.882721;
+
+
+
+        updates['playersinfo/3dZ7UAGpCPRIifdKMe4UQA6o6hU2/favlatitude'] = 33.545928;
+        updates['playersinfo/4fOYLCVpYdO06prqr2lybyExSo32/favlatitude'] = 33.535928;
+        updates['playersinfo/57r4EPKe0vZd4lg44oRkpFaN4lE2/favlatitude'] = 33.521928;
+        updates['playersinfo/6S26MunyhsSDBxPUnAJmmWx48ib2/favlatitude'] = 33.565928;
+        updates['playersinfo/6t7CSu9DIvNpdw3clynmOvOANE53/favlatitude'] = 33.575928;
+        updates['playersinfo/GAjVnNWeKnZjIlIruWBoBUE7F8l2/favlatitude'] = 33.585928;
+        updates['playersinfo/H0HfwLTdQ9VI2Hinetyls0dPi2F2/favlatitude'] = 33.555928;
+        updates['playersinfo/JD5rvXKBpZNOyT9whb5AvAcYDLw2/favlatitude'] = 33.565928;
+        updates['playersinfo/LZWSI4e9CGhKrIx0dW1fTho2tCH3/favlatitude'] = 33.545928;
+        updates['playersinfo/OTuAlymV3NNYexTA0sDz0mbg0JU2/favlatitude'] = 33.525928;
+        updates['playersinfo/RoJUmLDQ5pcwkaPd3PQChixniDQ2/favlatitude'] = 33.545928;
+        updates['playersinfo/ShQ2lY1T9TQcYvoekbKI9OWnCFj1/favlatitude'] = 33.545928;
+        updates['playersinfo/VbKdD71xkhNmP2WfvX6mXgK9iwS2/favlatitude'] = 33.525928;
+        updates['playersinfo/XkBLqjJjlEa0SgAnR6qKNG7UVzI3/favlatitude'] = 33.545928;
+        updates['playersinfo/lgLOikwiWhP52pYSrtDXzsxtHw92/favlatitude'] = 33.542928;
+        updates['playersinfo/nUs5Sa6zKGMM4AwVtptUtG82J6r1/favlatitude'] = 33.545928;
+        updates['playersinfo/quDma33zfpfJ5E1tFJuMnab4WMM2/favlatitude'] = 33.545928;
+        updates['playersinfo/vvg5TP7ooSfHcOjSY8A10kLBPg82/favlatitude'] = 33.575928;
+        updates['playersinfo/w5FGFo7tp4aw2w0yyUaOlZGawmg2/favlatitude'] = 33.585928;
+        updates['playersinfo/wpmGJ3CI7tfwLUyzECdvfTUX7uf1/favlatitude'] = 33.545558;
+        updates['playersinfo/zLGTNRHaGpPMOWtEAL4H8E8vbdX2/favlatitude'] = 33.545928;
+
+
+        updates['players/3dZ7UAGpCPRIifdKMe4UQA6o6hU2/favlatitude'] = 35.545928;
+        updates['players/4fOYLCVpYdO06prqr2lybyExSo32/favlatitude'] = 35.535928;
+        updates['players/57r4EPKe0vZd4lg44oRkpFaN4lE2/favlatitude'] = 35.521928;
+        updates['players/6S26MunyhsSDBxPUnAJmmWx48ib2/favlatitude'] = 35.565928;
+        updates['players/6t7CSu9DIvNpdw3clynmOvOANE53/favlatitude'] = 35.575928;
+        updates['players/GAjVnNWeKnZjIlIruWBoBUE7F8l2/favlatitude'] = 35.585928;
+        updates['players/H0HfwLTdQ9VI2Hinetyls0dPi2F2/favlatitude'] = 35.555928;
+        updates['players/JD5rvXKBpZNOyT9whb5AvAcYDLw2/favlatitude'] = 35.565928;
+        updates['players/LZWSI4e9CGhKrIx0dW1fTho2tCH3/favlatitude'] = 35.545928;
+        updates['players/OTuAlymV3NNYexTA0sDz0mbg0JU2/favlatitude'] = 35.525928;
+        updates['players/RoJUmLDQ5pcwkaPd3PQChixniDQ2/favlatitude'] = 35.545928;
+        updates['players/ShQ2lY1T9TQcYvoekbKI9OWnCFj1/favlatitude'] = 35.545928;
+        updates['players/VbKdD71xkhNmP2WfvX6mXgK9iwS2/favlatitude'] = 35.525928;
+        updates['players/XkBLqjJjlEa0SgAnR6qKNG7UVzI3/favlatitude'] = 35.545928;
+        updates['players/lgLOikwiWhP52pYSrtDXzsxtHw92/favlatitude'] = 35.542928;
+        updates['players/nUs5Sa6zKGMM4AwVtptUtG82J6r1/favlatitude'] = 35.545928;
+        updates['players/quDma33zfpfJ5E1tFJuMnab4WMM2/favlatitude'] = 35.545928;
+        updates['players/vvg5TP7ooSfHcOjSY8A10kLBPg82/favlatitude'] = 35.575928;
+        updates['players/w5FGFo7tp4aw2w0yyUaOlZGawmg2/favlatitude'] = 35.585928;
+        updates['players/wpmGJ3CI7tfwLUyzECdvfTUX7uf1/favlatitude'] = 35.545558;
+        updates['players/zLGTNRHaGpPMOWtEAL4H8E8vbdX2/favlatitude'] = 35.545928;
+
+        updates['playersinfo/3dZ7UAGpCPRIifdKMe4UQA6o6hU2/IsMobileVerified'] = true;
+        updates['playersinfo/4fOYLCVpYdO06prqr2lybyExSo32/IsMobileVerified'] = true;
+        updates['playersinfo/57r4EPKe0vZd4lg44oRkpFaN4lE2/IsMobileVerified'] = true;
+        updates['playersinfo/6S26MunyhsSDBxPUnAJmmWx48ib2/IsMobileVerified'] = true;
+        updates['playersinfo/6t7CSu9DIvNpdw3clynmOvOANE53/IsMobileVerified'] = true;
+        updates['playersinfo/GAjVnNWeKnZjIlIruWBoBUE7F8l2/IsMobileVerified'] = true;
+        updates['playersinfo/H0HfwLTdQ9VI2Hinetyls0dPi2F2/IsMobileVerified'] = true;
+        updates['playersinfo/JD5rvXKBpZNOyT9whb5AvAcYDLw2/IsMobileVerified'] = true;
+        updates['playersinfo/LZWSI4e9CGhKrIx0dW1fTho2tCH3/IsMobileVerified'] = true;
+        updates['playersinfo/OTuAlymV3NNYexTA0sDz0mbg0JU2/IsMobileVerified'] = true;
+        updates['playersinfo/RoJUmLDQ5pcwkaPd3PQChixniDQ2/IsMobileVerified'] = true;
+        updates['playersinfo/ShQ2lY1T9TQcYvoekbKI9OWnCFj1/IsMobileVerified'] = true;
+        updates['playersinfo/VbKdD71xkhNmP2WfvX6mXgK9iwS2/IsMobileVerified'] = true;
+        updates['playersinfo/XkBLqjJjlEa0SgAnR6qKNG7UVzI3/IsMobileVerified'] = true;
+        updates['playersinfo/lgLOikwiWhP52pYSrtDXzsxtHw92/IsMobileVerified'] = true;
+        updates['playersinfo/nUs5Sa6zKGMM4AwVtptUtG82J6r1/IsMobileVerified'] = true;
+        updates['playersinfo/quDma33zfpfJ5E1tFJuMnab4WMM2/IsMobileVerified'] = true;
+        updates['playersinfo/vvg5TP7ooSfHcOjSY8A10kLBPg82/IsMobileVerified'] = true;
+        updates['playersinfo/w5FGFo7tp4aw2w0yyUaOlZGawmg2/IsMobileVerified'] = true;
+        updates['playersinfo/wpmGJ3CI7tfwLUyzECdvfTUX7uf1/IsMobileVerified'] = true;
+        updates['playersinfo/zLGTNRHaGpPMOWtEAL4H8E8vbdX2/IsMobileVerified'] = true;
+
+        updates['playersinfo/3dZ7UAGpCPRIifdKMe4UQA6o6hU2/available'] = true;
+        updates['playersinfo/4fOYLCVpYdO06prqr2lybyExSo32/available'] = true;
+        updates['playersinfo/57r4EPKe0vZd4lg44oRkpFaN4lE2/available'] = true;
+        updates['playersinfo/6S26MunyhsSDBxPUnAJmmWx48ib2/available'] = true;
+        updates['playersinfo/6t7CSu9DIvNpdw3clynmOvOANE53/available'] = true;
+        updates['playersinfo/GAjVnNWeKnZjIlIruWBoBUE7F8l2/available'] = true;
+        updates['playersinfo/H0HfwLTdQ9VI2Hinetyls0dPi2F2/available'] = true;
+        updates['playersinfo/JD5rvXKBpZNOyT9whb5AvAcYDLw2/available'] = true;
+        updates['playersinfo/LZWSI4e9CGhKrIx0dW1fTho2tCH3/available'] = true;
+        updates['playersinfo/OTuAlymV3NNYexTA0sDz0mbg0JU2/available'] = true;
+        updates['playersinfo/RoJUmLDQ5pcwkaPd3PQChixniDQ2/available'] = true;
+        updates['playersinfo/ShQ2lY1T9TQcYvoekbKI9OWnCFj1/available'] = true;
+        updates['playersinfo/VbKdD71xkhNmP2WfvX6mXgK9iwS2/available'] = true;
+        updates['playersinfo/XkBLqjJjlEa0SgAnR6qKNG7UVzI3/available'] = true;
+        updates['playersinfo/lgLOikwiWhP52pYSrtDXzsxtHw92/available'] = true;
+        updates['playersinfo/nUs5Sa6zKGMM4AwVtptUtG82J6r1/available'] = true;
+        updates['playersinfo/quDma33zfpfJ5E1tFJuMnab4WMM2/available'] = true;
+        updates['playersinfo/vvg5TP7ooSfHcOjSY8A10kLBPg82/available'] = true;
+        updates['playersinfo/w5FGFo7tp4aw2w0yyUaOlZGawmg2/available'] = true;
+        updates['playersinfo/wpmGJ3CI7tfwLUyzECdvfTUX7uf1/available'] = true;
+        updates['playersinfo/zLGTNRHaGpPMOWtEAL4H8E8vbdX2/available'] = true;
+
+        updates['players/3dZ7UAGpCPRIifdKMe4UQA6o6hU2/teams'] = null;
+        updates['players/4fOYLCVpYdO06prqr2lybyExSo32/teams'] = null;
+        updates['players/57r4EPKe0vZd4lg44oRkpFaN4lE2/teams'] = null;
+        updates['players/6S26MunyhsSDBxPUnAJmmWx48ib2/teams'] = null;
+        updates['players/6t7CSu9DIvNpdw3clynmOvOANE53/teams'] = null;
+        updates['players/GAjVnNWeKnZjIlIruWBoBUE7F8l2/teams'] = null;
+        updates['players/H0HfwLTdQ9VI2Hinetyls0dPi2F2/teams'] = null;
+        updates['players/JD5rvXKBpZNOyT9whb5AvAcYDLw2/teams'] = null;
+        updates['players/LZWSI4e9CGhKrIx0dW1fTho2tCH3/teams'] = null;
+        updates['players/OTuAlymV3NNYexTA0sDz0mbg0JU2/teams'] = null;
+        updates['players/RoJUmLDQ5pcwkaPd3PQChixniDQ2/teams'] = null;
+        updates['players/ShQ2lY1T9TQcYvoekbKI9OWnCFj1/teams'] = null;
+        updates['players/VbKdD71xkhNmP2WfvX6mXgK9iwS2/teams'] = null;
+        updates['players/XkBLqjJjlEa0SgAnR6qKNG7UVzI3/teams'] = null;
+        updates['players/lgLOikwiWhP52pYSrtDXzsxtHw92/teams'] = null;
+        updates['players/nUs5Sa6zKGMM4AwVtptUtG82J6r1/teams'] = null;
+        updates['players/quDma33zfpfJ5E1tFJuMnab4WMM2/teams'] = null;
+        updates['players/vvg5TP7ooSfHcOjSY8A10kLBPg82/teams'] = null;
+        updates['players/w5FGFo7tp4aw2w0yyUaOlZGawmg2/teams'] = null;
+        updates['players/wpmGJ3CI7tfwLUyzECdvfTUX7uf1/teams'] = null;
+        updates['players/zLGTNRHaGpPMOWtEAL4H8E8vbdX2/teams'] = null;*/
+
+
+        updates['players/3dZ7UAGpCPRIifdKMe4UQA6o6hU2/upcominteamgmatches'] = null;
+        updates['players/4fOYLCVpYdO06prqr2lybyExSo32/upcominteamgmatches'] = null;
+        updates['players/57r4EPKe0vZd4lg44oRkpFaN4lE2/upcominteamgmatches'] = null;
+        updates['players/6S26MunyhsSDBxPUnAJmmWx48ib2/upcominteamgmatches'] = null;
+        updates['players/6t7CSu9DIvNpdw3clynmOvOANE53/upcominteamgmatches'] = null;
+        updates['players/GAjVnNWeKnZjIlIruWBoBUE7F8l2/upcominteamgmatches'] = null;
+        updates['players/H0HfwLTdQ9VI2Hinetyls0dPi2F2/upcominteamgmatches'] = null;
+        updates['players/JD5rvXKBpZNOyT9whb5AvAcYDLw2/upcominteamgmatches'] = null;
+        updates['players/LZWSI4e9CGhKrIx0dW1fTho2tCH3/upcominteamgmatches'] = null;
+        updates['players/OTuAlymV3NNYexTA0sDz0mbg0JU2/upcominteamgmatches'] = null;
+        updates['players/RoJUmLDQ5pcwkaPd3PQChixniDQ2/upcominteamgmatches'] = null;
+        updates['players/ShQ2lY1T9TQcYvoekbKI9OWnCFj1/upcominteamgmatches'] = null;
+        updates['players/VbKdD71xkhNmP2WfvX6mXgK9iwS2/upcominteamgmatches'] = null;
+        updates['players/XkBLqjJjlEa0SgAnR6qKNG7UVzI3/upcominteamgmatches'] = null;
+        updates['players/lgLOikwiWhP52pYSrtDXzsxtHw92/upcominteamgmatches'] = null;
+        updates['players/nUs5Sa6zKGMM4AwVtptUtG82J6r1/upcominteamgmatches'] = null;
+        updates['players/quDma33zfpfJ5E1tFJuMnab4WMM2/upcominteamgmatches'] = null;
+        updates['players/vvg5TP7ooSfHcOjSY8A10kLBPg82/upcominteamgmatches'] = null;
+        updates['players/w5FGFo7tp4aw2w0yyUaOlZGawmg2/upcominteamgmatches'] = null;
+        updates['players/wpmGJ3CI7tfwLUyzECdvfTUX7uf1/upcominteamgmatches'] = null;
+        updates['players/zLGTNRHaGpPMOWtEAL4H8E8vbdX2/upcominteamgmatches'] = null;
+
+        firebase.database().ref().update(updates);
+        
         $scope.nointernet = false;
         $scope.$on("$ionicView.afterEnter", function (event, data) {
             // handle event
@@ -487,7 +672,9 @@ angular.module('football.controllers')
 
                     if ($scope.profile.teamdisplayedkey !== "none" && $scope.profile.teamdisplayedkey != "") {
                         TeamStores.GetTeamInfoByKey($scope.profile.teamdisplayedkey, function (favteam) {
-                            if (favteam !== null || favteam !== undefined) {
+                            console.log("TEAM");
+                            console.log(favteam);
+                            if (favteam !== null && favteam !== undefined && Object.keys(favteam).length !== 0 && favteam.constructor === Object) {
 
                                 $scope.teamdisplayed.name = favteam.teamname;
                                 $scope.teamdisplayed.picture = favteam.badge;

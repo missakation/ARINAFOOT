@@ -340,6 +340,9 @@ angular.module('football.controllers')
                                             "difficultytext": difficultytext,
                                             "comments": childSnapshot.child("comments").val(),
                                             "members": snapshot.child("players").numChildren() - 1,
+                                            "favlatitude": childSnapshot.child("favlatitude").val(),
+                                            "favlongitude": childSnapshot.child("favlongitude").val()
+
                                         };
                                         AllITems.push(Items);
                                     }
