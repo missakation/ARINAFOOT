@@ -439,7 +439,7 @@
 			</h5>
 		</div>
 
-		<div class="card" style="background-color:rgb(62,83,100)" ng-repeat="team in filteredTeams">
+		<div class="card" style="background-color:rgb(62,83,100)" ng-repeat="team in filteredTeams | orderBy: 'points':false">
 
 			<div class="row" style="padding:5px 0 0 0">
 				<div class="col" style="padding:0px;border-right:1px solid #5f7485" align="center">

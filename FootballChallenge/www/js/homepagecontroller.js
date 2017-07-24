@@ -162,7 +162,7 @@ angular.module('football.controllers')
         updates['players/vvg5TP7ooSfHcOjSY8A10kLBPg82/teams'] = null;
         updates['players/w5FGFo7tp4aw2w0yyUaOlZGawmg2/teams'] = null;
         updates['players/wpmGJ3CI7tfwLUyzECdvfTUX7uf1/teams'] = null;
-        updates['players/zLGTNRHaGpPMOWtEAL4H8E8vbdX2/teams'] = null;*/
+        updates['players/zLGTNRHaGpPMOWtEAL4H8E8vbdX2/teams'] = null;
 
 
         updates['players/3dZ7UAGpCPRIifdKMe4UQA6o6hU2/upcominteamgmatches'] = null;
@@ -187,7 +187,90 @@ angular.module('football.controllers')
         updates['players/wpmGJ3CI7tfwLUyzECdvfTUX7uf1/upcominteamgmatches'] = null;
         updates['players/zLGTNRHaGpPMOWtEAL4H8E8vbdX2/upcominteamgmatches'] = null;
 
-        firebase.database().ref().update(updates);
+        updates['teams/-KpfHCX5ZD7jjtYgMAWF/reviewrating'] =5;
+        updates['teams/-KpfIdV1NBMMezJe5Wdq/reviewrating'] = 5;
+
+        updates['teaminfo/-KpfHCX5ZD7jjtYgMAWF/reviewrating'] = 5;
+        updates['teaminfo/-KpfIdV1NBMMezJe5Wdq/reviewrating'] = 5;*/
+
+
+
+        for (var i = 0; i < 50; i++) {
+            var updates = {};
+                                var contact = {
+                        //badge:team.badge,
+                        available: true,
+                        rating: 1500,
+                        status: '1',
+                        teamadmin: '',
+                        teamadminphoto: '',
+                        teamname: i+'teamname',
+                        yellowcard: 0,
+                        pteamsize: 5,
+                        startmonday: 7,
+                        startmondayend: 23,
+                        starttuesday: 7,
+                        starttuesdayend: 23,
+                        startwednesday: 7,
+                        startwednesdayend: 23,
+                        startthursday: 7,
+                        startthursdayend: 23,
+                        startfriday: 7,
+                        startfridayend: 23,
+                        startsaturday: 7,
+                        startsaturdayend: 23,
+                        startsunday: 7,
+                        startsundayend: 23,
+                        favstadium: "",
+                        favstadiumphoto: '',
+                        homejersey: 'white',
+                        awayjersey: 'white',
+                        badge: 'b01',
+                        rank: 0,
+                        numberofgames: 0,
+                        wins: 0,
+                        winstreak: 0,
+
+                        teamoffive: true,
+                        teamofsix: true,
+                        teamofseven: true,
+                        teamofeight: true,
+                        teamofnine: true,
+                        teamoften: true,
+                        teamofeleven: true,
+
+                        dateyear: 1,
+                        datemonth: 1,
+                        dateday: 1,
+
+                        datehour: 1,
+                        dateminute: 1,
+                        players: {
+                            firstone: true,
+                        },
+                        captain: {
+                            firstone: true,
+                        },
+                        timestamp: firebase.database.ServerValue.TIMESTAMP,
+
+                        comments: "",
+
+                        favlatitude: 100,
+                        favlongitude: 100,
+                        reviewrating: 5
+                        
+
+                    };
+
+                        
+                        updates['/teams/' + i] = null;
+                        updates['/teaminfo/' + i] = null;
+                        updates['/teamnames/' + contact.teamname] = null;
+                    firebase.database().ref().update(updates);
+
+        }
+
+        
         
         $scope.nointernet = false;
         $scope.$on("$ionicView.afterEnter", function (event, data) {

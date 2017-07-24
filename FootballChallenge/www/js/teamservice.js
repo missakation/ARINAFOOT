@@ -191,7 +191,9 @@
                         comments: "",
 
                         favlatitude: newteam.favlatitude,
-                        favlongitude: newteam.favlongitude
+                        favlongitude: newteam.favlongitude,
+                        reviewrating: 5
+                        
 
                     };
 

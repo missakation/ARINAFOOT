@@ -266,7 +266,7 @@ angular.module('football.controllers')
 
                 }
                 //    firebase.database().ref('/teams').limitToFirst(4).once('value').then(function (snapshot) {
-                firebase.database().ref('/teaminfo').orderByChild(startend).startAt(hour).once('value').then(function (snapshot) {
+                firebase.database().ref('/teaminfo').orderByChild(startend).startAt(hour).on('value',function (snapshot) {
                     //alert(firstName);
                     AllITems = [];
 
@@ -341,7 +341,8 @@ angular.module('football.controllers')
                                             "comments": childSnapshot.child("comments").val(),
                                             "members": snapshot.child("players").numChildren() - 1,
                                             "favlatitude": childSnapshot.child("favlatitude").val(),
-                                            "favlongitude": childSnapshot.child("favlongitude").val()
+                                            "favlongitude": childSnapshot.child("favlongitude").val(),
+                                            "reviewrating": childSnapshot.child("reviewrating").val()
 
                                         };
                                         AllITems.push(Items);

@@ -259,6 +259,11 @@ angular.module('football.controllers')
 
                             element.distance = d.toFixed(2);
 
+                            element.points = Math.abs(($scope.myteam.rating - element.rating)) + element.distance * 5 + ((5 - element.reviewrating) * 20);
+
+
+
+
                         }, this);
                     }
 
