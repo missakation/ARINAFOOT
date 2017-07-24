@@ -148,7 +148,9 @@ angular.module('football.controllers')
                                             "photo": childSnapshot.child("photoURL").val() == "" ? "img/PlayerProfile.png" : childSnapshot.child("photoURL").val(),
 
                                             "teamdisplayedkey": childSnapshot.child("teamdisplayedkey").val(),
-                                            "teambadge": ""
+                                            "teambadge": "",
+                                            "favlatitude": childSnapshot.child("favlatitude").val(),
+                                            "favlongitude": childSnapshot.child("favlongitude").val()
 
 
                                         };
@@ -177,9 +179,10 @@ angular.module('football.controllers')
                                             Items.lastseen.date.setDate(childSnapshot.val().lastseen.loginday);
 
                                             var difference = (new Date() - Items.lastseen.date) / 1000 / 60;
+                                            Items.seendifference = difference;
 
                                             if (difference < 20) {
-                                                Items.lastseen.text = "online";
+                                                Items.lastseen.text = "Online";
                                             }
                                             else
                                                 if (difference <= 60) {
@@ -191,14 +194,14 @@ angular.module('football.controllers')
                                                     }
                                                     else
                                                         if (difference >= 24 * 60 && difference <= 48 * 60) {
-                                                            Items.lastseen.text = "yesterday";
+                                                            Items.lastseen.text = "Yesterday";
                                                         }
                                                         else {
                                                             Items.lastseen.text = (Math.floor((difference / 60 / 24))) + " days ago";
                                                         }
-                                            }
+                                        }
 
-                                        
+
 
                                         AvailablePlayers.push(Items)
                                     }

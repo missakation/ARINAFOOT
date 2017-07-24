@@ -130,6 +130,7 @@
                 var hour = today.getHours();
                 var minute = today.getMinutes();
 
+
                 try {
                     var contact = {
                         //badge:team.badge,
@@ -187,7 +188,12 @@
                         },
                         timestamp: firebase.database.ServerValue.TIMESTAMP,
 
-                        comments: ""
+                        comments: "",
+
+                        favlatitude: newteam.favlatitude,
+                        favlongitude: newteam.favlongitude,
+                        reviewrating: 5
+                        
 
                     };
 
@@ -406,7 +412,7 @@
                                         photo: challenges.child("photo").val(),
                                         price: challenges.child("price").val(),
                                         stadiumdescription: challenges.child("stadiumdescription").val(),
-                                        status:challenges.child("status").val() //0 didnt begin 1 win 2 loss 3 draw
+                                        status: challenges.child("status").val() //0 didnt begin 1 win 2 loss 3 draw
 
                                     }
                                     upcomingmatches.push(matchdata);
@@ -503,7 +509,7 @@
                 try {
 
 
-                    firebase.database().ref('/teaminfo/' + key).on('value',function (snapshot) {
+                    firebase.database().ref('/teaminfo/' + key).on('value', function (snapshot) {
                         TeamProfileInfo = {};
 
                         if (snapshot.exists()) {
@@ -616,7 +622,7 @@
                     for (var i = 0; i < members.length; i++) {
                         updates['/players/' + members[i].key + '/teams/' + team.key] = null;
                     }
-                    updates['/teamnames/' + team.teamname ] = null;
+                    updates['/teamnames/' + team.teamname] = null;
 
 
 
@@ -659,6 +665,9 @@
                     updates['teams/' + id + '/favstadiumphoto'] = profile.favstadiumphoto;
                     updates['teams/' + id + '/available'] = profile.available;
 
+                    updates['teams/' + id + '/favlatitude'] = profile.favlatitude;
+                    updates['teams/' + id + '/favlongitude'] = profile.favlongitude;
+
 
 
 
@@ -680,6 +689,9 @@
                     updates['teaminfo/' + id + '/favstadium'] = profile.favstadium;
                     updates['teaminfo/' + id + '/favstadiumphoto'] = profile.favstadiumphoto;
                     updates['teaminfo/' + id + '/available'] = profile.available;
+
+                    updates['teaminfo/' + id + '/favlatitude'] = profile.favlatitude;
+                    updates['teaminfo/' + id + '/favlongitude'] = profile.favlongitude;
 
 
                     return firebase.database().ref().update(updates);

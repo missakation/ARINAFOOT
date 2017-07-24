@@ -34,7 +34,7 @@ angular.module('football.controllers')
         $scope.refreshpage = function () {
             //works
                 ProfileStore.GetProfileInfo(function (myprofile) {
-                    console.log(myprofile);
+                    
                     $scope.currentprofile = myprofile;
                     if ($scope.currentprofile.photo.trim() == "") {
                         $scope.currentprofile.photo = "img/PlayerProfile.png"
@@ -60,8 +60,6 @@ angular.module('football.controllers')
                             }
 
                             //$scope.currentprofile["teamdisplayed"] = $scope.teamdisplayed.name == "" ? "Select a Team" : $scope.teamdisplayed.name;
-
-
 
                         })
                     }
@@ -481,7 +479,6 @@ angular.module('football.controllers')
 
         $scope.UpdateUser = function (profile) {
             
-            console.log($scope.currentprofile);
 
             if ($scope.currentprofile.teamdisplayed == "Select a Team" || $scope.currentprofile.teamdisplayed == "" || $scope.currentprofile.teamdisplayed == null) {
                 $scope.currentprofile.teamdisplayedkey = "none";

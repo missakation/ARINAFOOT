@@ -1,14 +1,18 @@
 <style>
-		.bar.bar-royal {
-		background-color:rgb(46,62,85);
-		border:rgb(46,62,85);
+	.bar.bar-royal {
+		background-color: rgb(46, 62, 85);
+		border: rgb(46, 62, 85);
 	}
-		.filter-bar .filter-bar-wrapper .item-input-inset .icon.placeholder-icon:before {
-		font-size:26px;
-		}
-		.bar .button.button-icon, .bar button.button-icon {
-			color:white;
-		}
+
+	.filter-bar .filter-bar-wrapper .item-input-inset .icon.placeholder-icon:before {
+		font-size: 26px;
+	}
+
+	.bar .button.button-icon,
+	.bar button.button-icon {
+		color: white;
+	}
+
 	.item {
 		background-color: #2d3e4b;
 	}
@@ -312,9 +316,6 @@
 	p.greytext {
 		color: gray;
 	}
-
-
-	
 	/** from date time picker style css files **/
 
 	.picker-view .picker-content {
@@ -438,11 +439,11 @@
 			</h5>
 		</div>
 
-		<div class="card" style="background-color:rgb(62,83,100)" ng-repeat="team in filteredTeams">
+		<div class="card" style="background-color:rgb(62,83,100)" ng-repeat="team in filteredTeams | orderBy: 'points':false">
 
 			<div class="row" style="padding:5px 0 0 0">
 				<div class="col" style="padding:0px;border-right:1px solid #5f7485" align="center">
-					<img src="img/Badges/{{team.badge}}.png" ui-sref="app.teamview({teamid: team.key})"style="width:80px;height:80px;">
+					<img src="img/Badges/{{team.badge}}.png" ui-sref="app.teamview({teamid: team.key})" style="width:80px;height:80px;">
 					<h5 style="margin-bottom:0px;color:white;font-weight:bolder;text-transform:capitalize"> {{team.teamname}} </h5>
 
 				</div>
@@ -462,7 +463,7 @@
 
 
 				<div align="center" style="color:white;width:50%;padding:0px;font-size:12px;margin-top:5px">
-					<i class="ion-location" style="padding-right:3px;font-size:18px;color:#5f7485"></i> 404 km away
+					<i class="ion-location" style="padding-right:3px;font-size:18px;color:#5f7485"></i> {{team.distance}} km away
 				</div>
 
 				<div align="center" style="margin-top:5px;color:white;width:50%;padding:0px;margin-bottom:5px;font-weight:bold">
@@ -499,9 +500,10 @@
 
 				<div style="font-size:14px;width:27%;border-left:1px solid #5f7485;border-right:1px solid #5f7485;padding:0px;margin:5px 0 -10px 0;color:white"
 				 align="center">
-					<p class="whitetext" style="padding-left:10px">
-						{{team.rank}}
-					</p>
+					<rating style="color:rgb(255,152,18);margin-top:-8px;padding-top:0px" readonly="readOnly" ng-model="4.2" max="rating.max"
+					 align="left">
+
+					</rating>
 				</div>
 				<div align="center" style="font-weight:bold;margin:15px 0 -10px 0;font-size:14px;width:23%;color:white">
 					{{team.lastseen.text}}
@@ -526,8 +528,8 @@
 
 
 		</div>
-</br>
-<br>
+		</br>
+		<br>
 	</ion-content>
 
 	<div class="bar bar-footer " style="background-color:#2d3e4b">

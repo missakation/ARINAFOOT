@@ -172,6 +172,9 @@ angular.module('football.controllers')
                             "skilldescription": skilldescription,
                             "favstadiumname":snapshot.child("favstadiumname").val(),
 
+                            "favlatitude":snapshot.child("favlatitude").val(),
+                            "favlongitude":snapshot.child("favlongitude").val(),
+
                             //"distancetoplay": snapshot.child("identity").val(),
                             //"teamtoshow":snapshot.child("identity").val()
 

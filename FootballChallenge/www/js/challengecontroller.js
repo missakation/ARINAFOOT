@@ -6,9 +6,15 @@ angular.module('football.controllers')
     .controller('ChallengeController', function ($scope, TeamStores, ChallengeStore, $state, $ionicPopup, $ionicLoading, $ionicPopover, pickerView, $ionicFilterBar) {
 
 
+
+        $scope.myteam = $state.params.myteam;
+
+        console.log("MYTEAM");
+        console.log($scope.myteam);
+
         var numofplayersArr = [];
         //alert(JSON.stringify($state.params.myteam));
-        $scope.myteam = $state.params.myteam;
+
         //alert("Key:" +$scope.myteam.key);
         //alert($scope.myteam);
         TeamStores.GetTeamInfoByKey($scope.myteam.key, function (teaminfo) {
@@ -57,6 +63,11 @@ angular.module('football.controllers')
         tomorrow.setMinutes(0);
         tomorrow.setMilliseconds(0);
         tomorrow.setSeconds(0);
+
+        // set the rate and max variables
+        $scope.rating = {};
+        $scope.rating.rate = 3;
+        $scope.rating.max = 5;
 
 
         $scope.search = {
@@ -148,15 +159,20 @@ angular.module('football.controllers')
 
             try {
                 //works
+                //toRad function
+                if (typeof (Number.prototype.toRad) === "undefined") {
+                    Number.prototype.toRad = function () {
+                        return this * Math.PI / 180;
+                    }
+                }
 
                 var date = new Date();
                 ChallengeStore.GetAllTeamsNotMe($scope.myteam, $scope.search, function (leagues) {
-                    //console.log("TEAMS");
-                    //console.log(leagues);
+
                     $ionicLoading.hide();
                     $scope.allteamsnotme = leagues;
                     $scope.filteredTeams = $scope.allteamsnotme;
-                    console.log($scope.allteamsnotme);
+
 
 
                     if ($scope.allteamsnotme.length == 0) {
@@ -197,26 +213,56 @@ angular.module('football.controllers')
 
                                         var difference = (new Date() - element.lastseen.date) / 1000 / 60;
 
-
-                                        if (difference <= 60) {
-                                            element.lastseen.text = element.lastseen.minute + " mins. ago";
+                                        if (difference < 20) {
+                                            element.lastseen.text = "Online";
                                         }
                                         else
-                                            if (difference <= 24 * 60) {
-                                                element.lastseen.text = element.lastseen.hour + " hrs. ago";
+                                            if (difference <= 60) {
+                                                element.lastseen.text = Math.floor(difference) + " mins. ago";
                                             }
                                             else
-                                                if (difference >= 24 * 60 && difference <= 48 * 60) {
-                                                    element.lastseen.text = "Yesterday";
+                                                if (difference <= 24 * 60) {
+                                                    element.lastseen.text = Math.floor(difference / 60) + " hrs. ago";
                                                 }
-                                                else {
-                                                    element.lastseen.text = (difference / 24) + " days ago";
-                                                }
+                                                else
+                                                    if (difference >= 24 * 60 && difference <= 48 * 60) {
+                                                        element.lastseen.text = "Yesterday";
+                                                    }
+                                                    else {
+                                                        element.lastseen.text = (Math.floor((difference / 60 / 24))) + " days ago";
+                                                    }
 
                                     }
 
                                 })
                             }
+
+                            /** Converts numeric degrees to radians */
+                            var lat1 = $scope.myteam.favlatitude;
+                            var lon1 = $scope.myteam.favlongitude;
+
+                            var lat2 = element.favlatitude;
+                            var lon2 = element.favlongitude;
+
+                            var R = 6371; // km 
+                            //has a problem with the .toRad() method below.
+                            var x1 = lat2 - lat1;
+                            var dLat = x1.toRad();
+
+                            var x2 = lon2 - lon1;
+                            var dLon = x2.toRad();
+                            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                                Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+                                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                            var d = R * c;
+
+                            element.distance = d.toFixed(2);
+
+                            element.points = Math.abs(($scope.myteam.rating - element.rating)) + element.distance * 5 + ((5 - element.reviewrating) * 20);
+
+
+
 
                         }, this);
                     }
@@ -590,8 +636,6 @@ angular.module('football.controllers')
 
     .controller('ChooseYourTeamController', function ($scope, $ionicPopup, $ionicLoading, $state, $stateParams, ChallengeStore, $timeout) {
 
-
-
         $scope.$on("$ionicView.beforeEnter", function (event, data) {
             // handle event
             //works
@@ -604,11 +648,13 @@ angular.module('football.controllers')
 
                     $scope.allmyteams.forEach(function (element) {
 
-                        firebase.database().ref('/teaminfo/' + element.key).once('value').then(function (snapshot) {
+                        firebase.database().ref('/teaminfo/' + element.key).on('value', function (snapshot) {
                             if (snapshot.exists()) {
                                 element.members = snapshot.child("players").numChildren() - 1;
                                 element.rank = snapshot.child("rank").val();
-                                element.rating = snapshot.child("rating").val()
+                                element.rating = snapshot.child("rating").val(),
+                                    element.favlatitude = snapshot.child("favlatitude").val(),
+                                    element.favlongitude = snapshot.child("favlongitude").val()
                             }
                             else {
                                 element.members = "Not Found";
@@ -651,10 +697,9 @@ angular.module('football.controllers')
 
 
         $scope.gochallengeteams = function (team) {
-
-
+            console.log("HEREEEE");
+            console.log(team);
             try {
-                console.log($state.params.otherteam);
                 if ($state.params.otherteam || $state.params.otherteam != null) {
                     $state.go('app.challengeteamstadium',
 

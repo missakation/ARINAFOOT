@@ -18,7 +18,7 @@ angular.module('football.controllers')
 
                 if (leagues.length == 0) {
                 }
-                else if (leagues.length > 10) {
+                else if (leagues.length > 5) {
                     $scope.showadd = false;
 
                 }
@@ -178,25 +178,6 @@ angular.module('football.controllers')
 
         $scope.adduser = $state.params.newuser;
 
-        /*$scope.adduser =
-            {
-                teamname: "",
-                pteamsize: "5",
-                favstadiumphoto: "",
-                favstadiumphoto : "",
-                favstadiumname : "",
-                homejersey: "Blue",
-                awayjersey: "White",
-                badge: "01",
-                five: false,
-                six: false,
-                seven: false,
-                eight: false,
-                nine: false,
-                ten: false,
-                eleven: false
-            }*/
-
         $scope.gochoosestadium = function (adduser) {
             $scope.adduser = adduser;
             $state.go("app.choosestadium", {
@@ -207,6 +188,7 @@ angular.module('football.controllers')
 
         $scope.next = function (adduser) {
             try {
+
                 //IF THE SAME TEAM NAME EXIST ERROR
                 TeamStores.GetTeamByName($scope.adduser.teamname, function (exist) {
 
@@ -234,7 +216,9 @@ angular.module('football.controllers')
                             nine: $scope.adduser.nine,
                             ten: $scope.adduser.ten,
                             eleven: $scope.adduser.eleven,
-                            photo: ""
+                            photo: "",
+                            favlatitude: $scope.adduser.favlatitude,
+                            favlongitude: $scope.adduser.favlongitude
 
                         };
 
@@ -1590,10 +1574,15 @@ angular.module('football.controllers')
 
 
         $scope.goback = function (stadium) {
+            console.log("SELECTED STADIUM");
+            console.log(stadium);
             $state.params.myteam.favstadium = stadium.key;
             $state.params.myteam.favstadiumphoto = stadium.photo;
             $state.params.myteam.favstadiumname = stadium.name;
-            console.log($state.params.myteam);
+
+            $state.params.myteam.favlatitude = stadium.latitude;
+            $state.params.myteam.favlongitude = stadium.longitude;
+
             $ionicHistory.goBack();
         }
 
