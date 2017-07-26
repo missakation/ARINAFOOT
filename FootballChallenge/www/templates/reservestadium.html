@@ -643,11 +643,11 @@
 
 
 
-			<div class="col" align="center" style="width:80%;padding:2px;margin-top:-10px">
+			<div class="col" align="center" style="padding:2px 50px;margin-top:-10px">
 				<button style="line-height:26px;border-radius:50px;padding:6px 0 6px 0;font-size:12px;font-weight:600;background-color:rgb(42,176,65)"
 				 class="button button-block button-balanced button-small" type="submit" ng-disabled="verified" ng-click="reserve(search,stadiums)">
                        <!-- {{stadiums.datetime | date:'short'}} -->
-					{{stadiums.datetime | date:'HH:mm'}} for 90 mins
+					{{stadiums.datetime | date:'EEE, h:mm a'}} for 90 mins
                     </button>
 			</div>
 		</div>
