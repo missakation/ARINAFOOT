@@ -191,11 +191,13 @@ angular.module('football.controllers')
         updates['teams/-KpfIdV1NBMMezJe5Wdq/reviewrating'] = 5;
 
         updates['teaminfo/-KpfHCX5ZD7jjtYgMAWF/reviewrating'] = 5;
-        updates['teaminfo/-KpfIdV1NBMMezJe5Wdq/reviewrating'] = 5;*/
+        updates['teaminfo/-KpfIdV1NBMMezJe5Wdq/reviewrating'] = 5;
 
 
+        */
 
-        for (var i = 0; i < 50; i++) {
+        
+        /*for (var i = 51; i < 700; i++) {
             var updates = {};
                                 var contact = {
                         //badge:team.badge,
@@ -263,20 +265,48 @@ angular.module('football.controllers')
                     };
 
                         
-                        updates['/teams/' + i] = null;
                         updates['/teaminfo/' + i] = null;
-                        updates['/teamnames/' + contact.teamname] = null;
                     firebase.database().ref().update(updates);
-
+         
+        } /*
+        for (var i = 51; i < 500; i++) {
+            var updates = {};
+            var contact = {
+                ClosingTime: "23:00",
+                OpeningTime: "8:00",
+                RestrictedTime1: "20:00",
+                RestrictedTime2: "21:30",
+                admin: "tqujNBEWyTR54y510NTNENppu1T2",
+                cancelationpolicy: "sometext",
+                cordovaaccuracy: 0,
+                cordovaaltitude: 0,
+                cordovaaltitudeAccuracy: 0,
+                cordovalatitude: 33.910675,
+                cordovalongitude: 35.584254,
+                description: "long description",
+                email: "someemail",
+                indoor: 1,
+                locationarea: "beirut",
+                locationcity: "beirut",
+                locationtelephone: "01555666",
+                name: "Vclub2",
+                numberofstadium: 10,
+                outdoor: 1,
+                photo: "",
+                rating: 8,
+                telephone: "03333333"
+            }
+            updates['/stadiumsinfo/' + i] = contact;
+            firebase.database().ref().update(updates);
         }
+*/
 
-        
-        
+
         $scope.nointernet = false;
         $scope.$on("$ionicView.afterEnter", function (event, data) {
             // handle event
             //works
-            
+
             $timeout(function () {
 
                 try {
@@ -286,7 +316,7 @@ angular.module('football.controllers')
                     if (!(user === null || user == '' || user === undefined)) {
 
                         LoginStore.UpdateLastSeen();
-                        
+
                         //UPDATE TOKEN
                         $ionicPush.register().then(function (t) {
                             return $ionicPush.saveToken(t);
@@ -319,7 +349,7 @@ angular.module('football.controllers')
 
                                     }, function errorCallback(response) {
                                         alert("error");
-                                        LoginStore.PostError(response,103,"homepagecontroller.js")
+                                        LoginStore.PostError(response, 103, "homepagecontroller.js")
                                     });
 
                                 }
@@ -566,7 +596,7 @@ angular.module('football.controllers')
                             $scope.profile.requestednumbers = $scope.profile.requestednumbers.filter(function (el) {
                                 return el.key !== request.key;
 
-                            }); 
+                            });
                             $ionicSlideBoxDelegate.update();
 
                             firebase.database().ref('/playersinfo/' + user.uid).on('value', function (shot) {
@@ -589,7 +619,7 @@ angular.module('football.controllers')
 
                             });
                             $ionicSlideBoxDelegate.update();
-                            
+
                             firebase.database().ref('/playersinfo/' + user.uid).on('value', function (shot) {
                                 if (shot.exists()) {
                                     if (shot.val().settings.notification) {
