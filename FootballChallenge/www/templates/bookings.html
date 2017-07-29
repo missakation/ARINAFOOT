@@ -44,18 +44,18 @@
         </div>
     </div>
 
-    <ion-content style="background-color:rgb(46,62,75)">
+    <ion-content class="has-header has-subheader" style="background-color:rgb(46,62,75)">
         <div align="center">
-            <ion-spinner ng-show="notloaded" icon="lines"></ion-spinner>
+            <ion-spinner ng-show="notloaded"  icon="lines"></ion-spinner>
         </div>
         <div>
-            <div class="card" ng-repeat="item in selectedbookings | orderBy: 'date':true" style="border:10px solid rgb(62, 83, 100);margin:30px 5px -20px 5px;background-color:rgb(46,62,75)">
+            <div class="card" ng-repeat="item in selectedbookings | orderBy: 'date':true" style="border:10px solid rgb(62, 83, 100);margin:10px 5px -20px 5px;background-color:rgb(46,62,75)">
 
                 <div align="center">
                     <img src="{{item.photo}}" style="width:100%;height:140px;" ui-sref="app.reservestadiumdetails({stadiumid: stadiums.stadiumkey})">
                 </div>
                 <div align="center">
-                    <h6 class="whitetext" style="text-transform:uppercase;font-weight:bold;margin-top:0px;color:white"> {{item.date |date:'MMM d, y h:mm a'}} @ {{item.stadiumdescription}}
+                    <h6 class="whitetext" style="text-transform:uppercase;font-weight:bold;margin-top:0px;color:white"> {{item.date |date:'MMM d, y h:mm a'}} @ {{item.stadiumdescription}} - {{item.ministadiumkey}}
                     </h6>
                 </div>
                 <div align="center">
@@ -87,8 +87,6 @@
 
                         </div>
                         <div class="col" align="center" style="margin-top:5px;padding:0px;margin:0px;border-right:1px solid #5f7485">
-
-
                             <h6 style="margin-top:0px;color:#5f7485">
                                 PRICE
                             </h6>
@@ -96,12 +94,8 @@
                             <h6 style="color:white;margin-bottom:0px">
                                 {{item.price}}L.L.
                             </h6>
-
-
                         </div>
                         <div class="col" align="center" style="color:#5f7485;margin-top:5px;padding:0px;margin:0px">
-
-
                             <h6 style="margin-top:0px;color:#5f7485">
                                 RES. #
                             </h6>
@@ -109,10 +103,7 @@
                             <h6 style="color:white;margin-bottom:0px">
                                 {{item.reservationnumber}}
                             </h6>
-
-
                         </div>
-
                     </div>
 
                     <div class="row row-top" style="padding-bottom:0px">

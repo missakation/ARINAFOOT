@@ -33,52 +33,52 @@ angular.module('football.controllers')
 
         $scope.refreshpage = function () {
             //works
-                ProfileStore.GetProfileInfo(function (myprofile) {
-                    
-                    $scope.currentprofile = myprofile;
-                    if ($scope.currentprofile.photo.trim() == "") {
-                        $scope.currentprofile.photo = "img/PlayerProfile.png"
-                    }
+            ProfileStore.GetProfileInfo(function (myprofile) {
 
-                    if (myprofile.teamdisplayedkey !== "none") {
-                        TeamStores.GetTeamInfoByKey(myprofile.teamdisplayedkey, function (favteam) {
-                            if (favteam !== null || favteam !== undefined) {
+                $scope.currentprofile = myprofile;
+                if ($scope.currentprofile.photo.trim() == "") {
+                    $scope.currentprofile.photo = "img/PlayerProfile.png"
+                }
 
-                                $scope.teamdisplayed.name = favteam.teamname;
-                                $scope.teamdisplayed.picture = favteam.badge;
-                                $scope.teamdisplayed.rank = favteam.rank;
-                                $scope.teamdisplayed.key = favteam.key;
+                if (myprofile.teamdisplayedkey !== "none") {
+                    TeamStores.GetTeamInfoByKey(myprofile.teamdisplayedkey, function (favteam) {
+                        if (favteam !== null || favteam !== undefined) {
 
-                                $scope.currentprofile.teamdisplayed = favteam.teamname;
+                            $scope.teamdisplayed.name = favteam.teamname;
+                            $scope.teamdisplayed.picture = favteam.badge;
+                            $scope.teamdisplayed.rank = favteam.rank;
+                            $scope.teamdisplayed.key = favteam.key;
 
-                            }
-                            else {
-                                $scope.teamdisplayed.name = "";
-                                $scope.teamdisplayed.picture = "defaultteam";
-                                $scope.teamdisplayed.rank = "";
-                                $scope.teamdisplayed.key = "";
-                            }
+                            $scope.currentprofile.teamdisplayed = favteam.teamname;
 
-                            //$scope.currentprofile["teamdisplayed"] = $scope.teamdisplayed.name == "" ? "Select a Team" : $scope.teamdisplayed.name;
+                        }
+                        else {
+                            $scope.teamdisplayed.name = "";
+                            $scope.teamdisplayed.picture = "defaultteam";
+                            $scope.teamdisplayed.rank = "";
+                            $scope.teamdisplayed.key = "";
+                        }
 
-                        })
-                    }
-                    else {
-                        $scope.teamdisplayed.name = "";
-                        $scope.teamdisplayed.picture = "defaultteam";
-                        $scope.teamdisplayed.rank = "";
-                        $scope.teamdisplayed.key = "";
-                    }
+                        //$scope.currentprofile["teamdisplayed"] = $scope.teamdisplayed.name == "" ? "Select a Team" : $scope.teamdisplayed.name;
 
-                    $scope.notloaded = true;
-                    $ionicLoading.hide();
-                    $scope.$apply();
-                    $scope.$broadcast('scroll.refreshComplete');
+                    })
+                }
+                else {
+                    $scope.teamdisplayed.name = "";
+                    $scope.teamdisplayed.picture = "defaultteam";
+                    $scope.teamdisplayed.rank = "";
+                    $scope.teamdisplayed.key = "";
+                }
+
+                $scope.notloaded = true;
+                $ionicLoading.hide();
+                $scope.$apply();
+                $scope.$broadcast('scroll.refreshComplete');
 
 
-                }, function (error) {
+            }, function (error) {
 
-                })
+            })
         }
 
         $scope.gototeam = function (key) {
@@ -478,7 +478,7 @@ angular.module('football.controllers')
         }
 
         $scope.UpdateUser = function (profile) {
-            
+
 
             if ($scope.currentprofile.teamdisplayed == "Select a Team" || $scope.currentprofile.teamdisplayed == "" || $scope.currentprofile.teamdisplayed == null) {
                 $scope.currentprofile.teamdisplayedkey = "none";
@@ -493,13 +493,26 @@ angular.module('football.controllers')
                 }
             }
 
-            ProfileStore1.UpdateProfile($scope.currentprofile, true).then(function (result) {
+            if ($scope.currentprofile.favstadium != undefined && $scope.currentprofile.favstadium != null && $scope.currentprofile.hasOwnProperty("favstadium")) {
+                ProfileStore1.UpdateProfile($scope.currentprofile, true).then(function (result) {
 
-                $ionicHistory.goBack();
+                    $ionicHistory.goBack();
 
-            }, function (error) {
-                alert(error.message);
-            });
+                }, function (error) {
+                    alert(error.message);
+                });
+            }
+            else {
+
+                var alertPopup = $ionicPopup.alert({
+                    template: 'Please select your favorite stadium'
+                }).then(function () {
+                    
+                }, function (error) {
+                    
+                })
+
+            }
 
         }
 
@@ -507,14 +520,6 @@ angular.module('football.controllers')
         $scope.uploading = false;
 
         $scope.ChangePicture = function () {
-            // var options = {
-            //     maximumImagesCount: 1,
-            //     width: 800,
-            //     height: 800,
-            //     quality: 75
-            // };
-
-            console.log(JSON.stringify(window.Camera))
 
             var options = {
                 quality: 30,
@@ -570,8 +575,6 @@ angular.module('football.controllers')
         });
 
 
-
-
         $scope.currentprofile = {};
         $scope.teamdisplayed = {
             key: "",
@@ -579,8 +582,6 @@ angular.module('football.controllers')
             picture: "",
             rank: ""
         }
-
-
 
         $scope.notloaded = false;
 
@@ -595,7 +596,6 @@ angular.module('football.controllers')
         });
 
         $scope.refreshpage = function () {
-
             HomeStore.GetProfileInfoByKey($stateParams.key, function (myprofile) {
                 $scope.currentprofile = myprofile;
                 console.log($scope.currentprofile);

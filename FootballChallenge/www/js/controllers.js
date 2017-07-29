@@ -525,7 +525,8 @@ angular.module('football.controllers', [])
                                     adminphoto: challenges.child("adminphoto").val() == "" ? "img/PlayerProfile.png" : challenges.child("adminphoto").val(),
                                     admintelephon: challenges.child("admintelephon").val(),
                                     adminname: challenges.child("adminname").val(),
-                                    title: challenges.child("admin").val() == id ? "you challenged " + challenges.child("team2name").val() : challenges.child("team2name").val() + " challenged you"
+                                    title: challenges.child("admin").val() == id ? "you challenged " + challenges.child("team2name").val() : challenges.child("team2name").val() + " challenged you",
+                                    numplayers: challenges.child("numplayers").val()
 
                                 }
 
@@ -1100,7 +1101,8 @@ angular.module('football.controllers', [])
                         team2rank: challenge.team2rank,
                         teamone: 0,
                         teamonescore: 0,
-                        status: 0
+                        status: 0,
+                        numplayers: challenge.numplayers
 
                     };
 
@@ -1578,7 +1580,10 @@ angular.module('football.controllers', [])
                                 {
                                     notification: true,
                                     reminder_3hours: true,
-                                }
+                                },
+                                favlatitude: 0,
+                                favlongitude: 0
+
                             }
                         //alert(newPostKey);
                         // Write the new post's data simultaneously in the posts list and the user's post list.
@@ -1688,7 +1693,9 @@ angular.module('football.controllers', [])
                                 {
                                     notification: true,
                                     reminder_3hours: true,
-                                }
+                                },
+                                favlatitude: 0,
+                                favlongitude: 0
 
                             }
                         //alert(newPostKey);
@@ -2265,7 +2272,9 @@ angular.module('football.controllers', [])
                 available: false,
                 skilllevel: "Newbie",
                 isplayer: true,
-                age: new Date()
+                age: new Date(),
+                favlatitude: 0,
+                favlongitude: 0
 
             }
 

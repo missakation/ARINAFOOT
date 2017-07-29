@@ -237,6 +237,7 @@ angular.module('football.controllers')
                                 var R = 6371; // km 
                                 //has a problem with the .toRad() method below.
                                 var x1 = lat2 - lat1;
+                                
                                 var dLat = x1.toRad();
 
 

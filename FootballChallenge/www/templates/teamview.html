@@ -1,7 +1,7 @@
 <!--Ari-->
 <ion-view view-title="Team Profile" align="center">
 	<style>
-	.icon {
+		.icon {
 			font-size: 18px;
 		}
 
@@ -47,7 +47,7 @@
 			padding: 0;
 		}
 
-	
+
 
 		.headercolor {
 			background-color: rgb(62, 83, 100);
@@ -59,7 +59,6 @@
 		.card {
 			background-color: transparent
 		}
-	
 	</style>
 
 
@@ -130,8 +129,10 @@
 
 						<h4 style="color:#5f7485;border-right:1px solid #5f7485;margin:0px"> RATING
 						</h4>
-						<h3 style="padding-top:5px;color:darkorange;border-right:1px solid #5f7485"> {{currentprofile.rating}}
-						</h3>
+						<rating style="color:rgb(255,152,18);margin-top:-8px;padding-top:0px" readonly="readOnly" ng-model="4.2" max="rating.max"
+						 align="left">
+
+						</rating>
 					</div>
 
 					<div class="col " style="padding-top:10px;color:#5f7485" align="center">
@@ -301,8 +302,10 @@
 
 					<div class="col" style="margin-top:5px">
 
-						<h3 ng-show="notloaded && currentprofile.startmonday == currentprofile.startmondayend || !currentprofile.available" class="whitetext" align="right"> Not Available </h3>
-						<h3 ng-show="notloaded && currentprofile.startmonday != currentprofile.startmondayend && currentprofile.available" class="whitetext" align="right"> <b>{{currentprofile.startmonday}}:00</b> till <b>{{currentprofile.startmondayend}}:00</b> </h3>
+						<h3 ng-show="notloaded && currentprofile.startmonday == currentprofile.startmondayend || !currentprofile.available" class="whitetext"
+						 align="right"> Not Available </h3>
+						<h3 ng-show="notloaded && currentprofile.startmonday != currentprofile.startmondayend && currentprofile.available" class="whitetext"
+						 align="right"> <b>{{currentprofile.startmonday}}:00</b> till <b>{{currentprofile.startmondayend}}:00</b> </h3>
 					</div>
 
 				</div>
@@ -316,9 +319,11 @@
 					<div class="col" style="margin-top:5px">
 
 
-						<h3 ng-show="notloaded && currentprofile.starttuesday == currentprofile.starttuesdayend || !currentprofile.available" class="whitetext" align="right">
+						<h3 ng-show="notloaded && currentprofile.starttuesday == currentprofile.starttuesdayend || !currentprofile.available" class="whitetext"
+						 align="right">
 							Not Available </h3>
-						<h3 ng-show="notloaded && currentprofile.starttuesday != currentprofile.starttuesdayend && currentprofile.available" class="whitetext" align="right">
+						<h3 ng-show="notloaded && currentprofile.starttuesday != currentprofile.starttuesdayend && currentprofile.available" class="whitetext"
+						 align="right">
 							<b>{{currentprofile.starttuesday}}:00</b> till <b>{{currentprofile.starttuesdayend}}:00</b> </h3>
 					</div>
 
@@ -331,9 +336,11 @@
 					</div>
 
 					<div class="col" style="margin-top:5px">
-						<h3 ng-show="notloaded && currentprofile.startwednesday == currentprofile.startwednesdayend || !currentprofile.available" class="whitetext" align="right">
+						<h3 ng-show="notloaded && currentprofile.startwednesday == currentprofile.startwednesdayend || !currentprofile.available"
+						 class="whitetext" align="right">
 							Not Available </h3>
-						<h3 ng-show="notloaded && currentprofile.startwednesday != currentprofile.startwednesdayend && currentprofile.available" class="whitetext" align="right">
+						<h3 ng-show="notloaded && currentprofile.startwednesday != currentprofile.startwednesdayend && currentprofile.available"
+						 class="whitetext" align="right">
 							<b>{{currentprofile.startwednesday}}:00</b> till <b>{{currentprofile.startwednesdayend}}:00</b> </h3>
 					</div>
 
@@ -346,9 +353,11 @@
 					</div>
 
 					<div class="col" style="margin-top:5px">
-						<h3 ng-show="notloaded && currentprofile.startthursday == currentprofile.startthursdayend || !currentprofile.available" class="whitetext" align="right">
+						<h3 ng-show="notloaded && currentprofile.startthursday == currentprofile.startthursdayend || !currentprofile.available" class="whitetext"
+						 align="right">
 							Not Available </h3>
-						<h3 ng-show="notloaded && currentprofile.startthursday != currentprofile.startthursdayend && currentprofile.available" class="whitetext" align="right">
+						<h3 ng-show="notloaded && currentprofile.startthursday != currentprofile.startthursdayend && currentprofile.available" class="whitetext"
+						 align="right">
 							<b>{{currentprofile.startthursday}}:00</b> till <b>{{currentprofile.startthursdayend}}:00</b> </h3>
 					</div>
 
@@ -361,8 +370,10 @@
 					</div>
 
 					<div class="col" style="margin-top:5px">
-						<h3 ng-show="notloaded && currentprofile.startfriday == currentprofile.startfridayend || !currentprofile.available" class="whitetext" align="right"> Not Available </h3>
-						<h3 ng-show="notloaded && currentprofile.startfriday != currentprofile.startfridayend && currentprofile.available" class="whitetext" align="right"> <b>{{currentprofile.startfriday}}:00</b> till <b>{{currentprofile.startfridayend}}:00</b> </h3>
+						<h3 ng-show="notloaded && currentprofile.startfriday == currentprofile.startfridayend || !currentprofile.available" class="whitetext"
+						 align="right"> Not Available </h3>
+						<h3 ng-show="notloaded && currentprofile.startfriday != currentprofile.startfridayend && currentprofile.available" class="whitetext"
+						 align="right"> <b>{{currentprofile.startfriday}}:00</b> till <b>{{currentprofile.startfridayend}}:00</b> </h3>
 					</div>
 
 				</div>
@@ -374,9 +385,11 @@
 					</div>
 
 					<div class="col" style="margin-top:5px">
-						<h3 ng-show="notloaded && currentprofile.startsaturday == currentprofile.startsaturdayend || !currentprofile.available" class="whitetext" align="right">
+						<h3 ng-show="notloaded && currentprofile.startsaturday == currentprofile.startsaturdayend || !currentprofile.available" class="whitetext"
+						 align="right">
 							Not Available </h3>
-						<h3 ng-show="notloaded && currentprofile.startsaturday != currentprofile.startsaturdayend && currentprofile.available" class="whitetext" align="right">
+						<h3 ng-show="notloaded && currentprofile.startsaturday != currentprofile.startsaturdayend && currentprofile.available" class="whitetext"
+						 align="right">
 							<b>{{currentprofile.startsaturday}}:00</b> till <b>{{currentprofile.startsaturdayend}}:00</b> </h3>
 					</div>
 
@@ -389,8 +402,10 @@
 					</div>
 
 					<div class="col" style="margin-top:5px">
-						<h3 ng-show="notloaded && currentprofile.startsunday == currentprofile.startsundayend || !currentprofile.available" class="whitetext" align="right"> Not Available </h3>
-						<h3 ng-show="notloaded && currentprofile.startsunday != currentprofile.startsundayend && currentprofile.available" class="whitetext" align="right"> <b>{{currentprofile.startsunday}}:00</b> till <b>{{currentprofile.startsundayend}}:00</b> </h3>
+						<h3 ng-show="notloaded && currentprofile.startsunday == currentprofile.startsundayend || !currentprofile.available" class="whitetext"
+						 align="right"> Not Available </h3>
+						<h3 ng-show="notloaded && currentprofile.startsunday != currentprofile.startsundayend && currentprofile.available" class="whitetext"
+						 align="right"> <b>{{currentprofile.startsunday}}:00</b> till <b>{{currentprofile.startsundayend}}:00</b> </h3>
 					</div>
 
 				</div>

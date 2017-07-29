@@ -32,8 +32,6 @@ angular.module('football.controllers')
 
             ChallengeStore.GetChallengeByKey($scope.myid, $scope.gameid, function (challengedetails) {
 
-                console.log(challengedetails);
-
                 if (challengedetails.hasOwnProperty("key")) {
                     $scope.challenge = challengedetails;
 
@@ -101,8 +99,30 @@ angular.module('football.controllers')
 
                             $scope.notloaded = false;
 
+                            console.log($scope.myplayers);
+
+
+
+                            $scope.myplayers.forEach(function (element) {
+
+                                firebase.database().ref('/playersinfo/' + element.key + '/photoURL').on('value', function (snapshot) {
+
+
+
+                                    if (snapshot.exists() && snapshot.val() != null && snapshot.val().trim() != '') {
+                                        element.photoURL = snapshot.val();
+                                    }
+                                    else {
+                                        element.photoURL = "img/PlayerProfile.png";
+                                    }
+
+                                })
+
+
+                            }, this);
+
                             $scope.$apply();
-                            //  alert("test2");
+
                         })
                     }
                     $scope.notloaded = false;
@@ -115,14 +135,14 @@ angular.module('football.controllers')
                             $scope.challenge.adminphoto = snapshot.val().photoURL == "" ? 'img/PlayerProfile.png' : snapshot.val().photoURL;
                             $scope.challenge.admintelephon = snapshot.val().telephone;
 
-                            $scope.challenge.lastseen = 
-                            {
-                                year:0,
-                                month:0,
-                                day:0,
-                                hour:0,
-                                minute:0
-                            };
+                            $scope.challenge.lastseen =
+                                {
+                                    year: 0,
+                                    month: 0,
+                                    day: 0,
+                                    hour: 0,
+                                    minute: 0
+                                };
                             $scope.challenge.lastseen.year = snapshot.val().lastseen.loginyear;
                             $scope.challenge.lastseen.month = snapshot.val().lastseen.loginmonth;
                             $scope.challenge.lastseen.day = snapshot.val().lastseen.loginday;
@@ -136,23 +156,26 @@ angular.module('football.controllers')
                             $scope.challenge.lastseen.date.setHours(snapshot.val().lastseen.loginhour);
                             $scope.challenge.lastseen.date.setDate(snapshot.val().lastseen.loginday);
 
-                            var difference = (new Date() - $scope.challenge.lastseen.date) / 1000 /60;
+                            var difference = (new Date() - $scope.challenge.lastseen.date) / 1000 / 60;
 
-
-                            if (difference <= 60) {
-                                $scope.challenge.lastseen.text = $scope.challenge.lastseen.minute + " mins. ago";
+                            if (difference < 20) {
+                                $scope.challenge.lastseen.text = "Online";
                             }
                             else
-                                if (difference <= 24 * 60) {
-                                    $scope.challenge.lastseen.text = $scope.challenge.lastseen.hour + " hrs. ago";
+                                if (difference <= 60) {
+                                    $scope.challenge.lastseen.text = Math.floor(difference) + " mins. ago";
                                 }
                                 else
-                                    if (difference >= 24 * 60 && difference <= 48 * 60) {
-                                        $scope.challenge.lastseen.text = "yesterday";
+                                    if (difference <= 24 * 60) {
+                                        $scope.challenge.lastseen.text = Math.floor(difference / 60) + " hrs. ago";
                                     }
-                                    else {
-                                        $scope.challenge.lastseen.text = (difference/24) + " days ago";
-                                    }
+                                    else
+                                        if (difference >= 24 * 60 && difference <= 48 * 60) {
+                                            $scope.challenge.lastseen.text = "Yesterday";
+                                        }
+                                        else {
+                                            $scope.challenge.lastseen.text = (Math.floor((difference / 60 / 24))) + " days ago";
+                                        }
 
 
                         }
@@ -162,6 +185,7 @@ angular.module('football.controllers')
                         if (snapshot.exists()) {
 
                             $scope.challenge.team1rank = snapshot.val().rating;
+                            $scope.challenge.team1rating = snapshot.val().rank;
 
                             switch ($scope.challenge.team1rank) {
                                 case 1:
@@ -178,31 +202,67 @@ angular.module('football.controllers')
                                     $scope.challenge.team1rankdescription = $scope.challenge.team1rank + 'th';
                                     break;
                             }
+
+
+                            firebase.database().ref('/teampoints/' + $scope.challenge.team2key).on('value', function (snapshot) {
+                                if (snapshot.exists()) {
+
+                                    $scope.challenge.team2rank = snapshot.val().rating;
+                                    $scope.challenge.team2rating = snapshot.val().rank;
+
+                                    switch ($scope.challenge.team2rank) {
+                                        case 1:
+                                            $scope.challenge.team2rankdescription = $scope.challenge.team2rank + 'st';
+                                            break;
+                                        case 2:
+                                            $scope.challenge.team2rankdescription = $scope.challenge.team2rank + 'nd';
+                                            break;
+                                        case 3:
+                                            $scope.challenge.team2rankdescription = $scope.challenge.team2rank + 'rd';
+                                            break;
+
+                                        default:
+                                            $scope.challenge.team2rankdescription = $scope.challenge.team2rank + 'th';
+                                            break;
+                                    }
+
+                                    var range = $scope.challenge.team1rating - $scope.challenge.team2rating;
+
+                                    var difficulty = "";
+                                    var difficultytext = "";
+                                    switch (true) {
+                                        case range <= 100 && range >= -100:
+                                            $scope.challenge.difficulty = "Medium.png";
+                                            $scope.challenge.difficultytext = "Medium";
+                                            break;
+                                        case range < -100 && range > -200:
+                                            $scope.challenge.difficulty = "Hard.png";
+                                            $scope.challenge.difficultytext = "Hard";
+                                            break;
+                                        case range <= -200:
+                                            $scope.challenge.difficulty = "Extreme.png";
+                                            $scope.challenge.difficultytext = "Extreme";
+                                            break;
+                                        case range > 100 && range <= 200:
+                                            $scope.challenge.difficulty = "Easy.png";
+                                            $scope.challenge.difficultytext = "Easy";
+                                            break;
+                                        case range > 200:
+                                            $scope.challenge.difficulty = "VeryEasy.png";
+                                            $scope.challenge.difficultytext = "Very Easy";
+                                            break;
+                                        default:
+                                            break;
+                                    }
+                                }
+                            })
+
+
+
                         }
                     })
 
-                    firebase.database().ref('/teampoints/' + $scope.challenge.team2key).on('value', function (snapshot) {
-                        if (snapshot.exists()) {
 
-                            $scope.challenge.team2rank = snapshot.val().rating;
-
-                            switch ($scope.challenge.team2rank) {
-                                case 1:
-                                    $scope.challenge.team2rankdescription = $scope.challenge.team2rank + 'st';
-                                    break;
-                                case 2:
-                                    $scope.challenge.team2rankdescription = $scope.challenge.team2rank + 'nd';
-                                    break;
-                                case 3:
-                                    $scope.challenge.team2rankdescription = $scope.challenge.team2rank + 'rd';
-                                    break;
-
-                                default:
-                                    $scope.challenge.team2rankdescription = $scope.challenge.team2rank + 'th';
-                                    break;
-                            }
-                        }
-                    })
 
                     $scope.$apply();
 

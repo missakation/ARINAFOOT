@@ -230,9 +230,7 @@ angular.module('football.controllers')
         });
         // Execute action on hide popover
         $scope.$on('popover.hidden', function () {
-            // Execute action
-            //scope.$digest();
-            //alert($scope.choice)
+
         });
         // Execute action on remove popover
         $scope.$on('popover.removed', function () {
@@ -310,8 +308,6 @@ angular.module('football.controllers')
                 $ionicLoading.hide();
                 $scope.globalstadiums = leagues;
 
-
-
                 if (leagues.length == 0) {
                     var alertPopup = $ionicPopup.alert({
                         title: 'No results',
@@ -328,9 +324,6 @@ angular.module('football.controllers')
                             var lat1 = $scope.latitude;
                             var lon1 = $scope.longitude;
 
-                            console.log(lat1);
-                            console.log(lon1);
-
                             var lat2 = $scope.globalstadiums[i].latitude;
                             var lon2 = $scope.globalstadiums[i].longitude;
 
@@ -340,7 +333,6 @@ angular.module('football.controllers')
                             var x1 = lat2 - lat1;
 
                             var dLat = x1.toRad();
-
 
                             var x2 = lon2 - lon1;
                             var dLon = x2.toRad();
@@ -368,14 +360,12 @@ angular.module('football.controllers')
                         }
                         $scope.allfreestadiums = $scope.globalstadiums;
                         $scope.filteredStadiums = $scope.allfreestadiums;
-                        $scope.$apply();
-                        console.log($scope.globalstadiums);
+
                         // LOGIC FOR POINTS ENDS
                     }
                     else {
                         $scope.allfreestadiums = $scope.globalstadiums;
                         $scope.filteredStadiums = $scope.allfreestadiums;
-                        $scope.$apply();
                     }
 
                 });
@@ -420,7 +410,6 @@ angular.module('football.controllers')
 
 
         }, function (error) {
-            alert("Test");
             alert(error.message);
             $scope.checkfree();
         });
@@ -607,7 +596,6 @@ angular.module('football.controllers')
 
 
         $scope.filteredStadiums = $scope.allfreestadiums;
-        //$scope.$digest();
         $scope.showFilterBar = function () {
             filterBarInstance = $ionicFilterBar.show({
                 items: $scope.allfreestadiums,
