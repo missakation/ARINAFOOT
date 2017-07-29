@@ -9,7 +9,7 @@
 		p.whitetext {
 			color: white;
 		}
-		
+
 		.h3.graytext,
 		h2.graytext,
 		h1.graytext,
@@ -19,8 +19,8 @@
 		p.graytext {
 			color: lightgrey;
 		}
-		
-	
+
+
 		.headercolor {
 			background-color: rgb(62, 83, 100);
 			color: white;
@@ -42,7 +42,7 @@
 
 	<div class="bar bar-subheader" align="left" style="border:transparent;height:45px;margin-bottom:5px;background-color:#2ab041"
 	 ng-show="!notloaded">
-		<h3 class="title" align="left" style="color:white;font-size:15px">{{challenge.date |date:'EEEE - MMM d @ HH:mm a'}} - 404 Number of players </h3>
+		<h3 class="title" align="left" style="color:white;font-size:15px">{{challenge.date |date:'EEEE - MMM d @ HH:mm a'}} - {{challenge.numplayers}} Vs {{challenge.numplayers}}</h3>
 	</div>
 
 	<ion-content style="background-color:rgb(46,62,75)">
@@ -80,9 +80,11 @@
 							VS
 						</h3>
 						<h6 style="margin-top:70px;color:#5f7485" align="center"> DIFFICULTY </h6>
-						<h5 align="center" class="whitetext" style="margin-top:-5px;font-weight:bold">
-							HARD
-						</h5>
+
+						<div style="font-size:14px;width:33%;padding:0px;margin:5px 0 -25px 0;color:white" align="center">
+							<h5 style="margin-bottom:4px;padding:0px;font-weight:bold;color:white">{{challenge.difficultytext}} </h5>
+							<img src="img/difficulty/{{challenge.difficulty}}" align="left" style="margin:0 0 10px 0;height:10px">
+						</div>
 
 
 					</div>
@@ -129,7 +131,7 @@
 
 					<h6 style="color:#5f7485;border-left:1px solid #5f7485" align="center"> LAST SEEN </h6>
 					<h5 align="center" class="whitetext" style="padding-top:10px;margin-top:-10px;font-weight:bold;border-left:1px solid #5f7485">
-						 {{challenge.lastseen.text}}
+						{{challenge.lastseen.text}}
 					</h5>
 				</div>
 			</div>
@@ -141,33 +143,33 @@
 			<div align="center" style="Font-weight:bold;color:white;font-size:15px;margin:5px 0px"> Stadium </div>
 			<img image-lazy-src="http://gazettereview.com/wp-content/uploads/2017/01/stadium-header.jpg" image-lazy-loader="lines" style="width:100%;height:140px;"
 			 ui-sref="app.reservestadiumdetails({stadiumid: stadiums.stadiumkey})">
-		
 
-		<div class="row ">
-			<div class="col col-67" align="left" style="padding-top:0px;color:white; font-weight:bold;font-size:12px"> {{challenge.stadiums.stadiumname}} / {{challenge.stadiums.description}}
-			</div>
 
-			<div class="col col-33" align="right" style="padding-top:0px;font-size:11px;color:#5f7485"> PRICE
-			</div>
+			<div class="row ">
+				<div class="col col-67" align="left" style="padding-top:0px;color:white; font-weight:bold;font-size:12px"> {{challenge.stadiums.stadiumname}} / {{challenge.stadiums.description}}
+				</div>
 
-		</div>
-
-		<div class="row">
-			<div class="col col-67" align="left">
-				<rating style="color:rgb(255,152,18);margin-top:-8px;padding-top:0px" readonly="readOnly" ng-model="challenge.stadiums.rating" max="rating.max"
-				 align="left">
-
-				</rating>
+				<div class="col col-33" align="right" style="padding-top:0px;font-size:11px;color:#5f7485"> PRICE
+				</div>
 
 			</div>
 
-			<div class="col col-33" align="right" style="padding:3px 0 0 0;color:white;margin-top:-8px;font-size:15px">
-				<b>
+			<div class="row">
+				<div class="col col-67" align="left">
+					<rating style="color:rgb(255,152,18);margin-top:-8px;padding-top:0px" readonly="readOnly" ng-model="challenge.stadiums.rating"
+					 max="rating.max" align="left">
+
+					</rating>
+
+				</div>
+
+				<div class="col col-33" align="right" style="padding:3px 0 0 0;color:white;margin-top:-8px;font-size:15px">
+					<b>
 	
 		{{challenge.stadiums.price}} LL
 		</b>
+				</div>
 			</div>
-		</div>
 		</div>
 
 
@@ -204,9 +206,9 @@
 						<h6 style="color:#5f7485">
 							Stadium
 						</h6>
-							<h6 class="whitetext">
-								{{challenge.stadium.description}}
-							</h6>
+						<h6 class="whitetext">
+							{{challenge.stadium.description}}
+						</h6>
 
 					</div>
 
@@ -240,13 +242,7 @@
 
 			</div>
 
-
-
-
-
-
 		</div>
-
 
 		<div class="card" style="background-color:rgb(62,83,100);margin:10px 5px 0px 5px" ng-show="!notloaded">
 			<!--  <a class="item item-thumbnail-left" ng-href="#/app/reservestadiumdetails/{{stadiums.stadiumkey}}"> -->
@@ -261,9 +257,9 @@
 			</div>
 
 			<div class="row " ng-repeat="item in myplayers">
-					<div >
-						<img src="{{item.photo}}" style="margin-top:5px;border-radius:50px;border:1px solid #5f7485;width:42px;height:42px">
-					</div>
+				<div>
+					<img src="{{item.photoURL}}" style="margin-top:5px;border-radius:50px;border:1px solid #5f7485;width:42px;height:42px">
+				</div>
 				<div class="col col-30">
 					<h5 class="whitetext">
 						{{item.firstname}} {{item.lastname}}
@@ -290,17 +286,12 @@
 					</div>
 
 				</div>
-				<!--<div class="col">
-	<button class="button button-block button-balanced button-small" style="color:white" type="submit" ng-click="showConfirm()"> Accept
-</button>
-</div>-->
+
 
 			</div>
-			</div>
-
-
 		</div>
-				<hr style="height:0px; visibility:hidden;">
+
+		<hr style="height:0px; visibility:hidden;">
 		<div class="button-bar" ng-hide="notloaded || (!isadmin)">
 			<button class="button  button-assertive" ng-click="CancelChallenge(challenge)">Cancel Challenge</button>
 		</div>

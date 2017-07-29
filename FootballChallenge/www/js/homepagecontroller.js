@@ -268,8 +268,8 @@ angular.module('football.controllers')
                         updates['/teaminfo/' + i] = null;
                     firebase.database().ref().update(updates);
          
-        } /*
-        for (var i = 51; i < 500; i++) {
+        }
+        for (var i = 0; i < 50; i++) {
             var updates = {};
             var contact = {
                 ClosingTime: "23:00",
@@ -296,10 +296,9 @@ angular.module('football.controllers')
                 rating: 8,
                 telephone: "03333333"
             }
-            updates['/stadiumsinfo/' + i] = contact;
+            updates['/stadiumsinfo/' + i] = null;
             firebase.database().ref().update(updates);
-        }
-*/
+        }*/
 
 
         $scope.nointernet = false;
@@ -1030,8 +1029,7 @@ angular.module('football.controllers')
                                                     gameid: $scope.challenge.key
                                                 });
                                         }, function (error) {
-                                            var alertPopup = $ionicPopup.show({
-                                                title: 'Error',
+                                            var alertPopup = $ionicPopup.alert({
                                                 template: 'Stadium Not Available. Please Cancel the Challenge'
                                             });
 

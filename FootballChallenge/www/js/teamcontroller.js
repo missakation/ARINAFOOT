@@ -509,6 +509,15 @@ angular.module('football.controllers')
                     $scope.validate.samecolor = false;
 
                     SearchStore.GetMyProfileInfo(function (profile) {
+
+                        $ionicLoading.show({
+                            content: 'Loading',
+                            animation: 'fade-in',
+                            showBackdrop: true,
+                            maxWidth: 200,
+                            showDelay: 0
+                        });
+
                         TeamStores.AddNewTeam(team, profile)
                             .then(function (value) {
                                 LeaderBoardStore.GetAllLeaderboard(function (leagues) {
@@ -517,6 +526,7 @@ angular.module('football.controllers')
                                     $scope.rankedteams = leagues.reverse();
 
                                     LeaderBoardStore.UpdateRatings($scope.rankedteams).then(function (result) {
+                                        $ionicLoading.hide();
                                         var alertPopup = $ionicPopup.alert({
                                             title: 'Success',
                                             template: 'Team Added'
@@ -1644,6 +1654,11 @@ angular.module('football.controllers')
         $scope.currentprofile = {};
 
         $scope.notloaded = false;
+
+        // set the rate and max variables
+        $scope.rating = {};
+        $scope.rating.rate = 3;
+        $scope.rating.max = 5;
 
         $scope.tabs =
             {

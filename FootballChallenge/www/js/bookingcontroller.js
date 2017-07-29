@@ -25,16 +25,13 @@ angular.module('football.controllers')
             $scope.currentbookings = [];
             $scope.previousbookings = [];
             $scope.selectedbookings = [];
-            
+
             BookingStore.GetMyUpcomingBookings(function (leagues) {
 
-                // Simple GET request example:
                 $http({
                     method: 'GET',
                     url: 'https://us-central1-project-6346119287623064588.cloudfunctions.net/date'
                 }).then(function successCallback(response) {
-
-                    console.log(response);
 
                     $scope.bookings = leagues;
                     $scope.tabs.Current = true;
@@ -55,7 +52,6 @@ angular.module('football.controllers')
                     }
 
                     $scope.selectedbookings = $scope.currentbookings;
-                    console.log($scope.previousbookings);
                 }, function errorCallback(response) {
                     alert(JSON.stringify(response));
                 });
@@ -65,7 +61,6 @@ angular.module('football.controllers')
         }
 
         $scope.RefreshPage();
-
 
         $scope.CancelBooking = function (item) {
 
@@ -81,20 +76,33 @@ angular.module('football.controllers')
 
                 }
                 else {
-
+                    $ionicLoading.show({
+                        content: 'Loading',
+                        animation: 'fade-in',
+                        showBackdrop: true,
+                        maxWidth: 200,
+                        showDelay: 0
+                    });
                     BookingStore.GetBookingbyID(item, function (res) {
-                        console.log(res);
                         if (res != null && res != []) {
                             BookingStore.DeleteBookingByID(res).then(function () {
-                                console.log("Deleted Booking");
-                                $scope.RefreshPage();
+                                $ionicLoading.hide();
+                                var alertPopup = $ionicPopup.alert({
+                                    template: 'Booking Cancelled Successfully'
+                                }).then(function () {
+                                    $scope.RefreshPage();
+                                }, function (error) {
+
+                                })
+
                             }, function (error) {
-                                console.log("ERROR ON DELETED");
+                                $ionicLoading.hide();
+                                alert("ERROR");
                             })
                         }
 
                     }, function (error) {
-                        console.log(error);
+                       alert("ERROR");
                     })
 
                 }

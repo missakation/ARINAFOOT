@@ -5,36 +5,14 @@ angular.module('football.controllers')
 
     .controller('ChallengeController', function ($scope, TeamStores, ChallengeStore, $state, $ionicPopup, $ionicLoading, $ionicPopover, pickerView, $ionicFilterBar) {
 
-
-
         $scope.myteam = $state.params.myteam;
-
-        console.log("MYTEAM");
-        console.log($scope.myteam);
 
         var numofplayersArr = [];
         //alert(JSON.stringify($state.params.myteam));
 
         //alert("Key:" +$scope.myteam.key);
         //alert($scope.myteam);
-        TeamStores.GetTeamInfoByKey($scope.myteam.key, function (teaminfo) {
-            //alert(JSON.stringify(teaminfo));
-            if (teaminfo.teamoffive)
-                numofplayersArr.push(" 5 Vs 5");
-            if (teaminfo.teamofsix)
-                numofplayersArr.push(" 6 Vs 6");
-            if (teaminfo.teamofseven)
-                numofplayersArr.push(" 7 Vs 7");
-            if (teaminfo.teamofeight)
-                numofplayersArr.push(" 8 Vs 8");
-            if (teaminfo.teamofnine)
-                numofplayersArr.push(" 9 Vs 9");
-            if (teaminfo.teamoften)
-                numofplayersArr.push(" 10 Vs 10");
-            if (teaminfo.teamofeleven)
-                numofplayersArr.push(" 11 Vs 11");
-            //alert(JSON.stringify(numofplayersArr));
-        });
+
 
 
         /** picker view stuff **/
@@ -72,8 +50,55 @@ angular.module('football.controllers')
 
         $scope.search = {
             date: tomorrow,
-            text: "Tomorrow, 9:00PM - 5 Vs 5"
+            text: "Tomorrow, 9:00PM - 5 Vs 5",
+            players: 5
         };
+
+        TeamStores.GetTeamInfoByKey($scope.myteam.key, function (teaminfo) {
+            //alert(JSON.stringify(teaminfo));
+
+
+            if (teaminfo.teamofeleven) {
+                numofplayersArr.push(" 11 Vs 11");
+                $scope.search.players = "11";
+            }
+            if (teaminfo.teamoften) {
+                numofplayersArr.push(" 10 Vs 10");
+                $scope.search.players = "10";
+            }
+
+            if (teaminfo.teamofnine) {
+                numofplayersArr.push(" 9 Vs 9");
+                $scope.search.players = "9";
+            }
+
+
+            if (teaminfo.teamofeight) {
+                numofplayersArr.push(" 8 Vs 8");
+                $scope.search.players = "8";
+            }
+
+
+            if (teaminfo.teamofseven) {
+                numofplayersArr.push(" 7 Vs 7");
+                $scope.search.players = "7";
+            }
+
+
+
+            if (teaminfo.teamofsix) {
+                numofplayersArr.push(" 6 Vs 6");
+                $scope.search.players = "6";
+            }
+
+            numofplayersArr.reverse();
+
+
+            if (teaminfo.teamoffive) {
+                numofplayersArr.push(" 5 Vs 5");
+                $scope.search.players = "5";
+            }
+        });
 
         $scope.openPickerView = function openPickerView() {
 
@@ -261,9 +286,6 @@ angular.module('football.controllers')
 
                             element.points = Math.abs(($scope.myteam.rating - element.rating)) + element.distance * 5 + ((5 - element.reviewrating) * 20);
 
-
-
-
                         }, this);
                     }
 
@@ -289,9 +311,7 @@ angular.module('football.controllers')
 
         $scope.updateselectedteams = function (team) {
 
-
             try {
-
 
                 if (team.selected == "unselect") {
                     $scope.selectedteams = $scope.selectedteams.filter(function (el) {
@@ -341,6 +361,7 @@ angular.module('football.controllers')
 
                         {
                             date: $scope.search.date,
+                            numplayers: $scope.search.players,
                             visualText: $scope.search.text,
                             teams: $scope.selectedteams,
                             myteam: $scope.myteam
@@ -522,7 +543,7 @@ angular.module('football.controllers')
                             });
                             ChallengeStore.GetNumChallengeByDate($state.params.date, $scope.myteam, function (result) {
                                 if (result + $state.params.teams.length < 4) {
-                                    ChallengeStore.ChallengeTeams($state.params.date, $state.params.teams, $scope.selectedstadiums, $scope.myteam, $scope.profile)
+                                    ChallengeStore.ChallengeTeams($state.params.date, $state.params.numplayers, $state.params.teams, $scope.selectedstadiums, $scope.myteam, $scope.profile)
                                         .then(function (value) {
                                             $state.params.teams.forEach(function (element) {
 

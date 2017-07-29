@@ -475,6 +475,7 @@ angular.module('football', ['ionic', /*'ionicImgCache'*/ 'football.controllers',
                 url: '/challengeteamstadium',
                 params: {
                     date: null,
+                    numplayers:null,
                     visualText: null,
                     teams: null,
                     myteam: null

@@ -185,6 +185,7 @@ angular.module('football.controllers')
 
 
                 var numOfPlayers = search.players;
+
                 var year = search.date.getFullYear();
                 var month = search.date.getMonth();
                 var day = search.date.getDate();
@@ -199,33 +200,31 @@ angular.module('football.controllers')
 
                 var teamOf = "";
 
-                var teamOf = "";
-
                 switch (numOfPlayers) {
-                    case 5:
+                    case "5":
                         teamOf = "teamoffive";
                         break;
-                    case 6:
+                    case "6":
                         teamOf = "teamofsix";
                         break;
-                    case 7:
+                    case "7":
                         teamOf = "teamofseven";
                         break;
-                    case 8:
+                    case "8":
                         teamOf = "teamofeight";
                         break;
-                    case 9:
+                    case "9":
                         teamOf = "teamofnine";
                         break;
-                    case 10:
+                    case "10":
                         teamOf = "teamoften";
                         break;
-                    case 11:
+                    case "11":
                         teamOf = "teamofeleven";
                         break;
 
                     default:
-                        teamOf = "teamoffive";
+                        teamOf = "teamofeleven";
                 }
 
 
@@ -266,7 +265,7 @@ angular.module('football.controllers')
 
                 }
                 //    firebase.database().ref('/teams').limitToFirst(4).once('value').then(function (snapshot) {
-                firebase.database().ref('/teaminfo').orderByChild(startend).startAt(hour).on('value',function (snapshot) {
+                firebase.database().ref('/teaminfo').orderByChild(startend).startAt(hour).on('value', function (snapshot) {
                     //alert(firstName);
                     AllITems = [];
 
@@ -281,10 +280,7 @@ angular.module('football.controllers')
 
                                 if (!childSnapshot.child('players/' + id).exists()) {
 
-                                    // if (childSnapshot.child(startat).val() <= hour) {
-                                    if (childSnapshot.child("available").val()) {
-
-                                        //  if (childSnapshot.child(teamOf).val()) {
+                                    if (childSnapshot.child("available").val() && childSnapshot.child(teamOf).val()) {
 
                                         var range = 1500 - childSnapshot.child("rating").val();
 
@@ -315,7 +311,6 @@ angular.module('football.controllers')
                                                 break;
                                         }
 
-                                        //alert(childSnapshot.key);
                                         var Items = {
 
                                             "key": childSnapshot.key,
@@ -353,11 +348,10 @@ angular.module('football.controllers')
                             });
                         }
                     }
-                    console.log(AllITems);
                     callback(AllITems);
                 });
             },
-            ChallengeTeams: function (date, teams, stadiums, myteam, myprofile) {
+            ChallengeTeams: function (date, players, teams, stadiums, myteam, myprofile) {
 
 
                 //alert(myprofile.photo);
@@ -428,7 +422,9 @@ angular.module('football.controllers')
                                     dateofchallengemonth: dateofchallengemonth,
                                     dateofchallengeday: dateofchallengeday,
                                     dateofchallengehour: dateofchallengehour,
-                                    dateofchallengeminute: dateofchallengeminute
+                                    dateofchallengeminute: dateofchallengeminute,
+
+                                    numplayers: players
 
 
                                 }
@@ -477,7 +473,9 @@ angular.module('football.controllers')
                                     dateofchallengemonth: dateofchallengemonth,
                                     dateofchallengeday: dateofchallengeday,
                                     dateofchallengehour: dateofchallengehour,
-                                    dateofchallengeminute: dateofchallengeminute
+                                    dateofchallengeminute: dateofchallengeminute,
+
+                                    numplayers: players
 
                                 }
 
@@ -597,8 +595,8 @@ angular.module('football.controllers')
 
                                 adminphoto: challenges.child("adminphoto").val(),
                                 admintelephon: challenges.child("admintelephon").val(),
-                                adminname: challenges.child("adminname").val()
-
+                                adminname: challenges.child("adminname").val(),
+                                numplayers: challenges.child("numplayers").val()
 
 
                             }

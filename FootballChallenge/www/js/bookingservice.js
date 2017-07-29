@@ -7,15 +7,11 @@
             GetMyUpcomingBookings: function (callback) {
 
                 try {
-
-
                     var user = firebase.auth().currentUser;
                     var id = user.uid;
 
-
                     if (id !== null || id == '' || id === undefined) {
 
-                        
                         firebase.database().ref('/players/' + id + '/upcomingmatches').on('value', function (snapshot) {
                             Temp = [];
                             snapshot.forEach(function (childSnapshot) {

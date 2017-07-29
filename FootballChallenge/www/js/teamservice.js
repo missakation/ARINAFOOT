@@ -192,7 +192,7 @@
 
                         favlatitude: newteam.favlatitude,
                         favlongitude: newteam.favlongitude,
-                        reviewrating: 5
+                        reviewrating: 5,
                         
 
                     };
@@ -413,6 +413,7 @@
                                         price: challenges.child("price").val(),
                                         stadiumdescription: challenges.child("stadiumdescription").val(),
                                         status: challenges.child("status").val() //0 didnt begin 1 win 2 loss 3 draw
+                                        
 
                                     }
                                     upcomingmatches.push(matchdata);
