@@ -312,3 +312,21 @@
         border-bottom: 2px solid rgb(62, 83, 100) !important;
         border-top: 1px !important;
     }
+	
+		ul.rating li i {
+  font-size: 24px;
+  color:orange;
+}
+	.item {
+		background-color: rgb(46, 62, 75);
+	}
+
+	.item-select select {
+		background-color: rgb(46, 62, 75);
+		color: #2ab041;
+	}
+
+	.item-select:after {
+		margin-top: 0px;
+		color: #2ab041;
+	}
