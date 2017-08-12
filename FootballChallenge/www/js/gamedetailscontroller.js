@@ -42,6 +42,7 @@ angular.module('football.controllers')
                         $scope.first = true;
                         $scope.currentteam = $scope.challenge.team1key;
                         $scope.opponent = $scope.challenge.team2name;
+                        
                     }
                     else if ($scope.challenge.team2adminid === $scope.myid) {
                         $scope.isadmin = true;
@@ -52,6 +53,7 @@ angular.module('football.controllers')
                     else {
                         $scope.isadmin = false;
                     }
+                    $scope.$apply();
 
                     if ($scope.isadmin) {
 

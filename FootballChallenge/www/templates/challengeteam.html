@@ -8,7 +8,6 @@
 		font-size: 26px;
 	}
 
-
 	.bar .button.button-icon,
 	.bar button.button-icon {
 		color: white;
@@ -440,7 +439,7 @@
 			</h5>
 		</div>
 
-		<div class="card" style="border-bottom:15px solid rgb(46,62,75);background-color:rgb(62,83,100)" collection-repeat="team in filteredTeams | orderBy: 'points':false">
+		<div class="card" style="background-color:rgb(62,83,100)" collection-repeat="team in filteredTeams | orderBy: 'points':false">
 
 			<div class="row" style="padding:5px 0 0 0">
 				<div class="col" style="padding:0px;border-right:1px solid #5f7485" align="center">
@@ -496,12 +495,13 @@
 				<div style="font-size:14px;width:33%;padding:0px;margin:5px 0 -25px 0;color:white" align="center">
 					<h5 style="margin-bottom:4px;padding:0px;font-weight:bold;color:white">{{team.difficultytext}} </h5>
 					<img src="img/difficulty/{{team.difficulty}}" align="left" style="margin:0 0 10px 0;height:10px">
+					{{team.rankdescription}}
 
 				</div>
 
-				<div style="font-size:14px;width:27%;border-left:1px solid #5f7485;border-right:1px solid #5f7485;padding:0px;margin:5px 0 -10px 0;color:white;font-size:12px"
+				<div style="font-size:14px;width:27%;border-left:1px solid #5f7485;border-right:1px solid #5f7485;padding:0px;margin:5px 0 -10px 0;color:white"
 				 align="center">
-					<rating style="padding:20px 0 0 4px ;color:rgb(255,152,18);margin-top:-8px" readonly="readOnly" ng-model="4.2" max="rating.max"
+					<rating style="color:rgb(255,152,18);margin-top:-8px;padding-top:0px" readonly="readOnly" ng-model="4.2" max="rating.max"
 					 align="left">
 
 					</rating>

@@ -64,7 +64,7 @@ angular.module('football.controllers')
 
 
 
-                firebase.database().ref('/playersinfo').orderByChild(startend).startAt(hour).on('value', function (snapshot) {
+                firebase.database().ref('/players').orderByChild(startend).startAt(hour).on('value', function (snapshot) {
                     AvailablePlayers = [];
 
                     snapshot.forEach(function (childSnapshot) {
@@ -359,6 +359,7 @@ angular.module('football.controllers')
                                 requestorkey: player.key,
                                 firstname: player.firstname,
                                 lastname: player.lastname,
+                                photo:player.photo
                             };
 
                             var updates = {};

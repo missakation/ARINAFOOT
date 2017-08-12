@@ -479,8 +479,8 @@
 				</div>
 
 
-				<div class="col col-50" style="padding:0px" align="center">
-					<img ui-sref="app.teamview({teamid: item.teamkey})" style="width:80px;height:80px" src="img/Badges/{{item.teambadge}}.png">
+				<div ng-click="gototeam(item.teamkey)" class="col col-50" style="padding:0px" align="center">
+					<img style="width:80px;height:80px" src="img/Badges/{{item.teambadge}}.png">
 					<h5 class="whitetext" style="margin-bottom:0px;margin-top:5px;text-transform: capitalize;padding:0px;font-weight:bold"> {{item.teamname}} </h5>
 
 				</div>

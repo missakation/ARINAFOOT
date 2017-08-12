@@ -497,7 +497,7 @@ angular.module('football.controllers')
                     if ($scope.selectedstadiums.length == 3) {
                         $ionicPopup.alert({
                             title: 'Forbidden',
-                            template: 'You cannot select more than 3 teams'
+                            template: 'You cannot select more than 3 stadiums'
                         });
                     }
                     else {

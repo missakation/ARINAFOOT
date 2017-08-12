@@ -53,9 +53,6 @@
 
 
 		<div class="card" style="background-color:rgb(62,83,100);margin:10px 5px 0px 5px" ng-show="!notloaded">
-			<!--  <a class="item item-thumbnail-left" ng-href="#/app/reservestadiumdetails/{{stadiums.stadiumkey}}"> -->
-
-
 
 			<div class="row" style="padding-bottom:0px">
 				<div class="col" style="padding:0px">
@@ -230,20 +227,12 @@
 				</div>
 
 			</div>
-			<div class="row">
-				<div class="col">
-
-
-					<div class="col">
-
-						</button>
-					</div>
-				</div>
-
-			</div>
+			
 
 		</div>
-
+<h6 class="graytext" ng-show="item.isadmin">
+					Invite at Least {{challenge.numplayers}} Players
+				</h6>
 		<div class="card" style="background-color:rgb(62,83,100);margin:10px 5px 0px 5px" ng-show="!notloaded">
 			<!--  <a class="item item-thumbnail-left" ng-href="#/app/reservestadiumdetails/{{stadiums.stadiumkey}}"> -->
 
@@ -251,9 +240,7 @@
 				<h4 class="whitetext">
 					Players List
 				</h4>
-				<h6 class="graytext" ng-hide="!item.isadmin">
-					Invite at Least (404) Players
-				</h6>
+				
 			</div>
 
 			<div class="row " ng-repeat="item in myplayers">

@@ -87,6 +87,7 @@ angular.module('football.controllers')
                         newuser: {
                             teamname: "",
                             pteamsize: "5",
+                            favstadium: "",
                             favstadiumphoto: "",
                             favstadiumphoto: "",
                             favstadiumname: "",
@@ -1478,9 +1479,12 @@ angular.module('football.controllers')
 
 
         ProfileStore1.SearchPlayers($scope.myteam, function (leagues) {
+
             $scope.allplayers = leagues;
+
+
             $scope.filteredPlayers = $scope.allplayers;
-            console.log($scope.allplayers);
+
 
             var date = new Date();
             HomeStore.GetProfileInfo(date, function (players) {
@@ -1499,26 +1503,25 @@ angular.module('football.controllers')
         }
         )
 
-
-
-
-
         $scope.InvitePlayerToTeam = function (player) {
-            TeamStores.InvitePlayerToTeam($scope.myteam, player, $scope.profile).then(function () {
-                player.status = "Invitation Sent";
-                if (player.devicetoken != undefined && player.devicetoken != "") {
-                    if (player.settings.notification) {
-                        LoginStore.SendNotification("Would you like to join " + $scope.myteam.teamname + '?', player.devicetoken);
+
+            if (player.color != "white") {
+                TeamStores.InvitePlayerToTeam($scope.myteam, player, $scope.profile).then(function () {
+                    player.status = "Invitation Sent";
+                    if (player.devicetoken != undefined && player.devicetoken != "") {
+                        if (player.settings.notification) {
+                            LoginStore.SendNotification("Would you like to join " + $scope.myteam.teamname + '?', player.devicetoken);
+                        }
+
                     }
+                    player.color = "white";
+                    player.backcolor = "#28b041";
+                    $scope.$apply();
 
-                }
-                player.color = "white";
-                player.backcolor = "#28b041";
-                $scope.$apply();
-
-            }, function (error) {
-                alert(error.message)
-            })
+                }, function (error) {
+                    alert(error.message)
+                })
+            }
         }
         //Filter bar stuff
         var filterBarInstance;
@@ -1584,8 +1587,7 @@ angular.module('football.controllers')
 
 
         $scope.goback = function (stadium) {
-            console.log("SELECTED STADIUM");
-            console.log(stadium);
+
             $state.params.myteam.favstadium = stadium.key;
             $state.params.myteam.favstadiumphoto = stadium.photo;
             $state.params.myteam.favstadiumname = stadium.name;

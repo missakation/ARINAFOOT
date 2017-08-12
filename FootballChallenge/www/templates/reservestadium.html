@@ -1,5 +1,17 @@
 <style>
+	.item {
+		background-color: rgb(46, 62, 75);
+	}
 
+	.item-select select {
+		background-color: rgb(46, 62, 75);
+		color: #2ab041;
+	}
+
+	.item-select:after {
+		margin-top: 0px;
+		color: #2ab041;
+	}
 
 	input:focus,
 	input:valid {
@@ -469,13 +481,15 @@
 					<div align="left" style="border-top:1px solid #5f7485;color:rgb(157,171,184);font-size:15px;padding:10px 5px 0px 5px;margin-top:10px">
 						Distance (in Km) </div>
 					<div style="padding-left:10px;padding-right:10px;padding-bottom:5px;border-bottom:1px solid #5f7485">
-						<rzslider rz-slider-model="managecolors.distancefrom" rz-slider-high="managecolors.distanceto" style="color:white ">
+						<rzslider rz-slider-model="managecolors.distancefrom" rz-slider-high="managecolors.distanceto" rz-slider-options="distanceslider.options" style="color:white ">
 						</rzslider>
 
 					</div>
 					<div align="left" style=";color:rgb(157,171,184);font-size:15px;padding:10px 5px 0px 5px;margin-top:10px"> Price (in LBP) </div>
 					<div style="padding-left:10px;padding-right:10px;padding-bottom:5px;border-bottom:1px solid #5f7485">
-						<rzslider rz-slider-model="managecolors.pricefrom" rz-slider-high="managecolors.priceto" style="color:white ">
+						<rzslider rz-slider-model="managecolors.pricefrom" 
+						rz-slider-high="managecolors.priceto" style="color:white " 
+						rz-slider-options="priceslider.options">
 						</rzslider>
 
 					</div>

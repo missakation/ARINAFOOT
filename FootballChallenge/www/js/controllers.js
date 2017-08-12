@@ -293,7 +293,10 @@ angular.module('football.controllers', [])
                     updates['playersinfo/' + id + '/ageday'] = day;
 
                     updates['playersinfo/' + id + '/ageday'] = profile.favlatitude;;
-                    updates['playersinfo/' + id + '/ageday'] = profile.favlongitude;;
+                    updates['playersinfo/' + id + '/ageday'] = profile.favlongitude;
+
+                    updates['playersinfo/' + id + '/favlatitude'] = profile.favlatitude;
+                    updates['playersinfo/' + id + '/favlongitude'] = profile.favlongitude;
 
                     if (withdetails) {
                         //Age
@@ -386,7 +389,9 @@ angular.module('football.controllers', [])
                                         "color": color,
                                         "backcolor": backcolor,
                                         "identity": childSnapshot.child("identity").val(),
-                                        "settings": childSnapshot.child("settings").val()
+                                        "settings": childSnapshot.child("settings").val(),
+                                        "favstadium":childSnapshot.child("favstadium").val(),
+                                        "favstadiumname":childSnapshot.child("favstadiumname").val()
 
 
                                     };
@@ -759,7 +764,7 @@ angular.module('football.controllers', [])
                                     key: req.key,
                                     firstname: req.child("firstname").val(),
                                     lastname: req.child("lastname").val(),
-                                    photo: (req.child("requestorphoto").val() == "" || !req.child("requestorphoto").exists()) ? "img/PlayerProfile.png" : req.child("requestorphoto").val(),
+                                    photo: (req.child("photo").val() == "" || !req.child("photo").exists()) ? "img/PlayerProfile.png" : req.child("photo").val(),
                                     telephone: req.child("telephone").val(),
                                     status: req.child("requeststatus").val(),
                                     color: color,
@@ -1221,6 +1226,9 @@ angular.module('football.controllers', [])
 
                         updates['/players/' + challenge.team2adminid + '/challenges/' + challenge.key] = null;
 
+
+                        updates['/challenges/' + challenge.key + '/gameaccepted'] = true;
+
                         updates['/challenges/' + challenge.key + '/stadiums'] = angular.copy(stadiums);
 
                         updates['/challenges/' + challenge.key + '/team1players/' + challenge.team1adminid] =
@@ -1306,28 +1314,27 @@ angular.module('football.controllers', [])
 
                         updates['/players/' + id + '/myrequests/' + request.key + '/requeststatus'] = 1;
 
-                        updates['/players/' + id + '/friends/' + request.key] = {
+                        updates['/players/' + id + '/previousrequests/' + request.key] = {
                             firstname: request.firstname,
                             lastname: request.lastname,
                             key: request.key,
                             telephone: request.telephone,
-                            photo: request.photo
+                            photo: request.photo,
+                            requeststatus: 1
 
                         };
 
-                        updates['/players/' + request.key + '/friends/' + id] =
+                        /*updates['/players/' + request.key + '/friends/' + id] =
                             {
                                 firstname: request.firstname,
                                 lastname: request.lastname,
                                 key: request.key,
                                 telephone: request.telephone,
                                 photo: request.photo
-                            };
+                            };*/
 
                         updates['/players/' + request.key + '/previousrequests/' + id + '/requeststatus'] = 1;
                         updates['/players/' + request.key + '/previousrequests/' + id + '/telephone'] = myprofile.telephone;
-
-
 
 
                         console.log(request);

@@ -340,6 +340,21 @@ angular.module('football.controllers')
                                             "reviewrating": childSnapshot.child("reviewrating").val()
 
                                         };
+                                        switch (Items.rank) {
+                                            case 1:
+                                                Items.rankdescription = Items.rank + 'st';
+                                                break;
+                                            case 2:
+                                                Items.rankdescription = Items.rank + 'nd';
+                                                break;
+                                            case 3:
+                                                Items.rankdescription = Items.rank + 'rd';
+                                                break;
+
+                                            default:
+                                                Items.rankdescription = Items.rank + 'th';
+                                                break;
+                                        }
                                         AllITems.push(Items);
                                     }
                                     //   }
@@ -375,6 +390,9 @@ angular.module('football.controllers')
                 var dateofchallengeminute = dateofchallenge.getMinutes();
 
                 try {
+                    // Get a key for a new Post.
+                    var newPostKey = firebase.database().ref().child('challenges').push().key;
+
                     for (var i = 0; i < teams.length; i++) {
 
                         if (teams[i] !== null && teams[i].key !== null && myteam !== null && myteam.key !== null && myprofile !== null && myprofile.key !== null) {
@@ -424,7 +442,8 @@ angular.module('football.controllers')
                                     dateofchallengehour: dateofchallengehour,
                                     dateofchallengeminute: dateofchallengeminute,
 
-                                    numplayers: players
+                                    numplayers: players,
+                                    gameaccepted: false
 
 
                                 }
@@ -475,12 +494,12 @@ angular.module('football.controllers')
                                     dateofchallengehour: dateofchallengehour,
                                     dateofchallengeminute: dateofchallengeminute,
 
-                                    numplayers: players
+                                    numplayers: players,
+                                    gameaccepted: false
 
                                 }
 
-                                // Get a key for a new Post.
-                                var newPostKey = firebase.database().ref().child('challenges').push().key;
+
 
                                 updates['/challenges/' + newPostKey] = challengedata;
 

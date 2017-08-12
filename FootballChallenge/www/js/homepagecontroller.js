@@ -196,7 +196,7 @@ angular.module('football.controllers')
 
         */
 
-        
+
         /*for (var i = 51; i < 700; i++) {
             var updates = {};
                                 var contact = {
@@ -387,19 +387,74 @@ angular.module('football.controllers')
         }
 
         $scope.acceptinvitation = function (challenge) {
-            try {
 
-                if (challenge !== null || challenge == '' || challenge === undefined) {
-                    $state.go('app.choosechallengestadium', {
-                        challenge: challenge
-                    });
+            firebase.database().ref('/challenges/' + challenge.key).once('value').then(function (snapshot) {
+
+                if (snapshot.exists()) {
+
+                    if (snapshot.val().gameaccepted == false) {
+                        try {
+
+                            if (challenge !== null || challenge == '' || challenge === undefined) {
+                                $state.go('app.choosechallengestadium', {
+                                    challenge: challenge
+                                });
+                            }
+
+
+                        } catch (error) {
+                            alert(error.message);
+                            LoginStore.PostError(error);
+                        }
+
+
+                    }
+                    else {
+
+                        var alertPopup = $ionicPopup.alert({
+                            template: 'Sorry! Another team has already accepted the challenge!'
+                        });
+
+
+                        alertPopup.then(function (res) {
+
+                            HomeStore.DeleteChallenge(challenge).then(function () {
+                                //remove the challenge from homepage
+                                $scope.profile.challenges = $scope.profile.challenges.filter(function (el) {
+                                    return el.key !== challenge.key;
+
+                                })
+                                $ionicSlideBoxDelegate.update();
+                                $scope.$apply();
+                            });
+
+                        })
+
+                    }
                 }
+                else {
+
+                    var alertPopup = $ionicPopup.alert({
+                        template: 'Sorry! Another team has already accepted the challenge!'
+                    });
 
 
-            } catch (error) {
-                alert(error.message);
-                LoginStore.PostError(error);
-            }
+                    alertPopup.then(function (res) {
+
+                        HomeStore.DeleteChallenge(challenge).then(function () {
+                            //remove the challenge from homepage
+                            $scope.profile.challenges = $scope.profile.challenges.filter(function (el) {
+                                return el.key !== challenge.key;
+
+                            })
+                            $ionicSlideBoxDelegate.update();
+                            $scope.$apply();
+                        });
+
+                    })
+
+                }
+            })
 
         }
 
@@ -739,7 +794,7 @@ angular.module('football.controllers')
                     element.tickersec -= 1;
 
 
-                    if (element.tickersec < 1) {
+                    if (element.tickersec < 1 && Math.abs((element.date - new Date()) / 36e5) < 12) {
                         HomeStore.DeleteChallenge(element).then(function () {
                         }, function (error) {
                             LoginStore.PostError(error);
@@ -771,7 +826,10 @@ angular.module('football.controllers')
                     var test = new Date(null);
 
                     $scope.profile.challenges.forEach(function (element) {
-                        element.tickersec = 24 * 60 * 60 - (($scope.currentdate - element.dateofchallenge) / 1000);
+                        if (Math.abs((element.date - $scope.currentdate) / 36e5) < 24)
+                            element.tickersec = 24 * 60 * 60 - (($scope.currentdate - element.date) / 1000);
+                        else
+                            element.tickersec = 24 * 60 * 60 - (($scope.currentdate - element.dateofchallenge) / 1000);
 
                     }, this);
 

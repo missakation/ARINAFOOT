@@ -81,6 +81,8 @@ angular.module('football.controllers')
         $scope.white = "white";
         $scope.backcolor = "#28b041";
 
+
+
         $scope.managecolors =
             {
                 indoor:
@@ -121,12 +123,26 @@ angular.module('football.controllers')
                 },
                 sortby: "Best",
                 distancefrom: 0,
-                distanceto: 250000,
+                distanceto: 100,
                 pricefrom: 0,
                 priceto: 300000
             }
 
+        $scope.distanceslider = {
+            minValue: 0,
+            maxValue: 100,
+            options: {
+                step: 1
+            }
+        };
 
+        $scope.priceslider = {
+            minValue: 0,
+            maxValue: 300000,
+            options: {
+                step: 10000
+            }
+        };
 
         $scope.updatedoortype = function (x) {
 
@@ -281,7 +297,7 @@ angular.module('football.controllers')
         $scope.search = {
             date: tomorrow,
             text: "Tomorrow, 9:00PM - 5 Vs 5 ",
-            players:5
+            players: 5
         };
 
 
@@ -477,7 +493,7 @@ angular.module('football.controllers')
                                                     $scope.search.date.setSeconds(0);
                                                     //alert($scope.search.date);
                                                     $scope.search.date = new Date();
-                                                    
+
                                                     $ionicLoading.hide();
                                                     var alertPopup = $ionicPopup.alert({
                                                         title: 'Success',
@@ -562,6 +578,7 @@ angular.module('football.controllers')
                     }
                 }
             }
+            $scope.filteredStadiums = $scope.allfreestadiums;
             //$scope.$apply();
             $ionicLoading.hide();
 

@@ -1,7 +1,7 @@
 ﻿
 angular.module('football.controllers')
 
-    .controller('SearchController', function ($scope, SearchStore, ReservationFact, LoginStore, $ionicPopup, $ionicPopover, $timeout, $ionicLoading, pickerView, SMSService, $ionicFilterBar) {
+    .controller('SearchController', function ($scope, SearchStore,$state, ReservationFact, LoginStore, $ionicPopup, $ionicPopover, $timeout, $ionicLoading, pickerView, SMSService, $ionicFilterBar) {
         /** picker view stuff **/
         function getDateFromDayName(selectedDay) {
             var selectedDate = new Date();
@@ -193,6 +193,15 @@ angular.module('football.controllers')
 
         $scope.allfreeplayers = [];
 
+        $scope.gototeam = function (id) {
+            if (!(id == null || id == '' || id === undefined || id == 'none')) {
+                $state.go("app.teamview",
+                    {
+                        teamid: id
+                    })
+            }
+        }
+
         $scope.checkfree = function (search) {
 
             //getting current location
@@ -229,10 +238,6 @@ angular.module('football.controllers')
 
                                 var lat2 = element.favlatitude;
                                 var lon2 = element.favlongitude;
-
-                                console.log(lat2);
-                                console.log(lon2);
-
 
                                 var R = 6371; // km 
                                 //has a problem with the .toRad() method below.
