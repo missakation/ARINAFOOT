@@ -439,12 +439,13 @@
 			</h5>
 		</div>
 
-		<div class="card" style="background-color:rgb(62,83,100)" collection-repeat="team in filteredTeams | orderBy: 'points':false">
+		<div class="list" style="background-color:rgb(62,83,100);margin-top:10px;border-top:10px solid rgb(46, 62, 85)" collection-repeat="team in filteredTeams | orderBy: 'points':false">
 
 			<div class="row" style="padding:5px 0 0 0">
 				<div class="col" style="padding:0px;border-right:1px solid #5f7485" align="center">
 					<img src="img/Badges/{{team.badge}}.png" ui-sref="app.teamview({teamid: team.key})" style="width:80px;height:80px;">
-					<h5 style="margin-bottom:0px;color:white;font-weight:bolder;text-transform:capitalize"> {{team.teamname}} </h5>
+					<h5 style="margin-bottom:0px;color:white;font-weight:bolder;text-transform:capitalize"> {{team.teamname}}
+					</h5>
 
 				</div>
 
@@ -457,28 +458,38 @@
 
 			</div>
 
+			<div class="row" align="center" style="padding:5px 0 0 0">
+				<div class="col" style="margin-top:5px;color:darkturquoise;width:50%;padding:0px;margin-bottom:5px;font-weight:bold">
+					{{team.rankdescription}}
+				</div>
+
+				<div align="center" style="margin-top:5px;color:white;width:50%;padding:0px;margin-bottom:5px;font-weight:bold">
+					{{team.captainname}}</div>
+
+			</div>
+
 
 			<div class="row" style="padding:0px">
 
 
 
-				<div align="center" style="color:white;width:50%;padding:0px;font-size:12px;margin-top:5px">
+				<div align="center" style="color:white;width:50%;padding:0px;font-size:12px;margin-top:0px">
 					<i class="ion-location" style="padding-right:3px;font-size:18px;color:#5f7485"></i> {{team.distance}} km away
 				</div>
 
 				<div align="center" style="margin-top:5px;color:white;width:50%;padding:0px;margin-bottom:5px;font-weight:bold">
-					{{team.captainname}}</div>
+				</div>
 			</div>
 
 
 			<hr style="height:1px; visibility:hidden">
 
 			<div class="row" style="padding:0px">
-				<div style="width:18%;font-size:12px;margin:0px;padding:0px;color:#5f7485;border-right:1px solid #5f7485" align="center">
+				<div style="width:18%;font-size:12px;margin:0px;padding:0px;color:#5f7485" align="center">
 					GAMES
 
 				</div>
-				<div style="width:33%;font-size:12px;padding:0px;color:#5f7485" align="center"> DIFFICULTY
+				<div style="width:33%;font-size:12px;padding:0px;color:#5f7485;border-left:1px solid #5f7485" align="center"> DIFFICULTY
 				</div>
 				<div style="width:27%;font-size:12px;padding:0px;border-left:1px solid #5f7485;border-right:1px solid #5f7485;color:#5f7485"
 				 align="center"> RATING
@@ -488,20 +499,19 @@
 			</div>
 
 			<div class="row" style="padding:0px;margin-top:-15x">
-				<div align="center" style="margin:5px 0 -10px 0;font-size:14px;width:18%;border-right:1px solid #5f7485;color:#5f7485"> {{item.playposition}}
-
+				<div align="center" style="margin:15px 0 -10px 0;font-size:14px;width:18%;color:#5f7485">
+					<span style="color:green">7</span>-<span style="color:Orange">10</span>-<span style="color:red">10</span>
 				</div>
 
-				<div style="font-size:14px;width:33%;padding:0px;margin:5px 0 -25px 0;color:white" align="center">
-					<h5 style="margin-bottom:4px;padding:0px;font-weight:bold;color:white">{{team.difficultytext}} </h5>
+				<div style="border-left:1px solid #5f7485;font-size:14px;width:33%;padding:0px;margin:5px 0 -25px 0;color:white" align="center">
+					<h5 style="margin-bottom:4px;padding:0px;font-weight:bold;color:white;;">{{team.difficultytext}} </h5>
 					<img src="img/difficulty/{{team.difficulty}}" align="left" style="margin:0 0 10px 0;height:10px">
-					{{team.rankdescription}}
 
 				</div>
 
 				<div style="font-size:14px;width:27%;border-left:1px solid #5f7485;border-right:1px solid #5f7485;padding:0px;margin:5px 0 -10px 0;color:white"
 				 align="center">
-					<rating style="color:rgb(255,152,18);margin-top:-8px;padding-top:0px" readonly="readOnly" ng-model="4.2" max="rating.max"
+					<rating style="color:rgb(255,152,18);padding-top:10px;text-align:center" readonly="readOnly" ng-model="4.2" max="rating.max"
 					 align="left">
 
 					</rating>

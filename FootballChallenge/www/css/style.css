@@ -314,7 +314,7 @@
     }
 	
 		ul.rating li i {
-  font-size: 24px;
+  font-size: 15px !important;
   color:orange;
 }
 	.item {
@@ -330,3 +330,4 @@
 		margin-top: 0px;
 		color: #2ab041;
 	}
+	
