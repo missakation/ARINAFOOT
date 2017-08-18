@@ -55,6 +55,7 @@ angular.module('football.controllers')
             ReservationFact.GetAllMiniStadiumsByStadName(crit, function (allStadiums) {
                 if (allStadiums.length > 0) {
                     $scope.stadiums = allStadiums;
+                    console.log(allStadiums[0]);
                     //alert("Stadiums: " + $scope.stadiums.length);
                 }
                 //alert("hellO");

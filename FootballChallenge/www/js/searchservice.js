@@ -429,7 +429,9 @@ angular.module('football.controllers')
 
                     snapshot.forEach(function (childSnapshot) {
                         if (childSnapshot.val() != null) {
-                            searchResult.push(childSnapshot.val());
+                            var sr = childSnapshot.val();
+                            sr.key = childSnapshot.getKey();
+                            searchResult.push(sr);
                         }
                         //console.log(JSON.stringify(childSnapshot.val(),null,2));
                     });

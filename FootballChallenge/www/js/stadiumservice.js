@@ -474,6 +474,8 @@ angular.module('football.controllers')
                                 ministadiums.forEach(function (minisnapshot) {
                                     minStd = minisnapshot.val();
                                     minStd.name = stadiumSnapshot.child("name").val();
+                                    minStd.key = minisnapshot.getKey();
+                                    minStd.stadiumKey = stadiumSnapshot.getKey();
                                     AllStadiums.push(minStd);
                                 })
 
