@@ -35,9 +35,9 @@
                 <ion-slide-box ng-show="players.length > 0" show-pager="true">
                     <ion-slide ng-repeat="player in players" >
                             <div ui-sref="app.profileview({key: player.uid})" align="center" style="background-color:#3E5364;color:white;padding-top:20px;padding-bottom:30px;">
-                                <img src="https://bossip.files.wordpress.com/2015/03/nba-face-6.png" style="border-radius:50%;border:none ; height:70px ; width:70px" />
-                                <div style="margin-top:5px;text-align:center;">{{player.displayname}}</div>
-                                <div style="font-size:9px;">ID: {{player.uid}}</div>
+                                <img src={{player.photoURL}} style="border-radius:50%;border:none ; height:70px ; width:70px" />
+                                <div style="margin-top:5px;text-align:center;">{{player.firstname }}  {{player.lastname}}</div>
+                                <div style="font-size:9px;">ID: {{player.identity}}</div>
                             </div>
                     </ion-slide>
                 </ion-slide-box>
