@@ -1,7 +1,7 @@
 ﻿
 angular.module('football.controllers')
 
-    .controller('GlobalSearchController', function ($scope, SearchStore, ReservationFact, $ionicPopup, $ionicLoading, $stateParams, $timeout) {
+    .controller('GlobalSearchController', function ($scope, SearchStore, ReservationFact, $ionicPopup, $ionicLoading, $stateParams, $timeout, $ionicSlideBoxDelegate) {
 
 
         $scope.query = $stateParams.searchCriteria.toString();
@@ -33,6 +33,7 @@ angular.module('football.controllers')
                 if (allPlayers.length > 0) {
                     $scope.players = allPlayers;
                     console.log(allPlayers);
+                $ionicSlideBoxDelegate.update();
                     //alert("Players: " + $scope.players.length);
                 }
                 //alert("hellO");
@@ -71,12 +72,13 @@ angular.module('football.controllers')
                 $ionicLoading.hide();
             })) {
                 //callback();
+                $ionicSlideBoxDelegate.update();
             };
 
 
         };
 
-        $timeout(function () { $scope.searchAll($scope.searchCrit) });
+        $timeout(function () { $scope.searchAll($scope.searchCrit); $ionicSlideBoxDelegate.update();});
 
 
         $scope.gotoprofile = function (x, key) {
@@ -92,4 +94,6 @@ angular.module('football.controllers')
                     break;
             }
         }
+
+        $ionicSlideBoxDelegate.update();
     });
