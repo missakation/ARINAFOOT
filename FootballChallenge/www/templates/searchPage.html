@@ -36,9 +36,9 @@
                     <ion-slide ng-repeat="player in players" style="background-color:rgb(46, 62, 75);padding:0px" >
 				 	    <div class="card" style="padding:0px">
                             <div ui-sref="app.profileview({key: player.uid})" align="center" style="background-color:#3E5364;color:white;padding-top:15px;padding-bottom:35px;">
-                                <img src={{player.photo}} style="border-radius:50%;border:none ; height:70px ; width:70px" />
-                                <div style="margin-top:5px;text-align:center;">{{player.displayname}}</div>
-                                <div style="font-size:12px;">ID: {{player.uid}}</div>
+                                <img src={{player.photoURL}}  style="border-radius:50%;border:none ; height:70px ; width:70px" />
+                                <div style="margin-top:5px;text-align:center;">{{player.firstname }}  {{player.lastname}}</div>
+                                <div style="font-size:12px;">ID: {{player.identity}}</div>
                             </div>
 						</div>
                     </ion-slide>

@@ -421,6 +421,52 @@ angular.module('football.controllers')
                     alert(error.message);
                 }
             },
+            
+
+            //elasticSearch
+            SearchElastic: function(category, term, callback)
+            {
+                var searchResult = [];
+                var database = firebase.database();
+                console.log("Entered elastic search..");
+                // skeleton of the JSON object we will write to DB
+                var query = {
+                    index: "firebase",
+                    type: category
+                };
+                var f = {
+                    filter_path: "hits.hits._source"
+                }
+                query.q = "*"+term+"*";
+                query.filter_path = "hits.total,hits.hits._source";
+
+                
+
+                var ref = database.ref().child("search");
+                var key = ref.child('request').push(query).key;
+
+                //console.log('search', key, query);
+                //$('#query').text(JSON.stringify(query, null, 2));
+                ref.child('response/' + key).on('value',function (snap)
+                {
+                    if (!snap.exists()) { return; }
+
+                    if (snap.val() != null) {
+                        var dat = snap.val().hits.hits;
+                        if(dat!=null)
+                        dat.forEach(function (item, index) {
+                            searchResult.push(item._source);
+                            console.log(item._source);
+                        });
+                        // when a value arrives from the database, stop listening
+                        // and remove the temporary data from the database
+                        //snap.ref.off('value', showResults);
+                         snap.ref.remove();
+
+                         callback(searchResult);
+                    }
+                })
+            },
             SearchAllByField: function (table, fieldName, fieldValue, callback) {
                 var searchResult = [];
                 //var yarraw = firebase.database().ref('/players');//.orderByChild(fieldName).startAt(fieldValue);
