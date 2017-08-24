@@ -1,11 +1,11 @@
 ﻿<style>
-    .headercolor {
-        background-color: rgb(62, 83, 100);
-        color: white;
-        border-bottom: 45px solid rgb(62, 83, 100);
-        border-top:1px;
-    }
 
+.slider-pager {
+	bottom:45px;
+}
+.icon {
+	font-size:20px;
+}
 
 </style>
 
@@ -16,7 +16,7 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content class="bodyColor">
-        <div class="list">
+       
             <div class="item item-input-inset" style="background-color:rgb(62,83,100)">
                 <label class="item-input-wrapper">
                     <i class="icon ion-search placeholder-icon"></i>
@@ -27,53 +27,33 @@
                 </button>
             </div>
             <!-- ion slide box trial -->
-            <ion-item class="item-divider bodyColor" style="border:0px">
+            <ion-item class="item-divider bodyColor" style="color:white;border:0px">
                 Players
             </ion-item>
-            <ion-item ng-hide="players.length > 0" style="border:0px;background-color:#3E5364;color:white">No players found</ion-item>
-            <ion-item style="background-color:#2D3E4B;">
-                <ion-slide-box ng-show="players.length > 0" show-pager="true">
-                    <ion-slide ng-repeat="player in players" >
-                            <div ui-sref="app.profileview({key: player.uid})" align="center" style="background-color:#3E5364;color:white;padding-top:20px;padding-bottom:30px;">
-                                <img src="https://bossip.files.wordpress.com/2015/03/nba-face-6.png" style="border-radius:50%;border:none ; height:70px ; width:70px" />
+
+           <ion-item ng-hide="players.length > 0" style="border:0px;background-color:#3E5364;color:#5f7485">No Players Found</ion-item>
+                <ion-slide-box ng-if="players.length">
+                    <ion-slide ng-repeat="player in players" style="background-color:rgb(46, 62, 75);padding:0px" >
+				 	    <div class="card" style="padding:0px">
+                            <div ui-sref="app.profileview({key: player.uid})" align="center" style="background-color:#3E5364;color:white;padding-top:15px;padding-bottom:35px;">
+                                <img src={{player.photo}} style="border-radius:50%;border:none ; height:70px ; width:70px" />
                                 <div style="margin-top:5px;text-align:center;">{{player.displayname}}</div>
-                                <div style="font-size:9px;">ID: {{player.uid}}</div>
+                                <div style="font-size:12px;">ID: {{player.uid}}</div>
                             </div>
+						</div>
                     </ion-slide>
                 </ion-slide-box>
-            </ion-item>
-                <!--
-                <ion-item class="item-divider bodyColor" style="border:0px">
-                    Players
-                </ion-item>
-                
-                <ion-item ng-hide="players.length > 0" style="border:0px;background-color:#3E5364;color:white">No players found</ion-item>
-                <ion-scroll ng-show="players.length > 0" direction="x" class="item wide-item" style="border:0px;background-color:#3E5364">
-                    <div class="row" style="background-color:#3E5364">
-                        <div class="col" ng-repeat="player in players" >
-                            <a ng-href="#/app/profileView/{{player.uid}}">
-                                <div class="row" ui-sref="app.profileview({key: player.uid})">
-                                    <div class="col">
-                                        <div class="item item-avatar-center" style="border:none;background-color:rgb(45, 62, 75);color:white">
-                                            <img class="item-image player-image" src="https://bossip.files.wordpress.com/2015/03/nba-face-6.png" />
-                                            <div style="margin-top:5px;text-align:center;">{{player.displayname}}</div>
-                                            <div style="font-size:9px;">ID: {{player.uid}}</div>
-                                        </div>
-                                    </div>
-                                </div>
-</div>
-                    </div>
-                </ion-scroll>-->
+          
+
             
-                <ion-item class="item-divider bodyColor" style="border:0px">
+                <ion-item class="item-divider bodyColor" style="color:white;border:0px">
                     Stadiums
                 </ion-item>
-                <ion-item ng-hide="stadiums.length > 0" style="border:0px;background-color:#3E5364;color:white">No players found</ion-item>
-                <ion-item style="background-color:#2D3E4B;">
-                    <ion-slide-box ng-show="stadiums.length > 0" show-pager="true">
-                        <ion-slide ng-repeat="stadium in stadiums">
-
-                                <div class="card bodyColor" style="background-color:#3E5364;margin-bottom:45px;" >
+                <ion-item ng-hide="stadiums.length > 0" style="border:0px;background-color:#3E5364;color:#5f7485">No Stadiums found</ion-item>
+                
+                    <ion-slide-box ng-if="stadiums.length">
+                        <ion-slide ng-repeat="stadium in stadiums"  style="background-color:rgb(46, 62, 75);padding:0px" >
+						    <div class="card bodyColor" style="background-color:#3E5364;padding:0px"
                                     <div ui-sref="app.reservestadiumdetails({stadiumid: stadium.stadiumKey})" >
 
                                         <div align="center">
@@ -111,104 +91,23 @@
                                 </div>
                         </ion-slide>
                     </ion-slide-box>
-                </ion-item>
-            <!--
-                <ion-item ng-hide="stadiums.length > 0"  style="border:0px;background-color:#3E5364;color:white">No stadiums found</ion-item>
-                <ion-scroll ng-show="stadiums.length > 0" direction="x" class="item wide-item bodyColor" style="border:0px">
-
-
-                    <div class="row">
-
-                        <div class="card bodyColor" ng-repeat="stadium in stadiums" style="min-width:80%;" ui-sref="app.reservestadiumdetails({key: stadium.id})" >
-                             <a  ng-href="#/app/reservestadiumdetails/{{stadium.uid}}"> 
-
-                            <div align="center">
-                               <img src="http://www.sundul.com/wp-content/uploads/2013/02/Bikin-Stadion-Baru-Inter-Milan-Siap-Hengkang-Dari-San-Siro.jpg" style="width:100%;height:140px;">
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-75" style="font-size:14px;color:white;text-transform:capitalize;padding-bottom:0px">
-                                    {{stadium.name}} - {{stadium.description}}
-                                </div>
-
-                                <div class="col" align="right" style="color:#5f7485;padding:5px 0 0 5px">
-                                    Price
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-                                <div class="col col-66" align="left">
-                                    <rating readonly="readOnly" ng-model="stadium.rating" style="color:orange" align="left">
-
-                                    </rating>
-
-                                </div>
-
-                                <div class="col" align="right" style="color:white">
-                                    <b>
-
-                                        {{stadium.price}} L.L.
-                                    </b>
-                                </div>
-                            </div>
-
-</a>
-                        </div>
-
-                        <!--<div class="col" ng-repeat="stadium in stadiums" >
-                            <div class="row">
-                                
-                                <div class="col">
-                                    <a ng-href="#/app/reservestadiumdetails/{{stadium.id}}">
-                                    <div class="item item-avatar-center headercolor" style="padding-right:0px;padding-left:0px;padding-top:0px" >
-                                        
-                                            <img class="item-image" src="http://media.gettyimages.com/videos/dramatic-soccer-stadium-full-of-spectators-video-id533074742?s=640x640" style="width:100%;margin: 0px" />
-                                            </br>
-                                            <div>{{stadium.name}}</div>
-                                        
-                                    </div></a>
-                                </div>
-                                
-                            </div>
-
-                        </div>
-                    </div>
-                </ion-scroll>-->
-                <ion-item class="item-divider bodyColor" style="border:0px">
+             
+         
+                <ion-item class="item-divider bodyColor" style="color:white;border:0px">
                     Teams
                 </ion-item>
-                <ion-item ng-hide="teams.length > 0" style="border:0px;background-color:#3E5364;color:white">No teams found</ion-item>
-                <!--<ion-scroll ng-show="teams.length > 0" direction="x" class="item wide-item" style="border:0px;background-color:#3E5364;color:white">
-                    <div class="row" style="background-color:#3E5364">
-                        <div class="col" ng-repeat="team in teams" ui-sref="app.teamprofile({key: team.id})" >
-                            <div class="row">
-
-                                <div class="col">
-                                    <a ng-href="#/app/teamprofile/{{team.id}}">
-                                        <div class="item item-avatar-center" style="background-color:#3E5364;color:white;text-align:center;">
-
-                                            <img class="item-image player-image" src="http://www.vectorportal.com/img_novi/barcelona1_3472.jpg" />
-                                            <div>{{team.teamname}}</div>
-                                            <div style="color: DarkTurquoise;font-size:9px;">Ranking: {{team.rank}}</div>
-
-                                        </div>
-                                    </a>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </ion-scroll>-->
-            <ion-slide-box ng-show="teams.length > 0" show-pager="true">
-                <ion-slide ng-repeat="team in teams">
+                <ion-item ng-hide="teams.length > 0" style="border:0px;background-color:#3E5364;color:#5f7485">No Teams Found</ion-item>
+              
+            <ion-slide-box ng-if="teams.length">
+                <ion-slide ng-repeat="team in teams"  style="background-color:rgb(46, 62, 75);padding:0px" >
+				  <div class="card" style="padding:0px">
                     <div ui-sref="app.teamprofile({teamid: team.key})" align="center" style="background-color:#3E5364;color:white;padding-top:20px;padding-bottom:30px;">
                         <div class="item item-avatar-center" style="background-color:#3E5364;color:white;text-align:center;">
 
                             <!--<img class="item-image player-image" src="http://www.vectorportal.com/img_novi/barcelona1_3472.jpg" />-->
                             <img ion-img-cache image-lazy-src="img/Badges/{{team.badge}}.png" style="height:70px ; width:70px" height="70">
                             <div>{{team.teamname}}</div>
-                            <div style="color: DarkTurquoise;font-size:9px;">Ranking: {{team.rank}}</div>
+                            <div style="color: DarkTurquoise;font-size:12px;">{{team.rank}} 404th</div>
 
                         </div>
                     </div>
@@ -217,3 +116,4 @@
         </div>
     </ion-content>
 </ion-view>
+

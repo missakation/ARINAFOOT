@@ -12,11 +12,12 @@
     }
     .slider-pager .slider-pager-page
 	{
-		margin-top: 15px;
+		margin-top:25px;
 		color:white;
 		font-size:22px;
 		
 	}
+
        /** from date time picker style css files **/
 	
 	.picker-view::-webkit-scrollbar,
