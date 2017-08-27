@@ -2,5 +2,6 @@
   "name": "ARINA",
   "app_id": "de07ef7c",
   "type": "ionic1",
-  "watchPatterns": []
+  "watchPatterns": [],
+  "integrations": {}
 }

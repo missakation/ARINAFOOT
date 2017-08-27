@@ -438,7 +438,7 @@ angular.module('football.controllers')
                     filter_path: "hits.hits._source"
                 }
                 query.q = "*"+term+"*";
-                query.filter_path = "hits.total,hits.hits._source";
+                query.filter_path = "hits.total,hits.hits._source, hits.hits._id";
 
                 
 
@@ -454,9 +454,9 @@ angular.module('football.controllers')
                     if (snap.val() != null) {
                         var dat = snap.val().hits.hits;
                         if(dat!=null)
-                        dat.forEach(function (item, index) {
+                            dat.forEach(function (item, index) {
+                                item._source.itemKey = item._id;
                             searchResult.push(item._source);
-                            console.log(item._source);
                         });
                         // when a value arrives from the database, stop listening
                         // and remove the temporary data from the database
