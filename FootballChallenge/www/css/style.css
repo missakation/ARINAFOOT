@@ -35,7 +35,7 @@
 		z-index: 3;
 		height: 47px;
 		background-color: #2ab041;
-		top: 155px;
+		top: 160px;
 	}
 	
 	.picker-view .picker-accessory-bar .button {
@@ -58,6 +58,7 @@
 		color: white;
 		font-size: 3vh;
 		width: 100%;
+		position:relative;
 	}
 	
     .picker-view .picker-content {	
