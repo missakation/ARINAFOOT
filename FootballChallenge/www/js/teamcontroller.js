@@ -747,7 +747,7 @@ angular.module('football.controllers')
 
         try {
             TeamStores.GetTeamByKey($stateParams.teamid, function (myprofile) {
-                console.log(myprofile);
+                
 
                 $ionicLoading.hide();
                 $scope.notloaded = true;

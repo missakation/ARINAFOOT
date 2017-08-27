@@ -428,7 +428,7 @@ angular.module('football.controllers')
             {
                 var searchResult = [];
                 var database = firebase.database();
-                console.log("Entered elastic search..");
+                
                 // skeleton of the JSON object we will write to DB
                 var query = {
                     index: "firebase",

@@ -54,10 +54,10 @@
                     <ion-slide-box ng-if="stadiums.length">
                         <ion-slide ng-repeat="stadium in stadiums"  style="background-color:rgb(46, 62, 75);padding:0px" >
 						    <div class="card bodyColor" style="background-color:#3E5364;padding:0px"
-                                    <div ui-sref="app.reservestadiumdetails({stadiumid: stadium.stadiumKey})" >
+                                    <div ui-sref="app.reservestadiumdetails({stadiumid: stadium.itemKey})" >
 
                                         <div align="center">
-                                            <img src="http://www.sundul.com/wp-content/uploads/2013/02/Bikin-Stadion-Baru-Inter-Milan-Siap-Hengkang-Dari-San-Siro.jpg" style="width:100%;height:140px;">
+                                            <img ion-img-cache image-lazy-src={{stadium.photo}} style="width:100%;height:140px;">
                                         </div>
 
                                         <div class="row">
@@ -101,13 +101,13 @@
             <ion-slide-box ng-if="teams.length">
                 <ion-slide ng-repeat="team in teams"  style="background-color:rgb(46, 62, 75);padding:0px" >
 				  <div class="card" style="padding:0px">
-                    <div ui-sref="app.teamprofile({teamid: team.key})" align="center" style="background-color:#3E5364;color:white;padding-top:20px;padding-bottom:30px;">
+                    <div ui-sref="app.teamprofile({teamid: team.itemKey})" align="center" style="background-color:#3E5364;color:white;padding-top:20px;padding-bottom:30px;">
                         <div class="item item-avatar-center" style="background-color:#3E5364;color:white;text-align:center;">
 
                             <!--<img class="item-image player-image" src="http://www.vectorportal.com/img_novi/barcelona1_3472.jpg" />-->
                             <img ion-img-cache image-lazy-src="img/Badges/{{team.badge}}.png" style="height:70px ; width:70px" height="70">
                             <div>{{team.teamname}}</div>
-                            <div style="color: DarkTurquoise;font-size:12px;">{{team.rank}}</div>
+                            <div style="color: DarkTurquoise;font-size:12px;">{{team.rankdescription}}</div>
 
                         </div>
                     </div>
