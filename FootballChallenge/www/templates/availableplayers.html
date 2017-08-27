@@ -467,21 +467,21 @@
 			<!--</label>-->
 		</div>
 
-		<ion-item style="background-color:rgb(62,83,100);border-bottom: 10px solid rgb(46,62,75)" collection-repeat="item in filteredPlayers| orderBy: 'points':false">
+		<ion-item style="background-color:rgb(62,83,100);padding:0px;border-radius:5px;border: 7px solid rgb(46,62,75)" collection-repeat="item in filteredPlayers| orderBy: 'points':false">
 			<!--  <a class="item item-thumbnail-left" ng-href="#/app/reservestadiumdetails/{{stadiums.stadiumkey}}"> -->
 
 			<div class="row" style="margin-top:5px;padding:6px 0 0 0">
 				<div class="col col-50" style="border-right:1px solid #5f7485;	padding:0px" align="center">
 					<img src="{{item.photo}}" style="padding:0px;border-radius:50px;width:80px;height:80px;" ui-sref="app.profileview({key: item.key})">
 
-					<h5 class="whitetext" style="margin-bottom:0px;margin-top:5px;text-transform: capitalize;padding:0px;font-weight:bold"> {{item.firstname}} {{item.lastname}} </h5>
+					<h5 class="whitetext" style="margin-bottom:0px;margin-top:5px;text-transform: capitalize;padding:0px;font-weight:bold;font-size:14px"> {{item.firstname}} {{item.lastname}} </h5>
 
 				</div>
 
 
 				<div ng-click="gototeam(item.teamkey)" class="col col-50" style="padding:0px" align="center">
 					<img style="width:80px;height:80px" src="img/Badges/{{item.teambadge}}.png">
-					<h5 class="whitetext" style="margin-bottom:0px;margin-top:5px;text-transform: capitalize;padding:0px;font-weight:bold"> {{item.teamname}} </h5>
+					<h4 class="whitetext" style="margin-bottom:0px;margin-top:5px;text-transform: capitalize;padding:0px;font-weight:bold;font-size:14px"> {{item.teamname}} </h4>
 
 				</div>
 
@@ -490,53 +490,53 @@
 			<div class="row" style="margin-bottom:8px;padding:0px">
 
 				<div class="col col-50" style="padding:0px" align="center">
-					<h5 align="center" style="margin-top:10px;color:white">
+					<h5 align="center" style="font-size:12px;margin-top:5px;color:white">
 						<i class="ion-location" style="padding-right:3px;font-size:18px;color:#5f7485"></i> {{item.distance}} km
 					</h5>
 				</div>
 
 				<div ng-show="item.teamexists" class="col col-50" style="margin-top:5px;padding:0px" align="center">
-					<h6 style="color:darkturquoise"> Rank {{item.rankdescription}} </h6>
+					<h6 style="font-size:12px;margin-top:5px;color:darkturquoise"> Rank {{item.rankdescription}} </h6>
 				</div>
 			</div>
 
-			<div class="row" style="padding:0px">
+			<div class="row" style="font-size:13px;margin-top:10px;padding:0px">
 
-				<h6  align="center" style="width:25%;color:#5f7485;padding:0px">POSITION
+				<h4  align="center" style="width:25%;color:#5f7485;padding:0px">POSITION
 
-				</h6>
+				</h4>
 
-				<h6  align="center" style="width:25%;border-left:1px solid #5f7485;color:#5f7485;padding:0px"> SKILL
+				<h4  align="center" style="width:25%;border-left:1px solid #5f7485;color:#5f7485;padding:0px"> SKILL
 
-				</h6>
+				</h4>
 
-				<h6 align="center" style="width:15%;color:#5f7485;border-right:1px solid #5f7485;border-left:1px solid #5f7485;padding:0px"> AGE
+				<h4 align="center" style="width:15%;color:#5f7485;border-right:1px solid #5f7485;border-left:1px solid #5f7485;padding:0px"> AGE
 
-				</h6>
+				</h4>
 
-				<h6  align="center" style="width:35%;color:#5f7485;padding:0px">LAST SEEN
+				<h4  align="center" style="width:35%;color:#5f7485;padding:0px">LAST SEEN
 
-				</h6>
+				</h4>
 
 			</div>
 
 
-			<div class="row" style="padding:0px;margin-top:-10px;padding-top:0px">
-				<div align="center" style="width:25%;color:white;padding:0px"> {{item.playposition}}
+			<div class="row" style="font-size:14px;padding:0px;padding-top:0px">
+				<div align="center" style="font-size:15px;width:25%;color:white;padding:0px"> {{item.playposition}}
 
 				</div>
 
-				<div  align="center" style="width:25%;border-left:1px solid #5f7485;color:white;padding:0px">
+				<div  align="center" style="font-size:15px;width:25%;border-left:1px solid #5f7485;color:white;padding:0px">
 					{{item.skilllevel}}
 
 				</div>
 
-				<div style="width:15%;color:white;border-right:1px solid #5f7485;border-left:1px solid #5f7485;padding:0px"
+				<div style="font-size:15px;width:15%;color:white;border-right:1px solid #5f7485;border-left:1px solid #5f7485;padding:0px"
 				 align="center"> {{item.age}}
 
 				</div>
 
-				<div align="center" style="width:35%;color:white;padding:0px">
+				<div align="center" style="font-size:15px;width:35%;color:white;padding:0px">
 
 					{{item.lastseen.text}}
 				</div>
@@ -548,9 +548,9 @@
 
 			<div class="row" style="padding-top:0px">
 				<div class="col" style="padding-top:0px">
-					<button class="button button-block button-light" style="padding:2px 4px 1px;min-width:28px;min-height:30px;line-height:26px;color:#2ab041;background-color: {{item.backcolor}};border-radius:25px"
+					<button class="button button-block button-light" style="font-size:13px;padding:2px 4px 1px;min-width:28px;min-height:30px;line-height:26px;color:#2ab041;background-color: {{item.backcolor}};border-radius:25px"
 					 type="submit" ng-click="requestnumber(item)">
-			<h5 style="color:{{item.color}}"> {{item.statusdesc}}
+			<h5 style="font-size:14px;color:{{item.color}}"> {{item.statusdesc}}
 			</h5>
 		</button>
 				</div>
