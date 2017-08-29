@@ -31,6 +31,11 @@ angular.module('football.controllers')
             if (SearchStore.SearchElastic("player", crit, function (allPlayers) {
                 //$ionicLoading.hide();
                 if (allPlayers.length > 0) {
+                allPlayers.forEach(function (element) {
+                if (element.photoURL.trim() == "") {
+                        element.photoURL = "img/PlayerProfile.png"
+                    }
+            });
                     $scope.players = allPlayers;
                 $ionicSlideBoxDelegate.update();
                     //alert("Players: " + $scope.players.length);

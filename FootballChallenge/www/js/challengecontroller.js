@@ -108,7 +108,7 @@ angular.module('football.controllers')
                 cancelButtonText: 'Close', // default 'Cancel'
                 items: [{
                     values: dateArrayThingy,
-                    defaultIndex: 1
+                    defaultIndex: 0
                 }, {
                     values: [' 7:00 AM ', ' 7:30 AM ', ' 8:00 AM ', ' 8:30 AM ', ' 9:00 AM ', '9:30 AM ', ' 10:00 AM ', ' 10:30 AM', ' 11:00 AM ', ' 11:30 AM ', ' Noon ', ' 1:00 PM ', ' 1:30 PM ', ' 2:00 PM ', ' 2:30 PM ', ' 3:00 PM ', ' 3:30 PM ', ' 4:00 PM ', ' 4:30 PM ', ' 5:00 PM ', ' 5:30 PM ', ' 6:00 PM ', ' 6:30 PM ', ' 7:00 PM ', ' 7:30 PM ', ' 8:00 PM', ' 8:30 PM ', ' 9:00 PM ', ' 9:30 PM ', ' 10:00 PM ', ' 10:30 PM ', ' 11:00 PM', '11:30 PM ', ' Midnight ',],
                     defaultIndex: 27
@@ -444,10 +444,10 @@ angular.module('football.controllers')
             };
 
         $scope.myteam = $state.params.myteam;
-
+        
         ReservationFact.FindFreeStadiums($state.params, function (leagues) {
 
-
+            $scope.globalstadiums = leagues;
             $scope.allfreestadiums = leagues;
 
             if (leagues.length == 0) {
@@ -475,10 +475,57 @@ angular.module('football.controllers')
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
+
+            ///** Converts numeric degrees to radians */
+
+            //for (var i = 0; i < leagues.length; i++)
+            //{
+            //    var lat1 = $scope.latitude;
+            //    var lon1 = $scope.longitude;
+
+            //    var lat2 = $scope.globalstadiums[i].latitude;
+            //    var lon2 = $scope.globalstadiums[i].longitude;
+
+
+            //    var R = 6371; // km 
+            //    //has a problem with the .toRad() method below.
+            //    var x1 = lat2 - lat1;
+
+            //    var dLat = x1.toRad();
+
+            //    var x2 = lon2 - lon1;
+            //    var dLon = x2.toRad();
+            //    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            //        Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) *
+            //        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            //    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            //    var d = R * c; // Distance in km
+
+            //    $scope.globalstadiums[i].distance = d;
+            //    // LOGIC FOR POINTS START
+            //    var distancePoint = $scope.globalstadiums[i].distance * 1.5;
+            //    var ratingPoint = (5 - (parseInt($scope.globalstadiums[i].rating))) * 3;
+            //    var diff = Math.abs(new Date($scope.globalstadiums[i].datetime) - new Date());
+            //    var minutes = Math.floor((diff / 1000) / 60);
+            //    var timePoint = (minutes / 30) * 5;
+            //    var favouritePoint = 0;
+            //    var favstadiumname = profileInfoSnapshot.child("favstadiumname").val();
+            //    if (favstadiumname === $scope.globalstadiums[i].stadiumname) {
+            //        favouritePoint = -10;
+            //    }
+            //    var totlPoints = Math.floor(distancePoint + ratingPoint + timePoint + favouritePoint);
+            //    $scope.globalstadiums[i].points = -totlPoints;
+
+            //}
+
             $scope.filteredStadiums = $scope.allfreestadiums;
 
-
-
+            
+            if (typeof (Number.prototype.toRad) === "undefined") {
+                Number.prototype.toRad = function () {
+                    return this * Math.PI / 180;
+                }
+            }
         })
         $scope.updateselectedteams = function (stadiums) {
 
@@ -786,7 +833,7 @@ monthChar[11] = "Dec";
 
 var nesheDate = new Date();
 var dateArrayThingy = new Array();
-dateArrayThingy.push("Today");
+//dateArrayThingy.push("Today");
 dateArrayThingy.push("Tomorrow");
 //alert(nesheDate.getDay());
 nesheDate.setDate(nesheDate.getDate() + 1);
