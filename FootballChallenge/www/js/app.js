@@ -8,6 +8,7 @@ angular.module('football', ['ionic', /*'ionicImgCache'*/ 'football.controllers',
 
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
+        
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (cordova.platformId === 'ios' && window.cordova && window.cordova.plugins.Keyboard) {
@@ -20,13 +21,29 @@ angular.module('football', ['ionic', /*'ionicImgCache'*/ 'football.controllers',
                 StatusBar.styleDefault();
             }
 
-            $ionicPlatform.onHardwareBackButton(function () {
+            
+        });
+        $ionicPlatform.onHardwareBackButton(function (event) {
+            if ($rootScope.$viewHistory.backView) {
+                $rootScope.$viewHistory.backView.go();
+            } else {
+                console.log("going back disabled yaba log");
+                alert("going back now y'all");
                 event.preventDefault();
                 event.stopPropagation();
-                alert("going back now y'all");
-            });
-        });
+            }
+        }, 101);
 
+        $ionicPlatform.registerBackButtonAction(function (event) {
+            if ($rootScope.$viewHistory.backView) {
+                $rootScope.$viewHistory.backView.go();
+            } else {
+                console.log("going back disabled yaba log");
+                alert("going back now y'all");
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        }, 200);
         //  // This hooks all auth events to check everything as soon as the app starts
         //auth.hookEvents();
 

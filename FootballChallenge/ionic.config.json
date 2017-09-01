@@ -3,5 +3,7 @@
   "app_id": "de07ef7c",
   "type": "ionic1",
   "watchPatterns": [],
-  "integrations": {}
+  "integrations": {
+    "cordova": {}
+  }
 }
