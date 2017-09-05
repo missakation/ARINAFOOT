@@ -4,7 +4,7 @@
     <ReferenceCachePath>C:\Users\guiro.CCCGROUP\AppData\Local\Temp\gzi5ljuq_FootballChallenge_refcache</ReferenceCachePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Android'">
-    <DebuggerFlavor>RippleNexusS</DebuggerFlavor>
+    <DebuggerFlavor>RippleNexus</DebuggerFlavor>
     <AndroidEmulatorID>AndroidDevice;Device</AndroidEmulatorID>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Android'">

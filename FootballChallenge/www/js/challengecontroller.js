@@ -142,9 +142,18 @@ angular.module('football.controllers')
 
 
         };
+
+        //Cleanup the picker when we're done with it!
+        $scope.$on('$destroy', function () {
+            //$scope.openPickerView.picker.hide();
+            console.log("hello");
+            pickerView.close();
+            $scope.openPickerView = 0;
+        });
+
         /** End picker view stufgf**/
 
-
+        
         $scope.selectedteams = [];
 
         var template = '<ion-popover-view><ion-header-bar> <h1 class="title">My Popover Title</h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view>';

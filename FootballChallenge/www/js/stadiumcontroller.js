@@ -60,7 +60,15 @@ angular.module('football.controllers')
                 });
             }
         };
+        //Cleanup the picker when we're done with it!
+        $scope.$on('$destroy', function () {
+            //$scope.openPickerView.picker.hide();
+            console.log("hello");
+            pickerView.close();
+            $scope.openPickerView = 0;
+        });
 
+        /** End picker view stufgf**/
         $scope.notverified = false;
         $scope.nointernet = false;
         $scope.gotlocation = false;

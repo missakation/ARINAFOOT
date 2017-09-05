@@ -6,9 +6,33 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('football', ['ionic', /*'ionicImgCache'*/ 'football.controllers', 'ionic.cloud', 'jett.ionic.filter.bar', "ion-datetime-picker", "ionicLazyLoad", "ion-floating-menu", 'ngCordova', 'ionic.rating', 'rzModule'])
 
-    .run(function ($ionicPlatform) {
+    .run(function ($window, $document,$ionicPlatform) {
         $ionicPlatform.ready(function () {
-        
+            //end fakking back button with ctrl + alt + <
+            var document = $document[0];
+
+            function triggerBackButton() {
+                var backButtonEvent = document.createEvent('Events');
+                backButtonEvent.initEvent('backbutton', false, false);
+                document.dispatchEvent(backButtonEvent);
+            }
+
+            function registerBackButtonFake() {
+                document.addEventListener('keyup', function (event) {
+                    // Alt+Ctrl+<
+                    if (event.altKey && event.ctrlKey && event.keyCode === 188) {
+                        triggerBackButton();
+                    }
+                });
+            }
+
+            if (!$window.cordova) {
+                $ionicPlatform.ready(registerBackButtonFake);
+            }
+
+            //end fakking back button with ctrl + alt + <
+
+
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (cordova.platformId === 'ios' && window.cordova && window.cordova.plugins.Keyboard) {
@@ -23,27 +47,30 @@ angular.module('football', ['ionic', /*'ionicImgCache'*/ 'football.controllers',
 
             
         });
-        $ionicPlatform.onHardwareBackButton(function (event) {
-            if ($rootScope.$viewHistory.backView) {
-                $rootScope.$viewHistory.backView.go();
-            } else {
-                console.log("going back disabled yaba log");
-                alert("going back now y'all");
-                event.preventDefault();
-                event.stopPropagation();
-            }
-        }, 101);
-
-        $ionicPlatform.registerBackButtonAction(function (event) {
-            if ($rootScope.$viewHistory.backView) {
-                $rootScope.$viewHistory.backView.go();
-            } else {
-                console.log("going back disabled yaba log");
-                alert("going back now y'all");
-                event.preventDefault();
-                event.stopPropagation();
-            }
-        }, 200);
+        function clickAnchorTag(url) {
+            var event = document.createEvent('MouseEvent');
+            event = new CustomEvent('click');
+            console.log(url);
+            var a = document.getElementsByClassName(url);
+            console.log(a[0]);
+            a[0].dispatchEvent(event);
+        }
+        //$ionicPlatform.registerBackButtonAction(function (event) {
+        //    var pickers = document.getElementsByClassName("backdrop visible active");
+        //    if (pickers[0])
+        //    {
+        //        clickAnchorTag("button button-clear ng-binding disable-user-behavior");
+        //        console.log("going back disabled yaba log");
+        //        alert("going back now y'all");
+        //        event.preventDefault();
+        //        event.stopPropagation();
+        //    }
+        //    else
+        //    {
+        //        console.log("no picker");
+        //    }
+            
+        //}, 200);
         //  // This hooks all auth events to check everything as soon as the app starts
         //auth.hookEvents();
 
