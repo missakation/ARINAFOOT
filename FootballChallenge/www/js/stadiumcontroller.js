@@ -12,7 +12,10 @@ angular.module('football.controllers')
                 selectedDate.setDate(selectedDate.getDate());
                 return weekday[selectedDate.getDay()] + monthChar[selectedDate.getMonth()] + " " + selectedDate.getDate();
             }
-            for (var i = 0; i < 6; i++) {
+            selectedDate.setDate(selectedDate.getDate() + 2);
+            for (var i = 0; i < 7; i++) 
+			{
+				console.log("i is:" + i);
                 if (weekdayFull[selectedDate.getDay()] == selectedDay)
                     return weekday[selectedDate.getDay()] + monthChar[selectedDate.getMonth()] + " " + selectedDate.getDate();
                 selectedDate.setDate(selectedDate.getDate() + 1);
